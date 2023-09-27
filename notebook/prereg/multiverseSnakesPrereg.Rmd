@@ -1,0 +1,90 @@
+---
+title: "Applying a Multiverse to Snake Habitat Selection"
+author1: "Benjamin Michael Marshall*"
+author2: "Alexander Bradley Duthie**"
+affiliation1: "Biological and Environmental Sciences, Faculty of Natural Sciences, University of Stirling, Stirling, FK9 4LA, Scotland, UK"
+affiliation2: "-"
+corresponding1: "benjaminmichaelmarshall@gmail.com"
+corresponding2: "alexander.duthie@stir.ac.uk"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_document2:
+    template: main.tex
+    keep_tex: true
+    highlight: monochrome
+    fig_caption: true
+    dev: pdf
+  bookdown::html_document2:
+    theme: yeti
+    highlight: monochrome
+    fig_caption: true
+link-citations: yes
+linkcolor: gray
+bibliography: [multiversePop_refs.bib, packages_refs.bib]
+csl: peerj.csl
+editor_options: 
+  markdown: 
+    wrap: sentence
+abstract: abc
+keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, multiverse, research choice, researcher degrees for freedom,
+---
+
+# Introduction
+
+<!-- Science should be self correcting -->
+<!-- Alberts et al 2015 -->
+
+<!-- Self-correction can be more ephemeral, not limited to direct hard replications -->
+<!-- Peterson, Panosky 2021 -->
+
+<!-- reproducibility crisis -->
+<!-- Baker 2016 -->
+
+# Methods
+
+# ``` {r openOptions}
+# optionsCompleteList <- readRDS(here::here("data", "optionsCompleteList.rds"))
+# ```
+
+# Results
+
+# Discussion
+
+## Limitations
+
+## Conclusions
+
+# Acknowledgements
+
+BMM was funded by the Natural Environment Research Council (NERC) via the IAPETUS2 Doctoral Training Partnership.
+
+# Software availablity
+
+In addition to packages already mentioned in the methods we also used the following.
+
+We used *R* `r paste0("v.", version$major, ".", version$minor)` [@base] via *RStudio* v.2023.6.2.561 [@rstudio]. <!-- version has to be manually added because rstudioapi doesn't work in targets -->
+We used *here* `r paste0("v.", packageVersion("here"))` [@here] and *qs* `r paste0("v.", packageVersion("qs"))` [@qs] to manage directory addresses and saved objects.
+
+We used *raster* `r paste0("v.", packageVersion("raster"))` [@raster] and *RandomFields* `r paste0("v.", packageVersion("RandomFields"))` [@RandomFields] to aid landscape raster creation alongside NLMR `r paste0("v.", packageVersion("NLMR"))` [@NLMR].
+
+We used *ggplot2* `r paste0("v.", packageVersion("ggplot2"))` for creating figures [@ggplot2], with the expansions: *patchwork* `r paste0("v.", packageVersion("patchwork"))` [@patchwork], *ggridges* `r paste0("v.", packageVersion("ggridges"))` [@ggridges], and *ggdist* `r paste0("v.", packageVersion("ggdist"))` [@ggdist].
+
+We used *brms* `r paste0("v.", packageVersion("brms"))` [@brms] to run Bayesian models, with diagnostics generated used *bayesplot* `r paste0("v.", packageVersion("bayesplot"))` [@bayesplot], *tidybayes* `r paste0("v.", packageVersion("tidybayes"))` [@tidybayes], and *performance* `r paste0("v.", packageVersion("performance"))` [@performance].
+
+We used the *dplyr* `r paste0("v.", packageVersion("dplyr"))` [@dplyr], *tibble* `r paste0("v.", packageVersion("tibble"))` [@tibble],
+<!-- *reshape2* `r paste0("v.", packageVersion("reshape2"))` [@reshape2], -->
+and *stringr* `r paste0("v.", packageVersion("stringr"))` [@stringr] packages for data manipulation.
+
+We used *sp* `r paste0("v.", packageVersion("sp"))` [@sp], *move* `r paste0("v.", packageVersion("move"))` [@move] for manipulation of spatial data and estimation of space use not otherwise mentioned in the methods.
+
+We used rmarkdown `r paste0("v.", packageVersion("rmarkdown"))` [@rmarkdown2023; @rmarkdown2018; @rmarkdown2020], bookdown `r paste0("v.", packageVersion("bookdown"))` [@bookdown2016; @R-bookdown], tinytex `r paste0("v.", packageVersion("tinytex"))` [@tinytex2019; @tinytex2023], and knitr `r paste0("v.", packageVersion("knitr"))` [@knitr2015; @knitr2014; @knitr2023] packages to generate type-set outputs.
+
+We generated R package citations with the aid of *grateful* `r paste0("v.", packageVersion("grateful"))` [@grateful].
+
+# Data availabilty
+
+<!-- add zenodo archived snapshot of github -->
+
+# Supplementary Material
+
+# References

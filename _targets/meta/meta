@@ -1,0 +1,12 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+coreMultiverse|object|4419b593abe3a176|||||||||||||||
+optionsCompleteList|object|d03a681aed77be05|||||||||||||||
+optionsList_area|object|e465f26e7705c6cb|||||||||||||||
+optionsList_areaMethods|object|3bc966cf14ab9992|||||||||||||||
+optionsList_data|object|f9dcabaf9bd38e93|||||||||||||||
+optionsList_pois|object|9a064b912fbaba37|||||||||||||||
+optionsList_sff|object|01d4bf269496792b|||||||||||||||
+prereg|object|bc0079978bfb46ae|||||||||||||||
+render_rmd|function|f38ef75ed926d2e8|||||||||||||||
+resultsCompiled|object|dbed33f355803a5d|||||||||||||||
+rmdRenderPrereg|stem|93a50edf3136995e|bda6baabb46a33e4|a302f811bf43e554|-1722079747||t19627.6498817654s|24d52ebf1535bba2|123|qs|local|vector|||12.33|package qs was built under R version 4.2.3|
