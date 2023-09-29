@@ -9,7 +9,11 @@ library(tarchetypes) # Load other packages as needed. # nolint
 
 # Set target options:
 tar_option_set(
-  packages = c("qs", "amt"), # packages that your targets need to run
+  packages = c("qs",
+               "here",
+               "amt",
+               "move",
+               "inborutils"), # zenodo download
   garbage_collection = TRUE,
   format = "qs", # storage format
   storage = "worker",
@@ -22,6 +26,19 @@ tar_source()
 
 options(clustermq.scheduler = "multiprocess")
 
+
+# Data locations ----------------------------------------------------------
+
+speciesLocations <- data.frame(speciesCode = c("OPHA", "PYBI", "BUCA", "BUFA"),
+                               doi = c("10.5281/zenodo.3666028",
+                                       "10.5281/zenodo.4026927",
+                                       "10.5281/zenodo.5495839",
+                                       NA),
+                               movebankID = c("1649411628;556564170;1093796277",
+                                              NA,
+                                              NA,
+                                              "1204811528")
+)
 
 # Options for analysis variations -----------------------------------------
 
@@ -72,12 +89,21 @@ saveRDS(optionsCompleteList, file = here::here("data", "optionsCompleteList.rds"
 # Target pipeline ---------------------------------------------------------
 
 prereg <- list(
+  tar_map(
+    values = optionsList_data,
+    tar_target(
+      rawMovementData,
+      download_datasets(speciesLocations, species),
+      format = "file"
+    )
+  ),
   tar_target(
     rmdRenderPrereg,
     render_rmd(fileIN = here::here("notebook", "prereg",
                                    "multiverseSnakesPrereg.rmd"),
                fileOUT = here::here("notebook", "prereg",
                                     "multiverseSnakesPrereg.pdf")),
+    format = "file",
     priority = 0.95
   )
 )

@@ -1,12 +1,19 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-coreMultiverse|object|4419b593abe3a176|||||||||||||||
+coreMultiverse|object|8a53443c5a099dcd|||||||||||||||
+download_datasets|function|3d37c1882bb49287|||||||||||||||
+movebank_login_abstraction|function|71c409e969d32003|||||||||||||||
 optionsCompleteList|object|d03a681aed77be05|||||||||||||||
 optionsList_area|object|e465f26e7705c6cb|||||||||||||||
 optionsList_areaMethods|object|3bc966cf14ab9992|||||||||||||||
 optionsList_data|object|f9dcabaf9bd38e93|||||||||||||||
 optionsList_pois|object|9a064b912fbaba37|||||||||||||||
 optionsList_sff|object|01d4bf269496792b|||||||||||||||
-prereg|object|bc0079978bfb46ae|||||||||||||||
+prereg|object|04f271e05712678e|||||||||||||||
+rawMovementData_BUCA|stem|da7e5646cbdfced7|ee3cf996344908dd|ece9766dbba200ff|-800843172||t0s|f4066a65ff755f48|0|file|local|vector|||1335.63||
+rawMovementData_BUFA|stem|da7e5646cbdfced7|1331f0adbf3e1eeb|ece9766dbba200ff|-1335306450||t0s|f4066a65ff755f48|0|file|local|vector|||3.66||
+rawMovementData_OPHA|stem|da7e5646cbdfced7|229143448464512e|ece9766dbba200ff|-556091153||t0s|f4066a65ff755f48|0|file|local|vector|||2975.82|package qs was built under R version 4.2.3. package inborutils was built under R version 4.2.3|
+rawMovementData_PYBI|stem|da7e5646cbdfced7|1e441055078f3e7a|ece9766dbba200ff|-545051240||t0s|f4066a65ff755f48|0|file|local|vector|||59.06|package qs was built under R version 4.2.3. package inborutils was built under R version 4.2.3|
 render_rmd|function|f38ef75ed926d2e8|||||||||||||||
-resultsCompiled|object|dbed33f355803a5d|||||||||||||||
+resultsCompiled|object|a8a8cacc0e04b100|||||||||||||||
 rmdRenderPrereg|stem|93a50edf3136995e|bda6baabb46a33e4|a302f811bf43e554|-1722079747||t19627.6498817654s|24d52ebf1535bba2|123|qs|local|vector|||12.33|package qs was built under R version 4.2.3|
+speciesLocations|object|070269f29ce287de|||||||||||||||

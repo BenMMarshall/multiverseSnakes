@@ -20,7 +20,7 @@ output:
     fig_caption: true
 link-citations: yes
 linkcolor: gray
-bibliography: [multiversePop_refs.bib, packages_refs.bib]
+bibliography: [multiverseSnakesPrereg_refs.bib, packages_refs.bib]
 csl: peerj.csl
 editor_options: 
   markdown: 
@@ -40,7 +40,49 @@ keywords: Movement ecology, step selection function, habitat preference, habitat
 <!-- reproducibility crisis -->
 <!-- Baker 2016 -->
 
+* Science should be self correcting
+
+* Reassessments of old data have reveal inconsistencies
+
+* We can't always collect more data, rechecking old data and conclusions an (albeit not replaceable) alternative
+
+* Computational reproducibility is important, but sometimes new methods appear that might offer additionally insight or is more robust to data structural issues.
+
+* methods impact results and therefore conclusions, we can see such impact in many analysts and multiverses
+
+* movement ecology has seen such development in methods, can we check the conclusions remain the same
+
+* as a case study, we re-examine the findings from __ snake movement studies that all describe a form of habitat selection
+
+
 # Methods
+
+## Study Location
+* NE Thailand
+* SERS
+* SUT University campus
+
+## Study Species
+
+### King Cobra
+@Marshall2018; @marshall_no_2020
+OPHA
+Hypothesis: King Cobras select for areas of semi-natural habitat
+
+### Burmese Python
+@smith_native_2021
+PYBI
+Hypothesis: Burmese Pythons select for areas of semi-natural habitat
+
+### Malayan Krait
+@hodges_malayan_2022
+BUCA
+Hypothesis: Malayan Kraits select for buildings
+
+### Banded Krait
+@knierim_spatial_2019
+BUFA
+Hypothesis: Banded Kraits select for field edges
 
 # ``` {r openOptions}
 # optionsCompleteList <- readRDS(here::here("data", "optionsCompleteList.rds"))
