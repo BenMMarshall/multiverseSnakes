@@ -42,18 +42,37 @@ keywords: Movement ecology, step selection function, habitat preference, habitat
 
 * Science should be self correcting
 
+A key component of science is the continual reassessment of past work and findings.
+Whether that takes the form of "integrative replications" or quasi-replications<!-- see peterson paper for definition check . Also add quasi-rep citation --> testing the edges of previous findings generalisability and retesting questions in different study systems, or as direct replications aiming to discover how exactly how reliable previous work is.
+
+<!-- Direct quote from Peterson 2021 - "When replication in the normal course of integration does not provide clear signals of truth or falsity, researchers instead look for signs of robustness." -->
+
 * Reassessments of old data have reveal inconsistencies
 
+Reassessments and replications - regardless of their position on the direct-quasi continuum - can aid the formal and organic self-correcting process of science.
+
+Complex and difficult to control for ecological system (high task uncertainty) largely prohibit direct diagnostic replications.
+
+
 * We can't always collect more data, rechecking old data and conclusions an (albeit not replaceable) alternative
+
+<!-- peterson pano 2021 has a bit about "task uncertainty" where high perfectly describes ecology and the hard to control system -->
 
 * Computational reproducibility is important, but sometimes new methods appear that might offer additionally insight or is more robust to data structural issues.
 
 * methods impact results and therefore conclusions, we can see such impact in many analysts and multiverses
 
+<!-- ecology has high "task uncertainty" stemming from high "technical" and "strategic task uncertainty" - Peterson pano 2021 -->
+
+<!-- Peterson pano 2021 has a great line that when task uncertainty is higher and more uncontrollable variables exists then integrative replications are more open to interpretation. -->
+
 * movement ecology has seen such development in methods, can we check the conclusions remain the same
 
 * as a case study, we re-examine the findings from __ snake movement studies that all describe a form of habitat selection
 
+<!-- devezer et al 2021 - reproducing the results doesn't mean that they are more likely correct - pg 10. So instead here we are exploring the likely that conclusions would change, an attempt to gauge uncertainty with a number of ~equally~ valid analysis methods -->
+
+<!-- Direct quote from Peterson 2021 - "When replication in the normal course of integration does not provide clear signals of truth or falsity, researchers instead look for signs of robustness." -->
 
 # Methods
 
