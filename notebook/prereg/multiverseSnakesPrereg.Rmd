@@ -83,25 +83,51 @@ Complex and difficult to control for ecological system (high task uncertainty) l
 
 ## Study Species
 
+The papers below use distance from feature in the models, we could add an exploration of binary habitats too.
+Overall simplify the models just to the habitats of interest.
+The python paper has a contrasting grouping of what makes water habitats, do we need to explore alternative groupings of land use types - suspect that we don't but instead use the paper specific definitions (except for the 2018 paper because the number of habitat types is high and ill defined).
+
+Any paper using SSF methods we should summarise to the population level to get an estimate we can plot alongside the multiverse answers.
+Won't be a perfect comparison, but least on a similar scale.
+So we can get a naive mean of SSF preference for given habitat, and in the case of the population ones we can just use that estimate + CIs.
+
+Each species will get model ran on three landscape configurations:
+- original, using whatever method/classification system used, but we will only extract the estimates of direct interest to the hypotheses. Model formula will include all habitat types. This will also provide a means of reproducing the original answers for direct comparison to the other estimates from other decisions pathways. 2018 doesn't have this, so will use 2020 LU data.
+- targeted continuous, a distance to landscape feature approach but refined only to landscapes that matter (e.g., inverted distance to semi-nat vs inverted distance to everything else).
+- targeted binary, simply hypothesised good habitat versus everything else.
+
 ### King Cobra
 @Marshall2018; @marshall_no_2020
 OPHA
-Hypothesis: King Cobras select for areas of semi-natural habitat
+2018 paper doesn't conclude a habitat preference, more focusing on the fact that they do not remain within the forest.
+The methods are a major limitation in that regard. 
+Best course of action is likely to look at semi-nat areas and forest, and examine the validity of both claims.
+Using the results from the iSSF in figure 4 primarily, clear semi-nat preference that works for a clean re-testable hypo, forest preference can be additional motivation to make the 2018 paper worth exploring too.
+Didn't actually implement any population level summary, but we are testing general conclusions here.
+As the other papers have excluded individuals, what if we do the same here for the 2018 snakes, so we have something just targeting the 2020 paper and then something more general? Would make the targets pipeline more intuitive as all species would have this decision. 
+Hypothesis 1: King Cobras show preference for semi-natural habitat
+Hypothesis 2: King Cobras show preference for forest habitat
+
 
 ### Burmese Python
 @smith_native_2021
 PYBI
-Hypothesis: Burmese Pythons select for areas of semi-natural habitat
+excluded an individual for the pop-level stuff - possible choice to explore?
+Figure 4 shows the clear population pattern preferring water (water bodies and semi-nat areas). Figure 5 shows the preference on an individual level also.
+Hypothesis: Burmese Pythons select for areas near water.
+
 
 ### Malayan Krait
 @hodges_malayan_2022
 BUCA
-Hypothesis: Malayan Kraits select for buildings
+Had excluded individuals - one simply doesn't have enough data; the other should be included(?) but it remained in one habitat type - possible choice to explore?
+Hypothesis: Malayan Kraits select for buildings, settlements, and natural areas.
 
 ### Banded Krait
 @knierim_spatial_2019
 BUFA
-Hypothesis: Banded Kraits select for field edges
+Need to see if we can get the LU data.
+Hypothesis: Banded Kraits select for waterways and field edges.
 
 # ``` {r openOptions}
 # optionsCompleteList <- readRDS(here::here("data", "optionsCompleteList.rds"))
