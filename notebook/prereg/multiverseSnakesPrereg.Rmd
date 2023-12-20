@@ -50,25 +50,54 @@ Whether that takes the form of "integrative replications" or quasi-replications<
 * Reassessments of old data have reveal inconsistencies
 
 Reassessments and replications - regardless of their position on the direct-quasi continuum - can aid the formal and organic self-correcting process of science.
+Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but also be difficult to redirect if the initial impetus was misdirected <!-- thinking the progress papers, think it was by Brembs about early research that is underpowered starting trends that are hard to stop -->.
+Therefore, checking and confirming results early is important; we can see this principle recognised in the peer review system itself.
 
-Complex and difficult to control for ecological system (high task uncertainty) largely prohibit direct diagnostic replications.
+Checking previous findings through replication can be come more difficult in systems with high task uncertainty. 
+High task uncertainty systems –those that manifest high levels of uncontrollable stochasticity– may make direct diagnostic replications impractical or impossible, and quasi-replications weaker supporting evidence <!-- peterson pano 2021 is the paper for this stuff -->.
+Ecological systems can be considered as generating high task uncertainty, with many interconnected elements, and when studying wild systems many of those elements are uncontrollable.
+<!-- peterson pano 2021 has a bit about "task uncertainty" where high perfectly describes ecology and the hard to control system -->
 
 
 * We can't always collect more data, rechecking old data and conclusions an (albeit not replaceable) alternative
 
-<!-- peterson pano 2021 has a bit about "task uncertainty" where high perfectly describes ecology and the hard to control system -->
+With ecological systems, such complexity and the inability to control or reset an experiment makes the direct replications costly.
+When studying wild animals with a level of direct intervention, repeating experiments/studies might be unethical due to the well-being costs.
+When faced with limited options for direct replications, an alternative, albeit not a replacement, would be to re-examine existing datasets.
+Pooling old and new datasets, and reanalysising them may provide insights into broader generalisations.
 
 * Computational reproducibility is important, but sometimes new methods appear that might offer additionally insight or is more robust to data structural issues.
-
 * methods impact results and therefore conclusions, we can see such impact in many analysts and multiverses
+
+In some cases older data may have been collected/recorded in away that enables completely fresh analysis.
+As methodologies develop, conceptualisations change, and computational power increases, new avenues for examining the same data may materialise.
+As these new methods are developed and applied, we may see the conclusions based upon those data change.
+There are a growing number of examples demonstrating that the analysis approach alone can alter the results.
+These examples elegantly show the possible extent of technical uncertainty present in some systems <!-- peterson and pano term again, needs defining -->.
+
+* movement ecology has seen such development in methods, can we check the conclusions remain the same
+
+Not all disciplines have explored the sources of uncertainty in findings equally.
+Prudence would push for examination of uncertainty in all its forms, in particular for fields that already tackle high levels of uncertainty originating from a wild study system.
+Movement ecology could be argued to exemplify such a field.
+Animals are complex, existing in complex wild ecosystems, with individuality and personality that frustrates replication and control while simultaneously requiring strict ethical limitations on interventionist study.
+Movement ecology has also seized the opportunities presented by technological developments, enabling higher resolution tracking of animal movements (e.g., GPS tracking) and more sophisticated analysis that can integrate the high dimensional data (e.g., x-y coordinates, time, acceleration, individual, other covariates of interest).
+
+Personality and the repeatability of behaviours presents a key component to the uncertainty when attempting to generalise.
+However, here we turn to the technical uncertainty, the uncertainty originating from the research and how they approach the data.
+Previous many analyst projects highlight the potential for analyst-side variation, and previous multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset.
+Here we take the multiverse approach further by applying it to a number of real case studies with the aim of exploration whether different analysis approaches could/would have altered the final general conclusions.
 
 <!-- ecology has high "task uncertainty" stemming from high "technical" and "strategic task uncertainty" - Peterson pano 2021 -->
 
 <!-- Peterson pano 2021 has a great line that when task uncertainty is higher and more uncontrollable variables exists then integrative replications are more open to interpretation. -->
 
-* movement ecology has seen such development in methods, can we check the conclusions remain the same
-
 * as a case study, we re-examine the findings from __ snake movement studies that all describe a form of habitat selection
+
+We selected a quartet of separate but connected movement ecology studies that attempt to disentangle the habitat selection exhibited by snakes in north-eastern Thailand.
+All four cases focus on snakes that come into conflict with humans to some extent, either because of the risks poses from their venom (king cobra, Malayan krait, banded krait), or because of their appetite for domestic livestock (Burmese python).
+In all cases the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict.
+With these general goals in mind, we re-examine the movement datasets using a multiverse of habitat selection analysis pathways to reveal whether the same data could lead to different conclusions.
 
 <!-- devezer et al 2021 - reproducing the results doesn't mean that they are more likely correct - pg 10. So instead here we are exploring the likely that conclusions would change, an attempt to gauge uncertainty with a number of ~equally~ valid analysis methods -->
 
@@ -77,9 +106,18 @@ Complex and difficult to control for ecological system (high task uncertainty) l
 # Methods
 
 ## Study Location
-* NE Thailand
-* SERS
-* SUT University campus
+<!-- NE Thailand -->
+All four case studies occurred in northeastern Thailand, within Nakhon Ratchashima province.
+<!-- SERS -->
+Three case studies (king cobra, Burmese python, banded krait) were conducted within the Sakaerat Biosphere Reserve.
+The reserve comprises of three zones of management: core, buffer, and transitional
+The core is largely primary forest; the buffer surrounds the core and is comprised of forest regeneration efforts, whereas the transitional zone allows more development resulting in a mix of agriculture, settlements, and plantation forest.
+Bisecting the transitional zone, and running adjacent to the protected forest areas is a four-lane highway connecting the city of Nakhon Ratchshima to Bangkok.
+<!-- SUT University campus -->
+The case study (Malayan krait) not in the Sakaerat Biosphere Reserve was undertaken nearer to Nakhon Ratchshima proper, on the Suranaree University of Technology.
+The university campus is a mix of scrub forest, open lawn, university buildings, and homes.
+
+<!-- enough detail? and double check the match the orignal papers -->
 
 ## Study Species
 
