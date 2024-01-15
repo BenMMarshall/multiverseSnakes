@@ -73,8 +73,211 @@ Movement ecology, step selection function, habitat preference, habitat selection
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
+\begin{itemize}
+\tightlist
+\item
+  Science should be self correcting
+\end{itemize}
+
+A key component of science is the continual reassessment of past work and findings.
+Whether that takes the form of ``integrative replications'' or quasi-replications testing the edges of previous findings generalisability and retesting questions in different study systems, or as direct replications aiming to discover how exactly how reliable previous work is.
+
+\begin{itemize}
+\tightlist
+\item
+  Reassessments of old data have reveal inconsistencies
+\end{itemize}
+
+Reassessments and replications - regardless of their position on the direct-quasi continuum - can aid the formal and organic self-correcting process of science.
+Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but also be difficult to redirect if the initial impetus was misdirected .
+Therefore, checking and confirming results early is important; we can see this principle recognised in the peer review system itself.
+
+Checking previous findings through replication can be come more difficult in systems with high task uncertainty.
+High task uncertainty systems --those that manifest high levels of uncontrollable stochasticity-- may make direct diagnostic replications impractical or impossible, and quasi-replications weaker supporting evidence .
+Ecological systems can be considered as generating high task uncertainty, with many interconnected elements, and when studying wild systems many of those elements are uncontrollable.
+
+\begin{itemize}
+\tightlist
+\item
+  We can't always collect more data, rechecking old data and conclusions an (albeit not replaceable) alternative
+\end{itemize}
+
+With ecological systems, such complexity and the inability to control or reset an experiment makes the direct replications costly.
+When studying wild animals with a level of direct intervention, repeating experiments/studies might be unethical due to the well-being costs.
+When faced with limited options for direct replications, an alternative, albeit not a replacement, would be to re-examine existing datasets.
+Pooling old and new datasets, and reanalysising them may provide insights into broader generalisations.
+
+\begin{itemize}
+\tightlist
+\item
+  Computational reproducibility is important, but sometimes new methods appear that might offer additionally insight or is more robust to data structural issues.
+\item
+  methods impact results and therefore conclusions, we can see such impact in many analysts and multiverses
+\end{itemize}
+
+In some cases older data may have been collected/recorded in away that enables completely fresh analysis.
+As methodologies develop, conceptualisations change, and computational power increases, new avenues for examining the same data may materialise.
+As these new methods are developed and applied, we may see the conclusions based upon those data change.
+There are a growing number of examples demonstrating that the analysis approach alone can alter the results.
+These examples elegantly show the possible extent of technical uncertainty present in some systems .
+
+\begin{itemize}
+\tightlist
+\item
+  movement ecology has seen such development in methods, can we check the conclusions remain the same
+\end{itemize}
+
+Not all disciplines have explored the sources of uncertainty in findings equally.
+Prudence would push for examination of uncertainty in all its forms, in particular for fields that already tackle high levels of uncertainty originating from a wild study system.
+Movement ecology could be argued to exemplify such a field.
+Animals are complex, existing in complex wild ecosystems, with individuality and personality that frustrates replication and control while simultaneously requiring strict ethical limitations on interventionist study.
+Movement ecology has also seized the opportunities presented by technological developments, enabling higher resolution tracking of animal movements (e.g., GPS tracking) and more sophisticated analysis that can integrate the high dimensional data (e.g., x-y coordinates, time, acceleration, individual, other covariates of interest).
+
+Personality and the repeatability of behaviours presents a key component to the uncertainty when attempting to generalise.
+However, here we turn to the technical uncertainty, the uncertainty originating from the research and how they approach the data.
+Previous many analyst projects highlight the potential for analyst-side variation, and previous multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset.
+Here we take the multiverse approach further by applying it to a number of real case studies with the aim of exploration whether different analysis approaches could/would have altered the final general conclusions.
+
+\begin{itemize}
+\tightlist
+\item
+  as a case study, we re-examine the findings from \_\_ snake movement studies that all describe a form of habitat selection
+\end{itemize}
+
+We selected a quartet of separate but connected movement ecology studies that attempt to disentangle the habitat selection exhibited by snakes in north-eastern Thailand.
+All four cases focus on snakes that come into conflict with humans to some extent, either because of the risks poses from their venom (king cobra, Malayan krait, banded krait), or because of their appetite for domestic livestock (Burmese python).
+In all cases the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict.
+With these general goals in mind, we re-examine the movement datasets using a multiverse of habitat selection analysis pathways to reveal whether the same data could lead to different conclusions.
+
 \hypertarget{methods}{%
 \section{Methods}\label{methods}}
+
+\hypertarget{study-location}{%
+\subsection{Study Location}\label{study-location}}
+
+All four case studies occurred in north eastern Thailand, within Nakhon Ratchashima province.
+Three case studies (king cobra, Burmese python, banded krait) were conducted within the Sakaerat Biosphere Reserve.
+The reserve comprises of three zones of management: core, buffer, and transitional
+The core is largely primary forest; the buffer surrounds the core and is comprised of forest regeneration efforts, whereas the transitional zone allows more development resulting in a mix of agriculture, settlements, and plantation forest.
+Bisecting the transitional zone, and running adjacent to the protected forest areas is a four-lane highway connecting the city of Nakhon Ratchshima to Bangkok.
+The case study (Malayan krait) not in the Sakaerat Biosphere Reserve was undertaken nearer to Nakhon Ratchshima proper, on the Suranaree University of Technology.
+The university campus is a mix of scrub forest, open lawn, university buildings, and homes.
+
+\hypertarget{study-species-and-hypotheses}{%
+\subsection{Study Species and Hypotheses}\label{study-species-and-hypotheses}}
+
+The four case studies cover four species, each with their own ecology and movements.
+
+\hypertarget{king-cobra}{%
+\subsubsection{King Cobra}\label{king-cobra}}
+
+Marshall et al. (\protect\hyperlink{ref-Marshall2018}{2019}) and Marshall et al. (\protect\hyperlink{ref-marshall_no_2020}{2020}) are concerned with king cobras (\emph{Ophiophagus hannah}).
+King cobras are a large (tracked individuals between ), diurnal, active foraging snake species that depredate snakes and monitor lizards .
+While considered a predominately forest dwelling species , they are know to make use of more human altered areas , which can lead to frequent in human-snake conflict .
+The extremely low occurrence of king cobra bites in Thailand mean that instances of human-snake conflict are primarily a conservation concern as opposed to human health .
+
+Marshall et al. (\protect\hyperlink{ref-Marshall2018}{2019}) does not conclude on an actual selection, instead highlighting the king cobras excursions out of the protected forest.
+Marshall et al. (\protect\hyperlink{ref-marshall_no_2020}{2020}) looks more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersection the agricultural areas surrounding the protected forest.
+Therefore, we will pool both datasets and examine two non-mutually exclusion hypotheses that can be examined through a unified model.
+
+Hypothesis\textsubscript{OpHa1}: King Cobras select for semi-natural habitat
+
+Hypothesis\textsubscript{OpHa2}: King Cobras select for forest habitat
+
+\hypertarget{burmese-python}{%
+\subsubsection{Burmese Python}\label{burmese-python}}
+
+Smith et al. (\protect\hyperlink{ref-smith_native_2021}{2021}) describe Burmese python (\emph{Python bivittatus}) habitat selection and movement.
+Burmese pythons are large (tracked individuals between ), ambush predators capable of tacking prey \_\_\_\% larger than their body mass .
+The flexibility in regards to prey size means they are inevitably draw into conflict with humans over livestock, a pattern mirrored across the globe for large snakes .
+
+The conclusions of Smith et al. (\protect\hyperlink{ref-smith_native_2021}{2021}) on python habitat selection are not dissimilar to those made on king cobras, with an active selection for areas near water.
+The land classification used in Smith et al. (\protect\hyperlink{ref-smith_native_2021}{2021}) was slightly different to Marshall et al. (\protect\hyperlink{ref-marshall_no_2020}{2020}), grouping semi-natural areas with larger water bodies (e.g., agricultural ponds).
+
+Hypothesis\textsubscript{PyPi1}: Burmese Pythons select for areas near water.
+
+\hypertarget{malayan-krait}{%
+\subsubsection{Malayan Krait}\label{malayan-krait}}
+
+Hodges et al. (\protect\hyperlink{ref-hodges_malayan_2022}{2022}) examine a smaller species, the Malayan krait (\emph{Bungarus candidus}).
+The Malayan kraits tracked were between \_\_ and \_\_m snout to vent, and all lived on a university campus.
+Malayan kratis like many elapids, have a potent and medically significant venom; bites of Malayan kraits can be fatal.
+They are nocturnal and actively foraging, with a suggested preference for frogs and small rodents .
+
+Unlike the other case studies, Hodges et al. (\protect\hyperlink{ref-hodges_malayan_2022}{2022}) is undertaken in a more urban environment.
+The overall conclusions highlight a number of habitat types that potentially being selected for, and in opposition an avoidance of open areas.
+The scale of the Malayan krait movements meant the study was conducted at a finer spatial scale; habitat types are therefore more finely separated (e.g., buildings vs settlements).
+
+Hypothesis\textsubscript{BuCa1}: Malayan Kraits select for buildings, settlements, and natural areas.
+
+\hypertarget{banded-krait}{%
+\subsubsection{Banded Krait}\label{banded-krait}}
+
+Knierim (\protect\hyperlink{ref-knierim_spatial_2019}{2019}) looked at a larger krait species, the banded krait (\emph{Bungarus fasciatus}).
+Like its smaller cousin the banded krait is also a nocturnal active forager, with a potent venom.
+The banded krait is heavier bodies and grows to longer lengths, tracked individuals ranging from snout to vent length
+However, unlike the Malayan krait the banded krait appears less tolerant of human disturbance in this region of Thailand and tends to have a more Ophiophagus diet .
+
+Hypothesis\textsubscript{BuFa1}: Banded Kraits select for waterways and field edges.
+
+Snakes can be difficult to detect in wild scenarios , forcing a wider and more opportunistic suite of methods to gather adequate sample sizes.
+In all the chosen case studies snakes were obtained for study using trapping arrays, active surveying, and notifications from locals.
+The local notifications often arose from snakes entering human settlements, and a desire for the snake to be removed.
+
+\hypertarget{notes}{%
+\section{notes}\label{notes}}
+
+The papers below use distance from feature in the models, we could add an exploration of binary habitats too.
+Overall simplify the models just to the habitats of interest.
+The python paper has a contrasting grouping of what makes water habitats, do we need to explore alternative groupings of land use types - suspect that we don't but instead use the paper specific definitions (except for the 2018 paper because the number of habitat types is high and ill defined).
+
+Any paper using SSF methods we should summarise to the population level to get an estimate we can plot alongside the multiverse answers.
+Won't be a perfect comparison, but least on a similar scale.
+So we can get a naive mean of SSF preference for given habitat, and in the case of the population ones we can just use that estimate + CIs.
+
+Each species will get model ran on three landscape configurations:
+- original, using whatever method/classification system used, but we will only extract the estimates of direct interest to the hypotheses. Model formula will include all habitat types. This will also provide a means of reproducing the original answers for direct comparison to the other estimates from other decisions pathways. 2018 doesn't have this, so will use 2020 LU data.
+- targeted continuous, a distance to landscape feature approach but refined only to landscapes that matter (e.g., inverted distance to semi-nat vs inverted distance to everything else).
+- targeted binary, simply hypothesised good habitat versus everything else.
+
+\hypertarget{king-cobra-1}{%
+\subsubsection{King Cobra}\label{king-cobra-1}}
+
+Marshall et al. (\protect\hyperlink{ref-Marshall2018}{2019}); Marshall et al. (\protect\hyperlink{ref-marshall_no_2020}{2020})
+OPHA
+2018 paper doesn't conclude a habitat preference, more focusing on the fact that they do not remain within the forest.
+The methods are a major limitation in that regard.
+Best course of action is likely to look at semi-nat areas and forest, and examine the validity of both claims.
+Using the results from the iSSF in figure 4 primarily, clear semi-nat preference that works for a clean re-testable hypo, forest preference can be additional motivation to make the 2018 paper worth exploring too.
+Didn't actually implement any population level summary, but we are testing general conclusions here.
+As the other papers have excluded individuals, what if we do the same here for the 2018 snakes, so we have something just targeting the 2020 paper and then something more general? Would make the targets pipeline more intuitive as all species would have this decision.
+Hypothesis 1: King Cobras show preference for semi-natural habitat
+Hypothesis 2: King Cobras show preference for forest habitat
+
+\hypertarget{burmese-python-1}{%
+\subsubsection{Burmese Python}\label{burmese-python-1}}
+
+Smith et al. (\protect\hyperlink{ref-smith_native_2021}{2021})
+PYBI
+excluded an individual for the pop-level stuff - possible choice to explore?
+Figure 4 shows the clear population pattern preferring water (water bodies and semi-nat areas). Figure 5 shows the preference on an individual level also.
+Hypothesis: Burmese Pythons select for areas near water.
+
+\hypertarget{malayan-krait-1}{%
+\subsubsection{Malayan Krait}\label{malayan-krait-1}}
+
+Hodges et al. (\protect\hyperlink{ref-hodges_malayan_2022}{2022})
+BUCA
+Had excluded individuals - one simply doesn't have enough data; the other should be included(?) but it remained in one habitat type - possible choice to explore?
+Hypothesis: Malayan Kraits select for buildings, settlements, and natural areas.
+
+\hypertarget{banded-krait-1}{%
+\subsubsection{Banded Krait}\label{banded-krait-1}}
+
+Knierim (\protect\hyperlink{ref-knierim_spatial_2019}{2019})
+BUFA
+Need to see if we can get the LU data.
+Hypothesis: Banded Kraits select for waterways and field edges.
 
 \hypertarget{r-openoptions-optionscompletelist---readrdshereheredata-optionscompletelist.rds}{%
 \section{\texorpdfstring{\texttt{\{r\ openOptions\}\ \#\ optionsCompleteList\ \textless{}-\ readRDS(here::here("data",\ "optionsCompleteList.rds"))\ \#}}{\{r openOptions\} \# optionsCompleteList \textless- readRDS(here::here("data", "optionsCompleteList.rds")) \#}}\label{r-openoptions-optionscompletelist---readrdshereheredata-optionscompletelist.rds}}
@@ -115,7 +318,7 @@ and \emph{stringr} v.1.5.0 (\protect\hyperlink{ref-stringr}{Wickham, 2022}) pack
 
 We used \emph{sp} v.1.5.1 (\protect\hyperlink{ref-sp}{Bivand, Pebesma \& Gomez-Rubio, 2013}), \emph{move} v.4.1.12 (\protect\hyperlink{ref-move}{Kranstauber, Smolla \& Scharf, 2023}) for manipulation of spatial data and estimation of space use not otherwise mentioned in the methods.
 
-We used rmarkdown v.2.19 (\protect\hyperlink{ref-rmarkdown2018}{Xie, Allaire \& Grolemund, 2018}; \protect\hyperlink{ref-rmarkdown2020}{Xie, Dervieux \& Riederer, 2020}; \protect\hyperlink{ref-rmarkdown2023}{Allaire et al., 2023}), bookdown v.0.33 (\protect\hyperlink{ref-bookdown2016}{Xie, 2016}, \protect\hyperlink{ref-R-bookdown}{2022}), tinytex v.0.44 (\protect\hyperlink{ref-tinytex2019}{Xie, 2019}, \protect\hyperlink{ref-tinytex2023}{2023a}), and knitr v.1.41 (\protect\hyperlink{ref-knitr2014}{Xie, 2014}, \protect\hyperlink{ref-knitr2015}{2015}, \protect\hyperlink{ref-knitr2023}{2023b}) packages to generate type-set outputs.
+We used rmarkdown v.2.25 (\protect\hyperlink{ref-rmarkdown2018}{Xie, Allaire \& Grolemund, 2018}; \protect\hyperlink{ref-rmarkdown2020}{Xie, Dervieux \& Riederer, 2020}; \protect\hyperlink{ref-rmarkdown2023}{Allaire et al., 2023}), bookdown v.0.33 (\protect\hyperlink{ref-bookdown2016}{Xie, 2016}, \protect\hyperlink{ref-R-bookdown}{2022}), tinytex v.0.44 (\protect\hyperlink{ref-tinytex2019}{Xie, 2019}, \protect\hyperlink{ref-tinytex2023}{2023a}), and knitr v.1.41 (\protect\hyperlink{ref-knitr2014}{Xie, 2014}, \protect\hyperlink{ref-knitr2015}{2015}, \protect\hyperlink{ref-knitr2023}{2023b}) packages to generate type-set outputs.
 
 We generated R package citations with the aid of \emph{grateful} v.0.1.13 (\protect\hyperlink{ref-grateful}{Francisco Rodríguez-Sánchez, Connor P. Jackson \& Shaurita D. Hutchins, 2023}).
 
@@ -152,17 +355,29 @@ Gabry J, Simpson D, Vehtari A, Betancourt M, Gelman A. 2019. Visualization in ba
 \leavevmode\vadjust pre{\hypertarget{ref-raster}{}}%
 Hijmans RJ. 2023. \emph{\href{https://CRAN.R-project.org/package=raster}{{raster}: Geographic data analysis and modeling}}.
 
+\leavevmode\vadjust pre{\hypertarget{ref-hodges_malayan_2022}{}}%
+Hodges CW, Marshall BM, Hill JG, Strine CT. 2022. Malayan kraits ({Bungarus} candidus) show affinity to anthropogenic structures in a human dominated landscape. \emph{Scientific Reports} 12:7139. DOI: \href{https://doi.org/10.1038/s41598-022-11255-z}{10.1038/s41598-022-11255-z}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-ggdist}{}}%
 Kay M. 2023a. \emph{{ggdist}: Visualizations of distributions and uncertainty}. DOI: \href{https://doi.org/10.5281/zenodo.3879620}{10.5281/zenodo.3879620}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-tidybayes}{}}%
 Kay M. 2023b. \emph{{tidybayes}: Tidy data and geoms for {Bayesian} models}. DOI: \href{https://doi.org/10.5281/zenodo.1308151}{10.5281/zenodo.1308151}.
 
+\leavevmode\vadjust pre{\hypertarget{ref-knierim_spatial_2019}{}}%
+Knierim T. 2019. Spatial ecology study reveals nest attendance and habitat preference of banded kraits ({Bungarus} fasciatus). \emph{Herpetological Bulletin}:6--13. DOI: \href{https://doi.org/10.33256/hb150.613}{10.33256/hb150.613}.
+
 \leavevmode\vadjust pre{\hypertarget{ref-move}{}}%
 Kranstauber B, Smolla M, Scharf AK. 2023. \emph{\href{https://CRAN.R-project.org/package=move}{{move}: Visualizing and analyzing animal track data}}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-performance}{}}%
 Lüdecke D, Ben-Shachar MS, Patil I, Waggoner P, Makowski D. 2021. {performance}: An {R} package for assessment, comparison and testing of statistical models. \emph{Journal of Open Source Software} 6:3139. DOI: \href{https://doi.org/10.21105/joss.03139}{10.21105/joss.03139}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-marshall_no_2020}{}}%
+Marshall BM, Crane M, Silva I, Strine CT, Jones MD, Hodges CW, Suwanwaree P, Artchawakom T, Waengsothorn S, Goode M. 2020. No room to roam: {King} {Cobras} reduce movement in agriculture. \emph{Movement Ecology} 8:33. DOI: \href{https://doi.org/10.1186/s40462-020-00219-5}{10.1186/s40462-020-00219-5}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Marshall2018}{}}%
+Marshall BM, Strine CT, Jones MD, Artchawakom T, Silva I, Suwanwaree P, Goode M. 2019. Space fit for a king: Spatial ecology of king cobras ({Ophiophagus} hannah) in {Sakaerat} {Biosphere} {Reserve}, {Northeastern} {Thailand}. \emph{Amphibia-Reptilia} 40:163--178. DOI: \href{https://doi.org/10.1163/15685381-18000008}{10.1163/15685381-18000008}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-here}{}}%
 Müller K. 2020. \emph{\href{https://CRAN.R-project.org/package=here}{{here}: A simpler way to find your files}}.
@@ -184,6 +399,9 @@ Schlather M, Malinowski A, Menck PJ, Oesting M, Strokorb K. 2015. \href{https://
 
 \leavevmode\vadjust pre{\hypertarget{ref-NLMR}{}}%
 Sciaini M, Fritsch M, Scherer C, Simpkins CE. 2018. \href{https://doi.org/10.1111/2041-210X.13076}{NLMR and landscapetools: An integrated environment for simulating and modifying neutral landscape models in r}. \emph{Methods in Ecololgy and Evolution} 00:1--9.
+
+\leavevmode\vadjust pre{\hypertarget{ref-smith_native_2021}{}}%
+Smith SN, Jones MD, Marshall BM, Waengsothorn S, Gale GA, Strine CT. 2021. Native {Burmese} pythons exhibit site fidelity and preference for aquatic habitats in an agricultural mosaic. \emph{Scientific Reports} 11:7014. DOI: \href{https://doi.org/10.1038/s41598-021-86640-1}{10.1038/s41598-021-86640-1}.
 
 \leavevmode\vadjust pre{\hypertarget{ref-ggplot2}{}}%
 Wickham H. 2016. \emph{\href{https://ggplot2.tidyverse.org}{ggplot2: Elegant graphics for data analysis}}. Springer-Verlag New York.

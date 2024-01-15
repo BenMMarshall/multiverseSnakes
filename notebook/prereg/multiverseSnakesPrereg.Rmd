@@ -107,7 +107,7 @@ With these general goals in mind, we re-examine the movement datasets using a mu
 
 ## Study Location
 <!-- NE Thailand -->
-All four case studies occurred in northeastern Thailand, within Nakhon Ratchashima province.
+All four case studies occurred in north eastern Thailand, within Nakhon Ratchashima province.
 <!-- SERS -->
 Three case studies (king cobra, Burmese python, banded krait) were conducted within the Sakaerat Biosphere Reserve.
 The reserve comprises of three zones of management: core, buffer, and transitional
@@ -119,7 +119,101 @@ The university campus is a mix of scrub forest, open lawn, university buildings,
 
 <!-- enough detail? and double check the match the orignal papers -->
 
-## Study Species
+## Study Species and Hypotheses
+
+Snakes can be difficult to detect in wild scenarios <!-- snake in bush paper -->, forcing a wider and more opportunistic suite of methods to gather adequate sample sizes.
+In all the chosen case studies snakes were obtained for study using trapping arrays, active surveying, and notifications from locals.
+The local notifications often arose from snakes entering human settlements, and a desire for the snake to be removed.
+<!-- maybe summary table here of capture methods -->
+
+The four case studies cover four snake species, each with their own ecology and movements.
+
+### King Cobra
+
+@Marshall2018 and @marshall_no_2020 are concerned with king cobras (*Ophiophagus hannah*).
+King cobras are a large (tracked individuals between  <!-- ___m and ___m snout to vent length -->), diurnal, active foraging snake species that depredate snakes and monitor lizards <!-- Jones et al here -->.
+While considered a predominately forest dwelling species <!-- IUCN cite -->, they are know to make use of more human altered areas <!-- india stuff -->, which can lead to frequent in human-snake conflict <!-- india and hits close -->.
+The extremely low occurrence of king cobra bites in Thailand mean that instances of human-snake conflict are primarily a conservation concern as opposed to human health <!-- CITE -->.
+
+@Marshall2018 does not conclude on an actual selection, instead highlighting the king cobras excursions out of the protected forest.
+@marshall_no_2020 looks more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersection the agricultural areas surrounding the protected forest.
+Therefore, we will pool both datasets and examine two non-mutually exclusion hypotheses that can be examined through a unified model.
+
+H~OpHa1~: King Cobras select for semi-natural habitat
+
+H~OpHa2~: King Cobras select for forest habitat
+
+### Burmese Python
+
+@smith_native_2021 describe Burmese python (*Python bivittatus*) habitat selection and movement.
+Burmese pythons are large (tracked individuals between  <!-- ___m and ___m snout to vent length -->), ambush predators capable of tacking prey ___% larger than their body mass <!-- CITE -->.
+The flexibility in regards to prey size means they are inevitably draw into conflict with humans over livestock, a pattern mirrored across the globe for large snakes <!-- Miranda paper?? -->.
+
+The conclusions of @smith_native_2021 on python habitat selection are not dissimilar to those made on king cobras, with an active selection for areas near water.
+The land classification used in @smith_native_2021 was slightly different to @marshall_no_2020, grouping semi-natural areas with larger water bodies (e.g., agricultural ponds).
+
+H~PyBi1~: Burmese Pythons select for areas near water.
+
+### Malayan Krait
+
+@hodges_malayan_2022 examine a smaller species, the Malayan krait (*Bungarus candidus*). 
+The Malayan kraits tracked were between __ and __m snout to vent, and all lived on a university campus. 
+Malayan kratis like many elapids, have a potent and medically significant venom; bites of Malayan kraits can be fatal.
+They are nocturnal and actively foraging, with a suggested preference for frogs and small rodents <!--- CEHCK THIS AND CITE -->.
+
+Unlike the other case studies, @hodges_malayan_2022 is undertaken in a more urban environment.
+The scale of the Malayan krait movements meant the study was conducted at a finer spatial scale; habitat types are therefore more finely separated (e.g., buildings vs settlements).
+The overall conclusions highlight a number of habitat types that potentially being selected for, and in opposition an avoidance of open areas.
+
+H~BuCa1~: Malayan Kraits select for buildings, settlements, and natural areas.
+
+### Banded Krait
+
+@knierim_spatial_2019 looked at a larger krait species, the banded krait (*Bungarus fasciatus*).
+Like its smaller cousin the banded krait is also a nocturnal active forager, with a potent venom.
+The banded krait is heavier bodies and grows to longer lengths, tracked individuals ranging from <!--___m and ___m--> snout to vent length
+However, unlike the Malayan krait the banded krait appears less tolerant of human disturbance in this region of Thailand and tends to have a more Ophiophagus diet <!-- cite -->.
+
+Banded kraits were entirely located in agricultural land, and like the other krait had movements more conducive to finer habitat classifications.
+For example, field margins were found as a key nesting site <!-- nesting with cobra cite -->.
+@knierim_spatial_2019 shows that importance is reflected in the movements and habitat selection, as banded kraits follow the linear water or field margin features as opposed to the wider more exposed field areas.
+
+H~BuFa1~: Banded Kraits select for waterways and field edges.
+
+## Multiverse Construction
+
+To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
+A multiverse is tree of branching paths, where decisions made during analysis spawn multiple branches, each with alternative answers.
+Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection <!-- previous multiverse studies -->, but we are still left with sizeable variation in final answers –and perhaps more importantly answers that offer contradictory conclusions.
+The variation in results are similarly present in more practical demonstrations, such as many analysts projects <!-- many analysts -->.
+
+<!-- habitat class -->
+Our multiverse starts with two alternative ways of defining the habitats.
+Each case study has a map of available habitats, defined as categories.
+One approach we used is to examine the habitat selection by retaining these categories, only simplifying them to fit the hypotheses.
+This simplification took the habitat(s) of interest and codes them as 1, whereas all other habitats previously indicated in the studies to be avoided/not-selected for are coded as 0.
+For example, in the case of king cobras, forest and semi-natural areas were classed as 1, and all other types classed as 0.
+We then used the 0/1 classification as a predictor in the habitat selection analyses.
+We undertook this simplification to facilitate the repeated use of generic code in the multiverse.
+The second approach involved converting the simplified categorical habitat types into continuous rasters, where each cell described the distance to a given habitat type.
+We inverted the distances, so that a positive effect in the model mean a positive selection towards a habitat type (resulting in a more intuitive final output).
+
+<!-- methods - following pop level stuff -->
+The habitat selection methods we explored can be broadly grouped into three types:
+- area based RSF, <!-- compana(?), see what the other multiverse looks like, might be not worth it due to performance -->
+- step based SSF and Poisson
+- Weighted resource selection based
+
+The first category require a define area of availability, for which random available points can be drawn.
+To explore the impact of the definition of available, we created a number of different polygons surrounding the tracking data locations.
+
+The second group, instead of using an available area, use available steps randomly generated for each time step.
+
+Finally, we assessed Weighted Resource Selection Function <!-- alston paper -->.
+
+<!-- notes notes notes notes notes notes notes notes notes notes notes notes notes notes notes -->
+
+# notes
 
 The papers below use distance from feature in the models, we could add an exploration of binary habitats too.
 Overall simplify the models just to the habitats of interest.
