@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.29)  15 JAN 2024 14:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.29)  22 APR 2024 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -762,7 +762,7 @@ LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
 (Font)              scaled to size 10.59595pt on input line 66.
 LaTeX Font Info:    Font shape `T1/mdbch/m/fsc' will be
 (Font)              scaled to size 9.60007pt on input line 70.
-<PDFheaderImage.png, id=97, 200.4288pt x 29.8716pt>
+<PDFheaderImage.png, id=101, 200.4288pt x 29.8716pt>
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
 Package pdftex.def Info: PDFheaderImage.png  used on input line 70.
@@ -772,79 +772,94 @@ LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 [1{c:/Users/benma/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}
 
 {c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./PDFheaderImage.png>]
-LaTeX Font Info:    Trying to load font information for TS1+mdbch on input line 79.
-(c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mathdesign/mdbch/ts1mdbch.fd
-File: ts1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for TS1/mdbch.
-)
-LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 79.
+
+LaTeX Font Warning: Font shape `OT1/phv/n/n' undefined
+(Font)              using `OT1/phv/m/n' instead on input line 120.
+
+LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
+(Font)              scaled to size 10.59595pt on input line 120.
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 151.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 120.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
 [2
 
 ]
-
-LaTeX Font Warning: Font shape `OT1/phv/n/n' undefined
-(Font)              using `OT1/phv/m/n' instead on input line 156.
-
-LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 10.59595pt on input line 156.
 LaTeX Font Info:    Font shape `OT1/phv/n/n' will be
-(Font)              scaled to size 10.59595pt on input line 167.
+(Font)              scaled to size 10.59595pt on input line 131.
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
-(Font)              scaled to size 9.60007pt on input line 174.
+(Font)              scaled to size 9.60007pt on input line 142.
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 200.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 178.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
 [3]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 244.
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 265.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 240.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
 [4]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 262.
+
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 283.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 301.
 LaTeX Font Info:    Font shape `OT1/cmtt/m/n' will be
-(Font)              scaled to size 12.86407pt on input line 283.
-LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 283.
+(Font)              scaled to size 12.86407pt on input line 301.
+LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 301.
 (c:/Program Files/R/R-4.2.2/share/texmf/tex/latex/omscmtt.fd
 File: omscmtt.fd 
 )
 LaTeX Font Info:    Font shape `OMS/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 283.
-LaTeX Font Info:    Trying to load font information for OML+cmtt on input line 283.
-LaTeX Font Info:    No file OMLcmtt.fd. on input line 283.
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 301.
+LaTeX Font Info:    Trying to load font information for OML+cmtt on input line 301.
+LaTeX Font Info:    No file OMLcmtt.fd. on input line 301.
 
 LaTeX Font Warning: Font shape `OML/cmtt/bx/n' undefined
 (Font)              using `OML/cmm/m/it' instead
-(Font)              for symbol `textless' on input line 283.
+(Font)              for symbol `textless' on input line 301.
 
 
-Overfull \hbox (153.35402pt too wide) in paragraph at lines 283--283
+Overfull \hbox (153.35402pt too wide) in paragraph at lines 301--301
 |[]\OMS/cmsy/b/n/12 f\OT1/cmtt/m/n/12 r openOptions\OMS/cmsy/b/n/12 g \OT1/cmtt/m/n/12 # optionsCompleteList \OML/cmm/m/it/12 <\OT1/cmtt/m/n/12 - readRDS(here::here("data", "optionsCompleteList.rds"))
  []
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 326.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 304.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
 [5]
-Overfull \hbox (2.36508pt too wide) in paragraph at lines 403--405
+LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
+(Font)              scaled to size 9.60007pt on input line 325.
+
+Overfull \hbox (1.49202pt too wide) in paragraph at lines 332--333
+[]\T1/mdbch/m/n/10 We used \T1/mdbch/m/it/10 brms \T1/mdbch/m/n/10 v.2.19.0 ([][]\T1/mdbch/b/n/10 brms?[][]\T1/mdbch/m/n/10 ) to run Bayesian mod-els, with di-ag-nos-tics gen-er-ated used \T1/mdbch/m/it/10 bayesplot \T1/mdbch/m/n/10 v.1.10.0 ([][]\T1/mdbch/b/n/10 bayesplot?[][]\T1/mdbch/m/n/10 ),
+ []
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 378.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[6]
+Overfull \hbox (1.7049pt too wide) in paragraph at lines 403--405
+[]\T1/mdbch/m/n/10 Kelly CD. 2019. Rate and suc-cess of study repli-ca-tion in ecol-ogy and evo-lu-tion. \T1/mdbch/m/it/10 PeerJ \T1/mdbch/m/n/10 7:e7654. DOI: [][]10.7717/peerj.7654[][]. 
+ []
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 429.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[7]
+Overfull \hbox (2.36508pt too wide) in paragraph at lines 451--453
 \T1/mdbch/m/n/10 delity and pref-er-ence for aquatic habi-tats in an agri-cul-tural mo-saic. \T1/mdbch/m/it/10 Sci-en-tific Re-ports \T1/mdbch/m/n/10 11:7014. DOI: [][]10.1038/s41598-
  []
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 447.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 501.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[6] 
+[8] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./multiverseSnakesPrereg.aux)
  ***********
@@ -855,21 +870,45 @@ L3 programming layer <2023-11-09>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `multiverseSnakesPrereg.out' has not changed.
-(rerunfilecheck)             Checksum: 7375EBEBA8139B61706BBDAB6DC0413B;3273.
+(rerunfilecheck)             Checksum: 12AABA59A00322BF4D54C70CE01BAF7F;3449.
  ) 
 Here is how much of TeX's memory you used:
- 15490 strings out of 476233
- 249534 string characters out of 5795441
- 1939558 words of memory out of 5000000
- 37080 multiletter control sequences out of 15000+600000
- 605654 words of font info for 109 fonts, out of 8000000 for 9000
+ 15493 strings out of 476233
+ 249575 string characters out of 5795441
+ 1940558 words of memory out of 5000000
+ 37061 multiletter control sequences out of 15000+600000
+ 608027 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,16n,131p,683b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr8t.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on multiverseSnakesPrereg.pdf (6 pages, 150915 bytes).
+ 90i,16n,131p,3085b,572s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{ref-sp} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-performance} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-bayesplot} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-brms} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-ggridges} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-patchwork} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-RandomFields} has been referenced but does not exist, replaced by a fixed one
+
+
+pdfTeX warning (dest): name{ref-base} has been referenced but does not exist, replaced by a fixed one
+
+<c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chr8t.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on multiverseSnakesPrereg.pdf (8 pages, 169706 bytes).
 PDF statistics:
- 344 PDF objects out of 1000 (max. 8388607)
- 313 compressed objects within 4 object streams
- 89 named destinations out of 1000 (max. 500000)
- 190 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 427 PDF objects out of 1000 (max. 8388607)
+ 392 compressed objects within 4 object streams
+ 113 named destinations out of 1000 (max. 500000)
+ 198 words of extra memory for PDF output out of 10000 (max. 10000000)
 

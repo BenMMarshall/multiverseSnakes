@@ -46,7 +46,7 @@ Whether that takes the form of direct replications aiming to discover how exactl
 <!-- Direct quote from Peterson 2021 - "When replication in the normal course of integration does not provide clear signals of truth or falsity, researchers instead look for signs of robustness." -->
 
 Reassessments and replications --regardless of their position on the direct-quasi continuum-- can aid the formal and organic self-correcting process of science.
-Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but also be difficult to redirect if the initial impetus was misdirected [@jennions_relationships_2002; @barto_dissemination_2012] <!-- thinking the progress papers, think it was by barto about early research that is underpowered starting trends that are hard to stop -->.
+Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but this momentum can be difficult to redirect if the initial impetus was misdirected [@jennions_relationships_2002; @barto_dissemination_2012] <!-- thinking the progress papers, think it was by barto about early research that is underpowered starting trends that are hard to stop -->.
 Therefore, checking and confirming results early is important; we can see this principle recognised in the peer review system itself.
 
 Checking previous findings through replication can be come more difficult in systems with high task uncertainty. 
@@ -54,14 +54,14 @@ High task uncertainty systems –those that manifest high levels of uncontrollab
 Ecological systems can be considered as generating high task uncertainty, with many interconnected elements, and when studying wild systems many of those elements are uncontrollable.
 <!-- peterson pano 2021 has a bit about "task uncertainty" where high perfectly describes ecology and the hard to control system -->
 
-With ecological systems, such complexity and the difficulty to control an experiment makes the direct replications costly, potentially explaining their rarity [@kelly_rate_2019].
-When studying wild animals with a level of direct intervention, repeating experiments/studies might be unethical due to the well-being costs [@Weatherhead2004; @tomotani_great_2021; @robstad_impact_2021; @portugal_externally_2022; @altobelli_methods_2022]. 
+With ecological systems, such complexity and the difficulty to control an experiment makes direct replications costly, potentially explaining their rarity [@kelly_rate_2019].
+When studying wild animals with a level of direct intervention, repeating experiments might be unethical due to the well-being costs [@Weatherhead2004; @tomotani_great_2021; @robstad_impact_2021; @portugal_externally_2022; @altobelli_methods_2022]. 
 
 <!-- could add a couple more examples here -->
 When faced with limited options for direct replications, an alternative, albeit not a replacement, would be to re-examine existing datasets.
 Pooling old and new datasets, and reanalysising them may provide insights into broader generalisations.
 
-In some cases older data may have been collected/recorded in away that enables completely fresh analysis [@kays_movebank_2022].
+In some cases older data may have been collected and recorded in ways that enables completely fresh analysis [@kays_movebank_2022].
 As methodologies develop, conceptualisations change, and computational power increases, new avenues for examining the same data may materialise [e.g., @noonan_effects_2020].
 As these new methods are developed and applied, we may see the conclusions based upon those data change.
 There are a growing number of examples demonstrating that the analysis approach can alter the results [@salis_how_2021; @desbureaux_subjective_2021], and that the researchers themselves can be a key source of variation in analysis and results [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023].
@@ -72,7 +72,7 @@ Prudence would push for examination of uncertainty in all its forms, in particul
 Movement ecology could be argued to exemplify such a field.
 Animals are complex, existing in complex wild ecosystems, with individuality and personality [@stuber_spatial_2022].
 Depending on the research question, controls in movement ecology can be difficult to achieve, and replications difficult to justify given the strict ethical limitations on interventionist study.
-Movement ecology has also seized the opportunities presented by technological developments, enabling higher resolution tracking of animal movements (e.g., GPS tracking) and more sophisticated analysis that can integrate the high dimensional data [e.g., x-y coordinates, time, acceleration, individual, other covariates of interest; @joo_recent_2022].
+Movement ecology has also seized the opportunities presented by technological developments, enabling higher resolution tracking of animal movements (e.g., GPS tracking) and more sophisticated analysis that can integrate the high dimensional data [e.g., x-y coordinates, time, acceleration, individual, other covariates of interest, @joo_recent_2022].
 
 Personality and the repeatability of behaviours presents a key component to the uncertainty or variation when attempting to generalise.
 However, here we turn to the technical uncertainty, the uncertainty originating from the researcher and how they approach the data.
