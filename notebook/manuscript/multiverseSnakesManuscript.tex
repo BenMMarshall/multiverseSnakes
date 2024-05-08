@@ -1,0 +1,234 @@
+
+\documentclass[10pt,a4paper]{article}
+\usepackage{f1000_styles}
+
+%% Default: numerical citations
+% \usepackage[numbers]{natbib}
+
+%% Uncomment this lines for superscript citations instead
+% \usepackage[super]{natbib}
+
+%% Uncomment these lines for author-year citations instead
+% \usepackage[round]{natbib}
+% \let\cite\citep
+
+%% lines required to use a CSL style for references
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+%% lines to get the code chunks working
+
+%% lines to enable bulletpoints in a new notation style
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+\pagestyle{fancy}
+
+\title{Testing the conclusions of snake habitat selection studies with a multiverse of analyses}
+\author[1]{Benjamin Michael Marshall*}
+\author[1]{Alexander Bradley Duthie**}
+\affil[1]{Biological and Environmental Sciences, Faculty of Natural Sciences, University of Stirling, Stirling, FK9 4LA, Scotland, UK}
+
+\affil[*]{\href{mailto:benjaminmichaelmarshall@gmail.com}{\nolinkurl{benjaminmichaelmarshall@gmail.com}}}
+\affil[**]{\href{mailto:alexander.duthie@stir.ac.uk}{\nolinkurl{alexander.duthie@stir.ac.uk}}}
+
+\maketitle
+\thispagestyle{fancy}
+
+\begin{abstract}
+
+Possibly the best way to determine a snake's needs is to follow their movements. Once we have learnt of the snake's movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human snake conflict. However, extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement are leading to the correct decisions in snake conservation? We used a multiverse approach to explore thousands of ways of extracting the habitat preference estimates from the movement of simulated snakes with a pre-defined preference. We found that despite different sampling approaches, and completely different analysis methods, the vast majority of results agree and correctly identify habitat preference. The agreement between different habitat preference estimates tended to be better with more data, and when using more modern analysis methods. Now we apply this multiverse of analyses to re-examine several previous studies of snake habitat preference from Thailand. We examine how the published results compare to the thousands of other ways a researcher could have examined the snake movement data. Would certain analysis choices have led to a different conclusion and therefore a different conservation recommendation? We hope the answers to these questions will inform how confident we can be in the findings from snake movement studies and direct us towards more robust studies in the future.
+
+\end{abstract}
+
+\section*{Keywords}
+
+Movement ecology, simulation, step selection function, poisson, habitat preference, habitat selection, animal movement, multiverse, research choice, researcher degrees for freedom, snakes, King Cobra, Burmese Python, Banded Krait, Malayan Krait
+
+\clearpage
+\pagestyle{fancy}
+
+\subsection{Multiverse Construction}\label{multiverse-construction}
+
+To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
+A multiverse is tree of branching paths, where decisions made during analysis spawn multiple branches, each with alternative answers.
+Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection , but we are still left with sizeable variation in final answers --and perhaps more importantly answers that offer contradictory conclusions.
+The variation in results are similarly present in more practical demonstrations, such as many analysts projects .
+
+Our multiverse starts with two alternative ways of defining the habitats.
+Each case study has a map of available habitats, defined as categories.
+One approach we used is to examine the habitat selection by retaining these categories, only simplifying them to fit the hypotheses.
+This simplification took the habitat(s) of interest and codes them as 1, whereas all other habitats previously indicated in the studies to be avoided/not-selected for are coded as 0.
+For example, in the case of King Cobra cobras, forest and semi-natural areas were classed as 1, and all other types classed as 0.
+We then used the 0/1 classification as a predictor in the habitat selection analyses.
+We undertook this simplification to facilitate the repeated use of generic code in the multiverse.
+The second approach involved converting the simplified categorical habitat types into continuous rasters, where each cell described the distance to a given habitat type.
+We inverted the distances, so that a positive effect in the model mean a positive selection towards a habitat type (resulting in a more intuitive final output).
+
+The habitat selection methods we explored can be broadly grouped into three types:
+- area based RSF,
+- step based SSF and Poisson
+- Weighted resource selection
+
+The first category requires a defined area of availability, for which random available points can be drawn.
+To explore the impact of the definition of available, we created a number of different polygons surrounding the tracking data locations.
+We created available areas using Minimum Convex Polygons (MCP), Kernel Density Estimates (KDE: using the reference smoothing bandwidth {[}href{]}), and Autocorrelated Kernel Density Estimates (aKDE).
+All three methods require a selection of an outer most contour to define the edge of the available habitat, we varied this outer edge including analysis of 90, 95, and 99\% contours.
+For the aKDE areas, we selected the point estimate connected to the contour percentage, ignoring the 95\% confidence intervals associated with the estimate.
+Once an available area was defined, we generated points within the area to extract the available habitat.
+We varied the point generation process, either purely random or stratified across the overall area.
+In addition to the point generation method, we varied the number of points created from \_\_\_ to \_\_\_.
+As each individual had their own available area, we explored Type III habitat selection; however, as the question could be equally explored via a Type II design, we merged all available areas into a landscape level area of available habitat.
+Overall, for RSF we explored the impact of area method, area contour, point generation method, number of generated points, and type design.
+
+The second group, instead of using an available area, use available steps randomly generated for each time step.
+For these step-based methods a different suite of choices were explored.
+First is the number of random steps generated per known location, we ranged this from \_\_\_ to \_\_\_.
+To generate those steps we draw values from distributions, the choice of those distributions make up the next two choices.
+For the random step lengths we looked at impact of using Gamma and Exponential distributions; whereas for the turn angles we looked at Von Mises and Uniform distributions.
+Once the random available locations had been generated, we explore an additional choice regarding the model formula: whether to have the step lengths and turn angles interact with the habitat.
+Termed integrated step-selection, the inclusion of the step lengths and turn angles is meant to aid the acquisition of less biased estimates of habitat selection.
+However, the impacts of the inclusion have differing impacts when using step-selection or a poisson model ; we include it here to explore how dramatic that difference can be.
+
+Finally, we assessed Weighted Resource Selection Function (\citeproc{ref-alston_mitigating_2023}{Alston et al., 2023}).
+Weighted Resource Selection Functions are the newest of the methods examined here.
+Instead of relying on available areas they\ldots{} MORE HERE
+
+\section{Results}\label{results}
+
+\section{Discussion}\label{discussion}
+
+\subsection{Conclusions}\label{conclusions}
+
+\section{Acknowledgements}\label{acknowledgements}
+
+BMM was funded by the Natural Environment Research Council (NERC) via the IAPETUS2 Doctoral Training Partnership.
+
+\section{Software availablity}\label{software-availablity}
+
+In addition to packages already mentioned in the methods we also used the following.
+
+We used \emph{R} v.4.2.2 (\citeproc{ref-base}{\textbf{base?}}) via \emph{RStudio} v.2023.6.2.561 (\citeproc{ref-rstudio}{RStudio Team, 2022}).
+We used \emph{here} v.1.0.1 (\citeproc{ref-here}{Müller, 2020}) and \emph{qs} v.0.25.5 (\citeproc{ref-qs}{Ching, 2023}) to manage directory addresses and saved objects.
+
+We used \emph{raster} v.3.6.14 (\citeproc{ref-raster}{Hijmans, 2023}) and \emph{RandomFields} v.3.3.14 (\citeproc{ref-RandomFields}{\textbf{RandomFields?}}) to aid landscape raster creation alongside NLMR v.1.1.1 (\citeproc{ref-NLMR}{Sciaini et al., 2018}).
+
+We used \emph{ggplot2} v.3.4.2 for creating figures (\citeproc{ref-ggplot2}{Wickham, 2016}), with the expansions: \emph{patchwork} v.1.1.2 (\citeproc{ref-patchwork}{\textbf{patchwork?}}), \emph{ggridges} v.0.5.4 (\citeproc{ref-ggridges}{\textbf{ggridges?}}), and \emph{ggdist} v.3.2.0 (\citeproc{ref-ggdist}{Kay, 2023a}).
+
+We used \emph{brms} v.2.19.0 (\citeproc{ref-brms}{\textbf{brms?}}) to run Bayesian models, with diagnostics generated used \emph{bayesplot} v.1.10.0 (\citeproc{ref-bayesplot}{\textbf{bayesplot?}}), \emph{tidybayes} v.3.0.2 (\citeproc{ref-tidybayes}{Kay, 2023b}), and \emph{performance} v.0.10.2 (\citeproc{ref-performance}{\textbf{performance?}}).
+
+We used the \emph{dplyr} v.1.1.3 (\citeproc{ref-dplyr}{Wickham et al., 2023}), \emph{tibble} v.3.2.1 (\citeproc{ref-tibble}{Müller \& Wickham, 2023}),
+and \emph{stringr} v.1.5.0 (\citeproc{ref-stringr}{Wickham, 2022}) packages for data manipulation.
+
+We used \emph{sp} v.1.5.1 (\citeproc{ref-sp}{\textbf{sp?}}), \emph{move} v.4.1.12 (\citeproc{ref-move}{Kranstauber, Smolla \& Scharf, 2023}) for manipulation of spatial data and estimation of space use not otherwise mentioned in the methods.
+
+We used rmarkdown v.2.25 (\citeproc{ref-rmarkdown2018}{Xie, Allaire \& Grolemund, 2018}; \citeproc{ref-rmarkdown2020}{Xie, Dervieux \& Riederer, 2020}; \citeproc{ref-rmarkdown2023}{Allaire et al., 2023}), bookdown v.0.33 (\citeproc{ref-bookdown2016}{Xie, 2016}, \citeproc{ref-R-bookdown}{2022}), tinytex v.0.44 (\citeproc{ref-tinytex2019}{Xie, 2019}, \citeproc{ref-tinytex2023}{2023a}), and knitr v.1.41 (\citeproc{ref-knitr2014}{Xie, 2014}, \citeproc{ref-knitr2015}{2015}, \citeproc{ref-knitr2023}{2023b}) packages to generate type-set outputs.
+
+We generated R package citations with the aid of \emph{grateful} v.0.1.13 (\citeproc{ref-grateful}{Francisco Rodríguez-Sánchez, Connor P. Jackson \& Shaurita D. Hutchins, 2023}).
+
+\section{Data availabilty}\label{data-availabilty}
+
+\section{Supplementary Material}\label{supplementary-material}
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-rmarkdown2023}
+Allaire J, Xie Y, Dervieux C, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H, Cheng J, Chang W, Iannone R. 2023. \emph{\href{https://github.com/rstudio/rmarkdown}{{rmarkdown}: Dynamic documents for r}}.
+
+\bibitem[\citeproctext]{ref-alston_mitigating_2023}
+Alston JM, Fleming CH, Kays R, Streicher JP, Downs CT, Ramesh T, Reineking B, Calabrese JM. 2023. Mitigating pseudoreplication and bias in resource selection functions with autocorrelation‐informed weighting. \emph{Methods in Ecology and Evolution} 14:643--654. DOI: \href{https://doi.org/10.1111/2041-210X.14025}{10.1111/2041-210X.14025}.
+
+\bibitem[\citeproctext]{ref-qs}
+Ching T. 2023. \emph{\href{https://CRAN.R-project.org/package=qs}{{qs}: Quick serialization of r objects}}.
+
+\bibitem[\citeproctext]{ref-grateful}
+Francisco Rodríguez-Sánchez, Connor P. Jackson, Shaurita D. Hutchins. 2023. \emph{\href{https://github.com/Pakillo/grateful}{{grateful}: Facilitate citation of r packages}}.
+
+\bibitem[\citeproctext]{ref-raster}
+Hijmans RJ. 2023. \emph{\href{https://CRAN.R-project.org/package=raster}{{raster}: Geographic data analysis and modeling}}.
+
+\bibitem[\citeproctext]{ref-ggdist}
+Kay M. 2023a. \emph{{ggdist}: Visualizations of distributions and uncertainty}. DOI: \href{https://doi.org/10.5281/zenodo.3879620}{10.5281/zenodo.3879620}.
+
+\bibitem[\citeproctext]{ref-tidybayes}
+Kay M. 2023b. \emph{{tidybayes}: Tidy data and geoms for {Bayesian} models}. DOI: \href{https://doi.org/10.5281/zenodo.1308151}{10.5281/zenodo.1308151}.
+
+\bibitem[\citeproctext]{ref-move}
+Kranstauber B, Smolla M, Scharf AK. 2023. \emph{\href{https://CRAN.R-project.org/package=move}{{move}: Visualizing and analyzing animal track data}}.
+
+\bibitem[\citeproctext]{ref-here}
+Müller K. 2020. \emph{\href{https://CRAN.R-project.org/package=here}{{here}: A simpler way to find your files}}.
+
+\bibitem[\citeproctext]{ref-tibble}
+Müller K, Wickham H. 2023. \emph{\href{https://CRAN.R-project.org/package=tibble}{{tibble}: Simple data frames}}.
+
+\bibitem[\citeproctext]{ref-rstudio}
+RStudio Team. 2022. \emph{\href{http://www.rstudio.com/}{{RStudio}: Integrated development environment for r}}. Boston, MA: RStudio, PBC.
+
+\bibitem[\citeproctext]{ref-NLMR}
+Sciaini M, Fritsch M, Scherer C, Simpkins CE. 2018. \href{https://doi.org/10.1111/2041-210X.13076}{NLMR and landscapetools: An integrated environment for simulating and modifying neutral landscape models in r}. \emph{Methods in Ecololgy and Evolution} 00:1--9.
+
+\bibitem[\citeproctext]{ref-ggplot2}
+Wickham H. 2016. \emph{\href{https://ggplot2.tidyverse.org}{ggplot2: Elegant graphics for data analysis}}. Springer-Verlag New York.
+
+\bibitem[\citeproctext]{ref-stringr}
+Wickham H. 2022. \emph{\href{https://CRAN.R-project.org/package=stringr}{{stringr}: Simple, consistent wrappers for common string operations}}.
+
+\bibitem[\citeproctext]{ref-dplyr}
+Wickham H, François R, Henry L, Müller K, Vaughan D. 2023. \emph{\href{https://CRAN.R-project.org/package=dplyr}{{dplyr}: A grammar of data manipulation}}.
+
+\bibitem[\citeproctext]{ref-knitr2014}
+Xie Y. 2014. {knitr}: A comprehensive tool for reproducible research in {R}. In: Stodden V, Leisch F, Peng RD eds. \emph{Implementing reproducible computational research}. Chapman; Hall/CRC,.
+
+\bibitem[\citeproctext]{ref-knitr2015}
+Xie Y. 2015. \emph{\href{https://yihui.org/knitr/}{Dynamic documents with {R} and knitr}}. Boca Raton, Florida: Chapman; Hall/CRC.
+
+\bibitem[\citeproctext]{ref-bookdown2016}
+Xie Y. 2016. \emph{\href{https://bookdown.org/yihui/bookdown}{{bookdown}: Authoring books and technical documents with {R} markdown}}. Boca Raton, Florida: Chapman; Hall/CRC.
+
+\bibitem[\citeproctext]{ref-tinytex2019}
+Xie Y. 2019. \href{https://tug.org/TUGboat/Contents/contents40-1.html}{{TinyTeX}: A lightweight, cross-platform, and easy-to-maintain LaTeX distribution based on TeX live}. \emph{TUGboat} 40:30--32.
+
+\bibitem[\citeproctext]{ref-R-bookdown}
+Xie Y. 2022. \emph{\href{https://CRAN.R-project.org/package=bookdown}{Bookdown: Authoring books and technical documents with r markdown}}.
+
+\bibitem[\citeproctext]{ref-knitr2023}
+Xie Y. 2023b. \emph{\href{https://yihui.org/knitr/}{{knitr}: A general-purpose package for dynamic report generation in r}}.
+
+\bibitem[\citeproctext]{ref-tinytex2023}
+Xie Y. 2023a. \emph{\href{https://github.com/rstudio/tinytex}{{tinytex}: Helper functions to install and maintain TeX live, and compile LaTeX documents}}.
+
+\bibitem[\citeproctext]{ref-rmarkdown2018}
+Xie Y, Allaire JJ, Grolemund G. 2018. \emph{\href{https://bookdown.org/yihui/rmarkdown}{R markdown: The definitive guide}}. Boca Raton, Florida: Chapman; Hall/CRC.
+
+\bibitem[\citeproctext]{ref-rmarkdown2020}
+Xie Y, Dervieux C, Riederer E. 2020. \emph{\href{https://bookdown.org/yihui/rmarkdown-cookbook}{R markdown cookbook}}. Boca Raton, Florida: Chapman; Hall/CRC.
+
+\end{CSLReferences}
+
+\end{document}

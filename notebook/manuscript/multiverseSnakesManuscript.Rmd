@@ -1,0 +1,121 @@
+---
+title: "Testing the conclusions of snake habitat selection studies with a multiverse of analyses"
+author1: "Benjamin Michael Marshall*"
+author2: "Alexander Bradley Duthie**"
+affiliation1: "Biological and Environmental Sciences, Faculty of Natural Sciences, University of Stirling, Stirling, FK9 4LA, Scotland, UK"
+affiliation2: "-"
+corresponding1: "benjaminmichaelmarshall@gmail.com"
+corresponding2: "alexander.duthie@stir.ac.uk"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_document2:
+    template: main.tex
+    keep_tex: true
+    highlight: monochrome
+    fig_caption: true
+    dev: pdf
+  bookdown::html_document2:
+    theme: yeti
+    highlight: monochrome
+    fig_caption: true
+link-citations: yes
+linkcolor: gray
+bibliography: [multiverseSnakesPrereg_refs.bib, packages_refs.bib]
+csl: peerj.csl
+editor_options: 
+  markdown: 
+    wrap: sentence
+abstract: <PLACEHOLDER ABSTRACT> Possibly the best way to determine a snake’s needs is to follow their movements. Once we have learnt of the snake’s movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human snake conflict. However, extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement are leading to the correct decisions in snake conservation? We used a multiverse approach to explore thousands of ways of extracting the habitat preference estimates from the movement of simulated snakes with a pre-defined preference. We found that despite different sampling approaches, and completely different analysis methods, the vast majority of results agree and correctly identify habitat preference. The agreement between different habitat preference estimates tended to be better with more data, and when using more modern analysis methods. Now we apply this multiverse of analyses to re-examine several previous studies of snake habitat preference from Thailand. We examine how the published results compare to the thousands of other ways a researcher could have examined the snake movement data. Would certain analysis choices have led to a different conclusion and therefore a different conservation recommendation? We hope the answers to these questions will inform how confident we can be in the findings from snake movement studies and direct us towards more robust studies in the future.
+keywords: Movement ecology, simulation, step selection function, poisson, habitat preference, habitat selection, animal movement, multiverse, research choice, researcher degrees for freedom, snakes, King Cobra, Burmese Python, Banded Krait, Malayan Krait
+---
+
+## Multiverse Construction
+
+To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
+A multiverse is tree of branching paths, where decisions made during analysis spawn multiple branches, each with alternative answers.
+Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection <!-- previous multiverse studies -->[chapter 2 and 3 preprints can be cited here when published in June], but we are still left with sizeable variation in final answers –and perhaps more importantly answers that offer contradictory conclusions.
+The variation in results are similarly present in more practical demonstrations, such as many analysts projects [@gould_same_2023].
+
+<!-- habitat class -->
+Our multiverse starts with two alternative ways of defining the habitats.
+Each case study has a map of available habitats, defined as categories.
+One approach we used is to examine the habitat selection by retaining these categories, only simplifying them to fit the hypotheses.
+This simplification took the habitat(s) of interest and codes them as 1, whereas all other habitats previously indicated in the studies to be avoided/not-selected for are coded as 0.
+For example, in the case of King Cobra cobras, forest and semi-natural areas were classed as 1, and all other types classed as 0.
+We then used the 0/1 classification as a predictor in the habitat selection analyses.
+We undertook this simplification to facilitate the repeated use of generic code in the multiverse.
+The second approach involved converting the simplified categorical habitat types into continuous rasters, where each cell described the distance to a given habitat type.
+We inverted the distances, so that a positive effect in the model mean a positive selection towards a habitat type (resulting in a more intuitive final output).
+
+<!-- methods - following pop level stuff -->
+The habitat selection methods we explored can be broadly grouped into:
+- area based RSF, <!-- compana(?), see what the other multiverse looks like, might be not worth it due to performance -->
+- step based SSF and Poisson
+<!-- will also add wRSF if a pop level thing can be worked out -->
+
+The first category requires a defined area of availability, for which random available points can be drawn.
+To explore the impact of the definition of available, we created a number of different polygons surrounding the tracking data locations.
+We created available areas using Minimum Convex Polygons (MCP), Kernel Density Estimates (KDE: using the reference smoothing bandwidth [href]), and Autocorrelated Kernel Density Estimates (aKDE).
+All three methods require a selection of an outer most contour to define the edge of the available habitat, we varied this outer edge including analysis of 90, 95, and 99% contours.
+For the aKDE areas, we selected the point estimate connected to the contour percentage, ignoring the 95% confidence intervals associated with the estimate.
+Once an available area was defined, we generated points within the area to extract the available habitat.
+We varied the point generation process, either purely random or stratified across the overall area.
+In addition to the point generation method, we varied the number of points created from TBC to TBC.
+As each individual had their own available area, we explored Type III habitat selection; however, as the question could be equally explored via a Type II design, we merged all available areas into a landscape level area of available habitat.
+Overall, for RSF we explored the impact of area method, area contour, point generation method, number of generated points, and type design.
+
+The second group, instead of using an available area, use available steps randomly generated for each time step.
+For these step-based methods a different suite of choices were explored.
+First is the number of random steps generated per known location, we ranged this from TBC to TBC.
+To generate those steps we draw values from distributions, the choice of those distributions make up the next two choices.
+For the random step lengths we looked at impact of using Gamma and Exponential distributions; whereas for the turn angles we looked at Von Mises and Uniform distributions.
+Once the random available locations had been generated, we explore an additional choice regarding the model formula: whether to have the step lengths and turn angles interact with the habitat.
+Termed integrated step-selection, the inclusion of the step lengths and turn angles is meant to aid the acquisition of less biased estimates of habitat selection.
+However, the impacts of the inclusion have differing impacts when using step-selection or a poisson model <!--- cite here --->; we include it here to explore how dramatic that difference can be.
+
+The final extent of the multiverse will be determined by the computational costs of running it.
+
+<!-- Finally, we assessed Weighted Resource Selection Function [@alston_mitigating_2023]. -->
+<!-- Weighted Resource Selection Functions are the newest of the methods examined here. -->
+<!-- Instead of relying on available areas they... MORE HERE -->
+
+# Results
+
+# Discussion
+
+## Conclusions
+
+# Acknowledgements
+
+BMM was funded by the Natural Environment Research Council (NERC) via the IAPETUS2 Doctoral Training Partnership.
+
+# Software availablity
+
+In addition to packages already mentioned in the methods we also used the following.
+
+We used *R* `r paste0("v.", version$major, ".", version$minor)` [@base] via *RStudio* v.2023.6.2.561 [@rstudio]. <!-- version has to be manually added because rstudioapi doesn't work in targets -->
+We used *here* `r paste0("v.", packageVersion("here"))` [@here] and *qs* `r paste0("v.", packageVersion("qs"))` [@qs] to manage directory addresses and saved objects.
+
+We used *raster* `r paste0("v.", packageVersion("raster"))` [@raster] and *RandomFields* `r paste0("v.", packageVersion("RandomFields"))` [@RandomFields] to aid landscape raster creation alongside NLMR `r paste0("v.", packageVersion("NLMR"))` [@NLMR].
+
+We used *ggplot2* `r paste0("v.", packageVersion("ggplot2"))` for creating figures [@ggplot2], with the expansions: *patchwork* `r paste0("v.", packageVersion("patchwork"))` [@patchwork], *ggridges* `r paste0("v.", packageVersion("ggridges"))` [@ggridges], and *ggdist* `r paste0("v.", packageVersion("ggdist"))` [@ggdist].
+
+We used *brms* `r paste0("v.", packageVersion("brms"))` [@brms] to run Bayesian models, with diagnostics generated used *bayesplot* `r paste0("v.", packageVersion("bayesplot"))` [@bayesplot], *tidybayes* `r paste0("v.", packageVersion("tidybayes"))` [@tidybayes], and *performance* `r paste0("v.", packageVersion("performance"))` [@performance].
+
+We used the *dplyr* `r paste0("v.", packageVersion("dplyr"))` [@dplyr], *tibble* `r paste0("v.", packageVersion("tibble"))` [@tibble],
+<!-- *reshape2* `r paste0("v.", packageVersion("reshape2"))` [@reshape2], -->
+and *stringr* `r paste0("v.", packageVersion("stringr"))` [@stringr] packages for data manipulation.
+
+We used *sp* `r paste0("v.", packageVersion("sp"))` [@sp], *move* `r paste0("v.", packageVersion("move"))` [@move] for manipulation of spatial data and estimation of space use not otherwise mentioned in the methods.
+
+We used rmarkdown `r paste0("v.", packageVersion("rmarkdown"))` [@rmarkdown2023; @rmarkdown2018; @rmarkdown2020], bookdown `r paste0("v.", packageVersion("bookdown"))` [@bookdown2016; @R-bookdown], tinytex `r paste0("v.", packageVersion("tinytex"))` [@tinytex2019; @tinytex2023], and knitr `r paste0("v.", packageVersion("knitr"))` [@knitr2015; @knitr2014; @knitr2023] packages to generate type-set outputs.
+
+We generated R package citations with the aid of *grateful* `r paste0("v.", packageVersion("grateful"))` [@grateful].
+
+# Data availabilty
+
+<!-- add zenodo archived snapshot of github -->
+
+# Supplementary Material
+
+# References
