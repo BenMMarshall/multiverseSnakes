@@ -51,17 +51,17 @@ Reassessments and replications --regardless of their position on the direct-quas
 Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but this momentum can be difficult to redirect if the initial impetus was misdirected [@jennions_relationships_2002; @barto_dissemination_2012] <!-- thinking the progress papers, think it was by barto about early research that is underpowered starting trends that are hard to stop -->.
 Therefore, checking and confirming results early is important; we can see this principle recognised in the peer review system itself.
 
-Checking previous findings through replication can be come more difficult in systems with high task uncertainty. 
+Checking previous findings through replication can become more difficult in systems with high task uncertainty. 
 High task uncertainty systems –those that manifest high levels of uncontrollable stochasticity– may make direct diagnostic replications impractical or impossible, and render the evidence from quasi-replications weaker <!-- peterson pano 2021 is the paper for this stuff -->[@peterson_self-correction_2021].
 Ecological systems can be considered as generating high task uncertainty, with many interconnected elements, and when studying wild systems many of those elements are uncontrollable.
 <!-- peterson pano 2021 has a bit about "task uncertainty" where high perfectly describes ecology and the hard to control system -->
 
-With ecological systems, such complexity and the difficulty to control an experiment makes direct replications costly, potentially explaining their rarity [@kelly_rate_2019].
+With ecological systems, such complexity and the difficulties in controlling experiments makes direct replications costly, potentially explaining their rarity [@kelly_rate_2019].
 When studying wild animals with a level of direct intervention, repeating experiments might be unethical due to the well-being costs [@Weatherhead2004; @tomotani_great_2021; @robstad_impact_2021; @portugal_externally_2022; @altobelli_methods_2022]. 
 
 <!-- could add a couple more examples here -->
 When faced with limited options for direct replications, an alternative, albeit not a replacement, would be to re-examine existing datasets.
-Pooling old and new datasets, and reanalysising them, may provide opportunities for broader generalisations.
+Pooling old and new datasets, and reanalysing them, may provide opportunities for broader generalisations.
 
 In some cases older data may have been collected and recorded in ways that enables completely fresh analysis [@kays_movebank_2022].
 As methodologies develop, conceptualisations change, and computational power increases, new avenues for examining the same data may materialise [e.g., @noonan_effects_2020].
@@ -79,14 +79,14 @@ Movement ecology has also seized the opportunities presented by technological de
 Personality and the repeatability of behaviours presents a key component to the uncertainty or variation when attempting to generalise.
 However, here we turn to the technical uncertainty, the uncertainty originating from the researcher and how they approach the data.
 Previous many analyst projects highlight the potential for analyst-side variation [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023], and previous multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset <!-- FIRST PREPRINTS HERE -->[chapter 2 and 3 preprints can be cited here when published in June].
-Here we take the multiverse approach further by applying it to a number of real case studies with the aim of exploration whether different analysis approaches could have altered the final general conclusions.
+Here we take the multiverse approach further by applying it to a number of real case studies with the aim of exploring whether different analysis approaches could have altered the final general conclusions.
 
 <!-- ecology has high "task uncertainty" stemming from high "technical" and "strategic task uncertainty" - Peterson pano 2021 -->
 
 <!-- Peterson pano 2021 has a great line that when task uncertainty is higher and more uncontrollable variables exists then integrative replications are more open to interpretation. -->
 
 We selected a quartet of separate but connected movement ecology studies that attempt to disentangle the habitat selection exhibited by snakes in north-eastern Thailand.
-All four cases focus on snakes that come into conflict with humans to some extent, either because of the risks poses from their venom (King Cobra @Marshall2018 & @marshall_no_2020, Malayan Krait @hodges_malayan_2022, Banded Krait @knierim_spatial_2019), or because of their appetite for domestic livestock (Burmese python @smith_native_2021).
+All four cases focus on snakes that come into conflict with humans to some extent, either because of the risks posed by their venom (King Cobra @Marshall2018 & @marshall_no_2020, Malayan Krait @hodges_malayan_2022, Banded Krait @knierim_spatial_2019), or because of their appetite for domestic livestock (Burmese python @smith_native_2021).
 In all cases the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict.
 With these general goals in mind, we aim to re-examine the movement datasets using a multiverse of habitat selection analysis pathways to reveal whether the same data could lead to different conclusions.
 
@@ -124,12 +124,12 @@ The four case studies cover four snake species, each with their own ecology and 
 
 @Marshall2018 and @marshall_no_2020 are concerned with King Cobras (*Ophiophagus hannah*).
 King Cobras are a large (tracked individuals between 1.40 and 3.71m snout to vent length), diurnal, active foraging snake species that depredate snakes and monitor lizards [@Jones_supposed_2020].
-While considered a predominately forest dwelling species [@Stuart2012], they are know to make use of more human altered areas [@Whitaker2004; @Rao2013; @jones_how_2022], which can lead to frequent in human-snake conflict [@Shankar2013a; @Marshall2018b].
-The extremely low occurrence of King Cobra bites in Thailand mean that instances of human-snake conflict are primarily a conservation concern as opposed to human health [@Pochanugool1998; @Viravan1992].
+While considered a predominately forest dwelling species [@Stuart2012], they are known to make use of more human altered areas [@Whitaker2004; @Rao2013; @jones_how_2022], which can lead to frequent human-snake conflict [@Shankar2013a; @Marshall2018b].
+The extremely low occurrence of King Cobra bites in Thailand means that instances of human-snake conflict are primarily a conservation concern as opposed to human health [@Pochanugool1998; @Viravan1992].
 
-@Marshall2018 does not conclude on an actual selection, instead highlighting the King Cobras excursions out of the protected forest.
-@marshall_no_2020 looks more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersection the agricultural areas surrounding the protected forest.
-Therefore, we will pool both datasets and examine two non-mutually exclusion hypotheses that can be examined through a unified model.
+@Marshall2018 does not conclude on an actual selection, instead highlighting the King Cobras' excursions out of the protected forest.
+@marshall_no_2020 looks more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersect the agricultural matrix surrounding the protected forest.
+Therefore, we will pool both datasets and examine two non-mutually exclusive hypotheses that can be examined through a unified model.
 
 H~OPHA1~: King Cobras select for semi-natural habitat
 
@@ -139,7 +139,7 @@ H~OPHA2~: King Cobras select for forest habitat
 
 @smith_native_2021 describe Burmese Python (*Python bivittatus*) habitat selection and movement.
 Burmese Pythons are large (tracked individuals between  2.21 and 3.09m snout to vent length), ambush predators capable of tacking prey over 100% their own body mass [@bartoszek_natural_2018] and impacting mammal populations [@dorcas_severe_2012].
-The flexibility in regards to prey size means snakes of this size are inevitably draw into conflict with humans over livestock, a pattern mirrored across the globe for large snakes [@Miranda2016].
+The flexibility in regards to prey size means snakes of this size are inevitably drawn into conflict with humans over livestock, a pattern mirrored across the globe for large snakes [@Miranda2016].
 
 The conclusions of @smith_native_2021 on python habitat selection are not dissimilar to those made on King Cobras, with an active selection for areas near water.
 The land classification used in @smith_native_2021 was slightly different to @marshall_no_2020, grouping semi-natural areas with larger water bodies (e.g., agricultural ponds).
@@ -150,20 +150,20 @@ H~PYBI1~: Burmese Pythons select for areas near water.
 
 @hodges_malayan_2022 examine a smaller species, the Malayan Krait (*Bungarus candidus*). 
 The Malayan Kraits tracked were between 0.65 and 1.46m snout to vent, and all lived on a university campus. 
-Malayan Kraits like many elapids, have a potent and medically significant venom; bites of Malayan Kraits can be fatal [@looareesuwan_factors_1988; @searo_regional_office_for_the_south_east_asia_rgo_guidelines_2016].
-They are (mostly) nocturnal and actively foraging [@hodges_deadly_2021], known to depredate a range for prey [e.g., @hodges_diurnal_2020, @kuch_notes_nodate].
+Malayan Kraits, like many elapids, have a potent and medically significant venom; bites of Malayan Kraits can be fatal [@looareesuwan_factors_1988; @searo_regional_office_for_the_south_east_asia_rgo_guidelines_2016].
+They are (mostly) nocturnal and actively foraging [@hodges_deadly_2021], known to depredate a wide range of prey [@hodges_diurnal_2020; @kuch_notes_2001].
 
 Unlike the other case studies, @hodges_malayan_2022 is undertaken in a more urban environment.
 The scale of the Malayan Krait movements meant the study was conducted at a finer spatial scale; habitat types are therefore more finely separated (e.g., buildings vs settlements).
-The overall conclusions highlight a number of habitat types that potentially being selected for, and in opposition an avoidance of open areas.
+The overall conclusions highlight a number of habitat types that are potentially being selected for, in addition to an avoidance of open areas.
 
 H~BUCA1~: Malayan Kraits select for buildings, settlements, and natural areas.
 
 #### Banded Krait
 
 @knierim_spatial_2019 looked at a larger krait species, the Banded Krait (*Bungarus fasciatus*).
-Like its smaller cousin the Banded Krait is also a nocturnal active forager, with a potent venom.
-The Banded Krait is heavier bodies and grows to longer lengths, tracked individuals ranging from 1.13 and 1.58 m snout to vent length.
+Like its smaller cousin, the Banded Krait is also a nocturnal active forager, with a potent venom.
+The Banded Krait is heavier-bodied and grows to longer lengths, tracked individuals ranging from 1.13 and 1.58 m snout to vent length.
 However, unlike the Malayan Krait, the Banded Krait appears less tolerant of human disturbance in this region of Thailand and tends to have a more ophiophagus diet [@Knierim2017a].
 
 Banded Kraits were entirely located in agricultural land, and like the other krait had movements more conducive to finer habitat classifications.
