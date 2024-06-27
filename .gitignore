@@ -1,7 +1,9 @@
+*.tif
+/data/
+[.]tif$
+
 # files with log in details for movebank
 movebank_login_abstraction.R
-
-/data/
 
 # History files
 .Rhistory
@@ -54,3 +56,4 @@ po/*~
 rsconnect/
 .Rproj.user
 data
+

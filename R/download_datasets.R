@@ -2,7 +2,8 @@
 #'
 #' @name download_datasets
 #' @description A
-#' @param species
+#' @param speciesLocations a
+#' @param species a
 #' @return a
 #'
 #' @export

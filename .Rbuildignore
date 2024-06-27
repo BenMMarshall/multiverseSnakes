@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 ^data$
 movebank_login_abstraction.R
+[.]tif$

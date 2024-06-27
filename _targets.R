@@ -6,13 +6,23 @@
 # Load packages required to define the pipeline:
 library(targets)
 library(tarchetypes) # Load other packages as needed. # nolint
+library(dplyr)
 
 # Set target options:
 tar_option_set(
   packages = c("qs",
                "here",
+               "readr",
+               "dplyr",
+               "stringr",
+               "sf",
+               "terra",
+               "tidyterra",
                "amt",
                "move",
+               "ggplot2",
+               "ggtext",
+               "patchwork",
                "inborutils"), # zenodo download
   garbage_collection = TRUE,
   format = "qs", # storage format
@@ -26,6 +36,7 @@ tar_source()
 
 options(clustermq.scheduler = "multiprocess")
 
+dir.create(here::here("figures"), showWarnings = FALSE)
 
 # Data locations ----------------------------------------------------------
 
@@ -43,8 +54,22 @@ speciesLocations <- data.frame(speciesCode = c("OPHA", "PYBI", "BUCA", "BUFA"),
 # Options for analysis variations -----------------------------------------
 
 optionsList_data <- list(
-  species = c("OPHA", "BUCA", "BUFA", "PYBI")
+  species = c("OPHA", "PYBI", "BUCA", "BUFA")
 )
+
+optionsData <- tidyr::expand_grid(
+  species = optionsList_data$species,
+  landscape = c("binary", "continuous")
+)
+
+optionsData <- optionsData %>% 
+  left_join(tidyr::expand_grid(
+    species = c("OPHA"),
+    landscape = c("binary", "continuous"),
+    hypothesis = c("H1", "H2")
+  )) %>% 
+  mutate(hypothesis = ifelse(is.na(hypothesis), "H1", hypothesis)) %>% 
+  select(species, hypothesis, landscape)
 
 optionsList_area <- list(
   Method_method = c("areaBased"),
@@ -92,7 +117,7 @@ prereg <- list(
   tar_map(
     values = optionsList_data,
     tar_target(
-      rawMovementData,
+      rawData,
       download_datasets(speciesLocations, species),
       format = "file"
     )
@@ -110,10 +135,10 @@ prereg <- list(
 
 coreMultiverse <- list(
   tar_map(
-    values = optionsList_data,
+    values = optionsData,
     tar_target(
       movementData, # should be list where first object is the landscape - classified
-      read_data(species) # need to read in landscape per species
+      read_data(species, hypothesis, landscape) # need to read in landscape per species
     ),
     tar_target(areaBasedAvailUse,
                area_based_extraction(
@@ -135,7 +160,7 @@ coreMultiverse <- list(
                ),
                priority = 0.9),
     tar_target(ssfOUT,
-               sample_ssf_results(
+               summarise_ssf_results(
                  ssfModels,
                  optionsList = optionsList_sff
                ),
@@ -155,45 +180,203 @@ coreMultiverse <- list(
   )
 )
 
-resultsCompiled <- list(
+
+# Poisson model combined --------------------------------------------------
+
+poisCompiled <- list(
   tar_combine(
-    allResults,
-    coreMultiverse[[1]][grep("OUT", names(coreMultiverse[[1]]))],
+    poisResults,
+    coreMultiverse[[1]][grep("poisOUT", names(coreMultiverse[[1]]))],
     command = rbind(!!!.x),
     priority = 0.8
   ),
   tar_target(
-    allSpecCurve,
+    poisEstimateOutputs,
+    write.csv(poisResults,
+              here::here("data", "poisEstimateOutputs_uncom.csv"), row.names = FALSE),
+    format = "file"
+  ),
+  tar_target(
+    poisSpecCurve,
     generate_spec_curves(
-      outputResults = allResults,
+      outputResults = poisResults,
       method = "pois"
     )
   ),
   tar_target(
-    allBrms,
+    poisBrms,
     run_brms(
-      resultsData = allResults
+      resultsData = poisResults,
+      iter = 20000,
+      warmup = 8000,
+      thin = 20
+    )
+  )
+)
+
+# TwoStep Model Combined --------------------------------------------------
+
+twoStepCompiled <- list(
+  tar_combine(
+    twoStepResults,
+    coreMultiverse[[1]][grep("twoStepOUT", names(coreMultiverse[[1]]))],
+    command = rbind(!!!.x),
+    priority = 0.8
+  ),
+  tar_target(
+    twoStepEstimateOutputs,
+    write.csv(twoStepResults,
+              here::here("data", "twoStepEstimateOutputs_uncom.csv"), row.names = FALSE),
+    format = "file"
+  ),
+  tar_target(
+    twoStepSpecCurve,
+    generate_spec_curves(
+      outputResults = twoStepResults,
+      method = "twoStep"
     )
   ),
   tar_target(
+    twoStepBrms,
+    run_brms(
+      resultsData = twoStepResults,
+      iter = 20000,
+      warmup = 8000,
+      thin = 20
+    )
+  )
+)
+
+# Area Based Model Combined -----------------------------------------------
+
+areaBasedCompiled <- list(
+  tar_combine(
+    areaBasedResults,
+    coreMultiverse[[1]][grep("areaBasedOUT", names(coreMultiverse[[1]]))],
+    command = rbind(!!!.x),
+    priority = 0.8
+  ),
+  tar_target(
+    areaBasedEstimateOutputs,
+    write.csv(areaBasedResults,
+              here::here("data", "areaBasedEstimateOutputs_uncom.csv"), row.names = FALSE),
+    format = "file"
+  ),
+  tar_target(
+    areaBasedSpecCurve,
+    generate_spec_curves(
+      outputResults = areaBasedResults,
+      method = "areaBased"
+    )
+  ),
+  tar_target(
+    areaBasedBrms,
+    run_brms(
+      resultsData = areaBasedResults,
+      iter = 20000,
+      warmup = 8000,
+      thin = 20
+    )
+  )
+)
+
+# SSF Models Combined -----------------------------------------------------
+
+ssfCompiled <- list(
+  tar_combine(
+    ssfResults,
+    coreMultiverse[[1]][grep("ssfOUT", names(coreMultiverse[[1]]))],
+    command = rbind(!!!.x),
+    priority = 0.8
+  ),
+  tar_target(
+    ssfEstimateOutputs,
+    write.csv(ssfResults,
+              here::here("data", "ssfEstimateOutputs_uncom.csv"), row.names = FALSE),
+    format = "file"
+  ),
+  tar_target(
+    ssfSpecCurve,
+    generate_spec_curves(
+      outputResults = ssfResults,
+      method = "ssf"
+    )
+  ),
+  tar_target(
+    ssfBrms,
+    run_brms(
+      resultsData = ssfResults,
+      iter = 20000,
+      warmup = 8000,
+      thin = 20
+    )
+  )
+)
+
+# BRM Model Outputs -------------------------------------------------------
+
+brmModelOutputs <- list(
+  tar_combine(
+    modelsBrms,
+    # manually pull out the brms model outputs
+    list(
+      ssfCompiled[[4]],
+      areaBasedCompiled[[4]],
+      poisCompiled[[4]],
+      twoStepCompiled[[4]]),
+    command = list(!!!.x),
+    priority = 0.5
+  ),
+  tar_target(
     diagnosticPlots,
-    diagnostics_brms(modelsList = allBrms)
+    diagnostics_brms(modelsList = modelsBrms),
+    priority = 0.4
   ),
   tar_target(
     modelExtracts,
-    extract_model_values(modelsList = allBrms)
+    extract_model_values(modelsList = modelsBrms),
+    priority = 0.4
   ),
   tar_target(
     effectPlots,
-    generate_effect_plots(modelsList = allBrms)
+    generate_effect_plots(modelsList = modelsBrms),
+    priority = 0.4
   ),
+  tar_target(
+    allEffectPlots,
+    generate_allEffect_plots(modelExtracts = modelExtracts),
+    priority = 0.4
+  )
+)
+
+# Manuscript Prep ---------------------------------------------------------
+
+extraDetails <- list(
+  tar_combine(
+    movementDataAll,
+    coreMultiverse[[1]][grep("movementData", names(coreMultiverse[[1]]))],
+    command = list(!!!.x),
+    priority = 0.3
+  ),
+  tar_target(
+    landscapePlots,
+    plot_analysis_landscapes(movementDataAll) # need to read in landscape per species
+  )
+)
+
+manuscriptRendering <- list(
   tar_target(
     rmdRenderManuscript,
     render_rmd(fileIN = here::here("notebook", "manuscript",
                                    "multiverseSnakesManuscript.rmd"),
                fileOUT = here::here("notebook", "manuscript",
                                     "multiverseSnakesManuscript.pdf"),
-               modelExtracts, effectPlots, allSpecCurve, optionsCompleteList),
+               allEffectPlots,
+               poisSpecCurve,
+               areaBasedSpecCurve,
+               twoStepSpecCurve,
+               ssfSpecCurve
+               ),
     cue = tar_cue(mode = "always"),
     priority = 0.1
   )
@@ -204,5 +387,11 @@ resultsCompiled <- list(
 list(
   prereg,
   coreMultiverse,
-  resultsCompiled
+  poisCompiled,
+  twoStepCompiled,
+  areaBasedCompiled,
+  ssfCompiled,
+  brmModelOutputs,
+  extraDetails,
+  manuscriptRendering
 )

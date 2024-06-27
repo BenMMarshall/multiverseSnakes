@@ -45,21 +45,34 @@ polyIn[[10]]$landuse <- "Water"
 polyIn[[10]] <- polyIn[[10]] %>% 
   select(landuse, geometry)
 
+# sf_use_s2(FALSE)
+# polyIn[[2]] <- st_transform(polyIn[[2]], crs = st_crs("EPSG:32647"))
+# polyIn[[3]] <- st_transform(polyIn[[3]], crs = st_crs("EPSG:32647"))
+# polyIn[[2]] <- st_make_valid(polyIn[[2]])
+# polyIn[[3]] <- st_make_valid(polyIn[[3]])
+# 
+# settleTrimmed <- st_difference(polyIn[[2]], polyIn[[3]])
+
 combinedLanduse <- do.call(rbind, polyIn[unlist(lapply(polyIn, function(x){any(str_detect(names(x), "landuse"))}))])
 
 unique(combinedLanduse$landuse)
 
 combinedLanduse <- combinedLanduse %>% 
   mutate(habitat = case_when(
-    landuse %in% c("Buildings", "Natural", "Settlements", "Semi-natural", "Forest") ~ "H1_Habitat",
+    landuse %in% c("Buildings", "Natural", "Semi-natural", "Forest") ~ "H1_Habitat",
     TRUE ~ "Other Habitats"
   ))
 
 combinedLanduse %>% 
   ggplot() +
+  geom_sf(aes(fill = landuse))
+combinedLanduse %>% 
+  ggplot() +
   geom_sf(aes(fill = habitat))
 
-st_write(combinedLanduse, here("data", "landuseBUCA.geoJSON"),
+combinedLanduseUTM <- st_transform(combinedLanduse, crs = st_crs("EPSG:32647"))
+
+st_write(combinedLanduseUTM, here("data", "landuseBUCA.geoJSON"),
          driver = "geoJSON", append = FALSE)
 
 movementBUCA <- read.csv(here("data", "BUCA", "BUCA_data_complete.csv"))

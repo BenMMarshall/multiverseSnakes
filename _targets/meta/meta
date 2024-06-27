@@ -1,19 +1,57 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-coreMultiverse|object|8a53443c5a099dcd|||||||||||||||
+areaBasedCompiled|object|cd136044a5aa78c2|||||||||||||||
+brmModelOutputs|object|01b928087cb05e8a|||||||||||||||
+coreMultiverse|object|f25a298d57d96fa7|||||||||||||||
 download_datasets|function|3d37c1882bb49287|||||||||||||||
+extraDetails|object|d33c747bccaf45e7|||||||||||||||
+get_palette|function|9ee2fc62953ffcd5|||||||||||||||
+landscapePlot_OPHA_H1_continuous|stem||6ca88767c5c28cd3|1f8f85b268b5bef6|-1842785658||t19901.4484027121s||0|qs|local|vector|||0.34||subscript out of bounds
+landscapePlots|stem|6dd71d12008128c1|17e9b362aab4597b|a87dc90184deb9fc|110945927||t19901.4709183085s|de1c6d017cb4e8a8|38|qs|local|vector|||43.91|The size argument of element_line is deprecated as of ggplot2 3.4.0.ℹ Please use the linewidth argument instead.|
+manuscriptRendering|object|274a0cfe74596fe2|||||||||||||||
+method_indi_ssf|function|48e037ec645ff417|||||||||||||||
 movebank_login_abstraction|function|71c409e969d32003|||||||||||||||
-optionsCompleteList|object|d03a681aed77be05|||||||||||||||
+movementData_BUCA_binary_H1|stem|5425e379d3b3e4c7|fbbad0c722208c23|c56b1dff1658981f|1655748302||t19900.6516642635s|b31724cd5689a8bd|67314|qs|local|vector|||3.61|SpatVector from sf empty SpatVector|
+movementData_BUCA_continuous_H1|stem|7c0e66a918479297|7bdd421a7135aa4c|c56b1dff1658981f|436570418||t19900.6490592371s|ae73d3b8dae663b8|67297|qs|local|vector|||14.45|SpatVector from sf empty SpatVector|
+movementData_BUCA_H1_binary|stem|8ce8a71bc35d81b4|82cb5a1f638e2a93|0178328ca6e7f5d9|-20609300||t19901.4548306638s|11c4659704e8b8b8|14697|qs|local|vector|||10.13||
+movementData_BUCA_H1_continuous|stem|34a9f8f80f0671c2|cbd926d63cda1e52|0178328ca6e7f5d9|-402202722||t19901.4577532006s|81b8a67bb8f66c0f|14707|qs|local|vector|||32.38||
+movementData_BUFA_binary_H1|stem|3441cdad421b0c0c|ff813979bd98c599|c56b1dff1658981f|959294254||t19900.6492202843s|a03a71f397620119|10187|qs|local|vector|||0.56|SpatVector from sf empty SpatVector|
+movementData_BUFA_continuous_H1|stem|8e34ccf799e58d65|bdcb7baf4088e8cd|c56b1dff1658981f|1460048548||t19900.6488675872s|de56742ac28746fd|10161|qs|local|vector|||1.28|SpatVector from sf empty SpatVector|
+movementData_BUFA_H1_binary|stem|89206eb084725b39|eabeaefcff635130|0178328ca6e7f5d9|-497352618||t19901.4542786223s|1fa4378c9b488f98|7235|qs|local|vector|||9.03|package readr was built under R version 4.2.3. package stringr was built under R version 4.2.3. package sf was built under R version 4.2.3. package tidyterra was built under R version 4.2.3. package amt was built under R version 4.2.3. package move was built under R version 4.2.3. package raster was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package ggtext was built under R version 4.2.3. package patchwork was built under R version 4.2.3. package inborutils was built under R version 4.2.3|
+movementData_BUFA_H1_continuous|stem|419fa27fd04031a7|dae4fa1b5d20d3e8|0178328ca6e7f5d9|-512969621||t19901.4573745637s|7612212bccb6075e|7238|qs|local|vector|||2.11||
+movementData_OPHA_binary_H1|stem|c3490dae5bda08f6|d6ed24fc24ed7aef|c56b1dff1658981f|1089715899||t19900.6487024153s|ce84cf4ad90e5361|187212|qs|local|vector|||13.93|SpatVector from sf empty SpatVector|
+movementData_OPHA_binary_H2|stem|01e76515c3c5600d|1e513362bd9cbca2|c56b1dff1658981f|1473219248||t19900.6488481536s|ce84cf4ad90e5361|187212|qs|local|vector|||12.21|SpatVector from sf empty SpatVector|
+movementData_OPHA_continuous_H1|stem|f3740c41859db23d|9c00e8afc1be95ee|c56b1dff1658981f|1535958587||t19900.6504204248s|5ab443ec5fb9b30f|402734|qs|local|vector|||93.77|SpatVector from sf empty SpatVector. CUsersbenmaAppDataLocalTempRtmpCKSDSXspat_3bbc50877237_15292.tif, band 1 Failed to compute minmax, no valid pixels found in sampling. GDAL error 1|
+movementData_OPHA_continuous_H2|stem|f3740c41859db23d|adbef00d131d13ae|c56b1dff1658981f|-694218869||t19900.6515814588s|5ab443ec5fb9b30f|402734|qs|local|vector|||86.84|SpatVector from sf empty SpatVector. CUsersbenmaAppDataLocalTempRtmpCKSDSXspat_3bbc38ab7a27_15292.tif, band 1 Failed to compute minmax, no valid pixels found in sampling. GDAL error 1|
+movementData_OPHA_H1_binary|stem|c36a451eb3348134|1be84fac01b8dfd3|0178328ca6e7f5d9|1060967751||t19901.4547072442s|005cef998d242e3f|186971|qs|local|vector|||36.71||
+movementData_OPHA_H1_continuous|stem|adba09c34b3a76eb|3034683f2e4259dd|0178328ca6e7f5d9|-1168749279||t19901.4599586054s|8863e9457321c5b0|186951|qs|local|vector|||189.71||
+movementData_OPHA_H2_binary|stem|ff565572dc3b3d4c|bc1771997b63942f|0178328ca6e7f5d9|-2071362932||t19901.4626591339s|005cef998d242e3f|186971|qs|local|vector|||39.1||
+movementData_OPHA_H2_continuous|stem|301e58e5dfa2991f|75eb841fee4dbcff|0178328ca6e7f5d9|-580632083||t19901.4568800165s|8863e9457321c5b0|186951|qs|local|vector|||176.47||
+movementData_PYBI_binary_H1|stem|88e012a0d2d10279|3aaff42d6e93dc57|c56b1dff1658981f|-243484777||t19900.6492091894s|89d8ba048a3f2f50|19001|qs|local|vector|||12.22|SpatVector from sf empty SpatVector|
+movementData_PYBI_continuous_H1|stem|cf185e214d472900|f86156cc74c4a80b|c56b1dff1658981f|-1153416029||t19900.6485192936s|5fcc7e494e4eeea5|235740|qs|local|vector|||114.59|package readr was built under R version 4.2.3. package sf was built under R version 4.2.3. package tidyterra was built under R version 4.2.3. package amt was built under R version 4.2.3. package move was built under R version 4.2.3. package raster was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package ggtext was built under R version 4.2.3. package patchwork was built under R version 4.2.3. package inborutils was built under R version 4.2.3. SpatVector from sf empty SpatVector. CUsersbenmaAppDataLocalTempRtmpCKSDSXspat_3bbc64ca1056_15292.tif, band 1 Failed to compute minmax, no valid pixels found in sampling. GDAL error 1|
+movementData_PYBI_H1_binary|stem|21b9b93f439a7136|7be061646d05074f|0178328ca6e7f5d9|868736645||t19901.4573463184s|ac51cac6e8ac4c03|18720|qs|local|vector|||39.13||
+movementData_PYBI_H1_continuous|stem|6d72a8b0d5d39948|88ff39cc08fef12c|0178328ca6e7f5d9|1020367983||t19901.4621811264s|6c98fdd740967aeb|18723|qs|local|vector|||189.74||
+movementDataAll|stem|19b687d78e80ff3f|2b2d7bf84f080986|5360d3048389465a|208934784||t19901.3741985403s|c3655d1b2197d3e1|788801|qs|local|vector|||0||
+optionsCompleteList|object|ed5fe7a029fd808b|||||||||||||||
+optionsData|object|12b00b940d214611|||||||||||||||
 optionsList_area|object|e465f26e7705c6cb|||||||||||||||
 optionsList_areaMethods|object|3bc966cf14ab9992|||||||||||||||
-optionsList_data|object|f9dcabaf9bd38e93|||||||||||||||
+optionsList_data|object|1791ceb61e1995d5|||||||||||||||
 optionsList_pois|object|9a064b912fbaba37|||||||||||||||
 optionsList_sff|object|01d4bf269496792b|||||||||||||||
-prereg|object|04f271e05712678e|||||||||||||||
+plot_analysis_landscapes|function|73bc1dba27d95b1e|||||||||||||||
+poisCompiled|object|7bcc88e55f7bb0a8|||||||||||||||
+prereg|object|acf265c226eba779|||||||||||||||
 rawMovementData_BUCA|stem|da7e5646cbdfced7|ee3cf996344908dd|ece9766dbba200ff|-800843172||t0s|f4066a65ff755f48|0|file|local|vector|||1335.63||
 rawMovementData_BUFA|stem|da7e5646cbdfced7|1331f0adbf3e1eeb|ece9766dbba200ff|-1335306450||t0s|f4066a65ff755f48|0|file|local|vector|||3.66||
 rawMovementData_OPHA|stem|da7e5646cbdfced7|229143448464512e|ece9766dbba200ff|-556091153||t0s|f4066a65ff755f48|0|file|local|vector|||2975.82|package qs was built under R version 4.2.3. package inborutils was built under R version 4.2.3|
 rawMovementData_PYBI|stem|da7e5646cbdfced7|1e441055078f3e7a|ece9766dbba200ff|-545051240||t0s|f4066a65ff755f48|0|file|local|vector|||59.06|package qs was built under R version 4.2.3. package inborutils was built under R version 4.2.3|
+read_data|function|86cd571ad3c406a4|||||||||||||||
 render_rmd|function|f38ef75ed926d2e8|||||||||||||||
 resultsCompiled|object|a8a8cacc0e04b100|||||||||||||||
 rmdRenderPrereg|stem|93a50edf3136995e|bda6baabb46a33e4|a302f811bf43e554|-1722079747||t19627.6498817654s|24d52ebf1535bba2|123|qs|local|vector|||12.33|package qs was built under R version 4.2.3|
+sample_ssf_results|function|a6f974145634f101|||||||||||||||
 speciesLocations|object|070269f29ce287de|||||||||||||||
+ssfCompiled|object|38865d8aa0692a55|||||||||||||||
+ssfModels_BUFA_H1_continuous|stem|1b59ec58ff9d36c6|e6b19d0eca0701a5|eddaef10989e8c19|-1912165148||t19901.5057776824s|32e3757fa21229b1|4033993|qs|local|vector|||11.19|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
+twoStepCompiled|object|954dd5a9d492eda9|||||||||||||||
+wrapper_indi_ssf|function|6ee5d260b70f8145|||||||||||||||
