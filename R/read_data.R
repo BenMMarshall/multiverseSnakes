@@ -19,6 +19,14 @@ read_data <- function(species, hypothesis, landscape){
   movementData <- read_csv(here("data", paste0("movement", species, ".csv")),
                            locale = locale(tz = "Asia/Bangkok"))
   
+  if(species == "BUFA"){
+    # add an hour to the date only BUFA times, prevents issues with ctmm as.telemetry later
+    movementData <- movementData %>% 
+      mutate(datetime = datetime + 60*60) %>% 
+      mutate(datetime = as.POSIXct(datetime, format = "%Y-%m-%d %H:%M:%S",
+                                   tz = "Asia/Bangkok"))
+  }
+  
   if(length(unique(movementData$UTMzone)) == 2){
     
     moveData_47 <- movementData %>% 
@@ -35,6 +43,13 @@ read_data <- function(species, hypothesis, landscape){
     movementData_sf <- rbind(coord47, coord47Converted) %>% 
       arrange(datetime, id)
     movementData_sf$UTMzone <- "47N"
+    
+    movementData_sf$x <- sf::st_coordinates(movementData_sf)[,1]
+    movementData_sf$y <- sf::st_coordinates(movementData_sf)[,2]
+    
+    # drop 029 becuase they have too few relocations to even make an MCP
+    movementData_sf <- movementData_sf %>% 
+      filter(!id == "BUCA029")
     
   } else {
     movementData_sf <- st_as_sf(movementData, coords = c("x", "y"), remove = FALSE,
@@ -61,6 +76,7 @@ read_data <- function(species, hypothesis, landscape){
   print("Binary Raster")
   
   if(landscape == "binary"){
+    binaryRaster[is.na(binaryRaster)] <- 0
     habitatRaster <- binaryRaster
   } else if(landscape == "continuous"){
     

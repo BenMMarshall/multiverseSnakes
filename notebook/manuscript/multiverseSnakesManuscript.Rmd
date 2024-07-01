@@ -29,6 +29,15 @@ abstract: <PLACEHOLDER ABSTRACT> Possibly the best way to determine a snake’s 
 keywords: Movement ecology, simulation, step selection function, poisson, habitat preference, habitat selection, animal movement, multiverse, research choice, researcher degrees for freedom, snakes, King Cobra, Burmese Python, Banded Krait, Malayan Krait
 ---
 
+tracking summary used code from Crane et al  -   
+  title: "Summarising Tracking Data"
+  author: "Matt Crane, Inês Silva, Benjamin Michael Marshall, Colin Thomas Strine"
+  date: "24/08/2020"
+  
+  OPHA002, OPHA004, and OPHA005 had issues with step lengths fitting to a exp dist. Therefore code added to only fit using the exlcude the 75% quantile of steps - only instances where fit failed was this implemented
+  
+  distanace is scaled to aid model convergence - especially key in INLA, but also applied to others
+
 ## Multiverse Construction
 
 To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
@@ -117,5 +126,15 @@ We generated R package citations with the aid of *grateful* `r paste0("v.", pack
 <!-- add zenodo archived snapshot of github -->
 
 # Supplementary Material
+
+  <!-- knitr::kable(summaryTable, digits = 2, -->
+  <!--              caption = "Summary of animal tracking", -->
+  <!--              col.names = c("Animal ID", "# datapoints",  -->
+  <!--                            "Duration (days)", -->
+  <!--                            "Mean time lag ±SE (hours)", -->
+  <!--                            "# moves", -->
+  <!--                            "Mean step length ±SE (m)" -->
+  <!--              ), -->
+  <!--              align = "c") -->
 
 # References

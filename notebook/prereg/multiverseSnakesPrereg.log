@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.11)  12 JUN 2024 10:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.11)  1 JUL 2024 16:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**multiverseSnakesPrereg.tex
-(./multiverseSnakesPrereg.tex
+**"D:/Documents/Work Files/Git Repositories/multiverseSnakes/notebook/prereg/multiverseSnakesPrereg.tex"
+(d:/Documents/Work Files/Git Repositories/multiverseSnakes/notebook/prereg/multiverseSnakesPrereg.tex
 LaTeX2e <2024-06-01>
 L3 programming layer <2024-05-27>
 (c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
@@ -107,7 +107,7 @@ LaTeX Info: Redefining \textinf on input line 742.
 ) (c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2024/05/26 v1.0h Color table columns (DPC)
 (c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2024/05/23 v2.6c Tabular extension package (FMi)
+Package: array 2024/06/14 v2.6d Tabular extension package (FMi)
 \col@sep=\dimen143
 \ar@mcellbox=\box52
 \extrarowheight=\dimen144
@@ -587,15 +587,15 @@ Package rerunfilecheck Info: File `multiverseSnakesPrereg.out' has not changed.
 (rerunfilecheck)             Checksum: 3DD2AD63045E3976E570EDDEA2428849;630.
  ) 
 Here is how much of TeX's memory you used:
- 14715 strings out of 475517
- 242262 string characters out of 5775029
+ 14717 strings out of 475517
+ 242560 string characters out of 5775029
  1950894 words of memory out of 5000000
  37054 multiletter control sequences out of 15000+600000
  623860 words of font info for 72 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 90i,15n,131p,3089b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,15n,131p,3165b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on multiverseSnakesPrereg.pdf (6 pages, 266126 bytes).
+Output written on multiverseSnakesPrereg.pdf (6 pages, 266142 bytes).
 PDF statistics:
  261 PDF objects out of 1000 (max. 8388607)
  237 compressed objects within 3 object streams

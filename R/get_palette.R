@@ -15,7 +15,16 @@ get_palette <- function(){
                         "#b28904")
   names(speciesPalette)<- c("OPHA", "PYBI", "BUCA", "BUFA") 
   
+  speciesColour <- data.frame(
+    species = c("Ophiophagus hannah",
+                "Python bivittatus",
+                "Bungarus candidus",
+                "Bungarus fasciatus"),
+    colour = c("#bba07e", "#6c2b05", "#322b21", "#b28904")
+  )
+  
   return(list("corePalette" = palette,
-              "speciesPalette" = speciesPalette)
+              "speciesPalette" = speciesPalette,
+              "speciesColourDF" = speciesColour)
   )
 }

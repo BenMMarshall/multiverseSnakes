@@ -22,6 +22,13 @@ tar_option_set(
                "move",
                "ggplot2",
                "ggtext",
+               "ggridges",
+               "adehabitatHS",
+               "adehabitatHR",
+               "sp",
+               "raster",
+               "INLA",
+               "TwoStepCLogit",
                "patchwork",
                "inborutils"), # zenodo download
   garbage_collection = TRUE,
@@ -37,6 +44,7 @@ tar_source()
 options(clustermq.scheduler = "multiprocess")
 
 dir.create(here::here("figures"), showWarnings = FALSE)
+dir.create(here::here("tables"), showWarnings = FALSE)
 
 # Data locations ----------------------------------------------------------
 
@@ -52,6 +60,8 @@ speciesLocations <- data.frame(speciesCode = c("OPHA", "PYBI", "BUCA", "BUFA"),
 )
 
 # Options for analysis variations -----------------------------------------
+
+set.seed(2024)
 
 optionsList_data <- list(
   species = c("OPHA", "PYBI", "BUCA", "BUFA")
@@ -73,7 +83,8 @@ optionsData <- optionsData %>%
 
 optionsList_area <- list(
   Method_method = c("areaBased"),
-  areaMethod = c("MCP", "AKDE"),
+  # areaMethod = c("MCP", "AKDE"),
+  areaMethod = c("MCP"),
   areaContour = c(95, 99),
   Method_ap = as.integer(round(exp(seq(log(1), log(10), length.out = 2)), digits = 1)),
   Method_sp = c("rd", "st")
@@ -149,32 +160,24 @@ coreMultiverse <- list(
     tar_target(areaBasedOUT,
                area_based_calculations(
                  availUseData = areaBasedAvailUse,
-                 sampleGroups = optionsList_samples,
-                 optionsList = optionsList_areaMethods
-               ),
-               priority = 0.9),
-    tar_target(ssfModels,
-               wrapper_indi_ssf(
-                 allIndividualData = movementData,
-                 optionsList = optionsList_sff
+                 optionsList = optionsList_area,
+                 optionsListArea = optionsList_areaMethods
                ),
                priority = 0.9),
     tar_target(ssfOUT,
                summarise_ssf_results(
-                 ssfModels,
+                 movementData,
                  optionsList = optionsList_sff
                ),
                priority = 0.9),
     tar_target(poisOUT,
                method_pois_inla(
                  allIndividualData = movementData,
-                 sampleGroups = optionsList_samples,
                  optionsList = optionsList_pois),
                priority = 0.9),
     tar_target(twoStepOUT,
                method_twoStep(
                  allIndividualData = movementData,
-                 sampleGroups = optionsList_samples,
                  optionsList = optionsList_pois),
                priority = 0.9)
   )
@@ -361,6 +364,10 @@ extraDetails <- list(
   tar_target(
     landscapePlots,
     plot_analysis_landscapes(movementDataAll) # need to read in landscape per species
+  ),
+  tar_target(
+    trackingPlotsAndTables,
+    summarise_tracking_data(movementDataAll) # need to read in landscape per species
   )
 )
 
@@ -375,7 +382,9 @@ manuscriptRendering <- list(
                poisSpecCurve,
                areaBasedSpecCurve,
                twoStepSpecCurve,
-               ssfSpecCurve
+               ssfSpecCurve,
+               trackingPlotsAndTables,
+               landscapePlots
                ),
     cue = tar_cue(mode = "always"),
     priority = 0.1

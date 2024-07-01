@@ -16,7 +16,9 @@ wrapper_indi_ssf <- function(
     optionsList
 ){
   # targets::tar_load("movementData_BUFA_H1_continuous")
+  # targets::tar_load("movementData_OPHA_H1_binary")
   # allIndividualData <- movementData_BUFA_H1_continuous
+  # allIndividualData <- movementData_OPHA_H1_binary
   # optionsList <- optionsList_sff
   Method_method <- optionsList$Method_method
   MethodSSF_land <- optionsList$Method_land
@@ -33,8 +35,8 @@ wrapper_indi_ssf <- function(
   names(indiSSFResults) <- names(allIndividualData)
   for(indiID in names(allIndividualData)){
     
+    # indiID <- names(allIndividualData)[2]
     print(indiID)
-    # indiID <- names(allIndividualData)[1]
     movementData <- allIndividualData[[indiID]]
     
     # ssf places
@@ -56,15 +58,31 @@ wrapper_indi_ssf <- function(
           for(as in MethodSSF_as){
             # as <- MethodSSF_as[1]
             # for(land in MethodSSF_land){
-              
-              ssfOUT <- method_indi_ssf(
-                movementData = movementData,
-                landscape = landscape,
-                methodForm = mf,
+            
+            ssfOUT <- method_indi_ssf(
+              movementData = movementData,
+              landscape = landscape,
+              methodForm = mf,
+              stepDist = stepD,
+              turnDist = turnD,
+              availableSteps = as
+            )
+            
+            if(ssfOUT$model[1] == "Only one habitat used"){
+              optionsData <- data.frame(
+                id = movementData$id[1],
+                Estimate = "SingleHabitat",
+                Lower = NA,
+                Upper = NA,
+                analysis = "ssf",
+                classLandscape = land,
+                modelFormula = mf,
                 stepDist = stepD,
                 turnDist = turnD,
-                availableSteps = as
+                availablePerStep = as
               )
+            } else {
+              
               
               ssfDF <- as.data.frame(summary(ssfOUT)$coef)
               method <- rep("ssf", nrow(ssfDF))
@@ -98,13 +116,14 @@ wrapper_indi_ssf <- function(
                 turnDist = turnD,
                 availablePerStep = as
               )
-              
-              ssfOUT$options <- optionsData
-              
-              i <- i+1
-              listOUT[[i]] <- ssfOUT
-              # print(i)
-              
+            }
+            
+            ssfOUT$options <- optionsData
+            
+            i <- i+1
+            listOUT[[i]] <- ssfOUT
+            # print(i)
+            
             # } #landscape
           } # as
         } # stepD

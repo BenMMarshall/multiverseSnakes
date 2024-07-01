@@ -34,30 +34,47 @@ method_indi_ssf <- function(
   }
   movementTrack <- amt::make_track(tbl = sf::st_drop_geometry(movementData),
                                    .x = x, .y = y, .t = t, crs = 32647)
-  movementSteps <- amt::steps(movementTrack)
+  movementSteps <- amt::steps(movementTrack) %>% 
+    filter(sl_>0)
   
   set.seed(2024)
   
   # methodForm <- "mf.is"
   # stepDist <- "gamma"
   # turnDist <- "vonmises"
-  # availableSteps <- 10
+  # availableSteps <- 2
   
-  modelData <- amt::random_steps(movementSteps,
-                                 n_control = availableSteps,
-                                 sl_distr = amt::fit_distr(movementSteps$sl_, stepDist),
-                                 ta_distr = amt::fit_distr(movementSteps$ta_, turnDist))
+  modelData <- try(
+    amt::random_steps(movementSteps,
+                      n_control = availableSteps,
+                      sl_distr = amt::fit_distr(movementSteps$sl_, stepDist),
+                      ta_distr = amt::fit_distr(movementSteps$ta_, turnDist))
+  )
+  
+  if(class(modelData)[1] == "try-error"){
+    print("step length fitting error")
+    stepToFit <- movementSteps$sl_[movementSteps$sl_ < quantile(movementSteps$sl_, 0.75)]
+    modelData <- amt::random_steps(movementSteps,
+                                   n_control = availableSteps,
+                                   sl_distr = amt::fit_distr(stepToFit, stepDist),
+                                   ta_distr = amt::fit_distr(movementSteps$ta_, turnDist))
+  }
   
   modelData <- amt::extract_covariates(modelData,
                                        landscape,
                                        where = "end")
   
   # modelData$layer <- if_else(is.na(modelData$layer), 0, modelData$layer)
-  if(length(unique(modelData$layer)) == 2){
+  if(all(modelData$layer %in% c(0, 1))){
     modelData$values <- paste0("c", modelData$layer)
     modelData$values <- factor(modelData$values)
   } else {
-    modelData$values <- modelData$layer
+    modelData$values <- scale(modelData$layer)[,1]
+  }
+  
+  if(length(unique(modelData$layer)) == 1){
+    ssfOUT <- list(model = "Only one habitat used")
+    return(ssfOUT)
   }
   
   if(methodForm == "mf.is"){

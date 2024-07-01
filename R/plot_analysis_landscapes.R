@@ -9,8 +9,8 @@
 plot_analysis_landscapes <- function(movementDataAll){
   
   # targets::tar_load("movementDataAll")
-  # targets::tar_load("movementData_BUFA_binary_H1")
-  # targets::tar_load("movementData_BUFA_continuous_H1")
+  # targets::tar_load("movementData_BUFA_H1_binary")
+  # targets::tar_load("movementData_BUFA_H1_continuous")
   # targets::tar_source()
   
   paletteList <- get_palette()
