@@ -37,6 +37,8 @@ tracking summary used code from Crane et al  -
   OPHA002, OPHA004, and OPHA005 had issues with step lengths fitting to a exp dist. Therefore code added to only fit using the exlcude the 75% quantile of steps - only instances where fit failed was this implemented
   
   distanace is scaled to aid model convergence - especially key in INLA, but also applied to others
+  
+  twostep remove those individals with single habitat - also applies to some SSFs
 
 ## Multiverse Construction
 

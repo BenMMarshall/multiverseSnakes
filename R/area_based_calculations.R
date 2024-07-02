@@ -10,14 +10,15 @@
 #' @export
 area_based_calculations <- function(availUseData, optionsList, optionsListArea){
   
-  # targets::tar_load("areaBasedAvailUse_OPHA_H1_binary")
-  # availUseData <- areaBasedAvailUse_OPHA_H1_binary
+  # targets::tar_load("areaBasedAvailUse_OPHA_H1_continuous")
+  # availUseData <- areaBasedAvailUse_OPHA_H1_continuous
   # optionsList <- optionsList_area
   # optionsListArea <- optionsList_areaMethods
   if(class(availUseData) == "list"){
     companaResultsDF <- data.frame(
-      species = availUseData$species,
+      species = availUseData$species[1],
       classLandscape = "continous",
+      hypothesis = availUseData$hypothesis[1],
       analysis = "compana",
       type = NA,
       areaMethod = NA,
@@ -96,6 +97,7 @@ area_based_calculations <- function(availUseData, optionsList, optionsListArea){
                   companaResultsDF <- data.frame(
                     species = availUseData$species[1],
                     classLandscape = availUseData$classLandscape[1],
+                    hypothesis = availUseData$hypothesis[1],
                     analysis = "compana",
                     type = typ,
                     areaMethod = met,

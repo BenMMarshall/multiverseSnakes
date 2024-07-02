@@ -26,10 +26,12 @@ area_based_extraction <- function(allIndividualData, optionsList){
   landscape <- rast(allIndividualData$habitatRasterLocation)
   landscapeRaster <- raster::raster(allIndividualData$habitatRasterLocation)
   land <- str_extract(allIndividualData$habitatRasterLocation, "binary|continuous")
+  hypo <- str_extract(allIndividualData$habitatRasterLocation, "H1|H2")
   
   if(land == "continuous"){
     return(list("Continous raster values - unable to compare",
-                "species" = allIndividualData$movementData_sf$species[1]))
+                "species" = allIndividualData$movementData_sf$species[1],
+                "hypothesis" = hypo))
   }
   
   # Loop to create individual polygons --------------------------------------
@@ -203,6 +205,7 @@ area_based_extraction <- function(allIndividualData, optionsList){
             usedAvailable$id <- movementData$id[1]
             usedAvailable$species <- movementData$species[1]
             usedAvailable$classLandscape <- land
+            usedAvailable$hypothesis <- hypo
             usedAvailable$type <- "III"
             usedAvailable$method <- method
             usedAvailable$contour <- contour

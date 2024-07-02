@@ -9,13 +9,14 @@
 #' @export
 summarise_ssf_results <- function(allIndividualData, sampleGroups, optionsList){
   # targets::tar_load("movementData_BUFA_H1_continuous")
-  # targets::tar_load("movementData_OPHA_H1_binary")
+  # targets::tar_load("movementData_OPHA_H2_binary")
   # allIndividualData <- movementData_BUFA_H1_continuous
-  # allIndividualData <- movementData_OPHA_H1_binary
+  # allIndividualData <- movementData_OPHA_H2_binary
   # optionsList <- optionsList_sff
   
   landscape <- rast(allIndividualData$habitatRasterLocation)
   land <- str_extract(allIndividualData$habitatRasterLocation, "binary|continuous")
+  hypo <- str_extract(allIndividualData$habitatRasterLocation, "H1|H2")
   
   optionsForm <- optionsList$MethodSSF_mf
   optionsASteps <- optionsList$MethodSSF_as
@@ -32,7 +33,7 @@ summarise_ssf_results <- function(allIndividualData, sampleGroups, optionsList){
   for(mf in optionsForm){
     # mf <- optionsForm[1]
     for(step in optionsStepD){
-      # step <- optionsStepD[2]
+      # step <- optionsStepD[1]
       for(turn in optionsTurnD){
         # turn <- optionsTurnD[1]
         for(as in optionsASteps){
@@ -70,10 +71,19 @@ summarise_ssf_results <- function(allIndividualData, sampleGroups, optionsList){
                       turn,
                       as, sep = " - "))
           
+          if(any(sampleEst_sample$Estimate[!is.na(sampleEst_sample$Estimate)] == "SingleHabitat")){
+            singleHabIssues <- paste0(sampleEst_sample$id[!is.na(sampleEst_sample$Estimate) &
+                                                            sampleEst_sample$Estimate == "SingleHabitat"],
+                                      collapse = ";")
+          } else {
+            singleHabIssues <- NA
+          }
           # calculate CI surrounding the naive mean
+          sampleEst_sample$Estimate <- as.numeric(sampleEst_sample$Estimate)
+          
           nEst <- length(sampleEst_sample$Estimate)
-          meanEst <- mean(sampleEst_sample$Estimate)
-          sdEst <- sd(sampleEst_sample$Estimate)
+          meanEst <- mean(sampleEst_sample$Estimate, na.rm = TRUE)
+          sdEst <- sd(sampleEst_sample$Estimate, na.rm = TRUE)
           marginEst <- qt(0.975, df = nEst - 1) * sdEst/sqrt(nEst)
           lowEst <- meanEst - marginEst
           highEst <- meanEst + marginEst
@@ -110,15 +120,17 @@ summarise_ssf_results <- function(allIndividualData, sampleGroups, optionsList){
             species = allIndividualData$movementData_sf$species[1],
             analysis = sampleEst_sample$analysis[1],
             classLandscape = land,
+            hypothesis = hypo,
             modelFormula = sampleEst_sample$modelFormula[1],
             stepDist = sampleEst_sample$stepDist[1],
             turnDist = sampleEst_sample$turnDist[1],
             availablePerStep = sampleEst_sample$availablePerStep[1],
             averagingMethod = "Naive average",
-            modelAvg = mean(sampleEst_sample$Estimate),
-            modelAvgSE = sd(sampleEst_sample$Estimate)/sqrt(length(sampleEst_sample$Estimate)),
+            modelAvg = meanEst,
+            modelAvgSE = sdEst/sqrt(length(sampleEst_sample$Estimate)),
             modelAvgLower = lowEst,
-            modelAvgUpper = highEst
+            modelAvgUpper = highEst,
+            singleHabIssues
           )
           
           # ssfSampleOUT <- rbind(modelAvgData, naiveAvgData)

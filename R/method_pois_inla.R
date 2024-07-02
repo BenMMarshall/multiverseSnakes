@@ -9,14 +9,15 @@
 #' @export
 method_pois_inla <- function(allIndividualData, optionsList){
   
-  # targets::tar_load("movementData_BUFA_H1_binary")
-  # targets::tar_load("movementData_OPHA_H1_continuous")
+  # targets::tar_load("movementData_BUCA_H1_binary")
+  # targets::tar_load("movementData_OPHA_H1_binary")
   # targets::tar_source()
-  # allIndividualData <- movementData_BUFA_H1_binary
-  # allIndividualData <- movementData_OPHA_H1_continuous
+  # allIndividualData <- movementData_BUCA_H1_binary
+  # allIndividualData <- movementData_OPHA_H1_binary
   # optionsList <- optionsList_pois
   landscape <- rast(allIndividualData$habitatRasterLocation)
   land <- str_extract(allIndividualData$habitatRasterLocation, "binary|continuous")
+  hypo <- str_extract(allIndividualData$habitatRasterLocation, "H1|H2")
   
   optionsForm <- optionsList$MethodPois_mf
   optionsLand <- optionsList$MethodPois_land
@@ -79,7 +80,7 @@ method_pois_inla <- function(allIndividualData, optionsList){
   #   unnest(cols = c(sr))
   
   for(as in optionsASteps){
-    # as <- optionsASteps[2]
+    # as <- optionsASteps[1]
     for(sd in optionsStepD){
       # sd <- optionsStepD[1]
       for(td in optionsTurnD){
@@ -116,13 +117,13 @@ method_pois_inla <- function(allIndividualData, optionsList){
             print("step length fitting error")
             stepToFit <- indiTrack$sl_[indiTrack$sl_ < quantile(indiTrack$sl_, 0.75)]
             indiTrackCov <- indiTrack %>% # removing the non-moves, or under GPS error
-                random_steps(
-                  n_control = as,
-                  sl_distr = amt::fit_distr(x = stepToFit, dist_name = sd),
-                  ta_distr = amt::fit_distr(x = indiTrack$ta_, dist_name = td)
-                ) %>% 
-                extract_covariates(landscape) %>% 
-                mutate(id = indiID)
+              random_steps(
+                n_control = as,
+                sl_distr = amt::fit_distr(x = stepToFit, dist_name = sd),
+                ta_distr = amt::fit_distr(x = indiTrack$ta_, dist_name = td)
+              ) %>% 
+              extract_covariates(landscape) %>% 
+              mutate(id = indiID)
           }
           
           allTracksList[[indiID]] <- indiTrackCov
@@ -135,14 +136,17 @@ method_pois_inla <- function(allIndividualData, optionsList){
           mutate(
             y = as.numeric(case_),
             id = as.numeric(factor(id)), 
-            step_id = paste0(id, step_id_, sep = "-"),
+            step_id = paste(id, step_id_, sep = "-"),
             cos_ta = cos(ta_), 
             log_sl = log(sl_))
+        
+        poisModelData$layer[is.na(poisModelData$layer)] <- 0
         
         if(land == "binary"){
           poisModelData <- poisModelData %>% 
             mutate(layer = factor(paste0("c", layer),
                                   levels = c("c0", "c1")))
+          print(unique(poisModelData$layer))
         } else {
           # scaling appears to be required for INLA to run
           poisModelData$layer <- scale(poisModelData$layer)[,1]
@@ -153,7 +157,7 @@ method_pois_inla <- function(allIndividualData, optionsList){
         prec.beta.trls <- 1e-4
         
         for(form in optionsForm){
-          # form <- optionsForm[1]
+          # form <- optionsForm[2]
           if(form == "mf.is"){
             
             inlaFormula <- y ~ -1 + 
@@ -175,9 +179,7 @@ method_pois_inla <- function(allIndividualData, optionsList){
                                           prior = "pc.prec", param = c(1, 0.05)))) 
           } # if else end
           
-          # print(sum(poisModelData$y[poisModelData$layer == "c0"]))
-          # print(sum(poisModelData$y[poisModelData$layer == "c2"]))
-          # print(sum(is.na(poisModelData$y)))
+          # print(sum(is.na(poisModelData$step_id)))
           # print(sum(is.na(poisModelData$log_sl)))
           # print(sum(is.na(poisModelData$cos_ta)))
           # print(sum(is.na(poisModelData$id)))
@@ -198,15 +200,15 @@ method_pois_inla <- function(allIndividualData, optionsList){
           if(class(inlaOUT)[1] == "try-error"){
             
             if(land == "binary"){
-              inlaResults <- as.data.frame(matrix(NA, 2, 7))
-              inlaResults$term <- c("layerc1", "layerc0")
+              inlaResults <- as.data.frame(matrix(NA, 1, 8))
+              inlaResults$term <- c("layerc1binary")
             } else {
-              inlaResults <- as.data.frame(matrix(NA, 1, 7))
+              inlaResults <- as.data.frame(matrix(NA, 1, 8))
               inlaResults$term <- c("layercontinuous")
             }
             
             names(inlaResults) <- c("mean", "sd", "q025", "q50", "q975",
-                                    "mode", "kld", "term")
+                                    "mode", "kld", "estimateDiff", "term")
             inlaResults$mmarginal <- NA
             inlaResults$emarginal <- NA
             
@@ -214,26 +216,31 @@ method_pois_inla <- function(allIndividualData, optionsList){
             
             if(land == "binary"){
               inlaResults <- inlaOUT$summary.fixed[1:2,]
+              inlaResults$estimateDiff <- diff(inlaResults$mean)
               inlaResults$term <- row.names(inlaResults)
+              inlaResults <- inlaResults[inlaResults$term == "layerc1",]
+              inlaResults$term <- c("layerc1binary")
             } else {
               inlaResults <- inlaOUT$summary.fixed[1,]
+              inlaResults$estimateDiff <- inlaResults$mean
               inlaResults$term <- paste0(row.names(inlaResults), "continuous")
             }
             
             names(inlaResults) <- c("mean", "sd", "q025", "q50", "q975",
-                                    "mode", "kld", "term")
+                                    "mode", "kld", "estimateDiff", "term")
             inlaResults$mmarginal <- inla_mmarginal(inlaOUT)
             inlaResults$emarginal <- inla_emarginal(inlaOUT)
             
           }
           
-          print(inlaResults$mean)
+          print(inlaResults$estimateDiff)
           
           optionsInfo <-
             data.frame(
               species = allIndividualData$movementData_sf$species[1],
               analysis = "Poisson",
               classLandscape = land,
+              hypothesis = hypo,
               modelFormula = form,
               availablePerStep = as,
               stepDist = sd,

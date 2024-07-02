@@ -9,13 +9,14 @@
 #' @export
 method_twoStep <- function(allIndividualData, optionsList){
   # targets::tar_load("movementData_BUFA_H1_binary")
-  # targets::tar_load("movementData_BUFA_H1_continuous")
+  # targets::tar_load("movementData_OPHA_H1_binary")
   # targets::tar_source()
   # allIndividualData <- movementData_BUFA_H1_binary
-  # allIndividualData <- movementData_BUFA_H1_continuous
+  # allIndividualData <- movementData_OPHA_H1_binary
   # optionsList <- optionsList_pois
   landscape <- rast(allIndividualData$habitatRasterLocation)
   land <- str_extract(allIndividualData$habitatRasterLocation, "binary|continuous")
+  hypo <- str_extract(allIndividualData$habitatRasterLocation, "H1|H2")
   
   optionsForm <- optionsList$MethodPois_mf
   optionsLand <- optionsList$MethodPois_land
@@ -81,9 +82,9 @@ method_twoStep <- function(allIndividualData, optionsList){
   for(as in optionsASteps){
     # as <- 2
     for(sd in optionsStepD){
-      # sd <- "exp"
+      # sd <- "gamma"
       for(td in optionsTurnD){
-        # td <- "unif"
+        # td <- "vonmises"
         
         # had to modify the code and avoid map to make sure the distributions are
         # based on a single individual, issues with the sl_ and ta_ being passed to
@@ -128,13 +129,29 @@ method_twoStep <- function(allIndividualData, optionsList){
         }
         popModelData <- do.call(rbind, allTracksList)
         
+        popModelData$layer[is.na(popModelData$layer)] <- 0
+        
+        # for some binrary have to remove IDs --- the model cannot be fitted because
+        # the value of variable 'layerc1' remains constant within all strata of
+        # at least one cluster
+        if(land == "binary"){
+          landscapeLayers <- popModelData %>% 
+            as.data.frame() %>% 
+            dplyr::group_by(id) %>% 
+            dplyr::summarise(mixed = n_distinct(layer)) %>% 
+            filter(mixed == 1)
+          
+          popModelData <- popModelData %>% 
+            filter(!id %in% landscapeLayers$id)
+        }
+        # unique(popModelData$id)
         print("--- popModelData generated")
         
         popModelData <- popModelData %>% 
           mutate(
             y = as.numeric(case_),
             id = as.numeric(factor(id)), 
-            step_id = paste0(id, step_id_, sep = "-"),
+            step_id = paste(id, step_id_, sep = "-"),
             cos_ta = cos(ta_), 
             log_sl = log(sl_))
         
@@ -188,6 +205,7 @@ method_twoStep <- function(allIndividualData, optionsList){
                 species = allIndividualData$movementData_sf$species[1],
                 analysis = "TwoStep",
                 classLandscape = land,
+                hypothesis = hypo,
                 modelFormula = form,
                 availablePerStep = as,
                 stepDist = sd,
@@ -211,6 +229,7 @@ method_twoStep <- function(allIndividualData, optionsList){
                 species = allIndividualData$movementData_sf$species[1],
                 analysis = "TwoStep",
                 classLandscape = land,
+                hypothesis = hypo,
                 modelFormula = form,
                 availablePerStep = as,
                 stepDist = sd,
