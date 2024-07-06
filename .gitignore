@@ -1,6 +1,8 @@
 *.tif
 /data/
 [.]tif$
+*uncom.csv
+/modelOutput/*.rds
 
 # files with log in details for movebank
 movebank_login_abstraction.R

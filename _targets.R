@@ -30,6 +30,10 @@ tar_option_set(
                "INLA",
                "TwoStepCLogit",
                "patchwork",
+               "brms",
+               "tidybayes",
+               "performance",
+               "bayesplot",
                "inborutils"), # zenodo download
   garbage_collection = TRUE,
   format = "qs", # storage format
@@ -45,6 +49,7 @@ options(clustermq.scheduler = "multiprocess")
 
 dir.create(here::here("figures"), showWarnings = FALSE)
 dir.create(here::here("tables"), showWarnings = FALSE)
+dir.create(here::here("modelOutput"), showWarnings = FALSE)
 
 # Data locations ----------------------------------------------------------
 
@@ -84,7 +89,7 @@ optionsData <- optionsData %>%
 optionsList_area <- list(
   Method_method = c("areaBased"),
   # areaMethod = c("MCP", "AKDE"),
-  areaMethod = c("MCP"),
+  areaMethod = c("MCP", "KDEhref"),
   areaContour = c(95, 99),
   Method_ap = as.integer(round(exp(seq(log(1), log(10), length.out = 2)), digits = 1)),
   Method_sp = c("rd", "st")
@@ -210,9 +215,9 @@ poisCompiled <- list(
     poisBrms,
     run_brms(
       resultsData = poisResults,
-      iter = 20000,
-      warmup = 8000,
-      thin = 20
+      iter = 800,
+      warmup = 200,
+      thin = 2
     )
   )
 )
@@ -243,9 +248,9 @@ twoStepCompiled <- list(
     twoStepBrms,
     run_brms(
       resultsData = twoStepResults,
-      iter = 20000,
-      warmup = 8000,
-      thin = 20
+      iter = 800,
+      warmup = 200,
+      thin = 2
     )
   )
 )
@@ -269,16 +274,16 @@ areaBasedCompiled <- list(
     areaBasedSpecCurve,
     generate_spec_curves(
       outputResults = areaBasedResults,
-      method = "areaBased"
+      method = "area"
     )
   ),
   tar_target(
     areaBasedBrms,
     run_brms(
       resultsData = areaBasedResults,
-      iter = 20000,
-      warmup = 8000,
-      thin = 20
+      iter = 800,
+      warmup = 200,
+      thin = 2
     )
   )
 )
@@ -309,9 +314,9 @@ ssfCompiled <- list(
     ssfBrms,
     run_brms(
       resultsData = ssfResults,
-      iter = 20000,
-      warmup = 8000,
-      thin = 20
+      iter = 800,
+      warmup = 200,
+      thin = 2
     )
   )
 )
@@ -338,11 +343,6 @@ brmModelOutputs <- list(
   tar_target(
     modelExtracts,
     extract_model_values(modelsList = modelsBrms),
-    priority = 0.4
-  ),
-  tar_target(
-    effectPlots,
-    generate_effect_plots(modelsList = modelsBrms),
     priority = 0.4
   ),
   tar_target(

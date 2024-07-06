@@ -37,7 +37,7 @@ plot_analysis_landscapes <- function(movementDataAll){
       comboTitle <- glue::glue("<span style='color:{speciesColour}'>PYBI</span>: <i>Python bivittatus</i> (Burmese Python)")
       
     } else if(str_detect(spHy, "BUCA")){
-      xyBreaks <- 100
+      xyBreaks <- 1000
       comboTitle <- glue::glue("<span style='color:{speciesColour}'>BUCA</span>: <i>Bungarus candidus</i> (Malayan Krait)")
       
     } else if(str_detect(spHy, "BUFA")){
@@ -54,7 +54,7 @@ plot_analysis_landscapes <- function(movementDataAll){
       scale_x_continuous(breaks = seq(800000, 900000, xyBreaks)) +
       scale_y_continuous(breaks = seq(1500000, 1700000, xyBreaks)) +
       scale_fill_gradient(high = paletteVec["BADGER"],
-                          na.value = "#ffffff") +
+                          low = "#ffffff") +
       labs(x = "Easting", y = "Northing",
            fill = "<b>Hypothesised Habitat</b><br>
          <i><span style='font-size:6pt'>(Binary 0/1 of the hypothesised habitat)</span></i>",
