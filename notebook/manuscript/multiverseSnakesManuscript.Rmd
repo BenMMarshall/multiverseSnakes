@@ -107,7 +107,7 @@ In addition to packages already mentioned in the methods we also used the follow
 We used *R* `r paste0("v.", version$major, ".", version$minor)` [@base] via *RStudio* v.2023.6.2.561 [@rstudio]. <!-- version has to be manually added because rstudioapi doesn't work in targets -->
 We used *here* `r paste0("v.", packageVersion("here"))` [@here] and *qs* `r paste0("v.", packageVersion("qs"))` [@qs] to manage directory addresses and saved objects.
 
-We used *raster* `r paste0("v.", packageVersion("raster"))` [@raster] and *RandomFields* `r paste0("v.", packageVersion("RandomFields"))` [@RandomFields] to aid landscape raster creation alongside NLMR `r paste0("v.", packageVersion("NLMR"))` [@NLMR].
+We used *raster* `r paste0("v.", packageVersion("raster"))` [@raster].
 
 We used *ggplot2* `r paste0("v.", packageVersion("ggplot2"))` for creating figures [@ggplot2], with the expansions: *patchwork* `r paste0("v.", packageVersion("patchwork"))` [@patchwork], *ggridges* `r paste0("v.", packageVersion("ggridges"))` [@ggridges], and *ggdist* `r paste0("v.", packageVersion("ggdist"))` [@ggdist].
 

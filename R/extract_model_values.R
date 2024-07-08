@@ -36,7 +36,7 @@ extract_model_values <- function(modelsList){
   })
   r2Outputs <- do.call(rbind, r2Outputs)
   
-  write.csv(r2Outputs, file = here::here("data", "brmsR2Results.csv"),
+  write.csv(r2Outputs, file = here::here("modelOutput", "brmsR2Results.csv"),
             row.names = FALSE)
   
   # get all betas -----------------------------------------------------------

@@ -7,7 +7,11 @@
 #'
 #' @export
 generate_allEffect_plots <- function(modelExtracts){
-  
+  # targets::tar_load("modelExtracts")
+  # library(dplyr)
+  # library(ggplot2)
+  # library(ggtext)
+  # library(stringr)
   paletteList <- get_palette()
   modelPalette <- unname(paletteList$corePalette[1:4])
   names(modelPalette) <- c(
@@ -180,7 +184,7 @@ generate_allEffect_plots <- function(modelExtracts){
                position = position_dodge(0.75)) +
     geom_point(data = annotationDF,
                aes(x = -0.75, y = 0),
-               colour = palette["coreGrey"], size = 0.01) +
+               colour = paletteList$corePalette["coreGrey"], size = 0.01) +
     geom_richtext(data = betasOutputsPlotData %>% 
                 filter(.value < -0.5),
               aes(y = xlimits[1], x = .variable,
@@ -241,7 +245,7 @@ generate_allEffect_plots <- function(modelExtracts){
   allEffectsPlot
   
   ggsave(allEffectsPlot,
-         filename = here("notebook", "figures", "_allEffectsPlot.png"),
+         filename = here("figures", "allEffectsPlot.png"),
          dpi = 300, width = 260, height = 200,
          units = "mm")
   
