@@ -1,6 +1,6 @@
 
 targets::tar_load("movementData_BUFA_H1_binary")
-
+allIndividualData <- movementData_BUFA_H1_binary
 movementData <- movementData_BUFA_H1_binary$movementData_sf
 landscape <- rast(allIndividualData$habitatRasterLocation)
 landscapeRaster <- raster::raster(allIndividualData$habitatRasterLocation)
@@ -39,9 +39,26 @@ fitsList <- lapply(teleObj, function(x){
   return(fits)
 })
 print("fit")
+names(fitsList)
+names(teleObj)
 
-akdeRes <- ctmm::akde(teleObj, fitsList,
-           weights = TRUE)
+akdeList <- vector("list", length = length(names(teleObj)))
+names(akdeList) <- names(teleObj)
+for(n in names(teleObj)){
+  akdeList[[n]] <- ctmm::akde(teleObj[[n]], fitsList[[n]],
+                              weights = TRUE)
+}
+
+RSF.1 <- rsf.fit(teleObj$BUFA001, UD = akdeList$BUFA001, R = list("H1" = landscapeRaster), debias = T, level.UD = 0.95)
+RSF.2 <- rsf.fit(teleObj[names(teleObj) == "BUFA002"],
+                 UD=akdeList[names(akdeList) == "BUFA002"][1],
+                 R = list("H1" = landscapeRaster), debias = T, level.UD = 0.95)
+
+RSF.list <- list( RSF.1,  RSF.2)
+RSF.population <- mean(RSF.list)
+summary(RSF.population)
+
+
 
 # NEED TO FILL IN NAs in raster
 landscapeRaster[is.na(landscapeRaster)] <- 0

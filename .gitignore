@@ -1,5 +1,8 @@
 *.tif
-/data/
+data/BUCA/*
+data/BUFA/*
+data/OPHA/*
+data/PYBI/*
 [.]tif$
 *uncom.csv
 /modelOutput/*.rds
@@ -57,5 +60,4 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 .Rproj.user
-data
 
