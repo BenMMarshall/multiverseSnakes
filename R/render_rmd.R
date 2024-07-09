@@ -9,10 +9,7 @@
 #'
 #' @export
 render_rmd <- function(fileIN, fileOUT,
-                       modelExtracts = NA,
-                       effectPlots = NA,
-                       allSpecCurve = NA,
-                       optionsCompleteList = NA){
+                       ...){
   
   rmarkdown::render(input = fileIN,
                     output_file = fileOUT)

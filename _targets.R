@@ -91,7 +91,7 @@ optionsList_area <- list(
   # areaMethod = c("MCP", "AKDE"),
   areaMethod = c("MCP", "KDEhref"),
   areaContour = c(95, 99),
-  Method_ap = as.integer(round(exp(seq(log(1), log(10), length.out = 2)), digits = 1)),
+  Method_ap = as.integer(round(exp(seq(log(1), log(200), length.out = 8)), digits = 0)),
   Method_sp = c("rd", "st")
 )
 
@@ -104,6 +104,7 @@ optionsList_areaMethods <- list(
 optionsList_sff <- list(
   Method_method = c("ssf"),
   MethodSSF_as = c(2, 10),
+  # MethodSSF_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
   MethodSSF_mf = c("mf.is", "mf.ss"),
   MethodSSF_sd = c("gamma", "exp"),
   MethodSSF_td = c("vonmises", "unif")
@@ -112,6 +113,7 @@ optionsList_sff <- list(
 optionsList_pois <- list(
   Method_method = c("pois"),
   MethodPois_as = c(2, 10),
+  # MethodPois_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
   MethodPois_mf = c("mf.is", "mf.ss"),
   MethodPois_sd = c("gamma", "exp"),
   MethodPois_td = c("vonmises", "unif")
@@ -129,25 +131,25 @@ saveRDS(optionsCompleteList, file = here::here("data", "optionsCompleteList.rds"
 
 # Target pipeline ---------------------------------------------------------
 
-prereg <- list(
-  tar_map(
-    values = optionsList_data,
-    tar_target(
-      rawData,
-      download_datasets(speciesLocations, species),
-      format = "file"
-    )
-  ),
-  tar_target(
-    rmdRenderPrereg,
-    render_rmd(fileIN = here::here("notebook", "prereg",
-                                   "multiverseSnakesPrereg.rmd"),
-               fileOUT = here::here("notebook", "prereg",
-                                    "multiverseSnakesPrereg.pdf")),
-    format = "file",
-    priority = 0.95
-  )
-)
+# prereg <- list(
+#   tar_map(
+#     values = optionsList_data,
+#     tar_target(
+#       rawData,
+#       download_datasets(speciesLocations, species),
+#       format = "file"
+#     )
+#   ),
+#   tar_target(
+#     rmdRenderPrereg,
+#     rmarkdown::render(input = here::here("notebook", "prereg",
+#                                           "multiverseSnakesPrereg.Rmd"),
+#                       output_file = here::here("notebook", "prereg",
+#                                            "multiverseSnakesPrereg.pdf")),
+#     format = "file",
+#     priority = 0.95
+#   )
+# )
 
 coreMultiverse <- list(
   tar_map(
@@ -375,7 +377,7 @@ manuscriptRendering <- list(
   tar_target(
     rmdRenderManuscript,
     render_rmd(fileIN = here::here("notebook", "manuscript",
-                                   "multiverseSnakesManuscript.rmd"),
+                                   "multiverseSnakesManuscript.Rmd"),
                fileOUT = here::here("notebook", "manuscript",
                                     "multiverseSnakesManuscript.pdf"),
                allEffectPlots,
@@ -394,7 +396,7 @@ manuscriptRendering <- list(
 # All targets lists -------------------------------------------------------
 
 list(
-  prereg,
+  # prereg,
   coreMultiverse,
   poisCompiled,
   twoStepCompiled,
