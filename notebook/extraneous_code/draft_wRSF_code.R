@@ -49,10 +49,10 @@ for(n in names(teleObj)){
                               weights = TRUE)
 }
 
-RSF.1 <- rsf.fit(teleObj$BUFA001, UD = akdeList$BUFA001, R = list("H1" = landscapeRaster), debias = T, level.UD = 0.95)
-RSF.2 <- rsf.fit(teleObj[names(teleObj) == "BUFA002"],
-                 UD=akdeList[names(akdeList) == "BUFA002"][1],
-                 R = list("H1" = landscapeRaster), debias = T, level.UD = 0.95)
+RSF.1 <- rsf.fit(teleObj$BUFA001, UD = akdeList$BUFA001, R = list("H1" = landscapeRaster),
+                 debias = TRUE, level.UD = 0.95)
+RSF.2 <- rsf.fit(teleObj$BUFA003, UD = akdeList$BUFA003, R = list("H1" = landscapeRaster),
+                 debias = TRUE, level.UD = 0.95)
 
 RSF.list <- list( RSF.1,  RSF.2)
 RSF.population <- mean(RSF.list)
