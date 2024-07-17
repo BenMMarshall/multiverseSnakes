@@ -10,11 +10,12 @@
 #' @export
 area_based_calculations <- function(availUseData, optionsList, optionsListArea){
   
-  # targets::tar_load("areaBasedAvailUse_OPHA_H1_continuous")
-  # availUseData <- areaBasedAvailUse_OPHA_H1_continuous
+  # targets::tar_load("areaBasedAvailUse_BUFA_H1_continuous")
+  # availUseData <- areaBasedAvailUse_BUFA_H1_continuous
+  availUseData <- availUseData$usedAvailFull
   # optionsList <- optionsList_area
   # optionsListArea <- optionsList_areaMethods
-  if(class(availUseData) == "list"){
+  if(availUseData$classLandscape[1] == "continuous"){
     companaResultsDF <- data.frame(
       species = availUseData$species[1],
       classLandscape = "continous",

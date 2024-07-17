@@ -35,7 +35,7 @@ wrapper_indi_ssf <- function(
   names(indiSSFResults) <- names(allIndividualData)
   for(indiID in names(allIndividualData)){
     
-    # indiID <- names(allIndividualData)[2]
+    # indiID <- names(allIndividualData)[1]
     print(indiID)
     movementData <- allIndividualData[[indiID]]
     
@@ -59,14 +59,29 @@ wrapper_indi_ssf <- function(
             # as <- MethodSSF_as[1]
             # for(land in MethodSSF_land){
             
-            ssfOUT <- method_indi_ssf(
-              movementData = movementData,
-              landscape = landscape,
-              methodForm = mf,
-              stepDist = stepD,
-              turnDist = turnD,
-              availableSteps = as
+            ssfOUT <- try(
+              method_indi_ssf(
+                movementData = movementData,
+                landscape = landscape,
+                methodForm = mf,
+                stepDist = stepD,
+                turnDist = turnD,
+                availableSteps = as,
+                seed = 2024
+              )
             )
+            # odd instance of non-convergence can be tackled with a second attempt
+            if(class(ssfOUT)[1] == "try-error"){
+              ssfOUT <- method_indi_ssf(
+                movementData = movementData,
+                landscape = landscape,
+                methodForm = mf,
+                stepDist = stepD,
+                turnDist = turnD,
+                availableSteps = as,
+                seed = 2025
+              )
+            }
             
             if(ssfOUT$model[1] == "Only one habitat used"){
               optionsData <- data.frame(

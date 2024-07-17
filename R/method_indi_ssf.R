@@ -21,7 +21,8 @@ method_indi_ssf <- function(
   methodForm,
   stepDist,
   turnDist,
-  availableSteps){
+  availableSteps,
+  seed){
   
   if(!require(amt)){
     stop("amt not installed")
@@ -37,7 +38,7 @@ method_indi_ssf <- function(
   movementSteps <- amt::steps(movementTrack) %>% 
     filter(sl_>0)
   
-  set.seed(2024)
+  set.seed(seed)
   
   # methodForm <- "mf.is"
   # stepDist <- "gamma"
@@ -64,7 +65,7 @@ method_indi_ssf <- function(
                                        landscape,
                                        where = "end")
   
-  # modelData$layer <- if_else(is.na(modelData$layer), 0, modelData$layer)
+  modelData$layer <- if_else(is.na(modelData$layer), 0, modelData$layer)
   if(all(modelData$layer %in% c(0, 1))){
     modelData$values <- paste0("c", modelData$layer)
     modelData$values <- factor(modelData$values)

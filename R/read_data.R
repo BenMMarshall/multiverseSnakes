@@ -14,10 +14,16 @@ read_data <- function(species, hypothesis, landscape){
   # species <- "BUFA"
   # hypothesis <- "H1"
   # landscape <- "binary"
+  # landscape <- "continuous"
   print(species)
   
   movementData <- read_csv(here("data", paste0("movement", species, ".csv")),
                            locale = locale(tz = "Asia/Bangkok"))
+  
+  movementData <- movementData %>% 
+    dplyr::mutate(dupKey = paste(id, datetime)) %>% 
+    dplyr::filter(!duplicated(dupKey)) %>% 
+    dplyr::select(-dupKey)
   
   if(species == "BUFA"){
     # add an hour to the date only BUFA times, prevents issues with ctmm as.telemetry later
@@ -80,7 +86,7 @@ read_data <- function(species, hypothesis, landscape){
     habitatRaster <- binaryRaster
   } else if(landscape == "continuous"){
     
-    distanceRaster <- distance(binaryRaster)
+    distanceRaster <- terra::distance(binaryRaster)
     print("Distance Raster")
     distanceValues <- terra::values(distanceRaster)
     terra::values(distanceRaster) <- abs(distanceValues - max(distanceValues))

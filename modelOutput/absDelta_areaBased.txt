@@ -80,11 +80,11 @@ transformed parameters {
   r_2_2 = r_2[, 2];
   r_2_3 = r_2[, 3];
   r_2_4 = r_2[, 4];
-  lprior += cauchy_lpdf(b[1] | 0.1, 3);
   lprior += cauchy_lpdf(b[2] | 0.1, 3);
-  lprior += cauchy_lpdf(b[3] | -0.1, 3);
-  lprior += cauchy_lpdf(b[4] | 0.1, 3);
+  lprior += cauchy_lpdf(b[3] | 0.1, 3);
+  lprior += cauchy_lpdf(b[4] | -0.1, 3);
   lprior += cauchy_lpdf(b[5] | 0.1, 3);
+  lprior += cauchy_lpdf(b[6] | 0.1, 3);
   lprior += student_t_lpdf(Intercept | 3, 0.4, 2.5);
   lprior += student_t_lpdf(sigma | 3, 0, 2.5)
     - 1 * student_t_lccdf(0 | 3, 0, 2.5);

@@ -15,10 +15,13 @@ run_brms <- function(resultsData,
   # targets::tar_load("poisResults")
   # targets::tar_load("areaBasedResults")
   # targets::tar_load("twoStepResults")
+  # targets::tar_load("rsfResults")
   # resultsData <- ssfResults
   # resultsData <- poisResults
   # resultsData <- areaBasedResults
   # resultsData <- twoStepResults
+  # resultsData <- rsfResults
+  # resultsData <- wrsfResults
   
   if(resultsData$analysis[1] == "ssf"){
     
@@ -147,6 +150,40 @@ run_brms <- function(resultsData,
                             "absDelta_twoStep.txt")
     modelFile <- here::here("modelOutput",
                             "absDelta_twoStep")
+    
+  } else if(resultsData$analysis[1] == "rsf"){
+    
+    modelData <- resultsData %>% 
+      dplyr::group_by(species, hypothesis, classLandscape) %>% 
+      dplyr::mutate(medEst = median(Estimate, na.rm = TRUE),
+                    absDeltaEst = abs(Estimate - medEst)) %>% 
+      dplyr::ungroup() %>% 
+      dplyr::mutate(
+        contourScaled = (contour - mean(contour))/sd(contour),
+        availablePointsScaled  = (availablePoints - mean(availablePoints))/sd(availablePoints)
+      )
+    
+    formAbsDelta <- brms::bf(
+      absDeltaEst ~ 1 + 
+        method + contourScaled +
+        availablePointsScaled + samplingPattern + 
+        (hypothesis|hypothesis) + (classLandscape|classLandscape) + (species|species)
+    )
+    
+    brmpriors <- c(
+      # data quantity decreases deviation from median effect
+      brms::set_prior("cauchy(-0.1, 3)", coef = "availablePointsScaled"),
+      # other kept as weak positive priors
+      brms::set_prior("cauchy(0.1, 3)", coef = "contourScaled"),
+      brms::set_prior("cauchy(0.1, 3)", coef = "samplingPatternst"),
+      brms::set_prior("cauchy(0.1, 3)", coef = "methodMCP")
+    )
+    
+    modelSave <- here::here("modelOutput",
+                            "absDelta_rsf.txt")
+    modelFile <- here::here("modelOutput",
+                            "absDelta_rsf")
+    
   }
   
   modOUT_absDelta <- brms::brm(formula = formAbsDelta,

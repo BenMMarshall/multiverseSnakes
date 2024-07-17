@@ -8,10 +8,10 @@
 #'
 #' @export
 summarise_ssf_results <- function(allIndividualData, sampleGroups, optionsList){
-  # targets::tar_load("movementData_BUFA_H1_continuous")
-  # targets::tar_load("movementData_OPHA_H2_binary")
-  # allIndividualData <- movementData_BUFA_H1_continuous
-  # allIndividualData <- movementData_OPHA_H2_binary
+  # targets::tar_load("movementData_OPHA_H1_binary")
+  # targets::tar_load("movementData_BUCA_H1_continuous")
+  # allIndividualData <- movementData_OPHA_H1_binary
+  # allIndividualData <- movementData_BUCA_H1_continuous
   # optionsList <- optionsList_sff
   
   landscape <- rast(allIndividualData$habitatRasterLocation)

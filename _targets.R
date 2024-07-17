@@ -32,6 +32,8 @@ tar_option_set(
                "patchwork",
                "brms",
                "tidybayes",
+               "lme4",
+               "ctmm",
                "performance",
                "bayesplot",
                "inborutils"), # zenodo download
@@ -88,23 +90,25 @@ optionsData <- optionsData %>%
 
 optionsList_area <- list(
   Method_method = c("areaBased"),
-  # areaMethod = c("MCP", "AKDE"),
-  areaMethod = c("MCP", "KDEhref"),
-  areaContour = c(95, 99),
-  Method_ap = as.integer(round(exp(seq(log(1), log(200), length.out = 8)), digits = 0)),
+  areaMethod = c("MCP", "AKDE", "KDEhref"),
+  # areaMethod = c("MCP", "KDEhref"),
+  areaContour = c(90, 95, 99),
+  Method_ap = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
   Method_sp = c("rd", "st")
 )
 
 optionsList_areaMethods <- list(
   Method_method = c("areaBased"),
-  areaBasedMethod = c("Compana"),
-  areaBasedTest = c("randomisation", "parametric")
+  areaBasedMethod = c("Compana", "rsf"),
+  areaBasedTest = c("randomisation", "parametric"),
+  # areaBasedRsfRandom = c("slopes", "interOnly")
+  areaBasedRsfRandom = c("interOnly")
 )
 
 optionsList_sff <- list(
   Method_method = c("ssf"),
-  MethodSSF_as = c(2, 10),
-  # MethodSSF_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
+  # MethodSSF_as = c(2, 10),
+  MethodSSF_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
   MethodSSF_mf = c("mf.is", "mf.ss"),
   MethodSSF_sd = c("gamma", "exp"),
   MethodSSF_td = c("vonmises", "unif")
@@ -112,8 +116,8 @@ optionsList_sff <- list(
 
 optionsList_pois <- list(
   Method_method = c("pois"),
-  MethodPois_as = c(2, 10),
-  # MethodPois_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
+  # MethodPois_as = c(2, 10),
+  MethodPois_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
   MethodPois_mf = c("mf.is", "mf.ss"),
   MethodPois_sd = c("gamma", "exp"),
   MethodPois_td = c("vonmises", "unif")
@@ -171,6 +175,13 @@ coreMultiverse <- list(
                  optionsListArea = optionsList_areaMethods
                ),
                priority = 0.9),
+    tar_target(rsfOUT,
+               area_based_rsf(
+                 availUseData = areaBasedAvailUse,
+                 optionsList = optionsList_area,
+                 optionsListArea = optionsList_areaMethods
+               ),
+               priority = 0.9),
     tar_target(ssfOUT,
                summarise_ssf_results(
                  movementData,
@@ -186,10 +197,13 @@ coreMultiverse <- list(
                method_twoStep(
                  allIndividualData = movementData,
                  optionsList = optionsList_pois),
+               priority = 0.9),
+    tar_target(wrsfOUT,
+               method_wrsf(
+                 allIndividualData = movementData),
                priority = 0.9)
   )
 )
-
 
 # Poisson model combined --------------------------------------------------
 
@@ -217,7 +231,7 @@ poisCompiled <- list(
     poisBrms,
     run_brms(
       resultsData = poisResults,
-      iter = 800,
+      iter = 600,
       warmup = 200,
       thin = 2
     )
@@ -250,7 +264,7 @@ twoStepCompiled <- list(
     twoStepBrms,
     run_brms(
       resultsData = twoStepResults,
-      iter = 800,
+      iter = 600,
       warmup = 200,
       thin = 2
     )
@@ -283,7 +297,7 @@ areaBasedCompiled <- list(
     areaBasedBrms,
     run_brms(
       resultsData = areaBasedResults,
-      iter = 800,
+      iter = 600,
       warmup = 200,
       thin = 2
     )
@@ -316,9 +330,66 @@ ssfCompiled <- list(
     ssfBrms,
     run_brms(
       resultsData = ssfResults,
+      iter = 600,
+      warmup = 200,
+      thin = 2
+    )
+  )
+)
+
+# RSF Models Combined -----------------------------------------------------
+
+rsfCompiled <- list(
+  tar_combine(
+    rsfResults,
+    coreMultiverse[[1]][grep("^rsfOUT", names(coreMultiverse[[1]]))],
+    command = rbind(!!!.x),
+    priority = 0.8
+  ),
+  tar_target(
+    rsfEstimateOutputs,
+    write.csv(rsfResults,
+              here::here("data", "rsfEstimateOutputs_uncom.csv"), row.names = FALSE),
+    format = "file"
+  ),
+  tar_target(
+    rsfSpecCurve,
+    generate_spec_curves(
+      outputResults = rsfResults,
+      method = "rsf"
+    )
+  ),
+  tar_target(
+    rsfBrms,
+    run_brms(
+      resultsData = rsfResults,
       iter = 800,
       warmup = 200,
       thin = 2
+    )
+  )
+)
+
+# wRSF Models Combined -----------------------------------------------------
+
+wrsfCompiled <- list(
+  tar_combine(
+    wrsfResults,
+    coreMultiverse[[1]][grep("^wrsfOUT", names(coreMultiverse[[1]]))],
+    command = list(!!!.x),
+    priority = 0.8
+  ),
+  tar_target(
+    wrsfEstimateOutputs,
+    write.csv(wrsfResults,
+              here::here("data", "wrsfEstimateOutputs_uncom.csv"), row.names = FALSE),
+    format = "file"
+  ),
+  tar_target(
+    wrsfSpecCurve,
+    generate_spec_curves(
+      outputResults = wrsfResults,
+      method = "wrsf"
     )
   )
 )
@@ -333,6 +404,7 @@ brmModelOutputs <- list(
       ssfCompiled[[4]],
       areaBasedCompiled[[4]],
       poisCompiled[[4]],
+      rsfCompiled[[4]],
       twoStepCompiled[[4]]),
     command = list(!!!.x),
     priority = 0.5
@@ -385,9 +457,11 @@ manuscriptRendering <- list(
                areaBasedSpecCurve,
                twoStepSpecCurve,
                ssfSpecCurve,
+               rsfSpecCurve,
+               wrsfSpecCurve,
                trackingPlotsAndTables,
                landscapePlots
-               ),
+    ),
     cue = tar_cue(mode = "always"),
     priority = 0.1
   )
@@ -401,6 +475,8 @@ list(
   poisCompiled,
   twoStepCompiled,
   areaBasedCompiled,
+  rsfCompiled,
+  wrsfCompiled,
   ssfCompiled,
   brmModelOutputs,
   extraDetails,

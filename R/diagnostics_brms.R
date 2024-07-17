@@ -26,7 +26,7 @@ diagnostics_brms <- function(modelsList){
       
       acfplot <- mcmc_acf(currMod, pars = varsToPlot)
       ggsave(acfplot,
-             filename = here("modelOutput", paste0("scfPlot_", name, ".png")),
+             filename = here("modelOutput", paste0("acfPlot_", name, ".png")),
              dpi = 300, width = 210, height = 140,
              units = "mm")
     }
