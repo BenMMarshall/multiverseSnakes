@@ -22,6 +22,7 @@ generate_spec_curves <- function(outputResults, method){
   # library(ggplot2)
   # library(ggtext)
   # library(stringr)
+  # library(patchwork)
   
   paletteList <- get_palette()
   
@@ -40,32 +41,37 @@ generate_spec_curves <- function(outputResults, method){
   
   if(method == "ssf"){
     outputResults <- outputResults %>% 
-      mutate("estimate" = modelAvg) %>% 
+      mutate("estimate" = modelAvg,
+             "se" = modelAvgSE) %>% 
       dplyr::select(-modelAvg, -modelAvgSE, -modelAvgLower, -modelAvgUpper,
                     -averagingMethod, -singleHabIssues)
     
   } else if(method == "area"){
     outputResults <- outputResults %>% 
-      mutate("estimate" = companaHabDiff) %>% 
+      mutate("estimate" = companaHabDiff,
+             "se" = companaP) %>% 
       dplyr::select(-companaHabDiff, -companaLambda, -companaP, -type) %>% 
       dplyr::filter(classLandscape == "binary")
     
   } else if(method == "pois"){
     # outputResults <- poisResults
     outputResults <- outputResults %>% 
-      mutate("estimate" = estimateDiff) %>% 
+      mutate("estimate" = estimateDiff,
+             "se" = sd) %>% 
       dplyr::select(-mean, -sd, -q025, -q50, -q975, -mode, -kld, -estimateDiff,
                     -mmarginal, -emarginal, -term)
     
   } else if(method == "twoStep"){
     # check not using :log_sl_ estimates too
     outputResults <- outputResults %>% 
-      dplyr::mutate("estimate" = twoStepBeta) %>% 
+      dplyr::mutate("estimate" = twoStepBeta,
+                    "se" = twoStepSE) %>% 
       dplyr::select(-twoStepBeta, -twoStepSE)
   } else if(method == "rsf"){
     # check not using :log_sl_ estimates too
     outputResults <- outputResults %>% 
-      dplyr::mutate("estimate" = Estimate) %>% 
+      dplyr::mutate("estimate" = Estimate,
+                    "se" = SE) %>% 
       dplyr::select(-SE, -zValue, -PrZ, -type)
   } else if(method == "wrsf"){
     wrsfSummaryList <- lapply(outputResults, summary)
@@ -137,6 +143,9 @@ generate_spec_curves <- function(outputResults, method){
   hypoSpeciesPalette <- paletteList$speciesPalette
   names(hypoSpeciesPalette) <- paste0("Support ", names(hypoSpeciesPalette))
   hypoSpeciesPalette <- c(hypoSpeciesPalette, "No support" = "#999999")
+  hypoSpeciesPalette_sig <- paletteList$speciesPalette
+  names(hypoSpeciesPalette_sig) <- paste0("Sigificant Support ", names(hypoSpeciesPalette_sig))
+  hypoSpeciesPalette_sig <- c(hypoSpeciesPalette_sig, "No support" = "#999999")
   
   # if(method %in% c("twoStep", "area")){
   #   xlimits <- as.vector(quantile(outputPlotData$estimate, probs = c(.001, .999)))
@@ -149,22 +158,23 @@ generate_spec_curves <- function(outputResults, method){
   #     filter(estimate > xlimits[2]) %>% 
   #     count()
   # } else {
-  xlimits <- c(NA, NA)
+  # xlimits <- c(NA, NA)
+  xlimits <- range(outputResults$estimate, na.rm = TRUE)
   # }
   
   if(!method == "wrsf"){
     
     outputPlotData <- outputResults %>% 
       dplyr::select(-analysis) %>% 
-      dplyr::mutate(across(!contains("estimate"), as.character)) %>% 
-      tidyr::pivot_longer(cols = !contains(c("species", "classLandscape", "hypothesis", "estimate")),
+      dplyr::mutate(across(!matches("^estimate$|^se$"), as.character)) %>% 
+      tidyr::pivot_longer(cols = !contains(c("species", "classLandscape", "hypothesis", "estimate", "se")),
                           names_to = "variable") %>% 
       dplyr::mutate(
         variable = case_when(
-          variable == "modelFormula" ~ "Model Formula (SSF or iSSF)",
           variable == "availablePerStep" ~ "Available Points per Step",
           variable == "stepDist" ~ "Distribution of Step Lengths",
           variable == "turnDist" ~ "Distribution of Turn Angles",
+          variable == "modelFormula" ~ "Model Formula (SSF or iSSF)",
           variable == "availablePoints" ~ "Available Points Multiplier",
           variable == "averagingMethod" ~ "Model Averaging Method",
           variable == "samplingPattern" ~ "Sampling Pattern",
@@ -178,10 +188,10 @@ generate_spec_curves <- function(outputResults, method){
       dplyr::ungroup() %>% 
       dplyr::ungroup() %>%
       dplyr::mutate(variable = factor(variable, levels = c(
-        "Model Formula (SSF or iSSF)",
         "Available Points per Step",
         "Distribution of Step Lengths",
         "Distribution of Turn Angles",
+        "Model Formula (SSF or iSSF)",
         "Model Averaging Method",
         "Available Points Multiplier",
         "Sampling Pattern",
@@ -232,8 +242,28 @@ generate_spec_curves <- function(outputResults, method){
       )) %>% 
       mutate(classLandscape = ifelse(str_detect(classLandscape, "binary"),
                                      "Binary Habitat Classification",
-                                     "Continuous Habitat Classification"))
-      
+                                     "Continuous Habitat Classification")) 
+    
+    if(method %in% c("pois", "ssf", "rsf", "twoStep")){
+      overallSpecData <- overallSpecData %>% 
+        mutate(hypoSupportSig = case_when(
+          (estimate - se) > 0 & species == "Ophiophagus hannah" ~ "Sigificant Support OPHA",
+          (estimate - se) > 0 & species == "Python bivittatus" ~ "Sigificant Support PYBI",
+          (estimate - se) > 0 & species == "Bungarus candidus" ~ "Sigificant Support BUCA",
+          (estimate - se) > 0 & species == "Bungarus fasciatus" ~ "Sigificant Support BUFA",
+          TRUE ~ "No support"
+        ))
+    } else if(method %in% c("area")){
+      # se is actually a p value in area's case
+      overallSpecData <- overallSpecData %>% 
+        mutate(hypoSupportSig = case_when(
+          se < 0.05 & species == "Ophiophagus hannah" ~ "Sigificant Support OPHA",
+          se < 0.05 & species == "Python bivittatus" ~ "Sigificant Support PYBI",
+          se < 0.05 & species == "Bungarus candidus" ~ "Sigificant Support BUCA",
+          se < 0.05 & species == "Bungarus fasciatus" ~ "Sigificant Support BUFA",
+          TRUE ~ "No support"
+        ))
+    }
     
     overallMed <- overallSpecData %>%
       group_by(species, speciesCol, hypothesis, classLandscape) %>% 
@@ -249,6 +279,13 @@ generate_spec_curves <- function(outputResults, method){
         medEst > 0 & species == "Python bivittatus" ~ "Support PYBI",
         medEst > 0 & species == "Bungarus candidus" ~ "Support BUCA",
         medEst > 0 & species == "Bungarus fasciatus" ~ "Support BUFA",
+        TRUE ~ "No support"
+      )) %>% 
+      mutate(hypoSupportSig = case_when(
+        hypoSupport == "Support OPHA" ~ "Sigificant Support OPHA",
+        hypoSupport == "Support PYBI" ~ "Sigificant Support PYBI",
+        hypoSupport == "Support BUCA" ~ "Sigificant Support BUCA",
+        hypoSupport == "Support BUFA" ~ "Sigificant Support BUFA",
         TRUE ~ "No support"
       ))
     
@@ -348,7 +385,147 @@ generate_spec_curves <- function(outputResults, method){
                            paste0("specCurve_", method, ".png")),
            plot = specComplete,
            width = 360, height = 280, units = "mm", dpi = 300)
+    ggsave(filename = here("figures",
+                           paste0("specCurve_", method, ".pdf")),
+           plot = specComplete,
+           width = 360, height = 280, units = "mm")
+    
+    # Single species curves ---------------------------------------------------
+    
+    for(sp in unique(overallSpecData$species)){
+      # sp <- unique(overallSpecData$species)[1]
+      xlimits <- overallSpecData %>%
+        filter(species == sp) %>% 
+        pull(estimate) %>% 
+        range(na.rm = TRUE)
+      
+      if(xlimits[1] > 0){
+        xlimits[1] <- 0
+      }
+      
+      (overallSpecCurve_species <- overallSpecData %>%
+         filter(species == sp) %>% 
+         ggplot() +
+         geom_vline(xintercept = 0, linewidth = 0.25, alpha = 0.9, colour = "#403F41",
+                    linetype = 1) +
+         geom_hline(aes(yintercept = 0.0, colour = hypoSupport),
+                    linetype = 2) +
+         {if(method %in% c("pois", "ssf", "rsf", "twoStep"))geom_errorbarh(aes(
+           xmin = estimate-se, xmax = estimate+se,
+           y = index, colour = hypoSupportSig), alpha = 0.5,
+           linewidth = 0.95, height = 0)}+
+         {if(method %in% c("pois", "ssf", "rsf", "twoStep"))geom_point(aes(
+           x = estimate, y = index,
+           colour = hypoSupportSig), alpha = 0.75,
+           pch = 19, size = 1.2)}+
+         {if(method %in% c("area"))geom_point(aes(
+           x = estimate, y = index, shape = se < 0.05, colour = hypoSupportSig), alpha = 0.75,
+           size = 1.2)}+
+         geom_segment(data = overallMed %>%
+                        filter(species == sp),
+                      aes(x = medEst, xend = medEst, y = n,
+                          yend = -Inf, colour = hypoSupportSig),
+                      alpha = 0.75, linewidth = 0.95, linetype = 1) +
+         geom_richtext(data = overallMed %>%
+                         filter(species == sp), aes(x = medEst, y = Inf,
+                                                    label = lab, fill = hypoSupportSig),
+                       hjust = 0.95, vjust = 1, fontface = 4, size = 3,
+                       label.colour = NA,
+                       text.colour = "#ffffff") +
+         scale_colour_manual(values = hypoSpeciesPalette_sig) +
+         scale_fill_manual(values = hypoSpeciesPalette_sig) +
+         facet_grid(rows = vars(speciesCol, hypothesis),
+                    cols = vars(classLandscape), space = "free", switch = "y") +
+         labs(y = "", x = "Estimate") +
+         # scale_x_continuous(limits = xlimits) +
+         coord_cartesian(xlim = xlimits) +
+         theme_bw() +
+         theme(
+           line = element_line(colour = "#403F41"),
+           text = element_text(colour = "#403F41"),
+           strip.background = element_blank(),
+           strip.text = element_text(face = 2, hjust = 1, vjust = 1),
+           strip.text.y.left = element_markdown(angle = 0, hjust = 1, vjust = 1,
+                                                margin = margin(0, -30, 20, -10),
+                                                face = 4),
+           strip.text.x.top = element_text(face = 4, hjust = 1, vjust = 1),
+           strip.placement = "outside",
+           axis.text.y.left = element_blank(),
+           axis.ticks.y.left = element_blank(),
+           axis.title.x = element_blank(),
+           axis.line.x = element_line(),
+           strip.clip = "off",
+           legend.position = "none",
+           panel.border = element_blank(),
+           panel.spacing = unit(18, "pt"),
+           panel.grid = element_blank())
+      )
+      
+      (splitSpecCurve_species <- outputPlotData %>%
+          filter(species == sp) %>%
+          ggplot() +
+          geom_vline(xintercept = 0, linewidth = 0.5, alpha = 0.9, colour = "#403F41",
+                     linetype = 1) +
+          geom_point(aes(x = estimate, y = value, colour = species, shape  = hypothesis),
+                     position = position_jitter(width = 0, height = 0.2), alpha = 0.65,
+                     size = 1) +
+          geom_path(data = medData %>%
+                      filter(species == sp), aes(x = modelMedEst, y = value,
+                                                 group = group, colour = species),
+                    alpha = 0.5, linewidth = 0.5) +
+          geom_point(data = medData %>%
+                       filter(species == sp), aes(x = modelMedEst, y = value), colour = "#FFFFFF", 
+                     alpha = 1, size = 1.5, position = position_nudge(y = 0), shape = 23) +
+          geom_point(data = medData %>%
+                       filter(species == sp), aes(x = modelMedEst, y = value, colour = species),
+                     alpha = 1, size = 1, position = position_nudge(y = 0), shape = 23) +
+          geom_hline(yintercept = seq(0.5,10.5,1), linewidth = 0.5, alpha = 0.25, colour = "#403F41",
+                     linetype = 2) +
+          facet_grid(rows = vars(variable),
+                     cols = vars(classLandscape), scales = "free_y", space = "free", switch = "y") +
+          # facet_grid(species + variable ~ classLandscape, scales = "free_y", space = "free", switch = "y") +
+          labs(y = "", x = "Estimate") +
+          # scale_x_continuous(limits = xlimits) +
+          coord_cartesian(xlim = xlimits) +
+          scale_colour_manual(values = paletteList$speciesFullPalette) +
+          scale_shape_manual(values = c(16, 17)) +
+          theme_bw() +
+          theme(
+            line = element_line(colour = "#403F41"),
+            text = element_text(colour = "#403F41"),
+            # strip.text.y.left = element_text(angle = 0, margin = margin(-8.5,12,0,0)),
+            # axis.text.y.left = element_text(margin = margin(0,-165,0,80)), # 2nd value needed to alligns with facet, 4th gives space left
+            axis.ticks.y.left = element_blank(),
+            axis.line.x = element_line(),
+            strip.background = element_blank(),
+            strip.text = element_text(face = 2, hjust = 0, vjust = 1),
+            strip.text.y.left = element_markdown(angle = 0, hjust = 0, vjust = 1,
+                                                 margin = margin(0, 5, 20, 0),
+                                                 face = 4),
+            strip.text.x.top = element_blank(),
+            strip.placement = "outside",
+            legend.position = "none",
+            panel.border = element_blank(),
+            panel.spacing = unit(18, "pt"),
+            panel.grid = element_blank())
+      )
+      
+      (specComplete_species <- wrap_plots(overallSpecCurve_species, splitSpecCurve_species) +
+          plot_layout(heights = c(1, 1), guides = "collect"))
+      
+      ggsave(filename = here("figures",
+                             paste0("specCurve_", sp, "_", method, ".png")),
+             plot = specComplete_species,
+             width = 360, height = 280, units = "mm", dpi = 300)
+      ggsave(filename = here("figures",
+                             paste0("specCurve_", sp, "_", method, ".pdf")),
+             plot = specComplete_species,
+             width = 360, height = 280, units = "mm")
+      
+    } # sp end
+    
   } else {
+    # WRSF --------------------------------------------------------------------
     
     xlimits <- c(NA, 3.5)
     
@@ -446,6 +623,11 @@ generate_spec_curves <- function(outputResults, method){
                            paste0("specCurve_", method, ".png")),
            plot = specComplete_wrsf,
            width = 210, height = 120, units = "mm", dpi = 300)
+    
+    ggsave(filename = here("figures",
+                           paste0("specCurve_", method, ".pdf")),
+           plot = specComplete_wrsf,
+           width = 210, height = 120, units = "mm")
     
     return(specComplete_wrsf)
   }

@@ -159,6 +159,8 @@ summarise_tracking_data <- function(movementDataAll){
   
   ggsave(plot = timeLinePlot, file = here("figures", "timeLinePlot.png"),
          dpi = 300, width = 220, height = 160, units = "mm")
+  ggsave(plot = timeLinePlot, file = here("figures", "timeLinePlot.pdf"),
+         width = 220, height = 160, units = "mm")
   
   timeLabels <- timeStepSummaries %>% 
     left_join(paletteList$speciesColourDF) %>% 
@@ -236,6 +238,8 @@ summarise_tracking_data <- function(movementDataAll){
   
   ggsave(plot = timeLagPlot, file = here("figures", "timeLagPlot.png"),
          dpi = 300, width = 180, height = 150, units = "mm")
+  ggsave(plot = timeLagPlot, file = here("figures", "timeLagPlot.pdf"),
+         width = 180, height = 150, units = "mm")
   
   return(list("tables" = list("summaryTable" = summaryTable,
                               "dataDuraMovesSummaries" = dataDuraMovesSummaries,

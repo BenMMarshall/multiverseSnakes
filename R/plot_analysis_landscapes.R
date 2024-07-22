@@ -152,6 +152,8 @@ plot_analysis_landscapes <- function(movementDataAll){
     
     ggsave(plot = combinedPlot, filename = here("figures", paste0("landscape_plot_", spHy, ".png")),
            dpi = 300, height = 180, width = 230, units = "mm")
+    ggsave(plot = combinedPlot, filename = here("figures", paste0("landscape_plot_", spHy, ".pdf")),
+           height = 180, width = 230, units = "mm")
     
   }
 }
