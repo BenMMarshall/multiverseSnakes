@@ -19,6 +19,7 @@ generate_spec_curves <- function(outputResults, method){
   # 
   # library(here)
   # library(dplyr)
+  # library(tidyr)
   # library(ggplot2)
   # library(ggtext)
   # library(stringr)
@@ -144,7 +145,7 @@ generate_spec_curves <- function(outputResults, method){
   names(hypoSpeciesPalette) <- paste0("Support ", names(hypoSpeciesPalette))
   hypoSpeciesPalette <- c(hypoSpeciesPalette, "No support" = "#999999")
   hypoSpeciesPalette_sig <- paletteList$speciesPalette
-  names(hypoSpeciesPalette_sig) <- paste0("Sigificant Support ", names(hypoSpeciesPalette_sig))
+  names(hypoSpeciesPalette_sig) <- paste0("Significant Support ", names(hypoSpeciesPalette_sig))
   hypoSpeciesPalette_sig <- c(hypoSpeciesPalette_sig, "No support" = "#999999")
   
   # if(method %in% c("twoStep", "area")){
@@ -247,20 +248,20 @@ generate_spec_curves <- function(outputResults, method){
     if(method %in% c("pois", "ssf", "rsf", "twoStep")){
       overallSpecData <- overallSpecData %>% 
         mutate(hypoSupportSig = case_when(
-          (estimate - se) > 0 & species == "Ophiophagus hannah" ~ "Sigificant Support OPHA",
-          (estimate - se) > 0 & species == "Python bivittatus" ~ "Sigificant Support PYBI",
-          (estimate - se) > 0 & species == "Bungarus candidus" ~ "Sigificant Support BUCA",
-          (estimate - se) > 0 & species == "Bungarus fasciatus" ~ "Sigificant Support BUFA",
+          (estimate - se) > 0 & species == "Ophiophagus hannah" ~ "Significant Support OPHA",
+          (estimate - se) > 0 & species == "Python bivittatus" ~ "Significant Support PYBI",
+          (estimate - se) > 0 & species == "Bungarus candidus" ~ "Significant Support BUCA",
+          (estimate - se) > 0 & species == "Bungarus fasciatus" ~ "Significant Support BUFA",
           TRUE ~ "No support"
         ))
     } else if(method %in% c("area")){
       # se is actually a p value in area's case
       overallSpecData <- overallSpecData %>% 
         mutate(hypoSupportSig = case_when(
-          se < 0.05 & species == "Ophiophagus hannah" ~ "Sigificant Support OPHA",
-          se < 0.05 & species == "Python bivittatus" ~ "Sigificant Support PYBI",
-          se < 0.05 & species == "Bungarus candidus" ~ "Sigificant Support BUCA",
-          se < 0.05 & species == "Bungarus fasciatus" ~ "Sigificant Support BUFA",
+          se < 0.05 & species == "Ophiophagus hannah" ~ "Significant Support OPHA",
+          se < 0.05 & species == "Python bivittatus" ~ "Significant Support PYBI",
+          se < 0.05 & species == "Bungarus candidus" ~ "Significant Support BUCA",
+          se < 0.05 & species == "Bungarus fasciatus" ~ "Significant Support BUFA",
           TRUE ~ "No support"
         ))
     }
@@ -282,10 +283,10 @@ generate_spec_curves <- function(outputResults, method){
         TRUE ~ "No support"
       )) %>% 
       mutate(hypoSupportSig = case_when(
-        hypoSupport == "Support OPHA" ~ "Sigificant Support OPHA",
-        hypoSupport == "Support PYBI" ~ "Sigificant Support PYBI",
-        hypoSupport == "Support BUCA" ~ "Sigificant Support BUCA",
-        hypoSupport == "Support BUFA" ~ "Sigificant Support BUFA",
+        hypoSupport == "Support OPHA" ~ "Significant Support OPHA",
+        hypoSupport == "Support PYBI" ~ "Significant Support PYBI",
+        hypoSupport == "Support BUCA" ~ "Significant Support BUCA",
+        hypoSupport == "Support BUFA" ~ "Significant Support BUFA",
         TRUE ~ "No support"
       ))
     
@@ -405,79 +406,123 @@ generate_spec_curves <- function(outputResults, method){
       
       countDataLabel <- overallSpecData %>% 
         filter(species == sp) %>% 
-        group_by(hypoSupportSig, classLandscape) %>% 
+        group_by(hypoSupportSig, hypothesis, classLandscape) %>% 
         count() %>% 
-        ungroup() %>% 
-        complete(hypoSupportSig, classLandscape, fill = list(n = 0)) %>% 
-        group_by(classLandscape) %>% 
-        summarise(label = paste0(sort(n), collapse = " | "))
+        ungroup() 
+      
+      rowsNeeded <- c(paste0("Significant Support ",
+                             str_to_upper(paste0(substr(unlist(str_split(sp, "\\s")), 1, 2),
+                                                 collapse = ""))),
+                      "No support")
+      if(length(unique(countDataLabel$hypoSupportSig)) == 1){
+        
+        countDataLabel <- rbind(countDataLabel,
+              data.frame(
+                hypoSupportSig = rowsNeeded[!rowsNeeded %in% unique(countDataLabel$hypoSupportSig)],
+                hypothesis = countDataLabel$hypothesis[1],
+                classLandscape = countDataLabel$classLandscape[1],
+                n = 0
+              ))
+        
+      }
+      
+      simpleBars <- countDataLabel %>% 
+        complete(hypoSupportSig, hypothesis, classLandscape, fill = list(n = 0)) %>% 
+        ggplot() +
+        geom_col(aes(y = hypothesis, x = n, fill = hypoSupportSig)) +
+        scale_fill_manual(values = hypoSpeciesPalette_sig) +
+        facet_grid(rows = vars(classLandscape)) +
+        theme_void() +
+        theme(axis.text.y = element_text())
+      
+      ggsave(filename = here("figures",
+                             paste0("simpleBars_", sp, "_", method, ".pdf")),
+             plot = simpleBars,
+             width = 240, height = 120, units = "mm")
+      
+      countDataLabel <- countDataLabel %>% 
+        complete(hypoSupportSig, hypothesis, classLandscape, fill = list(n = 0)) %>% 
+        group_by(classLandscape, hypothesis) %>% 
+        mutate(total = sum(n)) %>% 
+        filter(!hypoSupportSig == "No support") %>% 
+        mutate(label = paste0(n, " | ", total))
+      
       labCol <- hypoSpeciesPalette_sig[str_detect(names(hypoSpeciesPalette_sig),
-                                        str_to_upper(paste0(substr(unlist(str_split(sp, "\\s")), 1, 2),
-                                                            collapse = "")))]
+                                                  str_to_upper(paste0(substr(unlist(str_split(sp, "\\s")), 1, 2),
+                                                                      collapse = "")))]
+      
+      shapesVal <- c(17, 16)
+      if(method == "area"){
+        names(shapesVal) <- c("TRUE", "FALSE")
+      } else {
+        names(shapesVal) <- c(names(labCol), "FALSE")
+      }
+      
       
       (overallSpecCurve_species <- overallSpecData %>%
-         filter(species == sp) %>% 
-         ggplot() +
-         geom_vline(xintercept = 0, linewidth = 0.65, alpha = 0.9, colour = "#403F41",
-                    linetype = 2) +
-         geom_hline(aes(yintercept = 0.0, colour = hypoSupport), linewidth = 0.65,
-                    alpha = 0.9, colour = "#403F41",
-                    linetype = 2) +
-         {if(method %in% c("pois", "ssf", "rsf", "twoStep"))geom_errorbarh(aes(
-           xmin = estimate-se, xmax = estimate+se,
-           y = index, colour = hypoSupportSig), alpha = 0.5,
-           linewidth = 0.95, height = 0)}+
-         {if(method %in% c("pois", "ssf", "rsf", "twoStep"))geom_point(aes(
-           x = estimate, y = index,
-           colour = hypoSupportSig), alpha = 0.75,
-           pch = 19, size = 1.2)}+
-         {if(method %in% c("area"))geom_point(aes(
-           x = estimate, y = index, shape = se < 0.05, colour = hypoSupportSig), alpha = 0.75,
-           size = 1.2)}+
-         geom_segment(data = overallMed %>%
-                        filter(species == sp),
-                      aes(x = medEst, xend = medEst, y = n,
-                          yend = -Inf, colour = hypoSupportSig),
-                      alpha = 0.75, linewidth = 0.65, linetype = 1) +
-         geom_richtext(data = overallMed %>%
-                         filter(species == sp), aes(x = medEst, y = Inf,
-                                                    label = lab, fill = hypoSupportSig),
-                       hjust = 0.95, vjust = 1, fontface = 4, size = 3,
-                       label.colour = NA,
-                       text.colour = "#ffffff") +
-         geom_richtext(data = countDataLabel,
-                       aes(x = Inf, y = 0,
-                           label = label), fill = labCol,
-                       hjust = 0.95, vjust = 0, fontface = 2, size = 3,
-                       label.colour = NA,
-                       text.colour = "#ffffff") +
-         scale_colour_manual(values = hypoSpeciesPalette_sig) +
-         scale_fill_manual(values = hypoSpeciesPalette_sig) +
-         facet_grid(rows = vars(speciesCol, hypothesis),
-                    cols = vars(classLandscape), space = "free", switch = "y") +
-         labs(y = "", x = "Estimate") +
-         # scale_x_continuous(limits = xlimits) +
-         coord_cartesian(xlim = xlimits) +
-         theme_bw() +
-         theme(
-           line = element_line(colour = "#403F41"),
-           text = element_text(colour = "#403F41"),
-           strip.background = element_blank(),
-           strip.text = element_text(face = 2, hjust = 1, vjust = 1),
-           strip.text.y.left = element_markdown(angle = 0, hjust = 1, vjust = 1,
-                                                margin = margin(0, -30, 20, -10),
-                                                face = 4),
-           strip.text.x.top = element_text(face = 4, hjust = 1, vjust = 1),
-           strip.placement = "outside",
-           axis.text.y.left = element_blank(),
-           axis.ticks.y.left = element_blank(),
-           axis.title.x = element_blank(),
-           axis.line.x = element_line(),
-           strip.clip = "off",
-           legend.position = "none",
-           panel.border = element_blank(),
-           panel.spacing = unit(18, "pt"),
-           panel.grid = element_blank())
+          filter(species == sp) %>% 
+          ggplot() +
+          geom_vline(xintercept = 0, linewidth = 0.65, alpha = 0.9, colour = "#403F41",
+                     linetype = 2) +
+          geom_hline(aes(yintercept = 0.0, colour = hypoSupport), linewidth = 0.65,
+                     alpha = 0.9, colour = "#403F41",
+                     linetype = 2) +
+          {if(method %in% c("pois", "ssf", "rsf", "twoStep"))geom_errorbarh(aes(
+            xmin = estimate-se, xmax = estimate+se,
+            y = index, colour = hypoSupportSig), alpha = 0.5,
+            linewidth = 0.95, height = 0)}+
+          {if(method %in% c("pois", "ssf", "rsf", "twoStep"))geom_point(aes(
+            x = estimate, y = index,
+            colour = hypoSupportSig), alpha = 0.75,
+            pch = 19, size = 1.2)}+
+          {if(method %in% c("area"))geom_point(aes(
+            x = estimate, y = index, shape = se < 0.05, colour = hypoSupportSig), alpha = 0.75,
+            size = 1.2)}+
+          geom_segment(data = overallMed %>%
+                         filter(species == sp),
+                       aes(x = medEst, xend = medEst, y = n,
+                           yend = -Inf, colour = hypoSupportSig),
+                       alpha = 0.75, linewidth = 0.65, linetype = 1) +
+          geom_richtext(data = overallMed %>%
+                          filter(species == sp), aes(x = medEst, y = Inf,
+                                                     label = lab, fill = hypoSupportSig),
+                        hjust = 0.95, vjust = 1, fontface = 4, size = 3,
+                        label.colour = NA,
+                        text.colour = "#ffffff") +
+          geom_richtext(data = countDataLabel,
+                        aes(x = Inf, y = 0,
+                            label = label), fill = labCol,
+                        hjust = 0.95, vjust = 0, fontface = 2, size = 3,
+                        label.colour = NA,
+                        text.colour = "#ffffff") +
+          scale_colour_manual(values = hypoSpeciesPalette_sig) +
+          scale_fill_manual(values = hypoSpeciesPalette_sig) +
+          scale_shape_manual(values = shapesVal) +
+          facet_grid(rows = vars(speciesCol, hypothesis),
+                     cols = vars(classLandscape), space = "free", switch = "y") +
+          labs(y = "", x = "Estimate") +
+          # scale_x_continuous(limits = xlimits) +
+          coord_cartesian(xlim = xlimits) +
+          theme_bw() +
+          theme(
+            line = element_line(colour = "#403F41"),
+            text = element_text(colour = "#403F41"),
+            strip.background = element_blank(),
+            strip.text = element_text(face = 2, hjust = 1, vjust = 1),
+            strip.text.y.left = element_markdown(angle = 0, hjust = 1, vjust = 1,
+                                                 margin = margin(0, -30, 20, -10),
+                                                 face = 4),
+            strip.text.x.top = element_text(face = 4, hjust = 1, vjust = 1),
+            strip.placement = "outside",
+            axis.text.y.left = element_blank(),
+            axis.ticks.y.left = element_blank(),
+            axis.title.x = element_blank(),
+            axis.line.x = element_line(),
+            strip.clip = "off",
+            legend.position = "none",
+            panel.border = element_blank(),
+            panel.spacing = unit(18, "pt"),
+            panel.grid = element_blank())
       )
       
       (splitSpecCurve_species <- outputPlotData %>%
