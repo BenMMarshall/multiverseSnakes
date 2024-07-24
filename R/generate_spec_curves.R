@@ -291,8 +291,8 @@ generate_spec_curves <- function(outputResults, method){
     
     (overallSpecCurve <- overallSpecData %>%
         ggplot() +
-        geom_vline(xintercept = 0, linewidth = 0.25, alpha = 0.9, colour = "#403F41",
-                   linetype = 1) +
+        geom_vline(xintercept = 0, linewidth = 0.65, alpha = 0.9, colour = "#403F41",
+                   linetype = 2) +
         geom_hline(aes(yintercept = 0.0, colour = hypoSupport),
                    linetype = 2) +
         geom_point(aes(x = estimate, y = index, colour = hypoSupport), alpha = 0.75,
@@ -300,7 +300,7 @@ generate_spec_curves <- function(outputResults, method){
         geom_segment(data = overallMed,
                      aes(x = medEst, xend = medEst, y = n,
                          yend = -Inf, colour = hypoSupport),
-                     alpha = 0.75, linewidth = 0.95, linetype = 1) +
+                     alpha = 0.75, linewidth = 0.85, linetype = 1) +
         geom_richtext(data = overallMed, aes(x = medEst, y = Inf,
                                              label = lab, fill = hypoSupport),
                       hjust = 0.95, vjust = 1, fontface = 4, size = 3,
@@ -336,8 +336,8 @@ generate_spec_curves <- function(outputResults, method){
     
     (splitSpecCurve <- outputPlotData %>%
         ggplot() +
-        geom_vline(xintercept = 0, linewidth = 0.5, alpha = 0.9, colour = "#403F41",
-                   linetype = 1) +
+        geom_vline(xintercept = 0, linewidth = 0.65, alpha = 0.9, colour = "#403F41",
+                   linetype = 2) +
         geom_point(aes(x = estimate, y = value, colour = species, shape  = hypothesis),
                    position = position_jitter(width = 0, height = 0.2), alpha = 0.65,
                    size = 1) +
@@ -403,12 +403,25 @@ generate_spec_curves <- function(outputResults, method){
         xlimits[1] <- 0
       }
       
+      countDataLabel <- overallSpecData %>% 
+        filter(species == sp) %>% 
+        group_by(hypoSupportSig, classLandscape) %>% 
+        count() %>% 
+        ungroup() %>% 
+        complete(hypoSupportSig, classLandscape, fill = list(n = 0)) %>% 
+        group_by(classLandscape) %>% 
+        summarise(label = paste0(sort(n), collapse = " | "))
+      labCol <- hypoSpeciesPalette_sig[str_detect(names(hypoSpeciesPalette_sig),
+                                        str_to_upper(paste0(substr(unlist(str_split(sp, "\\s")), 1, 2),
+                                                            collapse = "")))]
+      
       (overallSpecCurve_species <- overallSpecData %>%
          filter(species == sp) %>% 
          ggplot() +
-         geom_vline(xintercept = 0, linewidth = 0.25, alpha = 0.9, colour = "#403F41",
-                    linetype = 1) +
-         geom_hline(aes(yintercept = 0.0, colour = hypoSupport),
+         geom_vline(xintercept = 0, linewidth = 0.65, alpha = 0.9, colour = "#403F41",
+                    linetype = 2) +
+         geom_hline(aes(yintercept = 0.0, colour = hypoSupport), linewidth = 0.65,
+                    alpha = 0.9, colour = "#403F41",
                     linetype = 2) +
          {if(method %in% c("pois", "ssf", "rsf", "twoStep"))geom_errorbarh(aes(
            xmin = estimate-se, xmax = estimate+se,
@@ -425,11 +438,17 @@ generate_spec_curves <- function(outputResults, method){
                         filter(species == sp),
                       aes(x = medEst, xend = medEst, y = n,
                           yend = -Inf, colour = hypoSupportSig),
-                      alpha = 0.75, linewidth = 0.95, linetype = 1) +
+                      alpha = 0.75, linewidth = 0.65, linetype = 1) +
          geom_richtext(data = overallMed %>%
                          filter(species == sp), aes(x = medEst, y = Inf,
                                                     label = lab, fill = hypoSupportSig),
                        hjust = 0.95, vjust = 1, fontface = 4, size = 3,
+                       label.colour = NA,
+                       text.colour = "#ffffff") +
+         geom_richtext(data = countDataLabel,
+                       aes(x = Inf, y = 0,
+                           label = label), fill = labCol,
+                       hjust = 0.95, vjust = 0, fontface = 2, size = 3,
                        label.colour = NA,
                        text.colour = "#ffffff") +
          scale_colour_manual(values = hypoSpeciesPalette_sig) +
@@ -464,8 +483,8 @@ generate_spec_curves <- function(outputResults, method){
       (splitSpecCurve_species <- outputPlotData %>%
           filter(species == sp) %>%
           ggplot() +
-          geom_vline(xintercept = 0, linewidth = 0.5, alpha = 0.9, colour = "#403F41",
-                     linetype = 1) +
+          geom_vline(xintercept = 0, linewidth = 0.65, alpha = 0.9, colour = "#403F41",
+                     linetype = 2) +
           geom_point(aes(x = estimate, y = value, colour = species, shape  = hypothesis),
                      position = position_jitter(width = 0, height = 0.2), alpha = 0.65,
                      size = 1) +

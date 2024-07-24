@@ -14,6 +14,7 @@ tar_option_set(
                "here",
                "readr",
                "dplyr",
+               "tidyr",
                "stringr",
                "sf",
                "terra",
