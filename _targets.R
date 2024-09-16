@@ -23,6 +23,7 @@ tar_option_set(
                "move",
                "ggplot2",
                "ggtext",
+               "ggnewscale",
                "ggridges",
                "adehabitatHS",
                "adehabitatHR",
