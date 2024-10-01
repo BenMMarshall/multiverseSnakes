@@ -373,6 +373,9 @@ knitr::include_graphics(here::here("figures", "specCurve_wrsf.png"))
 
 # Discussion
 
+<!-- Muff et al. And third, we reiterated that the logistic regression likelihood to estimate RSFs should always be weighted with a large weight W on the available points, in order to ensure convergence to the IPP likelihood which is guaranteed for urn:x-wiley:00218790:media:jane13087:jane13087-math-0055 (Fithian & Hastie, 2013). -->
+<!-- SHOULD RERUN RSF WITH WEIGHTING ON AVAILABLE, worth it, we didnt see convergence issues I don't think ??? -->
+
 Our re-testing of snake habitat selection studies using a multiverse of over XXX analysis endpoints, suggests that the original conclusions remain broadly supported.
 More specifically it appears that there is a reasonably low chance that the analysis choices made in the original publications led to strange or outlying results.
 While the multiverse revealed broad support for the direction of the selection, the strength of the effect was more sensitive and we did identify a few analysis choices capable of contradicting the originally published results.

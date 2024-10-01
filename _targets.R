@@ -383,7 +383,8 @@ wrsfCompiled <- list(
   ),
   tar_target(
     wrsfEstimateOutputs,
-    compile_wrsf_summaries(wrsfResults),
+    write.csv(wrsfResults,
+              here::here("data", "wrsfEstimateOutputs_uncom.csv"), row.names = FALSE),
     format = "file"
   ),
   tar_target(
