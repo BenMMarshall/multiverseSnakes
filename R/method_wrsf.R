@@ -60,11 +60,11 @@ method_wrsf <- function(allIndividualData){
     ref <- "auto"
   }
   
-  # RSF.1 <- rsf.fit(teleObj$BUFA001, UD = akdeList$BUFA001, R = list("H1" = landscapeRaster),
-  #                  debias = TRUE, 
+  # RSF.1 <- rsf.fit(teleObj$BUCA001, UD = akdeList$BUCA001, R = list("H1" = landscapeRaster),
+  #                  debias = TRUE,
   #                  reference = ref)
-  # RSF.2 <- rsf.fit(teleObj$BUFA003, UD = akdeList$BUFA003, R = list("H1" = landscapeRaster),
-  #                  debias = TRUE, 
+  # RSF.2 <- rsf.fit(teleObj$BUCA007, UD = akdeList$BUCA007, R = list("H1" = landscapeRaster),
+  #                  debias = TRUE,
   #                  reference = ref)
   # RSF.3 <- rsf.fit(teleObj$BUFA004, UD = akdeList$BUFA004, R = list("H1" = landscapeRaster),
   #                  debias = TRUE, 
