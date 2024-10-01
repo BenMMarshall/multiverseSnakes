@@ -116,19 +116,20 @@ In all the chosen case studies snakes were obtained for study using trapping arr
 The local notifications often arose from snakes entering human settlements, and a desire for the snake to be removed.
 <!-- maybe summary table here of capture methods -->
 
-In all cases we implanted snakes with Holohil radio transmitters.
+In all cases we implanted snakes with Holohil radio transmitters (either AI-2T, SI-2T, SB-2, or BD-2, Holohil Inc., Ontario, Canada)).
 <!-- grab citation from older papers -->
-The implant procedure was conducted by trained team members, or later by independent trained veterinarians, following <CITE HERE>.
-We anaesthetised snakes with ISO, and implanted transmitters in the coelomic cavity.
+The implant procedure was conducted by trained team members, or later by independent trained veterinarians, following @Reinert1982.
+We anaesthetised snakes with isoflurane, and implanted transmitters in the coelomic cavity.
 The size of the transmitter varied between species, and was calibrated to body size.
-At no time did we implant transmitters that exceeding 5% of the body mass of the animal, in the vast majority of cases the transmitter weighted considerably less than 5%.
+At no time did we implant transmitters that exceeding 5% of the body mass of the animal, in the vast majority of cases the transmitter weighted considerably less than 1% (e.g., *Ophoiphagus hannah* 0.55 ±SD 0.47%; *Bungarus fascitatus* 0.01 ±SD 0.09%; *Python bivitattus* 0.26%).
 Inspections of longer term tracked individuals indicated that transmitter presence was do detrimental to their health [@marshall_no_2020].
-Greater details on the implantation procedure can be found in the original publications.
+Greater details on the implantation procedure, and supplemental snake processing, can be found in the original publications.
 
 Once implanted, we released snakes back into the wild as near as feasibly possible to their capture location; human-snake conflict was the main reason that exact return to capture location was not achieved.
-We then routinely relocated the snakes using radio receivers, recording their locations with handheld GPS devices.
+Following release, we routinely relocated the snakes using radio receivers, triangulating their locations then recording coordinates with handheld GPS devices.
 The four species had varying tracking regimes, that did not necessarily remain consistent across the entire study period.
 However, broadly speaking the tracking regime for King Cobras was three to four locations a day, whereas the other species we located once per day.
+The main exception is for the first three tracked *Ophiophagus hannah*, who we tracked more intensely.
 
 ## Study Species and Hypotheses
 
@@ -212,6 +213,12 @@ We suspect that these escaped detection during the initial publication [@Marshal
 
 ```{r readInOptions, echo=FALSE}
 optionsComplete <- readRDS(here::here("data", "optionsCompleteList.rds"))
+# might be worth pulling this from the summaries of the significance, that way we can ID rates of failure easier?
+# prod(unlist(lapply(optionsComplete$pois, length)))
+# prod(unlist(lapply(optionsComplete$ssf, length)))
+# prod(unlist(lapply(optionsComplete$area, length)))
+# prod(unlist(lapply(optionsComplete$areaMethods, length)))
+
 ```
 To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
 A multiverse is tree of branching paths, where decisions made during analysis spawn multiple branches, each with alternative answers.
@@ -372,23 +379,23 @@ While the multiverse revealed broad support for the direction of the selection, 
 
 Of the four species we examined, *Python bivitattus*'s preference for water bodies appears the most marginal, but the preference was clear in all bar six RSF analyses and the wRSF analysis.
 All these analysis approaches have different assumptions, and treat the data in different ways.
-Therefore, the apparent disagreement between RSF and other methods may tell us something about the preference that PYBI are demonstrating.
-PYBI are ambush hunters; therefore, their movements may be less informative compared to their overall location in the landscape.
-Particularly if they remain at the same location for extended periods, for example during nesting <CITE SAM's NEW PAPER>.
+Therefore, the apparent disagreement between RSF and other methods may tell us something about the preference that *Python bivitattus* are demonstrating.
+*Python bivitattus* are ambush hunters; therefore, their movements may be less informative compared to their overall location in the landscape.
+Particularly if they remain at the same location for extended periods, for example during nesting [@smith_risk_2024].
 RSFs' de-emphasis of movement compared to step-based methods, may explain the differences in support.
 The support from the more modern wRSF may also be ascribable to a broader selection for water bodies.
 
 We only saw two decisions that could clearly alter conclusions, and even those did not appear universal.
-BUFA selection for field margins was supported by the vast majority of analyses, but the weakest support was when using Compositional analysis.
+*Bungarus fasciatus* selection for field margins was supported by the vast majority of analyses, but the weakest support was when using Compositional analysis.
 While the point estimates still suggested selection, a decision to use randomisation rather than parametric tests for significance would render all analysis non-significant.
-Other species did not see the same impact; randomisation did lead to reduced strength estimates in BUCA, but all remained significant.
+Other species did not see the same impact; randomisation did lead to reduced strength estimates in *Bungarus candidus*, but all remained significant.
 We suspect the weaker support seen in Compositional Analysis may be the result of location error.
 Compositional analysis could only be used with the binary habitat classification.
 While every effort was made during tracking to ensure a correct GPS location was retrieved, error is unavoidable especially in denser forested areas or near buildings.
 Even small errors may lead to mismatches between the true location (and habitat) of an animal and the land-use data we had access to.
 This mismatch may be more pronounced when habitats are rarer or when animals tend to remain near its edges.
-BUFA's focus on very thin field margins may have made it particularly susceptible, and similarly PYBI's selection for the banks of water bodies.
-We suspect that location error resulting in binary habitat mis-classification may explain the large confidence intervals of the Poisson models and the limited support in PYBI SSF analyses, as this uncertainty and lack of support is not visible in the continuous habitat models.
+*Bungarus fasciatus*'s focus on very thin field margins may have made it particularly susceptible, and similarly *Python bivitattus*'s selection for the banks of water bodies.
+We suspect that location error resulting in binary habitat mis-classification may explain the large confidence intervals of the Poisson models and the limited support in *Python bivitattus* SSF analyses, as this uncertainty and lack of support is not visible in the continuous habitat models.
 
 
 
