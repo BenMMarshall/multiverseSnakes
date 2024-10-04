@@ -351,7 +351,7 @@ generate_spec_curves <- function(outputResults, method){
     
     countDataLabelAll <- countDataLabel %>% 
       full_join(missingCounts, by = "uniqueKey") %>% 
-      select(species = species.y, hypoSupportSig = hypoSupportSig.y, hypothesis = hypothesis.y,
+      dplyr::select(species = species.y, hypoSupportSig = hypoSupportSig.y, hypothesis = hypothesis.y,
              classLandscape = classLandscape.y, n = n.x) %>% 
       mutate(n = ifelse(is.na(n), 0, n)) %>% 
       group_by(species, hypothesis, classLandscape) %>% 
@@ -504,6 +504,7 @@ generate_spec_curves <- function(outputResults, method){
     # Single species curves ---------------------------------------------------
     
     for(sp in unique(overallSpecData$species)){
+      
       # sp <- unique(overallSpecData$species)[1]
       xlimits <- overallSpecData %>%
         filter(species == sp) %>% 

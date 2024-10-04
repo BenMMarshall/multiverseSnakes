@@ -88,7 +88,11 @@ optionsData <- optionsData %>%
     hypothesis = c("H1", "H2")
   )) %>% 
   mutate(hypothesis = ifelse(is.na(hypothesis), "H1", hypothesis)) %>% 
-  select(species, hypothesis, landscape)
+  dplyr::select(species, hypothesis, landscape)
+
+optionsDataBrms <- optionsData %>% 
+  rowwise() %>% 
+  mutate(fullOption = paste0(species, "_", hypothesis, "_", landscape))
 
 optionsList_area <- list(
   Method_method = c("areaBased"),
@@ -222,20 +226,24 @@ poisCompiled <- list(
               here::here("data", "poisEstimateOutputs_uncom.csv"), row.names = FALSE),
     format = "file"
   ),
+  tar_map(
+    values = optionsDataBrms,
+    tar_target(
+      poisBrms,
+      run_brms(
+        resultsData = poisResults,
+        modelName = fullOption,
+        iter = 600,
+        warmup = 200,
+        thin = 2
+      )
+    )
+  ),
   tar_target(
     poisSpecCurve,
     generate_spec_curves(
       outputResults = poisResults,
       method = "pois"
-    )
-  ),
-  tar_target(
-    poisBrms,
-    run_brms(
-      resultsData = poisResults,
-      iter = 600,
-      warmup = 200,
-      thin = 2
     )
   )
 )
@@ -255,20 +263,24 @@ twoStepCompiled <- list(
               here::here("data", "twoStepEstimateOutputs_uncom.csv"), row.names = FALSE),
     format = "file"
   ),
+  tar_map(
+    values = optionsDataBrms,
+    tar_target(
+      twoStepBrms,
+      run_brms(
+        resultsData = twoStepResults,
+        modelName = fullOption,
+        iter = 600,
+        warmup = 200,
+        thin = 2
+      )
+    )
+  ),
   tar_target(
     twoStepSpecCurve,
     generate_spec_curves(
       outputResults = twoStepResults,
       method = "twoStep"
-    )
-  ),
-  tar_target(
-    twoStepBrms,
-    run_brms(
-      resultsData = twoStepResults,
-      iter = 600,
-      warmup = 200,
-      thin = 2
     )
   )
 )
@@ -288,20 +300,25 @@ areaBasedCompiled <- list(
               here::here("data", "areaBasedEstimateOutputs_uncom.csv"), row.names = FALSE),
     format = "file"
   ),
+  tar_map(
+    values = optionsDataBrms %>% 
+      filter(landscape == "binary"),
+    tar_target(
+      areaBasedBrms,
+      run_brms(
+        resultsData = areaBasedResults,
+        modelName = fullOption,
+        iter = 600,
+        warmup = 200,
+        thin = 2
+      )
+    )
+  ),
   tar_target(
     areaBasedSpecCurve,
     generate_spec_curves(
       outputResults = areaBasedResults,
       method = "area"
-    )
-  ),
-  tar_target(
-    areaBasedBrms,
-    run_brms(
-      resultsData = areaBasedResults,
-      iter = 600,
-      warmup = 200,
-      thin = 2
     )
   )
 )
@@ -321,20 +338,24 @@ ssfCompiled <- list(
               here::here("data", "ssfEstimateOutputs_uncom.csv"), row.names = FALSE),
     format = "file"
   ),
+  tar_map(
+    values = optionsDataBrms,
+    tar_target(
+      ssfBrms,
+      run_brms(
+        resultsData = ssfResults,
+        modelName = fullOption,
+        iter = 600,
+        warmup = 200,
+        thin = 2
+      )
+    )
+  ),
   tar_target(
     ssfSpecCurve,
     generate_spec_curves(
       outputResults = ssfResults,
       method = "ssf"
-    )
-  ),
-  tar_target(
-    ssfBrms,
-    run_brms(
-      resultsData = ssfResults,
-      iter = 600,
-      warmup = 200,
-      thin = 2
     )
   )
 )
@@ -354,20 +375,24 @@ rsfCompiled <- list(
               here::here("data", "rsfEstimateOutputs_uncom.csv"), row.names = FALSE),
     format = "file"
   ),
+  tar_map(
+    values = optionsDataBrms,
+    tar_target(
+      rsfBrms,
+      run_brms(
+        resultsData = rsfResults,
+        modelName = fullOption,
+        iter = 600,
+        warmup = 200,
+        thin = 2
+      )
+    )
+  ),
   tar_target(
     rsfSpecCurve,
     generate_spec_curves(
       outputResults = rsfResults,
       method = "rsf"
-    )
-  ),
-  tar_target(
-    rsfBrms,
-    run_brms(
-      resultsData = rsfResults,
-      iter = 800,
-      warmup = 200,
-      thin = 2
     )
   )
 )
@@ -383,9 +408,7 @@ wrsfCompiled <- list(
   ),
   tar_target(
     wrsfEstimateOutputs,
-    write.csv(wrsfResults,
-              here::here("data", "wrsfEstimateOutputs_uncom.csv"), row.names = FALSE),
-    format = "file"
+    compile_wrsf_summaries(wrsfResults)
   ),
   tar_target(
     wrsfSpecCurve,
@@ -403,11 +426,11 @@ brmModelOutputs <- list(
     modelsBrms,
     # manually pull out the brms model outputs
     list(
-      ssfCompiled[[4]],
-      areaBasedCompiled[[4]],
-      poisCompiled[[4]],
-      rsfCompiled[[4]],
-      twoStepCompiled[[4]]),
+      ssfCompiled[[3]],
+      areaBasedCompiled[[3]],
+      poisCompiled[[3]],
+      rsfCompiled[[3]],
+      twoStepCompiled[[3]]),
     command = list(!!!.x),
     priority = 0.5
   ),
@@ -420,12 +443,12 @@ brmModelOutputs <- list(
     modelExtracts,
     extract_model_values(modelsList = modelsBrms),
     priority = 0.4
-  ),
-  tar_target(
-    allEffectPlots,
-    generate_allEffect_plots(modelExtracts = modelExtracts),
-    priority = 0.4
   )
+  # tar_target(
+  #   allEffectPlots,
+  #   generate_allEffect_plots(modelExtracts = modelExtracts),
+  #   priority = 0.4
+  # )
 )
 
 # Manuscript Prep ---------------------------------------------------------
@@ -462,7 +485,9 @@ manuscriptRendering <- list(
                rsfSpecCurve,
                wrsfSpecCurve,
                trackingPlotsAndTables,
-               landscapePlots
+               landscapePlots,
+               diagnosticPlots,
+               modelExtracts
     ),
     cue = tar_cue(mode = "always"),
     priority = 0.1

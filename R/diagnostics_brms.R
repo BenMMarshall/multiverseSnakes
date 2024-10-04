@@ -2,7 +2,7 @@
 #'
 #' @name diagnostics_brms
 #' @description A
-#' @param modelsList output tar_targets resulting in areaBrms or ssfBrms
+#' @param modelsList tar_targets resulting in Brms model
 #' @return a
 #'
 #' @export
@@ -20,16 +20,17 @@ diagnostics_brms <- function(modelsList){
       
       traceplot <- mcmc_trace(currMod, pars = varsToPlot)
       ggsave(traceplot,
-             filename = here("modelOutput", paste0("tracePlot_", name, ".png")),
+             filename = here("modelOutput", paste0(name, "_traceplot.png")),
              dpi = 300, width = 210, height = 140,
              units = "mm")
       
       acfplot <- mcmc_acf(currMod, pars = varsToPlot)
       ggsave(acfplot,
-             filename = here("modelOutput", paste0("acfPlot_", name, ".png")),
+             filename = here("modelOutput", paste0(name, "_acfplot.png")),
              dpi = 300, width = 210, height = 140,
              units = "mm")
     }
   }
   
+  return(list(traceplot, acfplot))
 }

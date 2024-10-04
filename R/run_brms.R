@@ -7,6 +7,7 @@
 #'
 #' @export
 run_brms <- function(resultsData,
+                     modelName,
                      iter = 4000,
                      warmup = 750,
                      thin = 4){
@@ -23,24 +24,37 @@ run_brms <- function(resultsData,
   # resultsData <- rsfResults
   # resultsData <- wrsfResults
   
+  # modelName <- "OPHA_H2_binary"
+  
+  modelOptions <- str_split(modelName, "_")[[1]]
+  names(modelOptions) <- c("species", "hypo", "landscape")
+  
+  resultsData <- resultsData %>% 
+    filter(species == case_when(
+      modelOptions["species"] == "OPHA" ~ "Ophiophagus hannah",
+      modelOptions["species"] == "PYBI" ~ "Python bivittatus",
+      modelOptions["species"] == "BUCA" ~ "Bungarus candidus",
+      modelOptions["species"] == "BUFA" ~ "Bungarus fasciatus"
+    ),
+    hypothesis == modelOptions["hypo"],
+    classLandscape == modelOptions["landscape"])
+  
   if(resultsData$analysis[1] == "ssf"){
     
     modelData <- resultsData %>% 
-      dplyr::group_by(species, hypothesis, classLandscape) %>% 
-      dplyr::mutate(medEst = median(modelAvg, na.rm = TRUE),
-                    absDeltaEst = abs(modelAvg - medEst)) %>% 
-      dplyr::ungroup() %>% 
+      mutate("estimate" = modelAvg,
+             "se" = modelAvgSE) %>% 
       dplyr::mutate(
         availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep)
       )
     
-    formAbsDelta <- brms::bf(
-      absDeltaEst ~ 1 + 
-        modelFormula + stepDist + turnDist + availablePerStepScaled + 
-        (hypothesis|hypothesis) + (classLandscape|classLandscape) + (species|species)
+    formMeta <- brms::bf(
+      estimate|se(se) ~ 1 + 
+        modelFormula + stepDist + turnDist + availablePerStepScaled
     )
     
     brmpriors <- c(
+      brms::set_prior("normal(0,2)", class = "Intercept"),
       # data quantity decreases deviation from median effect
       brms::set_prior("cauchy(-0.1, 3)", coef = "availablePerStepScaled"),
       # other kept as weak positive priors
@@ -50,28 +64,26 @@ run_brms <- function(resultsData,
     )
     
     modelSave <- here::here("modelOutput",
-                            "absDelta_ssf.txt")
+                            paste0("meta_", modelName, "_ssf.txt"))
     modelFile <- here::here("modelOutput",
-                            "absDelta_ssf")
+                            paste0("meta_", modelName, "_ssf"))
     
   } else if(resultsData$analysis[1] == "Poisson"){
     
     modelData <- resultsData %>% 
-      dplyr::group_by(species, hypothesis, classLandscape) %>% 
-      dplyr::mutate(medEst = median(estimateDiff, na.rm = TRUE),
-                    absDeltaEst = abs(estimateDiff - medEst)) %>% 
-      dplyr::ungroup() %>% 
+      mutate("estimate" = estimateDiff,
+             "se" = sd) %>% 
       dplyr::mutate(
         availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep)
       )
     
-    formAbsDelta <- brms::bf(
-      absDeltaEst ~ 1 + 
-        modelFormula + stepDist + turnDist + availablePerStepScaled +
-        (hypothesis|hypothesis) + (classLandscape|classLandscape) + (species|species)
+    formMeta <- brms::bf(
+      estimate|se(se) ~ 1 + 
+        modelFormula + stepDist + turnDist + availablePerStepScaled
     )
     
     brmpriors <- c(
+      brms::set_prior("normal(0,2)", class = "Intercept"),
       # data quantity decreases deviation from median effect
       brms::set_prior("cauchy(-0.1, 3)", coef = "availablePerStepScaled"),
       # other kept as weak positive priors
@@ -81,31 +93,28 @@ run_brms <- function(resultsData,
     )
     
     modelSave <- here::here("modelOutput",
-                            "absDelta_pois.txt")
+                            paste0("meta_", modelName, "_pois.txt"))
     modelFile <- here::here("modelOutput",
-                            "absDelta_pois")
+                            paste0("meta_", modelName, "_pois"))
     
   } else if("companaHabDiff" %in% names(resultsData)){
     
     modelData <- resultsData %>% 
       dplyr::filter(classLandscape == "binary") %>% 
-      dplyr::group_by(species, hypothesis, classLandscape) %>% 
-      dplyr::mutate(medEst = median(companaHabDiff, na.rm = TRUE),
-                    absDeltaEst = abs(companaHabDiff - medEst)) %>% 
-      dplyr::ungroup() %>% 
+      mutate("estimate" = companaHabDiff) %>% 
       dplyr::mutate(
         contourScaled = (contour - mean(contour))/sd(contour),
         availablePointsScaled  = (availablePoints - mean(availablePoints))/sd(availablePoints)
       )
     
-    formAbsDelta <- brms::bf(
-      absDeltaEst ~ 1 + 
+    formMeta <- brms::bf(
+      estimate ~ 1 + 
         areaMethod + contourScaled +
-        availablePointsScaled + samplingPattern + test +
-        (hypothesis|hypothesis) + (species|species)
+        availablePointsScaled + samplingPattern + test
     )
     
     brmpriors <- c(
+      brms::set_prior("normal(0,2)", class = "Intercept"),
       # data quantity decreases deviation from median effect
       brms::set_prior("cauchy(-0.1, 3)", coef = "availablePointsScaled"),
       # other kept as weak positive priors
@@ -116,58 +125,70 @@ run_brms <- function(resultsData,
     )
     
     modelSave <- here::here("modelOutput",
-                            "absDelta_areaBased.txt")
+                            paste0("meta_", modelName, "_areaBased.txt"))
     modelFile <- here::here("modelOutput",
-                            "absDelta_areaBased")
+                            paste0("meta_", modelName, "_areaBased"))
     
   } else if(resultsData$analysis[1] == "TwoStep"){
     
     modelData <- resultsData %>% 
-      dplyr::group_by(species, hypothesis, classLandscape) %>% 
-      dplyr::mutate(medEst = median(twoStepBeta, na.rm = TRUE),
-                    absDeltaEst = abs(twoStepBeta - medEst)) %>% 
-      dplyr::ungroup() %>% 
+      dplyr::mutate("estimate" = twoStepBeta,
+                    "se" = twoStepSE) %>% 
       dplyr::mutate(
         availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep)
       )
     
-    formAbsDelta <- brms::bf(
-      absDeltaEst ~ 1 + 
-        modelFormula + stepDist + turnDist + availablePerStepScaled +
-        (hypothesis|hypothesis) + (classLandscape|classLandscape) + (species|species)
-    )
+    if(all(is.na(modelData$estimate[modelData$modelFormula == "mf.is"]))){
+      formMeta <- brms::bf(
+        estimate|se(se) ~ 1 + 
+          stepDist + turnDist + availablePerStepScaled
+      )
+      
+      brmpriors <- c(
+        brms::set_prior("normal(0,2)", class = "Intercept"),
+        # data quantity decreases deviation from median effect
+        brms::set_prior("cauchy(-0.1, 3)", coef = "availablePerStepScaled"),
+        # other kept as weak positive priors
+        brms::set_prior("cauchy(0.1, 3)", coef = "stepDistgamma"),
+        brms::set_prior("cauchy(0.1, 3)", coef = "turnDistvonmises")
+      )
+    } else {
+      formMeta <- brms::bf(
+        estimate|se(se) ~ 1 + 
+          modelFormula + stepDist + turnDist + availablePerStepScaled
+      )
+      
+      brmpriors <- c(
+        brms::set_prior("normal(0,2)", class = "Intercept"),
+        # data quantity decreases deviation from median effect
+        brms::set_prior("cauchy(-0.1, 3)", coef = "availablePerStepScaled"),
+        # other kept as weak positive priors
+        brms::set_prior("cauchy(0.1, 3)", coef = "modelFormulamf.ss"),
+        brms::set_prior("cauchy(0.1, 3)", coef = "stepDistgamma"),
+        brms::set_prior("cauchy(0.1, 3)", coef = "turnDistvonmises")
+      )
+    }
     
-    brmpriors <- c(
-      # data quantity decreases deviation from median effect
-      brms::set_prior("cauchy(-0.1, 3)", coef = "availablePerStepScaled"),
-      # other kept as weak positive priors
-      brms::set_prior("cauchy(0.1, 3)", coef = "modelFormulamf.ss"),
-      brms::set_prior("cauchy(0.1, 3)", coef = "stepDistgamma"),
-      brms::set_prior("cauchy(0.1, 3)", coef = "turnDistvonmises")
-    )
     
     modelSave <- here::here("modelOutput",
-                            "absDelta_twoStep.txt")
+                            paste0("meta_", modelName, "_twostep.txt"))
     modelFile <- here::here("modelOutput",
-                            "absDelta_twoStep")
+                            paste0("meta_", modelName, "_twostep"))
     
   } else if(resultsData$analysis[1] == "rsf"){
     
     modelData <- resultsData %>% 
-      dplyr::group_by(species, hypothesis, classLandscape) %>% 
-      dplyr::mutate(medEst = median(Estimate, na.rm = TRUE),
-                    absDeltaEst = abs(Estimate - medEst)) %>% 
-      dplyr::ungroup() %>% 
+      dplyr::mutate("estimate" = Estimate,
+                    "se" = SE) %>% 
       dplyr::mutate(
         contourScaled = (contour - mean(contour))/sd(contour),
         availablePointsScaled  = (availablePoints - mean(availablePoints))/sd(availablePoints)
       )
     
-    formAbsDelta <- brms::bf(
-      absDeltaEst ~ 1 + 
+    formMeta <- brms::bf(
+      estimate|se(se) ~ 1 + 
         method + contourScaled +
-        availablePointsScaled + samplingPattern + 
-        (hypothesis|hypothesis) + (classLandscape|classLandscape) + (species|species)
+        availablePointsScaled + samplingPattern
     )
     
     brmpriors <- c(
@@ -180,27 +201,29 @@ run_brms <- function(resultsData,
     )
     
     modelSave <- here::here("modelOutput",
-                            "absDelta_rsf.txt")
+                            paste0("meta_", modelName, "_rsf.txt"))
     modelFile <- here::here("modelOutput",
-                            "absDelta_rsf")
+                            paste0("meta_", modelName, "_rsf"))
     
   }
   
-  modOUT_absDelta <- brms::brm(formula = formAbsDelta,
-                               data = modelData,
-                               family = gaussian,
-                               prior = brmpriors,
-                               warmup = warmup, iter = iter, chains = 4,
-                               cores = 4,
-                               thin = thin,
-                               # control = list(adapt_delta = 0.90,
-                               #                max_treedepth = 15),
-                               seed = 1,
-                               save_pars = brms::save_pars(all = TRUE),
-                               save_model = modelSave,
-                               file = modelFile
+  modOUT_meta <- brms::brm(formula = formMeta,
+                           data = modelData,
+                           family = gaussian,
+                           prior = brmpriors,
+                           warmup = warmup, iter = iter, chains = 4,
+                           cores = 4,
+                           thin = thin,
+                           # control = list(adapt_delta = 0.90,
+                           #                max_treedepth = 15),
+                           seed = 1,
+                           save_pars = brms::save_pars(all = TRUE),
+                           save_model = modelSave,
+                           file = modelFile
   )
   
-  return(modOUT_absDelta)
+  modOUT_meta$modelName <- modelName
+  
+  return(modOUT_meta)
   
 }

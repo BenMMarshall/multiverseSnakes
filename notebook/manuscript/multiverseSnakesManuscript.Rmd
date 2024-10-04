@@ -274,6 +274,12 @@ These packages allowed for efficient parallel process and tracking of intermedia
 
 # Results
 
+```{r summaryReadIn, echo=FALSE, message=FALSE}
+# timeStepSummaries <- read.csv(file = here::here("tables", "summary_species_timeStep.csv"))
+dataDuraMovesSummaries <- read.csv(file = here::here("tables", "summary_species_dataDuraMoves.csv"))
+summaryTable <- read.csv(file = here::here("tables", "summary_individuals.csv"))
+```
+
 ## Tracking Summary
 
 Sample sizes and data density varied between species and individuals.
@@ -451,9 +457,6 @@ If using this compiled data, we highly suggest also citing the original data pap
 ## Tracking Summary
 
 ```{r trackingSummaryTable, echo=FALSE, message=FALSE, warning=FALSE}
-# timeStepSummaries <- read.csv(file = here::here("tables", "summary_species_timeStep.csv"))
-dataDuraMovesSummaries <- read.csv(file = here::here("tables", "summary_species_dataDuraMoves.csv"))
-summaryTable <- read.csv(file = here::here("tables", "summary_individuals.csv"))
 
 knitr::kable(
   summaryTable,
