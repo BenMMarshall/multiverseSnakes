@@ -22,7 +22,6 @@ run_brms <- function(resultsData,
   # resultsData <- areaBasedResults
   # resultsData <- twoStepResults
   # resultsData <- rsfResults
-  # resultsData <- wrsfResults
   
   # modelName <- "OPHA_H2_binary"
   
@@ -45,12 +44,14 @@ run_brms <- function(resultsData,
       mutate("estimate" = modelAvg,
              "se" = modelAvgSE) %>% 
       dplyr::mutate(
-        availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep)
+        availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep),
+        index = row_number()
       )
     
     formMeta <- brms::bf(
       estimate|se(se) ~ 1 + 
-        modelFormula + stepDist + turnDist + availablePerStepScaled
+        modelFormula + stepDist + turnDist + availablePerStepScaled +
+        (1|index)
     )
     
     brmpriors <- c(
@@ -74,12 +75,14 @@ run_brms <- function(resultsData,
       mutate("estimate" = estimateDiff,
              "se" = sd) %>% 
       dplyr::mutate(
-        availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep)
+        availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep),
+        index = row_number()
       )
     
     formMeta <- brms::bf(
       estimate|se(se) ~ 1 + 
-        modelFormula + stepDist + turnDist + availablePerStepScaled
+        modelFormula + stepDist + turnDist + availablePerStepScaled +
+        (1|index)
     )
     
     brmpriors <- c(
@@ -104,13 +107,15 @@ run_brms <- function(resultsData,
       mutate("estimate" = companaHabDiff) %>% 
       dplyr::mutate(
         contourScaled = (contour - mean(contour))/sd(contour),
-        availablePointsScaled  = (availablePoints - mean(availablePoints))/sd(availablePoints)
+        availablePointsScaled  = (availablePoints - mean(availablePoints))/sd(availablePoints),
+        index = row_number()
       )
     
     formMeta <- brms::bf(
       estimate ~ 1 + 
         areaMethod + contourScaled +
-        availablePointsScaled + samplingPattern + test
+        availablePointsScaled + samplingPattern + test +
+        (1|index)
     )
     
     brmpriors <- c(
@@ -135,13 +140,15 @@ run_brms <- function(resultsData,
       dplyr::mutate("estimate" = twoStepBeta,
                     "se" = twoStepSE) %>% 
       dplyr::mutate(
-        availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep)
+        availablePerStepScaled  = (availablePerStep - mean(availablePerStep))/sd(availablePerStep),
+        index = row_number()
       )
     
     if(all(is.na(modelData$estimate[modelData$modelFormula == "mf.is"]))){
       formMeta <- brms::bf(
         estimate|se(se) ~ 1 + 
-          stepDist + turnDist + availablePerStepScaled
+          stepDist + turnDist + availablePerStepScaled +
+          (1|index)
       )
       
       brmpriors <- c(
@@ -155,7 +162,8 @@ run_brms <- function(resultsData,
     } else {
       formMeta <- brms::bf(
         estimate|se(se) ~ 1 + 
-          modelFormula + stepDist + turnDist + availablePerStepScaled
+          modelFormula + stepDist + turnDist + availablePerStepScaled +
+          (1|index)
       )
       
       brmpriors <- c(
@@ -182,13 +190,15 @@ run_brms <- function(resultsData,
                     "se" = SE) %>% 
       dplyr::mutate(
         contourScaled = (contour - mean(contour))/sd(contour),
-        availablePointsScaled  = (availablePoints - mean(availablePoints))/sd(availablePoints)
+        availablePointsScaled  = (availablePoints - mean(availablePoints))/sd(availablePoints),
+        index = row_number()
       )
     
     formMeta <- brms::bf(
       estimate|se(se) ~ 1 + 
         method + contourScaled +
-        availablePointsScaled + samplingPattern
+        availablePointsScaled + samplingPattern +
+        (1|index)
     )
     
     brmpriors <- c(

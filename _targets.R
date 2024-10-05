@@ -233,8 +233,8 @@ poisCompiled <- list(
       run_brms(
         resultsData = poisResults,
         modelName = fullOption,
-        iter = 600,
-        warmup = 200,
+        iter = 1200,
+        warmup = 400,
         thin = 2
       )
     )
@@ -270,8 +270,8 @@ twoStepCompiled <- list(
       run_brms(
         resultsData = twoStepResults,
         modelName = fullOption,
-        iter = 600,
-        warmup = 200,
+        iter = 1200,
+        warmup = 400,
         thin = 2
       )
     )
@@ -308,8 +308,8 @@ areaBasedCompiled <- list(
       run_brms(
         resultsData = areaBasedResults,
         modelName = fullOption,
-        iter = 600,
-        warmup = 200,
+        iter = 1200,
+        warmup = 400,
         thin = 2
       )
     )
@@ -345,8 +345,8 @@ ssfCompiled <- list(
       run_brms(
         resultsData = ssfResults,
         modelName = fullOption,
-        iter = 600,
-        warmup = 200,
+        iter = 1200,
+        warmup = 400,
         thin = 2
       )
     )
@@ -382,8 +382,8 @@ rsfCompiled <- list(
       run_brms(
         resultsData = rsfResults,
         modelName = fullOption,
-        iter = 600,
-        warmup = 200,
+        iter = 1200,
+        warmup = 400,
         thin = 2
       )
     )

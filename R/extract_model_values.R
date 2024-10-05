@@ -14,12 +14,19 @@ extract_model_values <- function(modelsList){
   r2Outputs <- lapply(names(modelsList), function(x){
     # x <- names(modelsList)[1]
     model <- modelsList[[x]]
+    
+    tau2 <- ggdist::median_hdci(tidybayes::gather_draws(model,
+                                                        `sd_index__Intercept`, regex = TRUE),
+                                .width = c(0.95)) %>% 
+      dplyr::select(.variable, .value, .lower, .upper, .width)
+    names(tau2) <- c("variable", "value", "lower", "upper", "ci")
+    tau2$variable <- "tau2_sd_index_intercept"
+    tau2$se <- NA
+    
     r2OUT <- performance::r2_bayes(model)
     
-    r2OUT
-    
     r2df_1 <- data.frame(
-      R2 = c(unlist(
+      value = c(unlist(
         r2OUT[1]),
         unlist(r2OUT[2])
       ),
@@ -27,16 +34,17 @@ extract_model_values <- function(modelsList){
              attr(r2OUT,"SE")$R2_Bayes_marginal),
       rbind(attr(r2OUT,"CI")$R2_Bayes,
             attr(r2OUT,"CI")$R2_Bayes_marginal),
-      Component = c("conditional", "marginal")
+      variable = c("r2 conditional", "r2 marginal")
     )
-    r2df_1$model <- x
+    names(r2df_1) <- c("value", "se", "ci", "lower", "upper", "variable")
+    modelExtras <- rbind(r2df_1, tau2)
+    modelExtras$model <- x
     
-    return(r2df_1)
+    return(modelExtras)
     
     print(paste0(x, " - r2 Extracted"))
   })
   r2Outputs <- do.call(rbind, r2Outputs)
-  
   
   write.csv(r2Outputs, file = here::here("modelOutput", "brmsR2Results.csv"),
             row.names = FALSE)
