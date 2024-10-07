@@ -443,12 +443,17 @@ brmModelOutputs <- list(
     modelExtracts,
     extract_model_values(modelsList = modelsBrms),
     priority = 0.4
+  ),
+  tar_target(
+    metaBetaPlot,
+    plot_meta_betas(modelExtracts = modelExtracts),
+    priority = 0.4
+  ),
+  tar_target(
+    metaR2Plot,
+    plot_meta_r2(modelExtracts = modelExtracts),
+    priority = 0.4
   )
-  # tar_target(
-  #   allEffectPlots,
-  #   generate_allEffect_plots(modelExtracts = modelExtracts),
-  #   priority = 0.4
-  # )
 )
 
 # Manuscript Prep ---------------------------------------------------------
@@ -487,7 +492,9 @@ manuscriptRendering <- list(
                trackingPlotsAndTables,
                landscapePlots,
                diagnosticPlots,
-               modelExtracts
+               modelExtracts,
+               metaBetaPlot,
+               metaR2Plot
     ),
     cue = tar_cue(mode = "always"),
     priority = 0.1

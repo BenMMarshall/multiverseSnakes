@@ -10,6 +10,7 @@ plot_meta_betas <- function(modelExtracts){
   
   # targets::tar_source()
   # targets::tar_load("modelExtracts")
+  # metaBetas <- read.csv(here::here("modelOutput", "brmsEstResults.csv"))
   
   paletteList <- get_palette()
   modelPalette <- unname(paletteList$corePalette[1:4])
@@ -25,6 +26,7 @@ plot_meta_betas <- function(modelExtracts){
   # library(ggplot2)
   # library(ggtext)
   # library(stringr)
+  # library(patchwork)
   
   betasOutputs <- metaBetas %>% 
     mutate(method = str_extract(model, "ssf|rsf|pois|twoStep|areaBased"),
@@ -37,7 +39,6 @@ plot_meta_betas <- function(modelExtracts){
       species == "BUCA" ~ "Bungarus candidus",
       species == "BUFA" ~ "Bungarus fasciatus"
     )) %>% 
-    filter(!.variable == "b_Intercept") %>% 
     mutate(
     hypothesis = factor(hypothesis, levels = c(
       "H1",
@@ -77,7 +78,8 @@ plot_meta_betas <- function(modelExtracts){
         .variable == "b_typeIII" ~ "\u03B2 Desigen Type: III",
         .variable == "b_contourScaled" ~ "\u03B2 Available Area Contour",
         .variable == "b_availablePointsScaled" ~ "\u03B2 Available Points Multipiler",
-        .variable == "b_testrandomisation" ~ "\u03B2 Compana Test: Randomisation"
+        .variable == "b_testrandomisation" ~ "\u03B2 Compana Test: Randomisation",
+        TRUE ~ .variable
       ),
       levels = rev(c(
         "\u03B2 Sample Size",
@@ -97,7 +99,9 @@ plot_meta_betas <- function(modelExtracts){
         "\u03B2 Desigen Type: III",
         "\u03B2 Available Points Multipiler",
         "\u03B2 Sampling Pattern: Stratified",
-        "\u03B2 Compana Test: Randomisation"
+        "\u03B2 Compana Test: Randomisation",
+        
+        "b_Intercept"
       ))
       )) %>% 
     mutate(method = case_when(
@@ -142,6 +146,7 @@ plot_meta_betas <- function(modelExtracts){
       }
       
       betaPlotSingle <- betasOutputs %>% 
+        filter(!.variable == "b_Intercept") %>% 
         filter(classLandscape == land,
                method == meth) %>% 
         ggplot() +
@@ -238,13 +243,87 @@ plot_meta_betas <- function(modelExtracts){
           legend.text = element_markdown(face = 3))
   
   ggsave(filename = here("figures",
-                         paste0("specCurve_", method, ".png")),
+                         "metaBeta.png"),
          plot = combinedPlot,
          width = 360, height = 280, units = "mm", dpi = 300)
   ggsave(filename = here("figures",
-                         paste0("specCurve_", method, ".pdf")),
+                         "metaBeta.pdf"),
          plot = combinedPlot,
          width = 360, height = 280, units = "mm")
   
+# intercept plot ----------------------------------------------------------
+  
+  interceptPlot <- betasOutputs %>% 
+    mutate(method = factor(method,
+                           levels = c(
+                             "Compana",
+                             "Resource Selection",
+                             "Two-step",
+                             "Step Selection",
+                             "Poisson"
+                           ))) %>% 
+    mutate(
+      speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
+      speciesCol = factor(speciesCol, levels = c(
+        "<span style='color:#b28904'>Bungarus fasciatus</span>",
+        "<span style='color:#322b21'>Bungarus candidus</span>",
+        "<span style='color:#6c2b05'>Python bivittatus</span>",
+        "<span style='color:#bba07e'>Ophiophagus hannah</span>"
+      )
+      )) %>% 
+    filter(.variable == "b_Intercept") %>% 
+    ggplot() +
+    geom_vline(xintercept = 0, linewidth = 0.5, alpha = 0.9,
+               colour = paletteList$corePalette["coreGrey"],
+               linetype = 1) +
+    geom_hline(yintercept = seq(0.5,20.5,1), linewidth = 0.25, alpha = 0.5,
+               colour = paletteList$corePalette["coreGrey"],
+               linetype = 2) +
+    geom_pointrange(aes(y = speciesCol, x = .value, xmin = .lower, xmax = .upper, 
+                        colour = speciesCol, shape = hypothesis),
+                    fatten = 2,
+                    position = position_dodge2(width = 0.75, reverse = TRUE)) +
+    scale_colour_manual(values = speciesColVec) +
+    facet_grid(rows = vars(method), cols = vars(classLandscape),
+               space = "free", scales = "free", drop = TRUE,
+               switch = "y") +
+    labs(x = "Beta coefficient estimate", y = "Variable",
+         colour = "Species", shape = "Hypothesis") +
+    theme_bw() +
+    theme(
+      line = element_line(colour = "#403F41"),
+      text = element_text(colour = "#403F41"),
+      # strip.text.y.left = element_text(angle = 0, margin = margin(-8.5,12,0,0)),
+      # axis.text.y.left = element_text(margin = margin(0,-165,0,80)), # 2nd value needed to alligns with facet, 4th gives space left
+      axis.ticks.y.left = element_blank(),
+      axis.line.x = element_line(),
+      strip.background = element_blank(),
+      strip.text = element_text(face = 2, hjust = 0, vjust = 1),
+      strip.text.y.left = element_markdown(angle = 0, hjust = 0, vjust = 1,
+                                           margin = margin(0, 5, 20, 0),
+                                           face = 4),
+      strip.text.x = element_markdown(angle = 0, hjust = 0, vjust = 1,
+                                      margin = margin(0, 5, 20, 0),
+                                      face = 4),
+      axis.text.y = element_markdown(face = 4),
+      axis.title.y = element_blank(),
+      strip.placement = "outside",
+      axis.title.x = element_blank(),
+      legend.position = "none",
+      panel.border = element_blank(),
+      panel.spacing = unit(18, "pt"),
+      panel.grid = element_blank())
+  
+  ggsave(filename = here("figures",
+                         "metaIntercept.png"),
+         plot = interceptPlot,
+         width = 220, height = 190, units = "mm", dpi = 300)
+  ggsave(filename = here("figures",
+                         "metaIntercept.pdf"),
+         plot = interceptPlot,
+         width = 220, height = 190, units = "mm")
+  
+  return(list(combinedPlot, 
+              interceptPlot))
   
 }

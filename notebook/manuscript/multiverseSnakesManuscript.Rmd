@@ -212,6 +212,8 @@ We suspect that these escaped detection during the initial publication [@Marshal
 ## Multiverse Construction
 
 ```{r readInOptions, echo=FALSE}
+library(dplyr)
+library(stringr)
 optionsComplete <- readRDS(here::here("data", "optionsCompleteList.rds"))
 # might be worth pulling this from the summaries of the significance, that way we can ID rates of failure easier?
 # prod(unlist(lapply(optionsComplete$pois, length)))
@@ -267,7 +269,21 @@ This approach dramatically reduces the choices during analysis; instead of requi
 Once the movement models had been generated, and wRSF models fitted, we used the supplied mean functionality within the ctmm package to generate an overall population selection.
 
 We handled the running of all analyses and their associated choices using the targets `r paste0("v.", packageVersion("targets"))` and tarchetypes `r paste0("v.", packageVersion("tarchetypes"))` R packages [@targets; @tarchetypes].
-These packages allowed for efficient parallel process and tracking of intermediate objects while avoiding errors in one analysis pathway from delays the completion of others. 
+These packages allowed for efficient parallel process and tracking of intermediate objects while avoiding errors in one analysis pathway from delays the completion of others.
+
+## Bayesian meta-analysis
+
+We ran a series of `r length(list.files(here::here("modelOutput"), pattern = "^meta"))` Bayesian meta-analysis models to determine an overall estimate of habitat selection for each analysis approach and hypothesis.
+We used the following model formula: "estimate"|se("estimate confidence") ~ 1 + "choices" + (1|"index of analysis end point").
+The estimate confidence measure varied from method to method: area-based Compana did not have a confidence interval so we excluded that term, for the RSF and Two-Step estimates we used standard error, for the SSF models we used standard errors of the model averaging, and for the Poisson models we used the standard deviation.
+Choices varied per method, and included a term for every choice made to reach a given analysis end point.
+For the area-based methods (Compana, RSF) the choice terms included area method `r paste0(optionsComplete$area$areaMethod, collapse = ", ")`, contour percentage (`r paste0(optionsComplete$area$areaContour, collapse = ", ")`, scaled), available points generation method (`r paste0(ifelse(optionsComplete$area$Method_sp == "rd", "random", "stratified"), collapse = ", ")`), and the number of available points generated per animal location (`r paste0(range(optionsComplete$area$Method_ap), collapse = " to ")`, scaled).
+The Compana analysis had the additional choice of test method (`r paste0(optionsComplete$areaMethods$areaBasedTest, collapse = ", ")`).
+For the step-based methods (Two-Step, SSF, Poisson) the choice terms included model formula (integrated, non-integrated), step length distribution (Gamma, Exponential), turn angle distribution (Von Mises, Uniform), and the number of random steps generated per animal location (`r paste0(range(optionsComplete$Method_method$MethodSSF_as), collapse = " to ")`, scaled).
+We used weakly informative priors.
+For the intercept we used a normal distribution with a mean of 0 and a standard deviation of 2, and for the choices we used Cauchy distributions with a location of -0.1 and scale as 3, except for the number of available points generated per animal location where we used a location of 0.1.
+We ran Bayesian models using the brms package [@brms], running 4 MCMC chains for 1200 iterations each, with a warmup of 400, and a thinning rate of 2.
+For reporting we used 95% median highest density continuous intervals when describing posteriors.
 
 # Results
 
@@ -303,6 +319,10 @@ Also the other species see that available area method and contour have varying i
 Only the Compana test method (randomisation or parametric) appears to have a consistent effect, with both *Bungarus* hypotheses seeing dramatically higher estimates of selection when parametric testing is used.
 For *Bungarus candidus* this does would not change any conclusions (all estimates are significantly supportive; Fig. \@ref(fig:specCurveAreaBUCA)); however, for *Bungarus fasciatus* this single decision is what is responsible for the half of estimates providing support (Fig. \@ref(fig:specCurveAreaBUFA)).
 
+```{r specCurveArea, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines."}
+knitr::include_graphics(here::here("figures", "specCurve_area.png"))
+```
+
 Unlike the Compositional analysis, Resource Selection Functions estimate medians provided support for all hypothesis (Fig. \@ref(fig:specCurveRsf)).
 Although, *Ophiophagus hannah* H2's support is marginal.
 The more limited support for *Ophiophagus hannah* H2 (for both habitat classification methods) appears driven by those estimates based on MCP available areas, and using wider contours (Fig. \@ref(fig:specCurveRsfOPHA)).
@@ -312,6 +332,10 @@ Those based on MCPs appears to be less variable regardless of other analysis dec
 The continuous habitat classification does appear to open the possibility for more dramatic variation in selection strength.
 The number of available points does seem to impact the estimates in both *Bungarus* species, but only when not using MCPs, and this impact appears to diminish once over 29.
 
+```{r specCurveRsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_rsf.png"))
+```
+
 The Two-Step approach was by far the least effective and most problematic when running in within a multiverse, as the models had frequent convergence issues.
 This failure rate is particularly visible in the *Ophiophagus hannah* data, when ran with low numbers of available points or with attempts to integrate step and turn angle into the equation (Fig. \@ref(fig:specCurveTwoStep)).
 In addition to the failure rate, we see a more even spread of estimates that contrasts with the ideal "S" shape that would indicate more agreement between the analysis end points.
@@ -319,6 +343,10 @@ The lack of agreement in selection strength appears more prevalent when using th
 The most consistent impact of the choice is whether to integrate step and turn angle into the model formula.
 As mentioned this led to convergence issues for *Ophiophagus hannah*, but for other species the integrated formulations tended to result in more conservative estimates of selection.
 Only for *Bungarus candidus* with a binary classification did the median estimate swap direction due to this analysis choice, and explains the lower rates of significant selection (32/64; Fig. \@ref(fig:specCurveTwoStepBUCA)).
+
+```{r specCurveTwoStep, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_twoStep.png"))
+```
 
 The Step Selection Function approach was impacted by the habitat classification method (Fig. \@ref(fig:specCurveSsf)). 
 When using a binary habitat classification on the *Bungarus* analysis supported the hypotheses, whereas we see more universal support when using the continuous habitat classification.
@@ -330,6 +358,10 @@ We should be additionally cautious with this support, as the SSF model averaging
 The impact of decisions are most visible in *Bungarus candidus*, whose estimates' strength is impacted by the step and turn angle distributions, as well as whether the formula was integrated.
 The distribution choices make less of an impact, with the spread of estimates largely overlapping, but using an integrated model formula led to more generous and variable estimates of preference.
 However, despite this impact, all bar one of *Bungarus candidus* estimates significantly support the hypothesis regardless of habitat classification method (Fig. \@ref(fig:specCurveSsfBUCA)).
+
+```{r specCurveSsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_ssf.png"))
+```
 
 The Poisson model approach appears similar to the SSF results, with universal support for the hypotheses when examining the median estimates (Fig. \@ref(fig:specCurvePois)).
 Once again the most marginal support was seen in *Ophiophagus hannah* H2, where both classification methods result in low median estimates of preference.
@@ -343,35 +375,78 @@ The impacts of other decisions are considerably smaller that model formulation.
 There appears to be advantages to generating more available points, as estimates with few points tend to explain the upper and lower outliers.
 The mitigation of extreme estimates is best seen in *Bungarus fasciatus* when using a continuous habitat classification (Fig. \@ref(fig:specCurvePoisBUFA)).
 
+```{r specCurvePois, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_pois.png"))
+```
+
 Our final analysis approach was using weighted Resource Selection Functions (wRSF).
 All wRSF results provided support for the hypotheses (Fig. \@ref(fig:specCurveWrsf)).
 Although, once again, support for *Ophiophagus hannah* H2 when using a continuous classification, is borderline and ultimately rounded to zero.
 The strongest selection was seen in *Ophiophagus hannah* H1, where both habitat classification methods unambiguously support the hypothesis.
 All other species saw unambiguous support when the habitat was binary classed, but when classed continuously as inverted distance the 95% confidence intervals for *Python bivittatus* and *Bungarus fasciatus* approximated zero.
 
-
-```{r specCurveArea, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines."}
-knitr::include_graphics(here::here("figures", "specCurve_area.png"))
-```
-
-```{r specCurveRsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_rsf.png"))
-```
-
-```{r specCurveTwoStep, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_twoStep.png"))
-```
-
-```{r specCurveSsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_ssf.png"))
-```
-
-```{r specCurvePois, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_pois.png"))
-```
-
 ```{r specCurveWrsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the weighted Resource Selection Function (wRSF) analysis. Circles and numbers above show the point estimate, and the horizontal bar depict the 95% confidence interval. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right).The results for King Cobra (Ophiophagus hannah) H1 with the continuous habitat classification are hidden to aid with visualising all other estimates."}
 knitr::include_graphics(here::here("figures", "specCurve_wrsf.png"))
+```
+
+## Meta-analysis Estimates
+
+```{r metaAnalysisRead, echo=FALSE}
+
+r2results <- read.csv(here::here("modelOutput", "brmsR2Results.csv"))
+
+r2results <- r2results %>% 
+    mutate(method = str_extract(model, "ssf|rsf|pois|twoStep|areaBased"),
+           species = str_extract(model, "OPHA|PYBI|BUCA|BUFA"),
+           hypothesis = str_extract(model, "H1|H2"),
+           classLandscape = str_extract(model, "binary|continuous")) %>% 
+    mutate(species = case_when(
+      species == "OPHA" ~ "Ophiophagus hannah",
+      species == "PYBI" ~ "Python bivittatus",
+      species == "BUCA" ~ "Bungarus candidus",
+      species == "BUFA" ~ "Bungarus fasciatus"
+    ))
+
+r2conditional <- r2results %>% 
+    group_by(method, classLandscape) %>% 
+    filter(variable == "r2 conditional")
+
+tau2conditional <- r2results %>% 
+  group_by(method, classLandscape) %>% 
+  filter(variable == "tau2_sd_index_intercept")
+
+```
+
+The Bayesian meta-analyses tended to perform very well, with the population effects producing high *R^2^* values (`r paste0(sum(r2conditional$value > 0.6), "/", nrow(r2conditional))` > 0.6, median: `r round(median(r2conditional$value), digits = 2)` ±SD `r round(sd(r2conditional$value), digits = 2)`).
+The RSF models had the highest *R^2^* values, with the continuous classification estimates being almost entirely described by the predictors (Fig. \@ref(fig:metaR2Plot)).
+The step-based approaches tended to have more variable *R^2^*, with step-selection models having the lowest values.
+
+*$\tau$^2^* values ranged from very low (`r signif(min(tau2conditional$value), digits = 2)`) for the binary classed RSF models examining *Bungaurs facsiatus*, to `r signif(max(tau2conditional$value), digits = 2)` for the binary classed Poisson models examining the same species.
+Mostly Tau2 values below 0.1 `r paste0(sum(tau2conditional$value < 0.1), "/", nrow(tau2conditional))` (overall median of `r round(median(tau2conditional$value), digits = 2)` ±SD `r round(sd(tau2conditional$value), digits = 2)`), largely mirroring results gained from meta-analyses and ecological many analysts projects [@gould_same_2023].
+
+```{r metaR2Plot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Conditional R2 values for all meta-analysis models, with 95% HDCIs."}
+knitr::include_graphics(here::here("figures", "r2Plot.png"))
+```
+
+SUPORT HERE
+The intercepts of the meta-analyses models reveal that most hypothesis are overall supported, with the only exceptions existing when the habitat was binary classified (Fig. \@ref(fig:metaInterPlot)).
+*Ophiophagus hannah* H2 and *Python bivittatus* H1 using Compana, *Bungarus candidus* H1 using Two-Step, *Ophiophagus hannah* H2 and *Python bivittatus* H1 using SSF.
+
+```{r metaInterPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Posterior estimates of the intercept for all meta-analysis models, with 95% HDCIs."}
+knitr::include_graphics(here::here("figures", "metaIntercept.png"))
+```
+
+Overall these patterns mirror the specification curves, and the similarities are also reflected in the estimates of the choices' population effects.
+Big impacts from model formula
+area methods sees lots of changes with regards to available area that are super consistent between species
+points per setp matter more for bungarus spp - rarer habitats
+ 
+ impact of decisions
+ (Fig. \@ref(fig:metaBetasPlot)).
+
+
+```{r metaBetasPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Posterior estimates of the population effects for all meta-analysis models, with 95% HDCIs."}
+knitr::include_graphics(here::here("figures", "metaBeta.png"))
 ```
 
 # Discussion
@@ -418,6 +493,28 @@ While the average or summation or multiverse findings cannot be used as to estim
 The support originating from more modern methods is additionally reassuring.
 The weighted Resource Selection Functions should be best placed to provide us with a broad estimate of habitat selection, while also best positioned to tackle the issues arising from inconsistent tracking <!--- alston here --->.
 Their agreement with the other results (in terms of direction), and the fact they largely provide significant support for the original hypothesis is reason to be confident in the original conclusions.
+
+
+
+<!-- step-based approaches seem perhaps least predictable regarding choices -->
+<!-- tau2 huge for binary poisson, paried with lower r2 suggests models is harder to predict, something off about binary classfication -->
+<!-- end point group effect allows the estimation of tau2 which tells you variation between end point heterogeneity -->
+<!-- r2 should tell us amount of var from choices -->
+
+We found that the final estimates could not be completely predicted by the analysis choices, despite there existing no sampling variation in the primary data.
+In some cases, such as RSF binary, the analysis decisions explained the vast majority of variation and tau2 indicated that there was very little heterogeneity between end point.
+Whereas others such as the Poisson binary meta-analysis models left most of the variation unexplained, and indicated much higher levels of between end point heterogeneity, which appear comparable to meta-analysis on multiple studies with sampling variation.
+The propensity for the step-based methods to show higher tau2 values could be due to random sampling of step and turn angles in the available points.
+Overall, the variation in tau2 and r2 values from the meta-analysis models indicate that analysis choices are interacting with the species data and hypothesis, suggesting variation in habitat selection estimates may be difficult to predict in other systems and limited the generalisably of patterns shown here.
+
+<!-- from many analyssts: -->
+<!-- "We quantified both absolute () and relative () heterogeneity resulting from analytical variation. Both measures suggest that substantial variability among effect sizes was attributable to the analytical decisions of analysts. -->
+<!-- The total absolute level of variance beyond what would typically be expected due to sampling error, -->
+<!-- (Table 3.2), among all usable blue tit effects was 0.08 and for Eucalyptus effects was 0.27. This is similar to or exceeding the median value (0.105) of found across 31 recent meta-analyses (calculated from the data in Yang et al. 2023). The similarity of our observed values to values from meta-analyses of different studies based on different data suggest the potential for a large portion of heterogeneity to arise from analytical decisions. For further discussion of interpretation of in our study, please consult discussion of post hoc analyses below." -->
+<!-- tau seemed sensitive to removal of outlying estimates, or those classed as flawed analysis - see the table -->
+<!-- suggest in realaibty it is greater due to sampling differences -->
+
+Despite the clear species-driven variation in how analysis choices impact final estimates, we can examine the results on a species-hypothesis-basis to determine whether overall our multiverse supports or contradicts previously published conclusions (bearing in mind the multiverse's limitations).
 
 OPHA CONCLUSIONS HERE
 H1 clearly supported
