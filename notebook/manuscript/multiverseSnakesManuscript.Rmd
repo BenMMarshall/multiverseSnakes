@@ -133,6 +133,10 @@ The main exception is for the first three tracked *Ophiophagus hannah*, who we t
 
 ## Study Species and Hypotheses
 
+```{r hypothesesFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="..."}
+knitr::include_graphics(here::here("notebook", "ext_images", "hypothesis_visual.png"))
+```
+
 ### King Cobra
 
 @Marshall2018 and @marshall_no_2020 are concerned with King Cobras (*Ophiophagus hannah*).
@@ -191,23 +195,12 @@ We downloaded tracking data from Movebank or linked data repositories associated
 The land use data was largely included with the associated data repositories, in cases where it was not we retrieved this from the original authors.
 We collated all tracking and land use data, unifying the data formats, naming conventions, and converting files to more accessible formats.
 We were left with two files for every study: a csv containing the movements of all individuals, and geoJSON file containing the polygon data describing land use.
+The movement data contains seven columns: "species" = the binomial species name, "id" = the individual animal ID, "sex" = whether the individual is male (M) or female (F), "x" = the UTM Easting coordinate (m),"y" = the UTM Northing (m), "UTMzone" = the UTM zone either 47N or 48N, "datetime" = the date and time formatted as ISO 8601 "YYYY-MM-DD hh:mm:ss" recorded in "Asia/Bangkok".
+The land use data contains geometry data in UTM projection, and data on the "landuse" category as well as a habitat column denoting whether the habitat is part of a hypothesis.
 
-METADATA HERE
-
-To reacquaint ourselves with the data, and check for any potential issues that could hinder habitat selection analysis, we used code from <crane et al cite here> to generate summaries of all the tracking datasets.
+To reacquaint ourselves with the data, and check for any potential issues that could hinder habitat selection analysis, we used code from @crane_lots_2021 to generate summaries of all the tracking datasets.
 During this process we identified duplicated data points in the King Cobra data that required removal.
 We suspect that these escaped detection during the initial publication [@Marshall2018] because the methods used did not use time in estimation of home range.
-
-<!-- tracking summary used code from Crane et al  -    -->
-<!--   title: "Summarising Tracking Data" -->
-<!--   author: "Matt Crane, Inês Silva, Benjamin Michael Marshall, Colin Thomas Strine" -->
-<!--   date: "24/08/2020" -->
-
-<!--   OPHA002, OPHA004, and OPHA005 had issues with step lengths fitting to a exp dist. Therefore code added to only fit using the exlcude the 75% quantile of steps - only instances where fit failed was this implemented -->
-
-<!--   distanace is scaled to aid model convergence - especially key in INLA, but also applied to others -->
-
-<!--   twostep remove those individals with single habitat - also applies to some SSFs -->
 
 ## Multiverse Construction
 
@@ -227,6 +220,10 @@ A multiverse is tree of branching paths, where decisions made during analysis sp
 Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection [@marshall_habitat_2024] <!--[chapter 3]-->, but we are still left with sizeable variation in final answers –and perhaps more importantly answers that offer contradictory conclusions.
 The variation in results are similarly present in more practical demonstrations, such as many analysts projects [@gould_same_2023].
 
+```{r decisionsFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="..."}
+knitr::include_graphics(here::here("notebook", "ext_images", "decisions_visual.png"))
+```
+
 <!-- habitat class -->
 Our multiverse starts with two alternative ways of defining the habitats.
 Each case study has a map of available habitats, defined as categories.
@@ -236,7 +233,7 @@ For example, in the case of Malayan Kraits, buildings and natural areas were cla
 We then used the 0/1 classification as a predictor in the habitat selection analyses.
 We undertook this simplification to facilitate the repeated use of generic code in the multiverse.
 The second approach involved converting the simplified categorical habitat types into continuous rasters, where each cell described the distance to a given habitat type.
-We inverted the distances, so that a positive effect in the model mean a positive selection towards a habitat type, resulting in a more intuitive final output (Fig. \@ref(fig:landscapePlotOPHA1); Fig. \@ref(fig:landscapePlotOPHA2); Fig. \@ref(fig:landscapePlotPYBI1); Fig. \@ref(fig:landscapePlotBUCA1); Fig. \@ref(fig:landscapePlotBUFA1)).
+We inverted the distances (and scaled), so that a positive effect in the model mean a positive selection towards a habitat type, resulting in a more intuitive final output (Fig. \@ref(fig:landscapePlotOPHA1); Fig. \@ref(fig:landscapePlotOPHA2); Fig. \@ref(fig:landscapePlotPYBI1); Fig. \@ref(fig:landscapePlotBUCA1); Fig. \@ref(fig:landscapePlotBUFA1)).
 All analyses (see below) were run on both classifications, with the exception of the Compositional Analysis that required categoric inputs.
 
 The habitat selection methods we explored consisted of: Resource Selection Functions (RSF) and Composite Analysis (Compana) that we called area-based methods, which used an estimated available area to help define availability for the snakes; Step Selection Functions (SSF), Two-Step (Two-Step), and Poisson models (Poisson) that we refer to as step-based methods, which used randomly generated alternative locations based on the movement and sinuosity of the individual being examined; and a newly described weighted Resource Selection Functions (wRSF), which use a fitted movement model to calibrate the available habitat.
@@ -244,9 +241,13 @@ The habitat selection methods we explored consisted of: Resource Selection Funct
 The area-based category made use of a defined area of availability, for which random available points can be drawn.
 To explore the impact of the definition of available, we created a number of different polygons surrounding the tracking data locations.
 We created available areas using Minimum Convex Polygons (MCP), Kernel Density Estimates (KDE: using the reference smoothing bandwidth [href]), and Autocorrelated Kernel Density Estimates (aKDE).
+We used the adehabitatHR for MCP and KDE creation [@adehabitatHR], and the ctmm package for aKDEs [@ctmm; @Calabrese2016; @Fleming2015; @Fleming2017].
+For the aKDEs we fitted a number of movement models: Ornstein-Uhlenbeck (OU), Ornstein–Uhlenbeck Foraging (OUF), and Independent Identically Distributed (IID); we selected the best performing by AICc.
+We elected to follow guidance from [@silva_autocorrelationinformed_2022], opting for weighted aKDEs and the perturbative hybrid residual maximum likelihood method (pHREML).
+The weighted AKDEs are better suited for tracking data with gaps.
 All three methods require an outer most contour to be selected to define the edge of the available habitat; we varied this outer edge including analysis of 90, 95, and 99% contours.
 For the aKDE areas, we selected the point estimate connected to the contour percentage, ignoring the 95% confidence intervals associated with the estimate.
-<!-- We elected to follow the guidance outlined in SILVA ET AL, opting for PULL FROM FIRST PREPRINT. -->
+
 Once an available area was defined, we generated points within the area to extract the available habitat (also referred to as available points).
 We varied the point generation process, either purely random or stratified across the overall area.
 In addition to the point generation method, we varied the the number of available points by multiplying the number of known/used data points by `r paste0(range(optionsComplete$area$Method_ap), collapse = " to ")`.
@@ -270,6 +271,13 @@ Once the movement models had been generated, and wRSF models fitted, we used the
 
 We handled the running of all analyses and their associated choices using the targets `r paste0("v.", packageVersion("targets"))` and tarchetypes `r paste0("v.", packageVersion("tarchetypes"))` R packages [@targets; @tarchetypes].
 These packages allowed for efficient parallel process and tracking of intermediate objects while avoiding errors in one analysis pathway from delays the completion of others.
+
+During the running of the multiverse there were several instances of model fitting issues.
+*Ophiophagus hannah* 002, 004, and 005 had issues with step lengths fitting to a exponential distribution; we addressed this by excluding the top 25% quantile of observed steps when the exponential fit failed.
+One *Bungarus candidus* individual did not have sufficient relocations to generate any area estimates; therefore we excluded them.
+There were infrequent instances where individuals did not enter both habitat types (or available points did not cover both types made more likely with fewer available points); this caused issues with model fitting in Two-Step and SSF approaches.
+We re-ran random step generation for those individuals to maximise the chances that available points captured both habitat types.
+If the convergence failed persisted, we excluded those individuals from that habitat selection estimate end-point.
 
 ## Bayesian meta-analysis
 
@@ -422,7 +430,7 @@ The RSF models had the highest *R^2^* values, with the continuous classification
 The step-based approaches tended to have more variable *R^2^*, with step-selection models having the lowest values.
 
 *$\tau$^2^* values ranged from very low (`r signif(min(tau2conditional$value), digits = 2)`) for the binary classed RSF models examining *Bungaurs facsiatus*, to `r signif(max(tau2conditional$value), digits = 2)` for the binary classed Poisson models examining the same species.
-Mostly Tau2 values below 0.1 `r paste0(sum(tau2conditional$value < 0.1), "/", nrow(tau2conditional))` (overall median of `r round(median(tau2conditional$value), digits = 2)` ±SD `r round(sd(tau2conditional$value), digits = 2)`), largely mirroring results gained from meta-analyses and ecological many analysts projects [@gould_same_2023].
+Mostly *$\tau$^2^* values below 0.1 `r paste0(sum(tau2conditional$value < 0.1), "/", nrow(tau2conditional))` (overall median of `r round(median(tau2conditional$value), digits = 2)` ±SD `r round(sd(tau2conditional$value), digits = 2)`), largely mirroring results gained from meta-analyses and ecological many analysts projects [@gould_same_2023].
 
 ```{r metaR2Plot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Conditional R2 values for all meta-analysis models, with 95% HDCIs."}
 knitr::include_graphics(here::here("figures", "r2Plot.png"))
@@ -480,18 +488,18 @@ This mismatch may be more pronounced when habitats are rarer or when animals ten
 The rarity of these habitats may have also played a role, as we see clear decrease in the confidence intervals surrounding the estimates as we increased the number of available points sampled <!--- cite supp figures here -->.
 We suspect that location error resulting in binary habitat mis-classification may explain the large confidence intervals of the Poisson models and the limited support in *Python bivitattus* SSF analyses, as this uncertainty and lack of support is not visible in the continuous habitat models.
 
-A second decisions that could alter estimate strength dramatically was whether use an integrated model formulation (i.e., include step and turn angle in the model formula).
-The work of <!--- muff et al --> and <!--- forrester(?) -->, as well as chapter 3 showed that integrated formulas have contrasting impacts on estimates in step-selection approaches and poisson models.
+A second decision that could alter estimate strength dramatically was whether use an integrated model formulation (i.e., include step and turn angle in the model formula).
+The work of [@muff_accounting_2020] and [@forester_accounting_2009], as well as chapter 3 showed that integrated formulas have contrasting impacts on estimates in step-selection approaches and poisson models.
 The step-selection models tend to produce less biased estimates when using an integrated formula, whereas the poisson models the opposite.
 With those findings in mind, we should weight the findings using the non-integrated poison models more heavily.
-The non-integrated poison models show clearer support for the hypotheses in all cases with either classification, bar OPHAH1 and PYBYH1 whose estimates seem negligibly impacted when using the continuous classification.
-Unexpectedly the choice of model formulation did not have as noticeable impact in the step-selection approach, there only BUCA's estimates were markedly impacted.
-Despite this, the strength of the selection exhibited by BUCA meant that the more conservative estimates from the non-integrated models did not render the selection estimates non-significant.
+The non-integrated poison models show clearer support for the hypotheses in all cases with either classification, bar *Ophiophagus hannah* H1 and *Python bivitattus* H1 whose estimates seem negligibly impacted when using the continuous classification.
+Unexpectedly the choice of model formulation did not have as noticeable impact in the step-selection approach, there only *Bungarus candidus*'s estimates were markedly impacted.
+Despite this, the strength of the selection exhibited by *Bungarus candidus* meant that the more conservative estimates from the non-integrated models did not render the selection estimates non-significant.
 
 Overall, we can be reasonably confident that the analyses choices of the original publications did not result in peculiarly conclusions.
 While the average or summation or multiverse findings cannot be used as to estimate a true effect, they do highlight the high likelihood of repeated analyses agreeing.
 The support originating from more modern methods is additionally reassuring.
-The weighted Resource Selection Functions should be best placed to provide us with a broad estimate of habitat selection, while also best positioned to tackle the issues arising from inconsistent tracking <!--- alston here --->.
+The weighted Resource Selection Functions should be best placed to provide us with a broad estimate of habitat selection, while also best positioned to tackle the issues arising from inconsistent tracking [@alston_mitigating_2023].
 Their agreement with the other results (in terms of direction), and the fact they largely provide significant support for the original hypothesis is reason to be confident in the original conclusions.
 
 
@@ -505,7 +513,7 @@ We found that the final estimates could not be completely predicted by the analy
 In some cases, such as RSF binary, the analysis decisions explained the vast majority of variation and tau2 indicated that there was very little heterogeneity between end point.
 Whereas others such as the Poisson binary meta-analysis models left most of the variation unexplained, and indicated much higher levels of between end point heterogeneity, which appear comparable to meta-analysis on multiple studies with sampling variation.
 The propensity for the step-based methods to show higher tau2 values could be due to random sampling of step and turn angles in the available points.
-Overall, the variation in tau2 and r2 values from the meta-analysis models indicate that analysis choices are interacting with the species data and hypothesis, suggesting variation in habitat selection estimates may be difficult to predict in other systems and limited the generalisably of patterns shown here.
+Overall, the variation in *$\tau$^2^* and *R^2^* values from the meta-analysis models indicate that analysis choices are interacting with the species data and hypothesis, suggesting variation in habitat selection estimates may be difficult to predict in other systems and limited the generalisably of patterns shown here.
 
 <!-- from many analyssts: -->
 <!-- "We quantified both absolute () and relative () heterogeneity resulting from analytical variation. Both measures suggest that substantial variability among effect sizes was attributable to the analytical decisions of analysts. -->
@@ -516,23 +524,65 @@ Overall, the variation in tau2 and r2 values from the meta-analysis models indic
 
 Despite the clear species-driven variation in how analysis choices impact final estimates, we can examine the results on a species-hypothesis-basis to determine whether overall our multiverse supports or contradicts previously published conclusions (bearing in mind the multiverse's limitations).
 
-OPHA CONCLUSIONS HERE
-H1 clearly supported
-H2 much less so
-Overall not restricted to forest, and clearly need semi-nat areas in this region
+## Conlcusions
 
-PYBI
-weak connection with water that appears more clearly on a landscape scale compared to movements
+### King Cobra *Ophiohagus hannah*
 
-BUCA
-very clear connection to buildings and nat, regardless of method
+For *Ophiophagus hannah* we examined two hypotheses.
+The previously published conclusions that they make heavy use of semi-natural areas (i.e., banks of irrigation canals, and scrub between fields) is nearly universally supported regardless of approach, especially when classified as invert continuous distance.
+Why *Ophiophagus hannah* uses these habitats is not immediately clear, but it could be driven by prey availability, the avoidance of threats, and density of shelter sites.
+Other animals are know to make use of linear habitats <!-- cites from orig paper -->, including other snakes at this study site (i.e., *Ophiophagus hannah* primary prey).
+Both prey and *Ophiophagus hannah* could be using these linear connected semi-nat areas a means of avoiding the more exposed and dangerous fields and anthropogenic areas.
+Human activity in fields, such as ploughing will kill snakes <!-- krait mort paper here -->, and we have documented many fatalities of *Ophiophagus hannah* as a direct result of human actions (e.g., persecution, road collision) <!-- king mort paper -->.
+We can be confident that suggestions regarding the importance of edge or scrub habitats amongst a human-modified landscape are robust in the face of a multitiude of analysis choices.
 
-BUFA
+The second hypothesis regarding their selection for forest was not nearly as widely supported, and only appears to be supported in certain analysis approaches.
+The original paper highlighted the propensity for *Ophiophagus hannah* to leave the forest <!-- cite -->, and the heightened movement particularly during breeding season, potentially mate searching behaviour, was suggested as a likely driver <!-- cite -->.
+The *Ophiophagus hannah* data included in the first paper was more skewed towards *Ophiophagus hannah* found in/near protected forest, hence the focus on forest use.
+The data used here pooled old and new data that presents a more overall picture of *Ophiophagus hannah* selection, likely weakened that associated with protected forest.
+However, data collected after the original paper showed the use of forest for nesting sites for some *Ophiophagus hannah*, and their use of semi-natural areas to access it.
+This highlights the potential importance of forest during certain times of year, even if it is less likely to be identified by the broad (rather generalised) habitat selection multiverse-analysis here.
 
+### Burmese Python *Python bivitattus*
+
+The conclusions regarding *Python bivitattus* habitat selection appear susceptible to differing analysis approaches, but overall we can be fairly confident that the assertion that *Python bivitattus* ideally remain closer to water bodies.
+The patterns of selection in *Python bivitattus* appear more clearly with broader landscape level approaches compared to those using steps.
+It is likely that *Python bivitattus* are prioritising being close to water bodies for food and shelter.
+The use of water bodies and aquatic landscapes is well documented in *Python bivitattus*'s invasive range in Florida, USA [@mutascio_modeling_2018]; and here in Thailand evidence of *Python bivitattus* capitalising on both shelter and prey provided by the water bodies is apparent.
+As mentioned for the *Ophiophagus hannah*, edge areas in agricultural land in this area of Thailand are considerably less trafficked and modified compared to the agricultural matrix of crops.
+Less disturbance likely boosts shelter site options, as well as ambush sites and associated prey (e.g., aquatic birds).
+Shelter sites along edge habitats, such as field margins and banks, appear to shelter suitable for nesting (also evidenced by *Bungarus fasciatus* nest site choice; @smith_risk_2024).
+Nesting requires prolonged periods of non-disturbance, evidencing the potential stability of some of these edge habitat areas.
+Whereas for food, rice paddies can house suitable sized water birds [@fujioka_bird_2010], and *Python bivitattus* in this area have been documented depredating domestic waterfowl <!-- smith paper cite -->, together supporting suggestions that the water bodies are a resource.
+
+### Malayan Krait *Bungarus candidus*
+
+The previously published conclusions that *Bungarus candidus* prefer buildings and natural areas appears to be the most clearly supported and one of the least susceptible to analysis choices.
+Broadly the analysis would support their selection for buildings and natural areas on the university campus.
+We suspect the support is not due to a particular movement pattern, but instead the strength of the selection, which is visible in the wRSF and meta-analysis intercepts.
+*Bungarus candidus* are likely avoiding open areas, instead choosing to make use of the better micro-habitats available in buildings and natural areas.
+@hodges_malayan_2022 suggests these environments may be better for thermoregulation, and other evidence reveals buildings are used for foraging [@hodges_diurnal_2020; @hodges_deadly_2021].
+The selection for buildings presents a clear potential for human-snake conflict.
+*Bungarus candidus* are highly medically significant [@looareesuwan_factors_1988; @searo_regional_office_for_the_south_east_asia_rgo_guidelines_2016], and apparent overlap between their preference and human movements could heighten the chances of human-snake interactions resulting the harm of either human or snake.
+Fortunately, *Bungarus candidus* are mostly nocturnal presenting the chance for human and snake to avoid conflict temporally.
+The robustness of the selection analyses means we can safely support the suggestions in @hodges_malayan_2022 for the university to encourage light use when moving in the evening and night, wearing of closed footwear, and ensure buildings are adequately sealed [@samuel_venomous_2020].
+The selection for natural areas may further present an opportunity to draw snakes away from buildings, if more ideal shelter sites are available farther from concentrations of human activity.
+
+### Banded Krait *Bungarus fasciatus*
+
+*Bungarus fasciatus* conclusions fall mostly in the middle, they are very well supported by the overall meta-analysis intercepts but did clearly reveal some scenarios where researcher choice could have obscured what appears to be a selection for field margins.
+As mentioned for *Ophiophagus hannah*, field margins and other edge habitats, appear key to snake's lives in agricultural areas in Northeast Thailand, providing shelter and movement corridors.
+*Bungarus fasciatus* supports this.
+Their use of edge habitats is not limited to sheltering, as like *Python bivitattus*, the edges offer suitable (possibly communal) nest sites [@knierim_spatial_2019].
+When paired with other studies indicating the importance of field margins for mammalian and amphibians [@brown_habitat_2001; @groffen_preference_2018], particularly rice paddy edges, it is clear that *Bungarus fasciatus* likely finds all the resources required in these edge habitats.
+The concentration to the field margins may indicate a human-snake interaction hotspot, the identification of which could aid refinement of agent-based snakebite risk maps (e.g., @goldstein_integrating_2021).
 
 <!-- Future - while things look ok here for direction. move towards modern methods, or methods that are scale independent if you want to extrapolate strength, e.g. bring in more mechanisms, mirror point made in review paper -->
+Looking forward, we feel confident in the broad conclusions draw by the original studies.
+However, the use of exact selection strengths should be examined in more detail if they are to be adapted to future purposes such as human-snake conflict prediction (as supported by simulation habitat multiveres; @marshall_habitat_2024; Chapter 3).
+In those cases reassessment of the selection using newer methods, more acutely tailored to prediction may be required, either by greater integration of mechanistic drivers of snake movement, or via methods that are scale independent enabling better beyond-sample extrapolation (e.g., @michelot_langevin_2019).
 
-## Conclusions
+Summarised together, this study reveals the robustness of snake habitat selection studies to researcher analysis choice, while also reaffirming the conclusions regarding the important role habitat patches (edges, banks, canals, etc.) play for snakes in an otherwise human dominated unsuitable landscape.
 
 # Acknowledgements
 
