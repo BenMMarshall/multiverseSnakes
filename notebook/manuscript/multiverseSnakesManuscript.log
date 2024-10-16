@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.11)  7 OCT 2024 16:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.6.11)  16 OCT 2024 11:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -513,7 +513,7 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/sc' will be
 (Font)              scaled to size 10.0pt on input line 80.
-<PDFheaderImage.png, id=122, 200.4288pt x 29.8716pt>
+<PDFheaderImage.png, id=138, 200.4288pt x 29.8716pt>
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
 Package pdftex.def Info: PDFheaderImage.png  used on input line 80.
@@ -536,498 +536,546 @@ LaTeX Font Warning: Font shape `OT1/phv/n/n' undefined
 (Font)              using `OT1/phv/m/n' instead on input line 127.
 
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 146.
-LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on input line 146.
+(Font)              scaled to size 10.0pt on input line 147.
+LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on input line 147.
 (c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcharter/TS1XCharter-TLF.fd
 File: TS1XCharter-TLF.fd 2020/05/25 (msharpe) Font definitions for TS1/XCharter-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 146.
+(Font)              scaled to size 10.0pt on input line 147.
+<../ext_images/hypothesis_visual.png, id=222, 674.52pt x 432.6564pt>
+File: ../ext_images/hypothesis_visual.png Graphic file (type png)
+<use ../ext_images/hypothesis_visual.png>
+Package pdftex.def Info: ../ext_images/hypothesis_visual.png  used on input line 160.
+(pdftex.def)             Requested size: 495.07779pt x 317.55962pt.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 160.
 
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 173.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 176.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
 [3{c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc}]
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 189.
-
-LaTeX Warning: Citation `ref-kuch_notes_2001' on page 4 undefined on input line 189.
-
-
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 223.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 200.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[4]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 225.
+[4 <../ext_images/hypothesis_visual.png>]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 230.
 (c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 289.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 259.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
 [5]
-
-LaTeX Warning: Citation `ref-targets' on page 6 undefined on input line 294.
-
-
-LaTeX Warning: Citation `ref-tarchetypes' on page 6 undefined on input line 294.
-
-
-LaTeX Warning: Citation `ref-brms' on page 6 undefined on input line 308.
-
+<../ext_images/decisions_visual.png, id=305, 674.52pt x 443.0151pt>
+File: ../ext_images/decisions_visual.png Graphic file (type png)
+<use ../ext_images/decisions_visual.png>
+Package pdftex.def Info: ../ext_images/decisions_visual.png  used on input line 261.
+(pdftex.def)             Requested size: 495.07779pt x 325.16266pt.
 
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 327.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 286.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[6]
-<../../figures/specCurve_area.pdf, id=314, 1023.825pt x 795.97375pt>
+[6 <../ext_images/decisions_visual.png>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 331.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[7]
+<../../figures/specCurve_area.pdf, id=361, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_area.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_area.pdf>
-Package pdftex.def Info: ../../figures/specCurve_area.pdf  used on input line 339.
+Package pdftex.def Info: ../../figures/specCurve_area.pdf  used on input line 360.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 350.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[7 <../../figures/specCurve_area.pdf>]
-<../../figures/specCurve_rsf.pdf, id=342, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_rsf.pdf, id=364, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_rsf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_rsf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_rsf.pdf  used on input line 352.
+Package pdftex.def Info: ../../figures/specCurve_rsf.pdf  used on input line 373.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
 
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 362.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 383.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[8 <../../figures/specCurve_rsf.pdf>]
-<../../figures/specCurve_twoStep.pdf, id=366, 1023.825pt x 795.97375pt>
+[8]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 383.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[9 <../../figures/specCurve_area.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 383.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[10 <../../figures/specCurve_rsf.pdf>]
+<../../figures/specCurve_twoStep.pdf, id=419, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_twoStep.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_twoStep.pdf>
-Package pdftex.def Info: ../../figures/specCurve_twoStep.pdf  used on input line 364.
+Package pdftex.def Info: ../../figures/specCurve_twoStep.pdf  used on input line 385.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_ssf.pdf, id=370, 1023.825pt x 795.97375pt>
+
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 398.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[11 <../../figures/specCurve_twoStep.pdf>]
+<../../figures/specCurve_ssf.pdf, id=444, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_ssf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_ssf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_ssf.pdf  used on input line 379.
+Package pdftex.def Info: ../../figures/specCurve_ssf.pdf  used on input line 400.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 380.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[9 <../../figures/specCurve_twoStep.pdf>]
-<../../figures/specCurve_pois.pdf, id=395, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_pois.pdf, id=448, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_pois.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_pois.pdf>
-Package pdftex.def Info: ../../figures/specCurve_pois.pdf  used on input line 395.
+Package pdftex.def Info: ../../figures/specCurve_pois.pdf  used on input line 416.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
 
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 403.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 424.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[10 <../../figures/specCurve_ssf.pdf>]
+[12 <../../figures/specCurve_ssf.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 403.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 424.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[11 <../../figures/specCurve_pois.pdf>]
-<../../figures/specCurve_wrsf.pdf, id=436, 597.23125pt x 341.275pt>
+[13 <../../figures/specCurve_pois.pdf>]
+<../../figures/specCurve_wrsf.pdf, id=491, 597.23125pt x 341.275pt>
 File: ../../figures/specCurve_wrsf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_wrsf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_wrsf.pdf  used on input line 405.
+Package pdftex.def Info: ../../figures/specCurve_wrsf.pdf  used on input line 426.
 (pdftex.def)             Requested size: 495.07779pt x 282.90407pt.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 7.0pt on input line 410.
-<../../figures/r2Plot.png, id=439, 625.8582pt x 540.5796pt>
+(Font)              scaled to size 7.0pt on input line 431.
+<../../figures/r2Plot.png, id=494, 625.8582pt x 540.5796pt>
 File: ../../figures/r2Plot.png Graphic file (type png)
 <use ../../figures/r2Plot.png>
-Package pdftex.def Info: ../../figures/r2Plot.png  used on input line 418.
+Package pdftex.def Info: ../../figures/r2Plot.png  used on input line 439.
 (pdftex.def)             Requested size: 495.07779pt x 427.62236pt.
+<../../figures/metaIntercept.png, id=496, 625.8582pt x 540.5796pt>
+File: ../../figures/metaIntercept.png Graphic file (type png)
+<use ../../figures/metaIntercept.png>
+Package pdftex.def Info: ../../figures/metaIntercept.png  used on input line 447.
+(pdftex.def)             Requested size: 495.07779pt x 427.62236pt.
+<../../figures/metaBeta.png, id=498, 1024.0659pt x 796.6563pt>
+File: ../../figures/metaBeta.png Graphic file (type png)
+<use ../../figures/metaBeta.png>
+Package pdftex.def Info: ../../figures/metaBeta.png  used on input line 459.
+(pdftex.def)             Requested size: 495.07779pt x 385.13794pt.
 
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 434.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 462.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[12 <../../figures/specCurve_wrsf.pdf>]
+[14 <../../figures/specCurve_wrsf.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 434.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 462.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[13 <../../figures/r2Plot.png>]
+[15 <../../figures/r2Plot.png>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 479.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 462.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[14]
+[16 <../../figures/metaIntercept.png>]
 
-LaTeX Warning: Citation `ref-base' on page 15 undefined on input line 496.
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 462.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[17 <../../figures/metaBeta.png>]
 
-
-LaTeX Warning: Citation `ref-patchwork' on page 15 undefined on input line 501.
-
-
-LaTeX Warning: Citation `ref-ggridges' on page 15 undefined on input line 501.
-
-
-LaTeX Warning: Citation `ref-brms' on page 15 undefined on input line 503.
-
-
-LaTeX Warning: Citation `ref-bayesplot' on page 15 undefined on input line 503.
-
-
-LaTeX Warning: Citation `ref-performance' on page 15 undefined on input line 503.
-
-
-LaTeX Warning: Citation `ref-sp' on page 15 undefined on input line 508.
-
-LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 584.
-<../../figures/timeLagPlot.pdf, id=493, 511.9125pt x 426.59375pt>
-File: ../../figures/timeLagPlot.pdf Graphic file (type pdf)
-<use ../../figures/timeLagPlot.pdf>
-Package pdftex.def Info: ../../figures/timeLagPlot.pdf  used on input line 588.
-(pdftex.def)             Requested size: 495.07779pt x 412.56517pt.
-<../../figures/timeLinePlot.pdf, id=494, 625.33624pt x 454.69875pt>
-File: ../../figures/timeLinePlot.pdf Graphic file (type pdf)
-<use ../../figures/timeLinePlot.pdf>
-Package pdftex.def Info: ../../figures/timeLinePlot.pdf  used on input line 592.
-(pdftex.def)             Requested size: 495.07779pt x 359.99208pt.
-<../../figures/landscape_plot_OPHA_H1.pdf, id=495, 653.44125pt x 511.9125pt>
-File: ../../figures/landscape_plot_OPHA_H1.pdf Graphic file (type pdf)
-<use ../../figures/landscape_plot_OPHA_H1.pdf>
-Package pdftex.def Info: ../../figures/landscape_plot_OPHA_H1.pdf  used on input line 598.
-(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
-<../../figures/landscape_plot_OPHA_H2.pdf, id=496, 653.44125pt x 511.9125pt>
-File: ../../figures/landscape_plot_OPHA_H2.pdf Graphic file (type pdf)
-<use ../../figures/landscape_plot_OPHA_H2.pdf>
-Package pdftex.def Info: ../../figures/landscape_plot_OPHA_H2.pdf  used on input line 602.
-(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
-<../../figures/landscape_plot_PYBI_H1.pdf, id=497, 653.44125pt x 511.9125pt>
-File: ../../figures/landscape_plot_PYBI_H1.pdf Graphic file (type pdf)
-<use ../../figures/landscape_plot_PYBI_H1.pdf>
-Package pdftex.def Info: ../../figures/landscape_plot_PYBI_H1.pdf  used on input line 606.
-(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
-<../../figures/landscape_plot_BUCA_H1.pdf, id=498, 653.44125pt x 511.9125pt>
-File: ../../figures/landscape_plot_BUCA_H1.pdf Graphic file (type pdf)
-<use ../../figures/landscape_plot_BUCA_H1.pdf>
-Package pdftex.def Info: ../../figures/landscape_plot_BUCA_H1.pdf  used on input line 610.
-(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
-<../../figures/landscape_plot_BUFA_H1.pdf, id=499, 653.44125pt x 511.9125pt>
-File: ../../figures/landscape_plot_BUFA_H1.pdf Graphic file (type pdf)
-<use ../../figures/landscape_plot_BUFA_H1.pdf>
-Package pdftex.def Info: ../../figures/landscape_plot_BUFA_H1.pdf  used on input line 614.
-(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 509.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[18]
 
 LaTeX Font Warning: Font shape `OT1/phv/n/it' undefined
-(Font)              using `OT1/phv/n/n' instead on input line 619.
+(Font)              using `OT1/phv/n/n' instead on input line 514.
 
-<../../figures/specCurve_Ophiophagus hannah_area.pdf, id=500, 1023.825pt x 795.97375pt>
+
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 545.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[19]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 587.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[20]
+LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 8.0pt on input line 673.
+<../../figures/timeLagPlot.pdf, id=659, 511.9125pt x 426.59375pt>
+File: ../../figures/timeLagPlot.pdf Graphic file (type pdf)
+<use ../../figures/timeLagPlot.pdf>
+Package pdftex.def Info: ../../figures/timeLagPlot.pdf  used on input line 677.
+(pdftex.def)             Requested size: 495.07779pt x 412.56517pt.
+<../../figures/timeLinePlot.pdf, id=660, 625.33624pt x 454.69875pt>
+File: ../../figures/timeLinePlot.pdf Graphic file (type pdf)
+<use ../../figures/timeLinePlot.pdf>
+Package pdftex.def Info: ../../figures/timeLinePlot.pdf  used on input line 681.
+(pdftex.def)             Requested size: 495.07779pt x 359.99208pt.
+<../../figures/landscape_plot_OPHA_H1.pdf, id=661, 653.44125pt x 511.9125pt>
+File: ../../figures/landscape_plot_OPHA_H1.pdf Graphic file (type pdf)
+<use ../../figures/landscape_plot_OPHA_H1.pdf>
+Package pdftex.def Info: ../../figures/landscape_plot_OPHA_H1.pdf  used on input line 687.
+(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
+<../../figures/landscape_plot_OPHA_H2.pdf, id=662, 653.44125pt x 511.9125pt>
+File: ../../figures/landscape_plot_OPHA_H2.pdf Graphic file (type pdf)
+<use ../../figures/landscape_plot_OPHA_H2.pdf>
+Package pdftex.def Info: ../../figures/landscape_plot_OPHA_H2.pdf  used on input line 691.
+(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
+<../../figures/landscape_plot_PYBI_H1.pdf, id=663, 653.44125pt x 511.9125pt>
+File: ../../figures/landscape_plot_PYBI_H1.pdf Graphic file (type pdf)
+<use ../../figures/landscape_plot_PYBI_H1.pdf>
+Package pdftex.def Info: ../../figures/landscape_plot_PYBI_H1.pdf  used on input line 695.
+(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
+<../../figures/landscape_plot_BUCA_H1.pdf, id=664, 653.44125pt x 511.9125pt>
+File: ../../figures/landscape_plot_BUCA_H1.pdf Graphic file (type pdf)
+<use ../../figures/landscape_plot_BUCA_H1.pdf>
+Package pdftex.def Info: ../../figures/landscape_plot_BUCA_H1.pdf  used on input line 699.
+(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
+<../../figures/landscape_plot_BUFA_H1.pdf, id=665, 653.44125pt x 511.9125pt>
+File: ../../figures/landscape_plot_BUFA_H1.pdf Graphic file (type pdf)
+<use ../../figures/landscape_plot_BUFA_H1.pdf>
+Package pdftex.def Info: ../../figures/landscape_plot_BUFA_H1.pdf  used on input line 703.
+(pdftex.def)             Requested size: 495.07779pt x 387.84682pt.
+<../../figures/specCurve_Ophiophagus hannah_area.pdf, id=666, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Ophiophagus hannah_area.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Ophiophagus hannah_area.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_area.pdf  used on input line 622.
+Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_area.pdf  used on input line 711.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Ophiophagus hannah_rsf.pdf, id=501, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Ophiophagus hannah_rsf.pdf, id=667, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Ophiophagus hannah_rsf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Ophiophagus hannah_rsf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_rsf.pdf  used on input line 626.
+Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_rsf.pdf  used on input line 715.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Ophiophagus hannah_twoStep.pdf, id=502, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Ophiophagus hannah_twoStep.pdf, id=668, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Ophiophagus hannah_twoStep.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Ophiophagus hannah_twoStep.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_twoStep.pdf  used on input line 630.
+Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_twoStep.pdf  used on input line 719.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Ophiophagus hannah_ssf.pdf, id=503, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Ophiophagus hannah_ssf.pdf, id=669, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Ophiophagus hannah_ssf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Ophiophagus hannah_ssf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_ssf.pdf  used on input line 634.
+Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_ssf.pdf  used on input line 723.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Ophiophagus hannah_pois.pdf, id=504, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Ophiophagus hannah_pois.pdf, id=670, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Ophiophagus hannah_pois.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Ophiophagus hannah_pois.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_pois.pdf  used on input line 638.
+Package pdftex.def Info: ../../figures/specCurve_Ophiophagus hannah_pois.pdf  used on input line 727.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Python bivittatus_area.pdf, id=505, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Python bivittatus_area.pdf, id=671, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Python bivittatus_area.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Python bivittatus_area.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_area.pdf  used on input line 644.
+Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_area.pdf  used on input line 733.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[15]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[16 <../../figures/timeLagPlot.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[17 <../../figures/timeLinePlot.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[18 <../../figures/landscape_plot_OPHA_H1.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[19 <../../figures/landscape_plot_OPHA_H2.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[20 <../../figures/landscape_plot_PYBI_H1.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[21 <../../figures/landscape_plot_BUCA_H1.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[22 <../../figures/landscape_plot_BUFA_H1.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[23 <../../figures/specCurve_Ophiophagus hannah_area.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[24 <../../figures/specCurve_Ophiophagus hannah_rsf.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[25 <../../figures/specCurve_Ophiophagus hannah_twoStep.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[26 <../../figures/specCurve_Ophiophagus hannah_ssf.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 645.
-(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[27 <../../figures/specCurve_Ophiophagus hannah_pois.pdf>]
-<../../figures/specCurve_Python bivittatus_rsf.pdf, id=761, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Python bivittatus_rsf.pdf, id=672, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Python bivittatus_rsf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Python bivittatus_rsf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_rsf.pdf  used on input line 648.
+Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_rsf.pdf  used on input line 737.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Python bivittatus_twoStep.pdf, id=762, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Python bivittatus_twoStep.pdf, id=673, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Python bivittatus_twoStep.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Python bivittatus_twoStep.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_twoStep.pdf  used on input line 652.
+Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_twoStep.pdf  used on input line 741.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Python bivittatus_ssf.pdf, id=763, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Python bivittatus_ssf.pdf, id=674, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Python bivittatus_ssf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Python bivittatus_ssf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_ssf.pdf  used on input line 656.
+Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_ssf.pdf  used on input line 745.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Python bivittatus_pois.pdf, id=764, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Python bivittatus_pois.pdf, id=675, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Python bivittatus_pois.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Python bivittatus_pois.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_pois.pdf  used on input line 660.
+Package pdftex.def Info: ../../figures/specCurve_Python bivittatus_pois.pdf  used on input line 749.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus candidus_area.pdf, id=765, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus candidus_area.pdf, id=676, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus candidus_area.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus candidus_area.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_area.pdf  used on input line 666.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_area.pdf  used on input line 755.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus candidus_rsf.pdf, id=766, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus candidus_rsf.pdf, id=677, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus candidus_rsf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus candidus_rsf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_rsf.pdf  used on input line 670.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_rsf.pdf  used on input line 759.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus candidus_twoStep.pdf, id=767, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus candidus_twoStep.pdf, id=678, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus candidus_twoStep.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus candidus_twoStep.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_twoStep.pdf  used on input line 674.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_twoStep.pdf  used on input line 763.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus candidus_ssf.pdf, id=768, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus candidus_ssf.pdf, id=679, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus candidus_ssf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus candidus_ssf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_ssf.pdf  used on input line 678.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_ssf.pdf  used on input line 767.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus candidus_pois.pdf, id=769, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus candidus_pois.pdf, id=680, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus candidus_pois.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus candidus_pois.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_pois.pdf  used on input line 682.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus candidus_pois.pdf  used on input line 771.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus fasciatus_area.pdf, id=770, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus fasciatus_area.pdf, id=681, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus fasciatus_area.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus fasciatus_area.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_area.pdf  used on input line 688.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_area.pdf  used on input line 777.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus fasciatus_rsf.pdf, id=771, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus fasciatus_rsf.pdf, id=682, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus fasciatus_rsf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus fasciatus_rsf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_rsf.pdf  used on input line 692.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_rsf.pdf  used on input line 781.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus fasciatus_twoStep.pdf, id=772, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus fasciatus_twoStep.pdf, id=683, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus fasciatus_twoStep.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus fasciatus_twoStep.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_twoStep.pdf  used on input line 696.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_twoStep.pdf  used on input line 785.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus fasciatus_ssf.pdf, id=773, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus fasciatus_ssf.pdf, id=684, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus fasciatus_ssf.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus fasciatus_ssf.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_ssf.pdf  used on input line 700.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_ssf.pdf  used on input line 789.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
-<../../figures/specCurve_Bungarus fasciatus_pois.pdf, id=774, 1023.825pt x 795.97375pt>
+<../../figures/specCurve_Bungarus fasciatus_pois.pdf, id=685, 1023.825pt x 795.97375pt>
 File: ../../figures/specCurve_Bungarus fasciatus_pois.pdf Graphic file (type pdf)
 <use ../../figures/specCurve_Bungarus fasciatus_pois.pdf>
-Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_pois.pdf  used on input line 704.
+Package pdftex.def Info: ../../figures/specCurve_Bungarus fasciatus_pois.pdf  used on input line 793.
 (pdftex.def)             Requested size: 495.07779pt x 384.89297pt.
 
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[28]
+[21]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[29 <../../figures/specCurve_Python bivittatus_area.pdf>]
+[22 <../../figures/timeLagPlot.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[30 <../../figures/specCurve_Python bivittatus_rsf.pdf>]
+[23 <../../figures/timeLinePlot.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[31 <../../figures/specCurve_Python bivittatus_twoStep.pdf>]
+[24 <../../figures/landscape_plot_OPHA_H1.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[32 <../../figures/specCurve_Python bivittatus_ssf.pdf>]
+[25 <../../figures/landscape_plot_OPHA_H2.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[33 <../../figures/specCurve_Python bivittatus_pois.pdf>]
+[26 <../../figures/landscape_plot_PYBI_H1.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[34 <../../figures/specCurve_Bungarus candidus_area.pdf>]
+[27 <../../figures/landscape_plot_BUCA_H1.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[35 <../../figures/specCurve_Bungarus candidus_rsf.pdf>]
+[28 <../../figures/landscape_plot_BUFA_H1.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[36 <../../figures/specCurve_Bungarus candidus_twoStep.pdf>]
+[29 <../../figures/specCurve_Ophiophagus hannah_area.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[37 <../../figures/specCurve_Bungarus candidus_ssf.pdf>]
+[30 <../../figures/specCurve_Ophiophagus hannah_rsf.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[38 <../../figures/specCurve_Bungarus candidus_pois.pdf>]
+[31 <../../figures/specCurve_Ophiophagus hannah_twoStep.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[39 <../../figures/specCurve_Bungarus fasciatus_area.pdf>]
+[32 <../../figures/specCurve_Ophiophagus hannah_ssf.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[40 <../../figures/specCurve_Bungarus fasciatus_rsf.pdf>]
+[33 <../../figures/specCurve_Ophiophagus hannah_pois.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[41 <../../figures/specCurve_Bungarus fasciatus_twoStep.pdf>]
+[34 <../../figures/specCurve_Python bivittatus_area.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[42 <../../figures/specCurve_Bungarus fasciatus_ssf.pdf>]
+[35 <../../figures/specCurve_Python bivittatus_rsf.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 744.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[43 <../../figures/specCurve_Bungarus fasciatus_pois.pdf>]
+[36 <../../figures/specCurve_Python bivittatus_twoStep.pdf>]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 786.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[44]
-Overfull \hbox (18.29172pt too wide) in paragraph at lines 788--789
+[37 <../../figures/specCurve_Python bivittatus_ssf.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[38 <../../figures/specCurve_Python bivittatus_pois.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[39 <../../figures/specCurve_Bungarus candidus_area.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[40 <../../figures/specCurve_Bungarus candidus_rsf.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[41 <../../figures/specCurve_Bungarus candidus_twoStep.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[42 <../../figures/specCurve_Bungarus candidus_ssf.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[43 <../../figures/specCurve_Bungarus candidus_pois.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[44 <../../figures/specCurve_Bungarus fasciatus_area.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[45 <../../figures/specCurve_Bungarus fasciatus_rsf.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[46 <../../figures/specCurve_Bungarus fasciatus_twoStep.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[47 <../../figures/specCurve_Bungarus fasciatus_ssf.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 807.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[48 <../../figures/specCurve_Bungarus fasciatus_pois.pdf>]
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 846.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[49]
+Overfull \hbox (14.72295pt too wide) in paragraph at lines 871--872
+\T1/XCharter-TLF/m/n/10 hatch-ing suc-cess and hatch-ling size. \T1/XCharter-TLF/m/it/10 Jour-nal of Ther-mal Bi-ol-ogy \T1/XCharter-TLF/m/n/10 112:103468. DOI: [][]10.1016/j.jtherbio.2023.103468[][]. 
+ []
+
+
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 908.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[50]
+Overfull \hbox (18.29172pt too wide) in paragraph at lines 961--962
 []\T1/XCharter-TLF/m/n/10 Kelly CD. 2019. Rate and suc-cess of study repli-ca-tion in ecol-ogy and evo-lu-tion. \T1/XCharter-TLF/m/it/10 PeerJ \T1/XCharter-TLF/m/n/10 7:e7654. DOI: [][]10.7717/peerj.7654[][]. 
  []
 
 
-Overfull \hbox (9.61296pt too wide) in paragraph at lines 851--852
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 986.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[51]
+Overfull \hbox (2.25888pt too wide) in paragraph at lines 994--995
+\T1/XCharter-TLF/m/n/10 com-par-i-son and test-ing of sta-tis-ti-cal mod-els. \T1/XCharter-TLF/m/it/10 Jour-nal of Open Source Soft-ware \T1/XCharter-TLF/m/n/10 6:3139. DOI: [][]10.21105/joss.03139[][]. 
+ []
+
+
+Overfull \hbox (5.76297pt too wide) in paragraph at lines 1030--1031
+\T1/XCharter-TLF/m/n/10 for in-va-sive Burmese pythons (Python molu-rus bivit-ta-tus). \T1/XCharter-TLF/m/it/10 Land-scape Ecol-ogy \T1/XCharter-TLF/m/n/10 33:257--274. DOI: [][]10.1007/s10980-
+ []
+
+
+
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1061.
+(pdftex.def)             Requested size: 80.51567pt x 12.0pt.
+[52]
+Overfull \hbox (9.61296pt too wide) in paragraph at lines 1075--1076
 \T1/XCharter-TLF/m/n/10 sponse to Al-lopatric Mob-bing Calls. \T1/XCharter-TLF/m/it/10 An-i-mal Be-hav-ior and Cog-ni-tion \T1/XCharter-TLF/m/n/10 8:152--165. DOI: [][]10.26451/abc.08.02.05.2021[][]. 
  []
 
@@ -1035,15 +1083,15 @@ Overfull \hbox (9.61296pt too wide) in paragraph at lines 851--852
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 858.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1128.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[45]
+[53]
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 924.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1178.
 (pdftex.def)             Requested size: 80.51567pt x 12.0pt.
-[46] 
+[54] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./multiverseSnakesManuscript.aux)
  ***********
@@ -1053,25 +1101,22 @@ L3 programming layer <2024-05-27>
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `multiverseSnakesManuscript.out' has not changed.
-(rerunfilecheck)             Checksum: 8E1E8194FCDC8A358AABC86088F250BD;4730.
+(rerunfilecheck)             Checksum: 1321B40F55233B694241DCB04C37DCB6;5648.
  ) 
 Here is how much of TeX's memory you used:
- 15347 strings out of 475517
- 264308 string characters out of 5775029
- 2021894 words of memory out of 5000000
- 37542 multiletter control sequences out of 15000+600000
+ 15529 strings out of 475517
+ 268716 string characters out of 5775029
+ 2015894 words of memory out of 5000000
+ 37653 multiletter control sequences out of 15000+600000
  634254 words of font info for 87 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 90i,16n,131p,3093b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,16n,131p,3093b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/benma/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benma/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on multiverseSnakesManuscript.pdf (46 pages, 7241348 bytes).
+Output written on multiverseSnakesManuscript.pdf (54 pages, 9087764 bytes).
 PDF statistics:
- 1276 PDF objects out of 1440 (max. 8388607)
- 1078 compressed objects within 11 object streams
- 181 named destinations out of 1000 (max. 500000)
- 408 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1548 PDF objects out of 1728 (max. 8388607)
+ 1335 compressed objects within 14 object streams
+ 252 named destinations out of 1000 (max. 500000)
+ 460 words of extra memory for PDF output out of 10000 (max. 10000000)
 

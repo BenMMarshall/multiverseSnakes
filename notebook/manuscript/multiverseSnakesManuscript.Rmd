@@ -108,6 +108,7 @@ Bisecting the transitional zone, and running adjacent to the protected forest ar
 The Malayan Krait case study was not in the Sakaerat Biosphere Reserve, instead undertaken nearer to Nakhon Ratchasima proper, on the Suranaree University of Technology campus.
 The university campus is a mix of scrub forest, open lawn, university buildings, and homes.
 Further details on the study sites' characteristics can be found in the original publications [@Marshall2018; @marshall_no_2020; @smith_native_2021; @hodges_malayan_2022; @knierim_spatial_2019].
+For land use classfication we relied on data supplied by the Land Development Department of Thailand [@land_development_department_thailand_land-use_2017].
 
 <!-- enough detail? and double check the match the original papers -->
 
@@ -529,19 +530,22 @@ Despite the clear species-driven variation in how analysis choices impact final 
 ### King Cobra *Ophiohagus hannah*
 
 For *Ophiophagus hannah* we examined two hypotheses.
-The previously published conclusions that they make heavy use of semi-natural areas (i.e., banks of irrigation canals, and scrub between fields) is nearly universally supported regardless of approach, especially when classified as invert continuous distance.
-Why *Ophiophagus hannah* uses these habitats is not immediately clear, but it could be driven by prey availability, the avoidance of threats, and density of shelter sites.
-Other animals are know to make use of linear habitats <!-- cites from orig paper -->, including other snakes at this study site (i.e., *Ophiophagus hannah* primary prey).
+The previously published conclusions that they make heavy use of semi-natural areas (i.e., banks of irrigation canals, and scrub between fields; @marshall_no_2020) is nearly universally supported regardless of approach, especially when classified as invert continuous distance.
+Why *Ophiophagus hannah* uses these habitats is not immediately clear, but it could be driven by prey availability (e.g., other snake species @Barnes2017; @Strine2018a), the avoidance of threats, and density of shelter sites.
+Other reptiles are know to make use of linear habitats [@doherty_animal_2019; @Kay2016], including other snakes at this study site (i.e., *Ophiophagus hannah*'s primary prey; @Jones_supposed_2020).
 Both prey and *Ophiophagus hannah* could be using these linear connected semi-nat areas a means of avoiding the more exposed and dangerous fields and anthropogenic areas.
-Human activity in fields, such as ploughing will kill snakes <!-- krait mort paper here -->, and we have documented many fatalities of *Ophiophagus hannah* as a direct result of human actions (e.g., persecution, road collision) <!-- king mort paper -->.
+Human activity in fields, such as ploughing will kill snakes [@Knierim2017a], and we have documented many fatalities of *Ophiophagus hannah* as a direct result of human actions (e.g., persecution, road collision; @marshall_no_2020).
 We can be confident that suggestions regarding the importance of edge or scrub habitats amongst a human-modified landscape are robust in the face of a multitiude of analysis choices.
 
 The second hypothesis regarding their selection for forest was not nearly as widely supported, and only appears to be supported in certain analysis approaches.
-The original paper highlighted the propensity for *Ophiophagus hannah* to leave the forest <!-- cite -->, and the heightened movement particularly during breeding season, potentially mate searching behaviour, was suggested as a likely driver <!-- cite -->.
+The original paper highlighted the propensity for *Ophiophagus hannah* to leave the forest [@Marshall2018], and the heightened movement particularly during breeding season, potentially mate searching behaviour.
+Mate searching has been indicated as a potential seasonal driver of heightened movements in other snake species [@Bauder2016a; @Duvall1997].
 The *Ophiophagus hannah* data included in the first paper was more skewed towards *Ophiophagus hannah* found in/near protected forest, hence the focus on forest use.
 The data used here pooled old and new data that presents a more overall picture of *Ophiophagus hannah* selection, likely weakened that associated with protected forest.
-However, data collected after the original paper showed the use of forest for nesting sites for some *Ophiophagus hannah*, and their use of semi-natural areas to access it.
-This highlights the potential importance of forest during certain times of year, even if it is less likely to be identified by the broad (rather generalised) habitat selection multiverse-analysis here.
+However, data collected after the original paper showed individuals using the forest for nesting; to maintain access to the forest these individuals travelled via semi-natural areas and were required to cross roads [@jones_how_2022; @marshall_no_2020].
+The nest construction of *Ophiophagus hannah* requires adequate vegetated material to maintain the requisite internal nest temperatures [@dolia_house-warming_2023].
+This highlights the potential importance of forested areas during certain times of year, even if it is less likely to be identified by the broad (rather generalised) habitat selection multiverse-analysis here.
+Other studies have revealed OPHA nesting potentially favours less disturbed areas, even if a clear preference of forests is not apparent [@koirala_distribution_2021]. 
 
 ### Burmese Python *Python bivitattus*
 
@@ -553,7 +557,7 @@ As mentioned for the *Ophiophagus hannah*, edge areas in agricultural land in th
 Less disturbance likely boosts shelter site options, as well as ambush sites and associated prey (e.g., aquatic birds).
 Shelter sites along edge habitats, such as field margins and banks, appear to shelter suitable for nesting (also evidenced by *Bungarus fasciatus* nest site choice; @smith_risk_2024).
 Nesting requires prolonged periods of non-disturbance, evidencing the potential stability of some of these edge habitat areas.
-Whereas for food, rice paddies can house suitable sized water birds [@fujioka_bird_2010], and *Python bivitattus* in this area have been documented depredating domestic waterfowl <!-- smith paper cite -->, together supporting suggestions that the water bodies are a resource.
+Whereas for food, rice paddies can house suitable sized water birds [@fujioka_bird_2010], and *Python bivitattus* in this area have been documented depredating domestic waterfowl [@smith_native_2021], together supporting suggestions that the water bodies are a resource.
 
 ### Malayan Krait *Bungarus candidus*
 
@@ -567,6 +571,7 @@ The selection for buildings presents a clear potential for human-snake conflict.
 Fortunately, *Bungarus candidus* are mostly nocturnal presenting the chance for human and snake to avoid conflict temporally.
 The robustness of the selection analyses means we can safely support the suggestions in @hodges_malayan_2022 for the university to encourage light use when moving in the evening and night, wearing of closed footwear, and ensure buildings are adequately sealed [@samuel_venomous_2020].
 The selection for natural areas may further present an opportunity to draw snakes away from buildings, if more ideal shelter sites are available farther from concentrations of human activity.
+Studies elsewhere in Thailand have suggested that other medically significant snakes will avoid buildings, preferring more vegetated areas [@barnes_snake_2024].
 
 ### Banded Krait *Bungarus fasciatus*
 
@@ -579,7 +584,7 @@ The concentration to the field margins may indicate a human-snake interaction ho
 
 <!-- Future - while things look ok here for direction. move towards modern methods, or methods that are scale independent if you want to extrapolate strength, e.g. bring in more mechanisms, mirror point made in review paper -->
 Looking forward, we feel confident in the broad conclusions draw by the original studies.
-However, the use of exact selection strengths should be examined in more detail if they are to be adapted to future purposes such as human-snake conflict prediction (as supported by simulation habitat multiveres; @marshall_habitat_2024; Chapter 3).
+However, the use of exact selection strengths should be examined in more detail if they are to be adapted to future purposes such as human-snake conflict prediction (as supported by simulation habitat multiverses; @marshall_habitat_2024; Chapter 3).
 In those cases reassessment of the selection using newer methods, more acutely tailored to prediction may be required, either by greater integration of mechanistic drivers of snake movement, or via methods that are scale independent enabling better beyond-sample extrapolation (e.g., @michelot_langevin_2019).
 
 Summarised together, this study reveals the robustness of snake habitat selection studies to researcher analysis choice, while also reaffirming the conclusions regarding the important role habitat patches (edges, banks, canals, etc.) play for snakes in an otherwise human dominated unsuitable landscape.
@@ -595,19 +600,18 @@ All code used in the creation of this manuscript is available at ...
 In addition to packages already mentioned in the methods we also used the following.
 
 We used *R* `r paste0("v.", version$major, ".", version$minor)` [@base] via *RStudio* v.2023.6.2.561 [@rstudio]. <!-- version has to be manually added because rstudioapi doesn't work in targets -->
-We used *here* `r paste0("v.", packageVersion("here"))` [@here] and *qs* `r paste0("v.", packageVersion("qs"))` [@qs] to manage directory addresses and saved objects.
+We used *here* `r paste0("v.", packageVersion("here"))` [@here], *readr* `r paste0("v.", packageVersion("readr"))` [@readr], *inborutils* `r paste0("v.", packageVersion("inborutils"))` [@inborutils], and *qs* `r paste0("v.", packageVersion("qs"))` [@qs] to manage directory addresses and saved objects.
 
-We used *raster* `r paste0("v.", packageVersion("raster"))` [@raster].
-
-We used *ggplot2* `r paste0("v.", packageVersion("ggplot2"))` for creating figures [@ggplot2], with the expansions: *patchwork* `r paste0("v.", packageVersion("patchwork"))` [@patchwork], *ggridges* `r paste0("v.", packageVersion("ggridges"))` [@ggridges], and *ggdist* `r paste0("v.", packageVersion("ggdist"))` [@ggdist].
+We used *ggplot2* `r paste0("v.", packageVersion("ggplot2"))` for creating figures [@ggplot2], with the expansions: *patchwork* `r paste0("v.", packageVersion("patchwork"))` [@patchwork], *ggridges* `r paste0("v.", packageVersion("ggridges"))` [@ggridges], *ggtext* `r paste0("v.", packageVersion("ggtext"))` [@ggtext], *ggnewscale* `r paste0("v.", packageVersion("ggnewscale"))` [@ggnewscale], and *ggdist* `r paste0("v.", packageVersion("ggdist"))` [@ggdist].
 
 We used *brms* `r paste0("v.", packageVersion("brms"))` [@brms] to run Bayesian models, with diagnostics generated used *bayesplot* `r paste0("v.", packageVersion("bayesplot"))` [@bayesplot], *tidybayes* `r paste0("v.", packageVersion("tidybayes"))` [@tidybayes], and *performance* `r paste0("v.", packageVersion("performance"))` [@performance].
 
-We used the *dplyr* `r paste0("v.", packageVersion("dplyr"))` [@dplyr], *tibble* `r paste0("v.", packageVersion("tibble"))` [@tibble],
-<!-- *reshape2* `r paste0("v.", packageVersion("reshape2"))` [@reshape2], -->
-and *stringr* `r paste0("v.", packageVersion("stringr"))` [@stringr] packages for data manipulation.
+We used the *dplyr* `r paste0("v.", packageVersion("dplyr"))` [@dplyr], *tidyr* `r paste0("v.", packageVersion("tidyr"))` [@tidyr], *tibble* `r paste0("v.", packageVersion("tibble"))` [@tibble], and *stringr* `r paste0("v.", packageVersion("stringr"))` [@stringr] packages for data manipulation.
 
-We used *sp* `r paste0("v.", packageVersion("sp"))` [@sp], *move* `r paste0("v.", packageVersion("move"))` [@move] for manipulation of spatial data and estimation of space use not otherwise mentioned in the methods.
+We used *sp* `r paste0("v.", packageVersion("sp"))` [@sp], *sf* `r paste0("v.", packageVersion("sf"))` [@sf2018; @sf2023; @sfheaders], *raster* `r paste0("v.", packageVersion("raster"))` [@raster], *terra* `r paste0("v.", packageVersion("terra"))` [@terra], *tidyterra* `r paste0("v.", packageVersion("tidyterra"))` [@tidyterra], and *move* `r paste0("v.", packageVersion("move"))` [@move] for manipulation of spatial data and estimation of space use not otherwise mentioned in the methods.
+We used *ctmm* `r paste0("v.", packageVersion("ctmm"))` [@ctmm], *amt* `r paste0("v.", packageVersion("amt"))` [@amt], *adehabitatHS* `r paste0("v.", packageVersion("adehabitatHS"))` [@adehabitatHS], *adehabitatHR* `r paste0("v.", packageVersion("adehabitatHR"))` [@adehabitatHR], *lme4* `r paste0("v.", packageVersion("lme4"))` [@lme4], *INLA* `r paste0("v.", packageVersion("INLA"))` [@INLA; @INLA2], and *TwoStepCLogit* `r paste0("v.", packageVersion("TwoStepCLogit"))` [@TwoStepCLogit] for the habitat analyses.
+
+<!-- targets `r paste0("v.", packageVersion("targets"))` and tarchetypes `r paste0("v.", packageVersion("tarchetypes"))` R packages [@targets; @tarchetypes] -->
 
 We used rmarkdown `r paste0("v.", packageVersion("rmarkdown"))` [@rmarkdown2023; @rmarkdown2018; @rmarkdown2020], bookdown `r paste0("v.", packageVersion("bookdown"))` [@bookdown2016; @R-bookdown], tinytex `r paste0("v.", packageVersion("tinytex"))` [@tinytex2019; @tinytex2023], and knitr `r paste0("v.", packageVersion("knitr"))` [@knitr2015; @knitr2014; @knitr2023] packages to generate type-set outputs.
 
@@ -616,7 +620,8 @@ We generated R package citations with the aid of *grateful* `r paste0("v.", pack
 # Data availabilty
 
 The majority of the data is already publicly available.
-<LIST HERE>
+Movement data can be accessed via Movebank [@kays_movebank_2022], with the following study IDs: 1649411628, 556564170, 1093796277, 1204811528.
+Movement data and land use data was also available via the following data repositories: @marshall_data_2020; @smith_dataset_2020; @hodges_malayan_2021.
 
 For the ease of recreating the results presented here, we have uploaded all movement and land use data, alongside the code used to generate this manuscript.
 If using this compiled data, we highly suggest also citing the original data paper and repository as listed above to ensure the data maintains a close connection to descriptions of its collection.
