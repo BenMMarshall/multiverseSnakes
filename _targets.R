@@ -475,6 +475,24 @@ extraDetails <- list(
   )
 )
 
+# odd issue, that targets have problem with writing to .gz compression during
+# tar_targets, figures sidestepping this with a post compression is ok. Added
+# uncompressed files to .gitignore
+if(all(list.files(here::here("data"), pattern = "EstimateOutputs_uncom.csv") %in% 
+       c("areaBasedEstimateOutputs_uncom.csv",
+         "poisEstimateOutputs_uncom.csv", 
+         "rsfEstimateOutputs_uncom.csv",
+         "wrsfEstimateOutputs_uncom.csv",
+         "ssfEstimateOutputs_uncom.csv",
+         "twoStepEstimateOutputs_uncom.csv"))){
+  for(file in list.files(here::here("data"), pattern = "EstimateOutputs_uncom.csv")){
+    # file <- "areaBasedEstimateOutputs_uncom.csv"
+    fileCom <- sub("_uncom.csv$", ".csv.gz", file)
+    readr::write_csv(readr::read_csv(here::here("data", file)),
+              here::here("data", fileCom))
+  }
+}
+
 manuscriptRendering <- list(
   tar_target(
     rmdRenderManuscript,
