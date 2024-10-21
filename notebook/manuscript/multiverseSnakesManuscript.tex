@@ -156,6 +156,9 @@ The main exception is for the first three tracked \emph{Ophiophagus hannah}, who
 
 \subsection{Study Species and Hypotheses}\label{study-species-and-hypotheses}
 
+We simplified the conclusions of the original studies into hypotheses targeting their preferred habitat for each species.
+We registered these hypothesis prior to undertaking the multiverse exploration (\url{https://osf.io/kv8rg/}).
+
 \begin{figure}
 \includegraphics[width=1\linewidth]{../ext_images/hypothesis_visual} \caption{...}\label{fig:hypothesesFigure}
 \end{figure}
@@ -219,9 +222,9 @@ The land use data was largely included with the associated data repositories, in
 We collated all tracking and land use data, unifying the data formats, naming conventions, and converting files to more accessible formats.
 We were left with two files for every study: a csv containing the movements of all individuals, and geoJSON file containing the polygon data describing land use.
 The movement data contains seven columns: ``species'' = the binomial species name, ``id'' = the individual animal ID, ``sex'' = whether the individual is male (M) or female (F), ``x'' = the UTM Easting coordinate (m),``y'' = the UTM Northing (m), ``UTMzone'' = the UTM zone either 47N or 48N, ``datetime'' = the date and time formatted as ISO 8601 ``YYYY-MM-DD hh:mm:ss'' recorded in ``Asia/Bangkok''.
-The land use data contains geometry data in UTM projection, and data on the ``landuse'' category as well as a habitat column denoting whether the habitat is part of a hypothesis.
+The land use data contains geometry data in UTM projection, and data on the ``landuse'' category as well as a ``habitat'' column denoting whether the habitat is part of a hypothesis.
 
-To reacquaint ourselves with the data, and check for any potential issues that could hinder habitat selection analysis, we used code from Crane et al. (\citeproc{ref-crane_lots_2021}{2021}) to generate summaries of all the tracking datasets.
+To reacquaint ourselves with the data, and check for any potential issues that could hinder habitat selection analysis, we used code from Crane et al. (\citeproc{ref-crane_lots_2021}{2021}) to generate summaries of all the tracking datasets (code from Crane et al. (\citeproc{ref-crane_supplementary_2020}{2020})).
 During this process we identified duplicated data points in the King Cobra data that required removal.
 We suspect that these escaped detection during the initial publication (\citeproc{ref-Marshall2018}{Marshall et al., 2019}) because the methods used did not use time in estimation of home range.
 
@@ -254,7 +257,7 @@ We suspect that these escaped detection during the initial publication (\citepro
 
 To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
 A multiverse is tree of branching paths, where decisions made during analysis spawn multiple branches, each with alternative answers.
-Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection (\citeproc{ref-marshall_habitat_2024}{Marshall \& Duthie, 2024}) , but we are still left with sizeable variation in final answers --and perhaps more importantly answers that offer contradictory conclusions.
+Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection (\citeproc{ref-marshall_habitat_2024}{Marshall \& Duthie, 2024}) (Chapter 3), but we are still left with sizeable variation in final answers --and perhaps more importantly answers that offer contradictory conclusions.
 The variation in results are similarly present in more practical demonstrations, such as many analysts projects (\citeproc{ref-gould_same_2023}{Gould et al., 2023}).
 
 \begin{figure}
@@ -296,7 +299,7 @@ To generate those steps we draw values from distributions, the choice of those d
 For the random step lengths we looked at impact of using Gamma and Exponential distributions; whereas for the turn angles we looked at Von Mises and Uniform distributions.
 Once the random available locations had been generated, we explore an additional choice regarding the model formula: whether to have the step lengths and turn angles interact with the habitat.
 Termed integrated step-selection, the inclusion of the step lengths and turn angles is meant to aid the acquisition of less biased estimates of habitat selection.
-However, the impacts of the inclusion have differing impacts when using step-selection or a Poisson model ; we include it here to explore how dramatic that difference can be.
+However, the impacts of the inclusion have differing impacts when using step-selection or a Poisson model (see Chapter 3); we include it here to explore how dramatic that difference can be.
 While the Poisson models explicitly target population level selection, the SSF models required summation to a single value.
 To generate that value, we conducted a simple mean of the point estimates and calculated corresponding 95\% confidence intervals.
 This process likely underestimates the overall uncertainty surrounding the SSF methods, as the uncertainty surrounding the initial estimates is lost.
@@ -325,7 +328,7 @@ For the area-based methods (Compana, RSF) the choice terms included area method 
 The Compana analysis had the additional choice of test method (randomisation, parametric).
 For the step-based methods (Two-Step, SSF, Poisson) the choice terms included model formula (integrated, non-integrated), step length distribution (Gamma, Exponential), turn angle distribution (Von Mises, Uniform), and the number of random steps generated per animal location (Inf to -Inf, scaled).
 We used weakly informative priors.
-For the intercept we used a normal distribution with a mean of 0 and a standard deviation of 2, and for the choices we used Cauchy distributions with a location of -0.1 and scale as 3, except for the number of available points generated per animal location where we used a location of 0.1.
+For the intercept prior we used a normal distribution with a mean of 0 and a standard deviation of 2, and for the choices' priors we used Cauchy distributions with a location of -0.1 and scale as 3, except for the number of available points generated per animal location where we used a location of 0.1.
 We ran Bayesian models using the brms package (\citeproc{ref-brms}{Bürkner, 2021}), running 4 MCMC chains for 1200 iterations each, with a warmup of 400, and a thinning rate of 2.
 For reporting we used 95\% median highest density continuous intervals when describing posteriors.
 
@@ -439,7 +442,6 @@ Mostly \emph{\(\tau\)\textsuperscript{2}} values below 0.1 27/45 (overall median
 \includegraphics[width=1\linewidth]{../../figures/r2Plot} \caption{Conditional R2 values for all meta-analysis models, with 95\% HDCIs.}\label{fig:metaR2Plot}
 \end{figure}
 
-SUPORT HERE
 The intercepts of the meta-analyses models reveal that most hypothesis are overall supported, with the only exceptions existing when the habitat was binary classified (Fig. \ref{fig:metaInterPlot}).
 \emph{Ophiophagus hannah} H2 and \emph{Python bivittatus} H1 using Compana, \emph{Bungarus candidus} H1 using Two-Step, \emph{Ophiophagus hannah} H2 and \emph{Python bivittatus} H1 using SSF.
 
@@ -447,13 +449,15 @@ The intercepts of the meta-analyses models reveal that most hypothesis are overa
 \includegraphics[width=1\linewidth]{../../figures/metaIntercept} \caption{Posterior estimates of the intercept for all meta-analysis models, with 95\% HDCIs.}\label{fig:metaInterPlot}
 \end{figure}
 
-Overall these patterns mirror the specification curves, and the similarities are also reflected in the estimates of the choices' population effects.
-Big impacts from model formula
-area methods sees lots of changes with regards to available area that are super consistent between species
-points per setp matter more for bungarus spp - rarer habitats
-
-impact of decisions
-(Fig. \ref{fig:metaBetasPlot}).
+Overall the patterns of meta-analysis results mirror the specification curves, and the similarities reappear in the analysis choice impacts.
+Model formulation appeared as the most dramatic effect on the meta-analysis estimate, and that effect is seen in all three step-based approaches (Fig. \ref{fig:metaBetasPlot}).
+The effects themselves were not consistent, with different directions and strengths depending on approach and species.
+Only \emph{Bungarus fasciatus} was impacted consistently the same way, with the non-integrated estimates tending to have a positive impact on the estimates (Fig. \ref{fig:metaBetasPlot}).
+Another choice that appears to have considerable impact was the available area method.
+Like the model formulation, the impact varied by species and landscape classification.
+It reveals that impact of available area method is not necessarily very predictable, and likely interacts with the specific movement characteristics of the study species.
+Available points, either steps or points within an area, tended to be positively related to estimate strength.
+This was reasonably universal, but the larger effects were seen in \emph{Bungarus spp.}, potentially suggesting greater impacts when the habitat's are defined at a finer spatial scale.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{../../figures/metaBeta} \caption{Posterior estimates of the population effects for all meta-analysis models, with 95\% HDCIs.}\label{fig:metaBetasPlot}
@@ -461,7 +465,7 @@ impact of decisions
 
 \section{Discussion}\label{discussion}
 
-Our re-testing of snake habitat selection studies using a multiverse of over XXX analysis endpoints, suggests that the original conclusions remain broadly supported.
+Our re-testing of snake habitat selection studies using a multiverse of over 4915 analysis endpoints, suggests that the original conclusions remain broadly supported.
 More specifically it appears that there is a reasonably low chance that the analysis choices made in the original publications led to strange or outlying results.
 While the multiverse revealed broad support for the direction of the selection, the strength of the effect was more sensitive and we did identify a few analysis choices capable of contradicting the originally published results.
 
@@ -484,30 +488,26 @@ While every effort was made during tracking to ensure a correct GPS location was
 Even small errors may lead to mismatches between the true location (and habitat) of an animal and the land-use data we had access to.
 This mismatch may be more pronounced when habitats are rarer or when animals tend to remain near its edges.
 \emph{Bungarus fasciatus}'s focus on very thin field margins may have made it particularly susceptible, and similarly \emph{Python bivitattus}'s selection for the banks of water bodies.
-The rarity of these habitats may have also played a role, as we see clear decrease in the confidence intervals surrounding the estimates as we increased the number of available points sampled .
+The rarity of these habitats may have also played a role, as we see clear decrease in the confidence intervals surrounding the estimates as we increased the number of available points sampled.
 We suspect that location error resulting in binary habitat mis-classification may explain the large confidence intervals of the Poisson models and the limited support in \emph{Python bivitattus} SSF analyses, as this uncertainty and lack of support is not visible in the continuous habitat models.
 
 A second decision that could alter estimate strength dramatically was whether use an integrated model formulation (i.e., include step and turn angle in the model formula).
 The work of (\citeproc{ref-muff_accounting_2020}{Muff, Signer \& Fieberg, 2020}) and (\citeproc{ref-forester_accounting_2009}{Forester, Im \& Rathouz, 2009}), as well as chapter 3 showed that integrated formulas have contrasting impacts on estimates in step-selection approaches and poisson models.
 The step-selection models tend to produce less biased estimates when using an integrated formula, whereas the poisson models the opposite.
-With those findings in mind, we should weight the findings using the non-integrated poison models more heavily.
+With those findings in mind, we should weight the findings using the non-integrated poisson models more heavily.
 The non-integrated poison models show clearer support for the hypotheses in all cases with either classification, bar \emph{Ophiophagus hannah} H1 and \emph{Python bivitattus} H1 whose estimates seem negligibly impacted when using the continuous classification.
 Unexpectedly the choice of model formulation did not have as noticeable impact in the step-selection approach, there only \emph{Bungarus candidus}'s estimates were markedly impacted.
 Despite this, the strength of the selection exhibited by \emph{Bungarus candidus} meant that the more conservative estimates from the non-integrated models did not render the selection estimates non-significant.
 
-Overall, we can be reasonably confident that the analyses choices of the original publications did not result in peculiarly conclusions.
-While the average or summation or multiverse findings cannot be used as to estimate a true effect, they do highlight the high likelihood of repeated analyses agreeing.
-The support originating from more modern methods is additionally reassuring.
-The weighted Resource Selection Functions should be best placed to provide us with a broad estimate of habitat selection, while also best positioned to tackle the issues arising from inconsistent tracking (\citeproc{ref-alston_mitigating_2023}{Alston et al., 2023}).
-Their agreement with the other results (in terms of direction), and the fact they largely provide significant support for the original hypothesis is reason to be confident in the original conclusions.
-
-We found that the final estimates could not be completely predicted by the analysis choices, despite there existing no sampling variation in the primary data.
-In some cases, such as RSF binary, the analysis decisions explained the vast majority of variation and tau2 indicated that there was very little heterogeneity between end point.
-Whereas others such as the Poisson binary meta-analysis models left most of the variation unexplained, and indicated much higher levels of between end point heterogeneity, which appear comparable to meta-analysis on multiple studies with sampling variation.
-The propensity for the step-based methods to show higher tau2 values could be due to random sampling of step and turn angles in the available points.
+Overall, we found that the final estimates could not be completely predicted by the analysis choices, despite there existing no sampling variation in the primary data.
+In some cases, such as RSF binary, the analysis decisions explained the vast majority of variation and \emph{\(\tau\)\textsuperscript{2}} indicated that there was very little heterogeneity between end points.
+Whereas others such as the Poisson binary meta-analysis models left most of the variation unexplained, and indicated much higher levels of between end point heterogeneity, which appear comparable to meta-analysis on multiple real studies that would also need to be contending with sampling variation.
+The propensity for the step-based methods to show higher \emph{\(\tau\)\textsuperscript{2}} values could be due to random sampling of step and turn angles in the available points.
 Overall, the variation in \emph{\(\tau\)\textsuperscript{2}} and \emph{R\textsuperscript{2}} values from the meta-analysis models indicate that analysis choices are interacting with the species data and hypothesis, suggesting variation in habitat selection estimates may be difficult to predict in other systems and limited the generalisably of patterns shown here.
 
-Despite the clear species-driven variation in how analysis choices impact final estimates, we can examine the results on a species-hypothesis-basis to determine whether overall our multiverse supports or contradicts previously published conclusions (bearing in mind the multiverse's limitations).
+Despite the clear species-driven variation in how analysis choices impact final estimates, we can examine the results on a species-hypothesis-basis to determine whether overall our multiverse supports or contradicts previously published conclusions.
+While the average or summation or multiverse findings cannot be used as to estimate a true effect, they do highlight the high likelihood of repeated analyses agreeing.
+Their agreement with the other results (in terms of direction), and the fact they largely provide significant support for the original hypothesis is reason to be confident in the original conclusions.
 
 \subsection{Conlcusions}\label{conlcusions}
 
@@ -529,7 +529,7 @@ The data used here pooled old and new data that presents a more overall picture 
 However, data collected after the original paper showed individuals using the forest for nesting; to maintain access to the forest these individuals travelled via semi-natural areas and were required to cross roads (\citeproc{ref-marshall_no_2020}{Marshall et al., 2020a}; \citeproc{ref-jones_how_2022}{Jones et al., 2022}).
 The nest construction of \emph{Ophiophagus hannah} requires adequate vegetated material to maintain the requisite internal nest temperatures (\citeproc{ref-dolia_house-warming_2023}{Dolia, Das \& Kelkar, 2023}).
 This highlights the potential importance of forested areas during certain times of year, even if it is less likely to be identified by the broad (rather generalised) habitat selection multiverse-analysis here.
-Other studies have revealed OPHA nesting potentially favours less disturbed areas, even if a clear preference of forests is not apparent (\citeproc{ref-koirala_distribution_2021}{Koirala \& Dawa Tshering, 2021}).
+Other studies have revealed \emph{Ophiophagus hannah} nesting potentially favours less disturbed areas, even if a clear preference of forests is not apparent (\citeproc{ref-koirala_distribution_2021}{Koirala \& Dawa Tshering, 2021}).
 
 \subsubsection{\texorpdfstring{Burmese Python \emph{Python bivitattus}}{Burmese Python Python bivitattus}}\label{burmese-python-python-bivitattus}
 
@@ -566,9 +566,11 @@ Their use of edge habitats is not limited to sheltering, as like \emph{Python bi
 When paired with other studies indicating the importance of field margins for mammalian and amphibians (\citeproc{ref-brown_habitat_2001}{Brown \& Singleton, 2001}; \citeproc{ref-groffen_preference_2018}{Groffen, Borzée \& Jang, 2018}), particularly rice paddy edges, it is clear that \emph{Bungarus fasciatus} likely finds all the resources required in these edge habitats.
 The concentration to the field margins may indicate a human-snake interaction hotspot, the identification of which could aid refinement of agent-based snakebite risk maps (e.g., Goldstein et al. (\citeproc{ref-goldstein_integrating_2021}{2021})).
 
-Looking forward, we feel confident in the broad conclusions draw by the original studies.
+Looking forward, we feel confident in the broad conclusions draw by the original studies and that the analyses choices of the original publications did not result in peculiarly conclusions.
+The support originating from more modern methods is additionally reassuring.
+The wRSFs should be best placed to provide us with a broad estimate of habitat selection, while also best positioned to tackle the issues arising from inconsistent tracking (\citeproc{ref-alston_mitigating_2023}{Alston et al., 2023}).
 However, the use of exact selection strengths should be examined in more detail if they are to be adapted to future purposes such as human-snake conflict prediction (as supported by simulation habitat multiverses; Marshall \& Duthie (\citeproc{ref-marshall_habitat_2024}{2024}); Chapter 3).
-In those cases reassessment of the selection using newer methods, more acutely tailored to prediction may be required, either by greater integration of mechanistic drivers of snake movement, or via methods that are scale independent enabling better beyond-sample extrapolation (e.g., Michelot et al. (\citeproc{ref-michelot_langevin_2019}{2019})).
+In those cases reassessment of the selection using newer methods more acutely tailored to prediction may be required, either by greater integration of mechanistic drivers of snake movement, or via methods that are scale independent enabling better beyond-sample extrapolation (e.g., Michelot et al. (\citeproc{ref-michelot_langevin_2019}{2019})).
 
 Summarised together, this study reveals the robustness of snake habitat selection studies to researcher analysis choice, while also reaffirming the conclusions regarding the important role habitat patches (edges, banks, canals, etc.) play for snakes in an otherwise human dominated unsuitable landscape.
 
@@ -857,6 +859,9 @@ Cooley D. 2023. \emph{\href{https://CRAN.R-project.org/package=sfheaders}{{sfhea
 
 \bibitem[\citeproctext]{ref-TwoStepCLogit}
 Craiu RV, Duchesne T, Fortin D, Baillargeon S. 2016. \emph{\href{https://CRAN.R-project.org/package=TwoStepCLogit}{TwoStepCLogit: Conditional logistic regression: A two-step estimation method}}.
+
+\bibitem[\citeproctext]{ref-crane_supplementary_2020}
+Crane MS, Silva IMS, Marshall BM, Strine CT. 2020. Supplementary files for {Crane} et al., "{Lots} of movement, little progress": {R} {Code}, data and figures. DOI: \href{https://doi.org/10.5281/ZENODO.4303887}{10.5281/ZENODO.4303887}.
 
 \bibitem[\citeproctext]{ref-crane_lots_2021}
 Crane M, Silva I, Marshall BM, Strine CT. 2021. Lots of movement, little progress: A review of reptile home range literature. \emph{PeerJ} 9:e11742. DOI: \href{https://doi.org/10.7717/peerj.11742}{10.7717/peerj.11742}.

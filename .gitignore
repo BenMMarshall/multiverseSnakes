@@ -7,6 +7,7 @@ data/PYBI/*
 [.]tif$
 *uncom.csv
 /modelOutput/*.rds
+/notebook/feedback
 
 # files with log in details for movebank
 movebank_login_abstraction.R
