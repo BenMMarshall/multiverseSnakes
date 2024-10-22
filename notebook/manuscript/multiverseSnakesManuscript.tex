@@ -69,7 +69,7 @@
 
 \begin{abstract}
 
-Possibly the best way to determine a snake's needs is to follow their movements. Once we have learnt of the snake's movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human snake conflict. However, extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement are leading to the correct decisions in snake conservation? We used a multiverse approach to explore thousands of ways of extracting the habitat preference estimates from the movement of simulated snakes with a pre-defined preference. We found that despite different sampling approaches, and completely different analysis methods, the vast majority of results agree and correctly identify habitat preference. The agreement between different habitat preference estimates tended to be better with more data, and when using more modern analysis methods. Now we apply this multiverse of analyses to re-examine several previous studies of snake habitat preference from Thailand. We examine how the published results compare to the thousands of other ways a researcher could have examined the snake movement data. Would certain analysis choices have led to a different conclusion and therefore a different conservation recommendation? We hope the answers to these questions will inform how confident we can be in the findings from snake movement studies and direct us towards more robust studies in the future.
+Possibly the best way to determine a snake's needs is to follow their movements. Once we have learnt of the snake's movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human-snake conflict. Extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement studies are providing the correct guidance for snake conservation? We used a multiverse approach to explore several thousand ways of extracting habitat selection estimates from four snake movement datasets, using categoric and continuous classifications of the landscape. The resulting habitat selection estimates showed an overall agreement with regards to direction, indicating general support for the original conclusions on the snakes selected habitats. However, the strength of the selection appeared more sensitive to choices made during analysis, with several analysis choices appearing only to be impactful with a particular species' data. This leads us to suggest that generalisations on the impact of specific analysis decisions may be difficult to predict a priori for other species and study systems. The broad agreement shown here should bolster confidence in past studies' conclusions. Whereas the variation displayed in the selection strengths highlights how analysis choices could inflate the differences between studies.
 
 \end{abstract}
 
@@ -83,43 +83,52 @@ Movement ecology, simulation, step selection function, poisson, habitat preferen
 \section{Introduction}\label{introduction}
 
 A key component of science is the continual reassessment of past work and findings (\citeproc{ref-alberts_self-correction_2015}{Alberts et al., 2015}).
-Whether that takes the form of direct replications aiming to discover exactly how reliable previous work is, or more integrative approaches testing the edges of previous findings' generalisability and retesting questions in different study systems (\citeproc{ref-nakagawa_replicating_2015}{Nakagawa \& Parker, 2015}; \citeproc{ref-peterson_self-correction_2021}{Peterson \& Panofsky, 2021}).
+Whether that reassessment takes the form of direct replications aiming to evaluate the reliability previous work, or a more integrative approach testing the boundaries of previous findings' generalisability by retesting questions in different study systems (e.g., quasi-replications) (\citeproc{ref-nakagawa_replicating_2015}{Nakagawa \& Parker, 2015}; \citeproc{ref-peterson_self-correction_2021}{Peterson \& Panofsky, 2021}).
 
-Reassessments and replications --regardless of their position on the direct-quasi continuum-- can aid the formal and organic self-correcting process of science.
-Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but this momentum can be difficult to redirect if the initial impetus was misdirected (\citeproc{ref-jennions_relationships_2002}{Jennions \& Møller, 2002}; \citeproc{ref-barto_dissemination_2012}{Barto \& Rillig, 2012}) .
-Therefore, checking and confirming results early is important; we can see this principle recognised in the peer review system itself.
+Reassessments and replications can aid the formal and organic self-correcting process of science.
+Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but this momentum can be difficult to redirect after the initial impetus (\citeproc{ref-jennions_relationships_2002}{Jennions \& Møller, 2002}; \citeproc{ref-barto_dissemination_2012}{Barto \& Rillig, 2012}) .
+In ecology and evolution, research on mating systems shows exactly this momentum.
+Early studies on \emph{Anolis spp.} mating systems concluded that territoriality played a key role in mating success by controlling access to breeding females (\citeproc{ref-Kamath2017}{Kamath \& Losos, 2017}, \citeproc{ref-Kamath2018a}{2018b}).
+The assumption of a polygynous mating system coloured and shaped subsequent research, and was only adequately challenged when genetic investigation revealed the importance of female mate choice and multiple partners {[}Kamath \& Losos (\citeproc{ref-Kamath2018}{2018a}).
+The new research highlighted that the initial assumptions of territoriality were overly strong and had misdirected research and obscured an important part of \emph{Anolis} ecology (\citeproc{ref-Kamath2017}{Kamath \& Losos, 2017}, \citeproc{ref-Kamath2018a}{2018b}).
+Similar perspective changes are seen in studies of bird mating systems, where earlier research focused on mating competition and potentially lost sight of explanations connected mating cooperation (\citeproc{ref-griffith_cooperation_2019}{Griffith, 2019}).
+Here over emphasis on mate choice via differential ornamentation could obscure the roles of social compatibility (i.e., pair behavioural compatibility Ihle, Kempenaers \& Forstmeier (\citeproc{ref-ihle_fitness_2015}{2015}); and the imperfect information communicated by ornamentation Wang, Forstmeier \& Kempenaers (\citeproc{ref-wang_no_2017}{2017}); Wang et al. (\citeproc{ref-wang_male_2017}{2017})).
+These examples emphasise the importance of checking and confirming results early, before assumptions are entrenched; we can see this principle recognised in the peer review system.
 
-Checking previous findings through replication can become more difficult in systems with high task uncertainty.
-High task uncertainty systems --those that manifest high levels of uncontrollable stochasticity-- may make direct diagnostic replications impractical or impossible, and render the evidence from quasi-replications weaker (\citeproc{ref-peterson_self-correction_2021}{Peterson \& Panofsky, 2021}).
+Checking previous findings through replication is more difficult in systems with high task uncertainty.
+High task uncertainty systems manifesting high levels of uncontrollable stochasticity, making direct diagnostic replications impractical or impossible, render the evidence from quasi-replications weaker (\citeproc{ref-peterson_self-correction_2021}{Peterson \& Panofsky, 2021}).
 Ecological systems can be considered as generating high task uncertainty, with many interconnected elements, and when studying wild systems many of those elements are uncontrollable.
 
 With ecological systems, such complexity and the difficulties in controlling experiments makes direct replications costly, potentially explaining their rarity (\citeproc{ref-kelly_rate_2019}{Kelly, 2019}).
 When studying wild animals with a level of direct intervention, repeating experiments might be unethical due to the well-being costs (\citeproc{ref-Weatherhead2004}{Weatherhead \& Blouin-Demers, 2004}; \citeproc{ref-robstad_impact_2021}{Robstad et al., 2021}; \citeproc{ref-tomotani_great_2021}{Tomotani et al., 2021}; \citeproc{ref-portugal_externally_2022}{Portugal \& White, 2022}; \citeproc{ref-altobelli_methods_2022}{Altobelli et al., 2022}).
-
-When faced with limited options for direct replications, an alternative, albeit not a replacement, would be to re-examine existing datasets.
-Pooling old and new datasets, and reanalysing them, may provide opportunities for broader generalisations.
+When faced with limited options for direct replications, an alternative approach would be to re-examine existing datasets.
+Pooling old and new datasets and re-analysing them may provide opportunities for broader generalisations.
+Good examples exist in movement ecology, where the re-examination of many animal movement datasets revealed general patterns of reduced mammal movement with increased human footprint (\citeproc{ref-Tucker2018}{Tucker et al., 2018}), and increased bird movements in increasingly homogeneous landscapes (\citeproc{ref-tucker_large_2019}{Tucker et al., 2019}).
+These findings, based on many species, across various regions, are better placed to be the building blocks of future hypotheses.
 
 In some cases older data may have been collected and recorded in ways that enables completely fresh analysis (\citeproc{ref-kays_movebank_2022}{Kays et al., 2022}).
 As methodologies develop, conceptualisations change, and computational power increases, new avenues for examining the same data may materialise (e.g., \citeproc{ref-noonan_effects_2020}{Noonan et al., 2020}).
 As these new methods are developed and applied, we may see the conclusions based upon those data change.
 There are a growing number of examples demonstrating that the analysis approach can alter the results (\citeproc{ref-salis_how_2021}{Salis, Lena \& Lengagne, 2021}; \citeproc{ref-desbureaux_subjective_2021}{Desbureaux, 2021}), and that the researchers themselves can be a key source of variation in analysis and results (\citeproc{ref-silberzahn_many_2018}{Silberzahn et al., 2018}; \citeproc{ref-huntingtonklein_influence_2021}{Huntington‐Klein et al., 2021}; \citeproc{ref-gould_same_2023}{Gould et al., 2023}).
-These examples elegantly show the possible extent of technical uncertainty present in some systems.
+Recently for ecology and evolution, Gould et al. (\citeproc{ref-gould_same_2023}{2023}) showed that when \textasciitilde250 researchers were asked to answer the same question with the same dataset (either bird nestling success, or eucalyptus growth) the analysis approaches and therefore results varied, in some cases indicated opposing effects.
+These examples elegantly show the possible extent of technical uncertainty present in some systems (i.e., the uncertainty resulting differences in methodology).
+In practice researchers often do not have the time to explore many possible analysis pathways; therefore, we may be underestimating the uncertainty surrounding published results.
 
 Not all disciplines have explored the sources of uncertainty in findings equally.
 Prudence would push for examination of uncertainty in all its forms, in particular for fields that already tackle high levels of uncertainty originating from wild study systems.
-Movement ecology could be argued to exemplify such a field.
-Animals are complex, existing in complex wild ecosystems, with individuality and personality (\citeproc{ref-stuber_spatial_2022}{Stuber, Carlson \& Jesmer, 2022}).
+Movement ecology is such a field.
+Animals are complex, existing in complex ecosystems with individuality and personality (\citeproc{ref-stuber_spatial_2022}{Stuber, Carlson \& Jesmer, 2022}).
 Depending on the research question, controls in movement ecology can be difficult to achieve, and replications difficult to justify given the strict ethical limitations on interventionist study.
 Movement ecology has also seized the opportunities presented by technological developments, enabling higher resolution tracking of animal movements (e.g., GPS tracking) and more sophisticated analysis that can integrate the high dimensional data (e.g., x-y coordinates, time, acceleration, individual, other covariates of interest, \citeproc{ref-joo_recent_2022}{Joo et al., 2022}).
 
-Personality and the repeatability of behaviours presents a key component to the uncertainty or variation when attempting to generalise.
-However, here we turn to the technical uncertainty, the uncertainty originating from the researcher and how they approach the data.
-Previous many analyst projects highlight the potential for analyst-side variation (\citeproc{ref-silberzahn_many_2018}{Silberzahn et al., 2018}; \citeproc{ref-huntingtonklein_influence_2021}{Huntington‐Klein et al., 2021}; \citeproc{ref-gould_same_2023}{Gould et al., 2023}), and previous multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset (\citeproc{ref-marshall_habitat_2024}{Marshall \& Duthie, 2024}) {[}chapter 2 and 3 preprints can be cited here when published in June{]}.
-Here we take the multiverse approach further by applying it to a number of real case studies with the aim of exploring whether different analysis approaches could have altered the final general conclusions.
+Personality and the repeatability of behaviours presents a key component of the variation when attempting to generalise (\citeproc{ref-stuber_spatial_2022}{Stuber, Carlson \& Jesmer, 2022}).
+However, here we focus on the technical uncertainty, the uncertainty originating from the researcher and how they approach the data.
+Many analyst projects highlight the potential for analyst-side variation (\citeproc{ref-silberzahn_many_2018}{Silberzahn et al., 2018}; \citeproc{ref-huntingtonklein_influence_2021}{Huntington‐Klein et al., 2021}; \citeproc{ref-gould_same_2023}{Gould et al., 2023}), and multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset (\citeproc{ref-marshall_habitat_2024}{Marshall \& Duthie, 2024}) (also see Chapter 3).
+Here we take the multiverse approach further by applying it to a number of real case studies to explore whether different analysis approaches alter general conclusions.
 
 We selected a quartet of separate but connected movement ecology studies that attempt to disentangle the habitat selection exhibited by snakes in north-eastern Thailand.
-All four cases focus on snakes that come into conflict with humans to some extent, either because of the risks posed by their venom (King Cobra Marshall et al. (\citeproc{ref-Marshall2018}{2019}) \& Marshall et al. (\citeproc{ref-marshall_no_2020}{2020a}), Malayan Krait Hodges et al. (\citeproc{ref-hodges_malayan_2022}{2022}), Banded Krait Knierim (\citeproc{ref-knierim_spatial_2019}{2019})), or because of their appetite for domestic livestock (Burmese python Smith et al. (\citeproc{ref-smith_native_2021}{2021})).
-In all cases the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict by highlighting the snakes are drawn to.
+All four cases focus on snakes that come into conflict with humans to varying degrees, either because of the risks posed by their venom (King Cobra Marshall et al. (\citeproc{ref-Marshall2018}{2019}) \& Marshall et al. (\citeproc{ref-marshall_no_2020}{2020a}), Malayan Krait Hodges et al. (\citeproc{ref-hodges_malayan_2022}{2022}), Banded Krait Knierim (\citeproc{ref-knierim_spatial_2019}{2019})), or because of their appetite for domestic livestock (Burmese python Smith et al. (\citeproc{ref-smith_native_2021}{2021})).
+In all cases, the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict by highlighting the snakes are drawn to.
 With these general goals in mind, we aim to re-examine the movement datasets using a multiverse of habitat selection analysis pathways to reveal whether the same data could lead to different conclusions.
 
 \section{Methods}\label{methods}
@@ -134,7 +143,11 @@ Bisecting the transitional zone, and running adjacent to the protected forest ar
 The Malayan Krait case study was not in the Sakaerat Biosphere Reserve, instead undertaken nearer to Nakhon Ratchasima proper, on the Suranaree University of Technology campus.
 The university campus is a mix of scrub forest, open lawn, university buildings, and homes.
 Further details on the study sites' characteristics can be found in the original publications (\citeproc{ref-Marshall2018}{Marshall et al., 2019}, \citeproc{ref-marshall_no_2020}{2020a}; \citeproc{ref-knierim_spatial_2019}{Knierim, 2019}; \citeproc{ref-smith_native_2021}{Smith et al., 2021}; \citeproc{ref-hodges_malayan_2022}{Hodges et al., 2022}).
-For land use classfication we relied on data supplied by the Land Development Department of Thailand (\citeproc{ref-land_development_department_thailand_land-use_2017}{Land Development Department, 2017}).
+For land use classification we relied on data supplied by the Land Development Department of Thailand (\citeproc{ref-land_development_department_thailand_land-use_2017}{Land Development Department, 2017}).
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../ext_images/LocationMap} \caption{The study site locations for all four case studies. Top left the location within Thailand, both the Sakaerat Biosphere Reserve and the Suranaree University of Technology campus are located within Nakhon Ratchasima Province. Bottom right shows the overall study location for King Cobra, Burmese Python, and Banded Krait (circular points). The purple areas that the land uses that are included in any of the species hypotheses. Gray lines indicate roads. Bottom right is the same region, but focused on the Banded Krait locations to better show the field margin data used for their assessment of habitat selection. Top right is the study location for the Malayan Krait study on the Suranaree University of Technology campus.}\label{fig:locationFigure}
+\end{figure}
 
 Snakes can be difficult to detect in wild scenarios (\citeproc{ref-Durso2015}{Durso \& Seigel, 2015}; \citeproc{ref-boback_use_2020}{Boback et al., 2020}), forcing a wider and more opportunistic suite of methods to gather adequate sample sizes.
 In all the chosen case studies snakes were obtained for study using trapping arrays, active surveying, and notifications from locals.
@@ -157,10 +170,10 @@ The main exception is for the first three tracked \emph{Ophiophagus hannah}, who
 \subsection{Study Species and Hypotheses}\label{study-species-and-hypotheses}
 
 We simplified the conclusions of the original studies into hypotheses targeting their preferred habitat for each species.
-We registered these hypothesis prior to undertaking the multiverse exploration (\url{https://osf.io/kv8rg/}).
+We registered these hypothesis prior to undertaking the multiverse exploration (\url{https://osf.io/kv8rg/}), they remained unchanged and are detailed below.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{../ext_images/hypothesis_visual} \caption{...}\label{fig:hypothesesFigure}
+\includegraphics[width=1\linewidth]{../ext_images/hypothesis_visual} \caption{A summary of the species and hypotheses, alongside sample sizes for each species, and a visualisation describing the two landscape classifications used in the multiverse.}\label{fig:hypothesesFigure}
 \end{figure}
 
 \subsubsection{King Cobra}\label{king-cobra}
@@ -168,10 +181,10 @@ We registered these hypothesis prior to undertaking the multiverse exploration (
 Marshall et al. (\citeproc{ref-Marshall2018}{2019}) and Marshall et al. (\citeproc{ref-marshall_no_2020}{2020a}) are concerned with King Cobras (\emph{Ophiophagus hannah}).
 King Cobras are a large (tracked individuals between 1.40 and 3.71m snout to vent length), diurnal, active foraging snake species that depredate snakes and monitor lizards (\citeproc{ref-Jones_supposed_2020}{Jones et al., 2020}).
 While considered a predominately forest dwelling species (\citeproc{ref-Stuart2012}{Stuart et al., 2012}), they are known to make use of more human altered areas (\citeproc{ref-Whitaker2004}{Whitaker \& Captain, 2004}; \citeproc{ref-Rao2013}{Rao et al., 2013}; \citeproc{ref-jones_how_2022}{Jones et al., 2022}), which can lead to frequent human-snake conflict (\citeproc{ref-Shankar2013a}{Shankar et al., 2013}; \citeproc{ref-Marshall2018b}{Marshall et al., 2018}).
-The extremely low occurrence of King Cobra bites in Thailand means that instances of human-snake conflict are primarily a conservation concern as opposed to human health (\citeproc{ref-Viravan1992}{Viravan et al., 1992}; \citeproc{ref-Pochanugool1998}{Pochanugool et al., 1998}).
+The extremely low occurrence of King Cobra bites in Thailand means that instances of human-snake conflict are primarily a conservation concern as opposed to a human health concern (\citeproc{ref-Viravan1992}{Viravan et al., 1992}; \citeproc{ref-Pochanugool1998}{Pochanugool et al., 1998}).
 
-Marshall et al. (\citeproc{ref-Marshall2018}{2019}) does not conclude on an actual selection, instead highlighting the King Cobras' excursions out of the protected forest.
-Marshall et al. (\citeproc{ref-marshall_no_2020}{2020a}) looks more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersect the agricultural matrix surrounding the protected forest.
+Marshall et al. (\citeproc{ref-Marshall2018}{2019}) do not conclude on an actual selection, instead highlighting the King Cobras' excursions out of the protected forest.
+Marshall et al. (\citeproc{ref-marshall_no_2020}{2020a}) look more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersect the agricultural matrix surrounding the protected forest.
 Therefore, we will pool both datasets and examine two non-mutually exclusive hypotheses.
 
 H\textsubscript{OPHA1}: King Cobras select for semi-natural habitat.
@@ -181,10 +194,10 @@ H\textsubscript{OPHA2}: King Cobras select for forest habitat.
 \subsubsection{Burmese Python}\label{burmese-python}
 
 Smith et al. (\citeproc{ref-smith_native_2021}{2021}) describe Burmese Python (\emph{Python bivittatus}) habitat selection and movement.
-Burmese Pythons are large (tracked individuals between 2.21 and 3.09m snout to vent length), ambush predators capable of tacking prey over 100\% their own body mass (\citeproc{ref-bartoszek_natural_2018}{Bartoszek et al., 2018}) and impacting mammal populations (\citeproc{ref-dorcas_severe_2012}{Dorcas et al., 2012}).
-The flexibility in regards to prey size means snakes of this size are inevitably drawn into conflict with humans over livestock, a pattern mirrored across the globe for large snakes (\citeproc{ref-Miranda2016}{Miranda, Ribeiro- \& Strüssmann, 2016}).
+Burmese Pythons are large (tracked individuals between 2.21 and 3.09m snout to vent length), ambush predators capable of tackling prey over 100\% their own body mass (\citeproc{ref-bartoszek_natural_2018}{Bartoszek et al., 2018}), and whose predation pressure can play a role in limiting mammal populations sizes (\citeproc{ref-dorcas_severe_2012}{Dorcas et al., 2012}).
+The flexibility in prey size means snakes of this size are inevitably drawn into conflict with humans over livestock, a pattern mirrored across the globe for large snakes (\citeproc{ref-Miranda2016}{Miranda, Ribeiro- \& Strüssmann, 2016}).
 
-The conclusions of Smith et al. (\citeproc{ref-smith_native_2021}{2021}) on python habitat selection are not dissimilar to those made on King Cobras, with an active selection for areas near water.
+The conclusions of Smith et al. (\citeproc{ref-smith_native_2021}{2021}) on python habitat selection are similar to those made on King Cobras, with an active selection for areas near water.
 The land classification used in Smith et al. (\citeproc{ref-smith_native_2021}{2021}) was slightly different to Marshall et al. (\citeproc{ref-marshall_no_2020}{2020a}), grouping semi-natural areas with larger water bodies (e.g., agricultural ponds).
 
 H\textsubscript{PYBI1}: Burmese Pythons select for areas near water.
@@ -230,38 +243,13 @@ We suspect that these escaped detection during the initial publication (\citepro
 
 \subsection{Multiverse Construction}\label{multiverse-construction}
 
-\begin{verbatim}
-## Warning: package 'dplyr' was built under R version 4.2.3
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'dplyr'
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-\end{verbatim}
-
-\begin{verbatim}
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'stringr' was built under R version 4.2.3
-\end{verbatim}
-
 To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
 A multiverse is tree of branching paths, where decisions made during analysis spawn multiple branches, each with alternative answers.
 Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection (\citeproc{ref-marshall_habitat_2024}{Marshall \& Duthie, 2024}) (Chapter 3), but we are still left with sizeable variation in final answers --and perhaps more importantly answers that offer contradictory conclusions.
 The variation in results are similarly present in more practical demonstrations, such as many analysts projects (\citeproc{ref-gould_same_2023}{Gould et al., 2023}).
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{../ext_images/decisions_visual} \caption{...}\label{fig:decisionsFigure}
+\includegraphics[width=1\linewidth]{../ext_images/decisions_visual} \caption{A visual of all the decisions contained in the multiverse and colour coded to which approach that decision that applies.}\label{fig:decisionsFigure}
 \end{figure}
 
 Our multiverse starts with two alternative ways of defining the habitats.
@@ -438,10 +426,6 @@ The step-based approaches tended to have more variable \emph{R\textsuperscript{2
 \emph{\(\tau\)\textsuperscript{2}} values ranged from very low (0.0061) for the binary classed RSF models examining \emph{Bungaurs facsiatus}, to 1.6 for the binary classed Poisson models examining the same species.
 Mostly \emph{\(\tau\)\textsuperscript{2}} values below 0.1 27/45 (overall median of 0.05 ±SD 0.42), largely mirroring results gained from meta-analyses and ecological many analysts projects (\citeproc{ref-gould_same_2023}{Gould et al., 2023}).
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{../../figures/r2Plot} \caption{Conditional R2 values for all meta-analysis models, with 95\% HDCIs.}\label{fig:metaR2Plot}
-\end{figure}
-
 The intercepts of the meta-analyses models reveal that most hypothesis are overall supported, with the only exceptions existing when the habitat was binary classified (Fig. \ref{fig:metaInterPlot}).
 \emph{Ophiophagus hannah} H2 and \emph{Python bivittatus} H1 using Compana, \emph{Bungarus candidus} H1 using Two-Step, \emph{Ophiophagus hannah} H2 and \emph{Python bivittatus} H1 using SSF.
 
@@ -459,13 +443,9 @@ It reveals that impact of available area method is not necessarily very predicta
 Available points, either steps or points within an area, tended to be positively related to estimate strength.
 This was reasonably universal, but the larger effects were seen in \emph{Bungarus spp.}, potentially suggesting greater impacts when the habitat's are defined at a finer spatial scale.
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{../../figures/metaBeta} \caption{Posterior estimates of the population effects for all meta-analysis models, with 95\% HDCIs.}\label{fig:metaBetasPlot}
-\end{figure}
-
 \section{Discussion}\label{discussion}
 
-Our re-testing of snake habitat selection studies using a multiverse of over 4915 analysis endpoints, suggests that the original conclusions remain broadly supported.
+Our re-testing of snake habitat selection studies using a multiverse of over 2195 analysis endpoints, suggests that the original conclusions remain broadly supported.
 More specifically it appears that there is a reasonably low chance that the analysis choices made in the original publications led to strange or outlying results.
 While the multiverse revealed broad support for the direction of the selection, the strength of the effect was more sensitive and we did identify a few analysis choices capable of contradicting the originally published results.
 
@@ -580,12 +560,13 @@ BMM was funded by the Natural Environment Research Council (NERC) via the IAPETU
 
 \section{Software availablity}\label{software-availablity}
 
-All code used in the creation of this manuscript is available at \ldots{}
+All code used in the creation of this manuscript is available at \url{https://github.com/BenMMarshall/multiverseSnakes}; and archived at {[}ZENDO DOI HERE WHEN READY{]}.
 
-In addition to packages already mentioned in the methods we also used the following.
+In addition to packages mentioned in the methods, a complete list of software used follows.
 
 We used \emph{R} v.4.2.2 (\citeproc{ref-base}{R Core Team, 2022}) via \emph{RStudio} v.2023.6.2.561 (\citeproc{ref-rstudio}{RStudio Team, 2022}).
-We used \emph{here} v.1.0.1 (\citeproc{ref-here}{Müller, 2020}), \emph{readr} v.2.1.5 (\citeproc{ref-readr}{Wickham, Hester \& Bryan, 2024}), \emph{inborutils} v.0.3.0 (\citeproc{ref-inborutils}{Van Calster, Oldoni \& Van Hoey, 2023}), and \emph{qs} v.0.26.3 (\citeproc{ref-qs}{Ching, 2023}) to manage directory addresses and saved objects.
+We used \emph{here} v.1.0.1 (\citeproc{ref-here}{Müller, 2020}), \emph{readr} v.2.1.5 (\citeproc{ref-readr}{Wickham, Hester \& Bryan, 2024}), \emph{inborutils} v.0.3.0 (\citeproc{ref-inborutils}{Van Calster, Oldoni \& Van Hoey, 2023}),
+\emph{targets} v.1.6.0 and \emph{tarchetypes} v.0.9.0 (\citeproc{ref-targets}{Landau, 2021a},\citeproc{ref-tarchetypes}{b}), and \emph{qs} v.0.26.3 (\citeproc{ref-qs}{Ching, 2023}) to manage directory addresses and saved objects.
 
 We used \emph{ggplot2} v.3.5.1 for creating figures (\citeproc{ref-ggplot2}{Wickham, 2016}), with the expansions: \emph{patchwork} v.1.2.0 (\citeproc{ref-patchwork}{Pedersen, 2024}), \emph{ggridges} v.0.5.6 (\citeproc{ref-ggridges}{Wilke, 2024}), \emph{ggtext} v.0.1.2 (\citeproc{ref-ggtext}{Wilke \& Wiernik, 2022}), \emph{ggnewscale} v.0.5.0 (\citeproc{ref-ggnewscale}{Campitelli, 2024}), and \emph{ggdist} v.3.3.2 (\citeproc{ref-ggdist}{Kay, 2023a}).
 
@@ -795,6 +776,16 @@ Python bivittatus & PYBI060 & 191 & 190.93819 & 24.12 ±0.25 & 63 & 65.09 ±9.91
 \includegraphics[width=1\linewidth]{../../figures/specCurve_Bungarus fasciatus_pois} \caption{All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriated coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right).}\label{fig:specCurvePoisBUFA}
 \end{figure}
 
+\subsection{Additional Meta-analysis Plots}\label{additional-meta-analysis-plots}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/r2Plot} \caption{Conditional R2 values for all meta-analysis models, with 95\% HDCIs.}\label{fig:metaR2Plot}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/metaBeta} \caption{Posterior estimates of the population effects for all meta-analysis models, with 95\% HDCIs.}\label{fig:metaBetasPlot}
+\end{figure}
+
 \section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
 
@@ -911,6 +902,9 @@ Goldstein E, Erinjery JJ, Martin G, Kasturiratne A, Ediriweera DS, Silva HJ de, 
 \bibitem[\citeproctext]{ref-gould_same_2023}
 Gould E, Fraser H, Parker T, Nakagawa S, Griffith S, Vesk P, Fidler F, Abbey-Lee R, Abbott J, Aguirre L, Alcaraz C, Altschul D, Arekar K, Atkins J, Atkinson J, Barrett M, Bell K, Bello S, Berauer B, Bertram M, Billman P, Blake C, Blake S, Bliard L, Bonisoli-Alquati A, Bonnet T, Bordes C, Bose A, Botterill-James T, Boyd M, Boyle S, Bradfer-Lawrence T, Brand J, Brengdahl M, Bulla M, Bussière L, Camerlenghi E, Campbell S, Campos L, Caravaggi A, Cardoso P, Carroll C, Catanach T, Chen X, Chik HYJ, Choy E, Christie A, Chuang A, Chunco A, Clark B, Cox M, Cressman K, Crouch C, D'Amelio P, De Sousa A, Döbert T, Dobler R, Dobson A, Doherty T, Drobniak S, Duffy A, Dunn R, Dunning J, Eberhart-Hertel L, Elmore J, Elsherif M, English H, Ensminger D, Ernst U, Ferguson S, Ferreira-Arruda T, Fieberg J, Finch E, Fiorenza E, Fisher D, Forstmeier W, Fourcade Y, Francesca Santostefano F, Frank G, Freund C, Gandy S, Gannon D, García-Cervigón A, Géron C, Gilles M, Girndt A, Gliksman D, Goldspiel H, Gomes D, Goslee S, Gosnell J, Gratton P, Grebe N, Greenler S, Griffith D, Griffith F, Grossman J, Güncan A, Haesen S, Hagan J, Harrison N, Hasnain S, Havird J, Heaton A, Hsu B-Y, Iranzo E, Iverson E, Jimoh S, Johnson D, Johnsson M, Jorna J, Jucker T, Jung M, Kačergytė I, Ke A, Kelly C, Keogan K, Keppeler F, Killion A, Kim D, Kochan D, Korsten P, Kothari S, Kuppler J, Kusch J, Lagisz M, Larkin D, Larson C, Lauck K, Lauterbur M, Law A, Léandri-Breton D-J, Lievens E, Lima D, Lindsay S, Macphie K, Mair M, Malm L, Mammola S, Manhart M, Mäntylä E, Marchand P, Marshall B, Martin D, Martin J, Martin C, Martinig A, McCallum E, McNew S, Meiners S, Michelangeli M, Moiron M, Moreira B, Mortensen J, Mos B, Muraina T, Nelli L, Nilsonne G, Nolazco S, Nooten S, Novotny J, Olin A, Organ C, Ostevik K, Palacio F, Paquet M, Pascall D, Pasquarella V, Payo-Payo A, Pedersen K, Perez G, Perry K, Pottier P, Proulx M, Proulx R, Pruett J, Ramananjato V, Randimbiarison F, Razafindratsima O, Rennison D, Riva F, Riyahi S, Roast M, Rocha F, Roche D, Román-Palacios C, Rosenberg M, Ross J, Rowland F, Rugemalila D, Russell A, Ruuskanen S, Saccone P, Sadeh A, Salazar S, Sales K, Salmón P, Sanchez-Tojar A, Santos L, Schilling H, Schmidt M, Schmoll T, Schneider A, Schrock A, Schroeder J, Schtickzelle N, Schultz N, Scott D, Shapiro J, Sharma N, Shearer C, Sitvarin M, Skupien F, Slinn H, Smith J, Smith G, Sollmann R, Stack Whitney K, Still S, Stuber E, Sutton G, Swallow B, Taff C, Takola E, Tanentzap A, Thawley C, Tortorelli C, Trlica A, Turnell B, Urban L, Van De Vondel S, Van Oordt F, Vanderwel M, Vanderwel K, Vanderwolf K, Verrelli B, Vieira M, Vollering J, Walker X, Walter J, Waryszak P, Weaver R, Weller D, Whelan S, White R, Wolfson D, Wood A, Yanco S, Yen J, Youngflesh C, Zilio G, Zimmer C, Zitomer R, Villamil N, Tompkins E. 2023. Same data, different analysts: Variation in effect sizes due to analytical decisions in ecology and evolutionary biology. \emph{EcoEvoRxiv}. DOI: \href{https://doi.org/10.32942/X2GG62}{10.32942/X2GG62}.
 
+\bibitem[\citeproctext]{ref-griffith_cooperation_2019}
+Griffith SC. 2019. Cooperation and {Coordination} in {Socially} {Monogamous} {Birds}: {Moving} {Away} {From} a {Focus} on {Sexual} {Conflict}. \emph{Frontiers in Ecology and Evolution} 7:455. DOI: \href{https://doi.org/10.3389/fevo.2019.00455}{10.3389/fevo.2019.00455}.
+
 \bibitem[\citeproctext]{ref-groffen_preference_2018}
 Groffen J, Borzée A, Jang Y. 2018. Preference for natural borders in rice paddies by two treefrog species. \emph{Animal Cells and Systems} 22:205--211. DOI: \href{https://doi.org/10.1080/19768354.2018.1475301}{10.1080/19768354.2018.1475301}.
 
@@ -938,6 +932,9 @@ Hodges CW, Marshall BM, Hill JG, Strine CT. 2022. Malayan kraits ({Bungarus} can
 \bibitem[\citeproctext]{ref-huntingtonklein_influence_2021}
 Huntington‐Klein N, Arenas A, Beam E, Bertoni M, Bloem JR, Burli P, Chen N, Grieco P, Ekpe G, Pugatch T, Saavedra M, Stopnitzky Y. 2021. The influence of hidden researcher decisions in applied microeconomics. \emph{Economic Inquiry} 59:944--960. DOI: \href{https://doi.org/10.1111/ecin.12992}{10.1111/ecin.12992}.
 
+\bibitem[\citeproctext]{ref-ihle_fitness_2015}
+Ihle M, Kempenaers B, Forstmeier W. 2015. Fitness {Benefits} of {Mate} {Choice} for {Compatibility} in a {Socially} {Monogamous} {Species}. \emph{PLOS Biology} 13:e1002248. DOI: \href{https://doi.org/10.1371/journal.pbio.1002248}{10.1371/journal.pbio.1002248}.
+
 \bibitem[\citeproctext]{ref-jennions_relationships_2002}
 Jennions MD, Møller AP. 2002. Relationships fade with time: A meta-analysis of temporal trends in publication in ecology and evolution. \emph{Proceedings of the Royal Society of London. Series B: Biological Sciences} 269:43--48. DOI: \href{https://doi.org/10.1098/rspb.2001.1832}{10.1098/rspb.2001.1832}.
 
@@ -949,6 +946,15 @@ Jones MD, Marshall BM, Smith SN, Crane M, Silva I, Artchawakom T, Suwanwaree P, 
 
 \bibitem[\citeproctext]{ref-joo_recent_2022}
 Joo R, Picardi S, Boone ME, Clay TA, Patrick SC, Romero-Romero VS, Basille M. 2022. Recent trends in movement ecology of animals and human mobility. \emph{Movement Ecology} 10:26. DOI: \href{https://doi.org/10.1186/s40462-022-00322-9}{10.1186/s40462-022-00322-9}.
+
+\bibitem[\citeproctext]{ref-Kamath2017}
+Kamath A, Losos J. 2017. The erratic and contingent progression of research on territoriality: A case study. \emph{Behavioral Ecology and Sociobiology} 71:1--13. DOI: \href{https://doi.org/10.1007/s00265-017-2319-z}{10.1007/s00265-017-2319-z}.
+
+\bibitem[\citeproctext]{ref-Kamath2018}
+Kamath A, Losos JB. 2018a. Estimating encounter rates as the first step of sexual selection in the lizard {Anolis} sagrei. \emph{Proceedings of the Royal Society B: Biological Sciences} 285:20172244. DOI: \href{https://doi.org/10.1098/rspb.2017.2244}{10.1098/rspb.2017.2244}.
+
+\bibitem[\citeproctext]{ref-Kamath2018a}
+Kamath A, Losos J. 2018b. Reconsidering territoriality is necessary for understanding {Anolis} mating systems. \emph{Behavioral Ecology and Sociobiology} 72:106. DOI: \href{https://doi.org/10.1007/s00265-018-2524-4}{10.1007/s00265-018-2524-4}.
 
 \bibitem[\citeproctext]{ref-ggdist}
 Kay M. 2023a. \emph{{ggdist}: Visualizations of distributions and uncertainty}. DOI: \href{https://doi.org/10.5281/zenodo.3879620}{10.5281/zenodo.3879620}.
@@ -1118,11 +1124,23 @@ Stuber EF, Carlson BS, Jesmer BR. 2022. Spatial personalities: A meta-analysis o
 \bibitem[\citeproctext]{ref-tomotani_great_2021}
 Tomotani BM, Muijres FT, Johnston B, Jeugd HP, Naguib M. 2021. Great tits do not compensate over time for a radio‐tag‐induced reduction in escape‐flight performance. \emph{Ecology and Evolution} 11:16600--16617. DOI: \href{https://doi.org/10.1002/ece3.8240}{10.1002/ece3.8240}.
 
+\bibitem[\citeproctext]{ref-tucker_large_2019}
+Tucker MA, Alexandrou O, Bierregaard RO, Bildstein KL, Böhning‐Gaese K, Bracis C, Brzorad JN, Buechley ER, Cabot D, Calabrese JM, Carrapato C, Chiaradia A, Davenport LC, Davidson SC, Desholm M, DeSorbo CR, Domenech R, Enggist P, Fagan WF, Farwig N, Fiedler W, Fleming CH, Franke A, Fryxell JM, García‐Ripollés C, Grémillet D, Griffin LR, Harel R, Kane A, Kays R, Kleyheeg E, Lacy AE, LaPoint S, Limiñana R, López‐López P, Maccarone AD, Mellone U, Mojica EK, Nathan R, Newman SH, Noonan MJ, Oppel S, Prostor M, Rees EC, Ropert‐Coudert Y, Rösner S, Sapir N, Schabo D, Schmidt M, Schulz H, Shariati M, Shreading A, Paulo Silva J, Skov H, Spiegel O, Takekawa JY, Teitelbaum CS, Toor ML van, Urios V, Vidal‐Mateo J, Wang Q, Watts BD, Wikelski M, Wolter K, Žydelis R, Mueller T. 2019. Large birds travel farther in homogeneous environments. \emph{Global Ecology and Biogeography} 28:576--587. DOI: \href{https://doi.org/10.1111/geb.12875}{10.1111/geb.12875}.
+
+\bibitem[\citeproctext]{ref-Tucker2018}
+Tucker MA, Böhning-Gaese K, Fagan WF, Fryxell JM, Van Moorter B, Alberts SC, Ali AH, Allen AM, Attias N, Avgar T, Bartlam-Brooks H, Bayarbaatar B, Belant JL, Bertassoni A, Beyer D, Bidner L, Beest FM van, Blake S, Blaum N, Bracis C, Brown D, Bruyn PJN de, Cagnacci F, Calabrese JM, Camilo-Alves C, Chamaillé-Jammes S, Chiaradia A, Davidson SC, Dennis T, DeStefano S, Diefenbach D, Douglas-Hamilton I, Fennessy J, Fichtel C, Fiedler W, Fischer C, Fischhoff I, Fleming CH, Ford AT, Fritz SA, Gehr B, Goheen JR, Gurarie E, Hebblewhite M, Heurich M, Hewison AJM, Hof C, Hurme E, Isbell LA, Janssen R, Jeltsch F, Kaczensky P, Kane A, Kappeler PM, Kauffman M, Kays R, Kimuyu D, Koch F, Kranstauber B, LaPoint S, Leimgruber P, Linnell JDC, López-López P, Markham AC, Mattisson J, Medici EP, Mellone U, Merrill E, Miranda Mourão G de, Morato RG, Morellet N, Morrison TA, Díaz-Muñoz SL, Mysterud A, Nandintsetseg D, Nathan R, Niamir A, Odden J, O'Hara RB, Oliveira-Santos LGR, Olson KA, Patterson BD, Cunha de Paula R, Pedrotti L, Reineking B, Rimmler M, Rogers TL, Rolandsen CM, Rosenberry CS, Rubenstein DI, Safi K, Saïd S, Sapir N, Sawyer H, Schmidt NM, Selva N, Sergiel A, Shiilegdamba E, Silva JP, Singh N, Solberg EJ, Spiegel O, Strand O, Sundaresan S, Ullmann W, Voigt U, Wall J, Wattles D, Wikelski M, Wilmers CC, Wilson JW, Wittemyer G, Zięba F, Zwijacz-Kozica T, Mueller T. 2018. Moving in the {Anthropocene}: {Global} reductions in terrestrial mammalian movements. \emph{Science} 359:466--469. DOI: \href{https://doi.org/10.1126/science.aam9712}{10.1126/science.aam9712}.
+
 \bibitem[\citeproctext]{ref-inborutils}
 Van Calster H, Oldoni D, Van Hoey S. 2023. \emph{\href{https://inbo.github.io/inborutils/}{Inborutils: Collection of useful r utilities. Version 0.3.0}}.
 
 \bibitem[\citeproctext]{ref-Viravan1992}
 Viravan C, Looareesuwan S, Kosakam W, Wuthiekanun V, McCarthy CJ, Stimson AF, Bunnag D, Harinasuta T, Warrell DA. 1992. A national hospital-based survey of snakes responsible for bites in {Thailand}. \emph{Transactions of the Royal Society of Tropical Medicine and Hygiene} 86:100--106. DOI: \href{https://doi.org/10.1016/0035-9203(92)90463-M}{10.1016/0035-9203(92)90463-M}.
+
+\bibitem[\citeproctext]{ref-wang_no_2017}
+Wang D, Forstmeier W, Kempenaers B. 2017. No mutual mate choice for quality in zebra finches: {Time} to question a widely held assumption: {NO} {MUTUAL} {MATE} {CHOICE} {FOR} {QUALITY} {IN} {ZEBRA} {FINCHES}. \emph{Evolution} 71:2661--2676. DOI: \href{https://doi.org/10.1111/evo.13341}{10.1111/evo.13341}.
+
+\bibitem[\citeproctext]{ref-wang_male_2017}
+Wang D, Kempenaers N, Kempenaers B, Forstmeier W. 2017. Male zebra finches have limited ability to identify high-fecundity females. \emph{Behavioral Ecology} 28:784--792. DOI: \href{https://doi.org/10.1093/beheco/arx037}{10.1093/beheco/arx037}.
 
 \bibitem[\citeproctext]{ref-Weatherhead2004}
 Weatherhead PJ, Blouin-Demers G. 2004. Long-term effects of radiotelemetry on black ratsnakes. \emph{Wildlife Society Bulletin} 32:900--906. DOI: \href{https://doi.org/10.2193/0091-7648(2004)032\%5B0900:LEOROB\%5D2.0.CO;2}{10.2193/0091-7648(2004)032{[}0900:LEOROB{]}2.0.CO;2}.

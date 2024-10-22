@@ -25,69 +25,70 @@ csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
-abstract: <PLACEHOLDER ABSTRACT> Possibly the best way to determine a snake’s needs is to follow their movements. Once we have learnt of the snake’s movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human snake conflict. However, extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement studies are leading to the correct decisions in snake conservation? We used a multiverse approach to explore thousands of ways of extracting habitat preference estimates from the movement of simulated snakes with a pre-defined preference. We found that despite different sampling approaches, and completely different analysis methods, the vast majority of results agree and correctly identify habitat preference. The agreement between different habitat preference estimates tended to be better with more data, and when using more modern analysis methods. Now we apply this multiverse of analyses to re-examine several previous studies of snake habitat preference from Thailand. We examine how the published results compare to the thousands of other ways a researcher could have examined the snake movement data. Would certain analysis choices have led to a different conclusion and therefore a different conservation recommendation? We hope the answers to these questions will inform how confident researchers can be in the findings from snake movement studies and direct researchers towards more robust studies in the future.
+abstract: Possibly the best way to determine a snake’s needs is to follow their movements. Once we have learnt of the snake’s movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human-snake conflict. Extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement studies are providing the correct guidance for snake conservation? We used a multiverse approach to explore several thousand ways of extracting habitat selection estimates from four snake movement datasets, using categoric and continuous classifications of the landscape. The resulting habitat selection estimates showed an overall agreement with regards to direction, indicating general support for the original conclusions on the snakes selected habitats. However, the strength of the selection appeared more sensitive to choices made during analysis, with several analysis choices appearing only to be impactful with a particular species' data. This leads us to suggest that generalisations on the impact of specific analysis decisions may be difficult to predict a priori for other species and study systems. The broad agreement shown here should bolster confidence in past studies' conclusions. Whereas the variation displayed in the selection strengths highlights how analysis choices could inflate the differences between studies.
 keywords: Movement ecology, simulation, step selection function, poisson, habitat preference, habitat selection, animal movement, multiverse, research choice, researcher degrees for freedom, snakes, King Cobra, Burmese Python, Banded Krait, Malayan Krait
 ---
 
 # Introduction
 
-<!-- Science should be self correcting -->
-<!-- Alberts et al 2015 -->
-
-<!-- Self-correction can be more ephemeral, not limited to direct hard replications -->
-<!-- Peterson, Panosky 2021 -->
-
 <!-- reproducibility crisis -->
 <!-- Baker 2016 -->
-<!-- \usepackage[bitstream-charter]{mathdesign} -->
-<!-- \usepackage[charter]{mathdesign} -->
 
 A key component of science is the continual reassessment of past work and findings [@alberts_self-correction_2015].
-Whether that reassessment takes the form of direct replications aiming to evaluate the reliability previous work, or a more integrative approach testing the boundaries of previous findings' generalisability by retesting questions in different study systems [@nakagawa_replicating_2015; @peterson_self-correction_2021]. <!-- see peterson paper for definition check . Also add quasi-rep citation --> 
+Whether that reassessment takes the form of direct replications aiming to evaluate the reliability previous work, or a more integrative approach testing the boundaries of previous findings' generalisability by retesting questions in different study systems (e.g., quasi-replications) [@nakagawa_replicating_2015; @peterson_self-correction_2021]. <!-- see peterson paper for definition check . Also add quasi-rep citation --> 
 
 <!-- Direct quote from Peterson 2021 - "When replication in the normal course of integration does not provide clear signals of truth or falsity, researchers instead look for signs of robustness." -->
 
-Reassessments and replications --regardless of their position on the direct-quasi continuum-- can aid the formal and organic self-correcting process of science.
-Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but this momentum can be difficult to redirect if the initial impetus was misdirected [@jennions_relationships_2002; @barto_dissemination_2012] <!-- thinking the progress papers, think it was by barto about early research that is underpowered starting trends that are hard to stop -->.
-Therefore, checking and confirming results early is important; we can see this principle recognised in the peer review system.
+Reassessments and replications can aid the formal and organic self-correcting process of science.
+Initial findings set the stage for subsequent work, building momentum that can accelerate progress, but this momentum can be difficult to redirect after the initial impetus [@jennions_relationships_2002; @barto_dissemination_2012] <!-- thinking the progress papers, think it was by barto about early research that is underpowered starting trends that are hard to stop -->.
+In ecology and evolution, research on mating systems shows exactly this momentum.
+Early studies on *Anolis spp.* mating systems concluded that territoriality played a key role in mating success by controlling access to breeding females [@Kamath2017; @Kamath2018a].
+The assumption of a polygynous mating system coloured and shaped subsequent research, and was only adequately challenged when genetic investigation revealed the importance of female mate choice and multiple partners [@Kamath2018.
+The new research highlighted that the initial assumptions of territoriality were overly strong and had misdirected research and obscured an important part of *Anolis* ecology [@Kamath2017; @Kamath2018a].
+Similar perspective changes are seen in studies of bird mating systems, where earlier research focused on mating competition and potentially lost sight of explanations connected mating cooperation [@griffith_cooperation_2019].
+Here over emphasis on mate choice via differential ornamentation could obscure the roles of social compatibility (i.e., pair behavioural compatibility @ihle_fitness_2015; and the imperfect information communicated by ornamentation @wang_no_2017; @wang_male_2017). 
+These examples emphasise the importance of checking and confirming results early, before assumptions are entrenched; we can see this principle recognised in the peer review system.
 
-Checking previous findings through replication can become more difficult in systems with high task uncertainty. 
-High task uncertainty systems –those that manifest high levels of uncontrollable stochasticity– may make direct diagnostic replications impractical or impossible, and render the evidence from quasi-replications weaker <!-- peterson pano 2021 is the paper for this stuff -->[@peterson_self-correction_2021].
+Checking previous findings through replication is more difficult in systems with high task uncertainty. 
+High task uncertainty systems manifesting high levels of uncontrollable stochasticity, making direct diagnostic replications impractical or impossible, render the evidence from quasi-replications weaker <!-- peterson pano 2021 is the paper for this stuff -->[@peterson_self-correction_2021].
 Ecological systems can be considered as generating high task uncertainty, with many interconnected elements, and when studying wild systems many of those elements are uncontrollable.
 <!-- peterson pano 2021 has a bit about "task uncertainty" where high perfectly describes ecology and the hard to control system -->
 
 With ecological systems, such complexity and the difficulties in controlling experiments makes direct replications costly, potentially explaining their rarity [@kelly_rate_2019].
 When studying wild animals with a level of direct intervention, repeating experiments might be unethical due to the well-being costs [@Weatherhead2004; @tomotani_great_2021; @robstad_impact_2021; @portugal_externally_2022; @altobelli_methods_2022]. 
-
 <!-- could add a couple more examples here -->
-When faced with limited options for direct replications, an alternative, albeit not a replacement, would be to re-examine existing datasets.
-Pooling old and new datasets, and reanalysing them, may provide opportunities for broader generalisations.
+When faced with limited options for direct replications, an alternative approach would be to re-examine existing datasets.
+Pooling old and new datasets and re-analysing them may provide opportunities for broader generalisations.
+Good examples exist in movement ecology, where the re-examination of many animal movement datasets revealed general patterns of reduced mammal movement with increased human footprint [@Tucker2018], and increased bird movements in increasingly homogeneous landscapes [@tucker_large_2019].
+These findings, based on many species, across various regions, are better placed to be the building blocks of future hypotheses.
 
 In some cases older data may have been collected and recorded in ways that enables completely fresh analysis [@kays_movebank_2022].
 As methodologies develop, conceptualisations change, and computational power increases, new avenues for examining the same data may materialise [e.g., @noonan_effects_2020].
 As these new methods are developed and applied, we may see the conclusions based upon those data change.
 There are a growing number of examples demonstrating that the analysis approach can alter the results [@salis_how_2021; @desbureaux_subjective_2021], and that the researchers themselves can be a key source of variation in analysis and results [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023].
-These examples elegantly show the possible extent of technical uncertainty present in some systems<!-- peterson and pano term again, needs defining -->.
+Recently for ecology and evolution, @gould_same_2023 showed that when ~250 researchers were asked to answer the same question with the same dataset (either bird nestling success, or eucalyptus growth) the analysis approaches and therefore results varied, in some cases indicated opposing effects.
+These examples elegantly show the possible extent of technical uncertainty present in some systems (i.e., the uncertainty resulting differences in methodology)<!-- peterson and pano term again, needs defining -->.
+In practice researchers often do not have the time to explore many possible analysis pathways; therefore, we may be underestimating the uncertainty surrounding published results. 
 
 Not all disciplines have explored the sources of uncertainty in findings equally.
 Prudence would push for examination of uncertainty in all its forms, in particular for fields that already tackle high levels of uncertainty originating from wild study systems.
-Movement ecology could be argued to exemplify such a field.
-Animals are complex, existing in complex wild ecosystems, with individuality and personality [@stuber_spatial_2022].
+Movement ecology is such a field.
+Animals are complex, existing in complex ecosystems with individuality and personality [@stuber_spatial_2022].
 Depending on the research question, controls in movement ecology can be difficult to achieve, and replications difficult to justify given the strict ethical limitations on interventionist study.
 Movement ecology has also seized the opportunities presented by technological developments, enabling higher resolution tracking of animal movements (e.g., GPS tracking) and more sophisticated analysis that can integrate the high dimensional data [e.g., x-y coordinates, time, acceleration, individual, other covariates of interest, @joo_recent_2022].
 
-Personality and the repeatability of behaviours presents a key component to the uncertainty or variation when attempting to generalise.
-However, here we turn to the technical uncertainty, the uncertainty originating from the researcher and how they approach the data.
-Previous many analyst projects highlight the potential for analyst-side variation [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023], and previous multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset [@marshall_habitat_2024] <!-- FIRST PREPRINTS HERE -->[chapter 2 and 3 preprints can be cited here when published in June].
-Here we take the multiverse approach further by applying it to a number of real case studies with the aim of exploring whether different analysis approaches could have altered the final general conclusions.
+Personality and the repeatability of behaviours presents a key component of the variation when attempting to generalise [@stuber_spatial_2022]. 
+However, here we focus on the technical uncertainty, the uncertainty originating from the researcher and how they approach the data.
+Many analyst projects highlight the potential for analyst-side variation [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023], and multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset [@marshall_habitat_2024] (also see Chapter 3).
+Here we take the multiverse approach further by applying it to a number of real case studies to explore whether different analysis approaches alter general conclusions.
 
 <!-- ecology has high "task uncertainty" stemming from high "technical" and "strategic task uncertainty" - Peterson pano 2021 -->
 
 <!-- Peterson pano 2021 has a great line that when task uncertainty is higher and more uncontrollable variables exists then integrative replications are more open to interpretation. -->
 
 We selected a quartet of separate but connected movement ecology studies that attempt to disentangle the habitat selection exhibited by snakes in north-eastern Thailand.
-All four cases focus on snakes that come into conflict with humans to some extent, either because of the risks posed by their venom (King Cobra @Marshall2018 & @marshall_no_2020, Malayan Krait @hodges_malayan_2022, Banded Krait @knierim_spatial_2019), or because of their appetite for domestic livestock (Burmese python @smith_native_2021).
-In all cases the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict by highlighting the snakes are drawn to.
+All four cases focus on snakes that come into conflict with humans to varying degrees, either because of the risks posed by their venom (King Cobra @Marshall2018 & @marshall_no_2020, Malayan Krait @hodges_malayan_2022, Banded Krait @knierim_spatial_2019), or because of their appetite for domestic livestock (Burmese python @smith_native_2021).
+In all cases, the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict by highlighting the snakes are drawn to.
 With these general goals in mind, we aim to re-examine the movement datasets using a multiverse of habitat selection analysis pathways to reveal whether the same data could lead to different conclusions.
 
 <!-- devezer et al 2021 - reproducing the results doesn't mean that they are more likely correct - pg 10. So instead here we are exploring the likely that conclusions would change, an attempt to gauge uncertainty with a number of ~equally~ valid analysis methods -->
@@ -108,7 +109,11 @@ Bisecting the transitional zone, and running adjacent to the protected forest ar
 The Malayan Krait case study was not in the Sakaerat Biosphere Reserve, instead undertaken nearer to Nakhon Ratchasima proper, on the Suranaree University of Technology campus.
 The university campus is a mix of scrub forest, open lawn, university buildings, and homes.
 Further details on the study sites' characteristics can be found in the original publications [@Marshall2018; @marshall_no_2020; @smith_native_2021; @hodges_malayan_2022; @knierim_spatial_2019].
-For land use classfication we relied on data supplied by the Land Development Department of Thailand [@land_development_department_thailand_land-use_2017].
+For land use classification we relied on data supplied by the Land Development Department of Thailand [@land_development_department_thailand_land-use_2017].
+
+```{r locationFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The study site locations for all four case studies. Top left the location within Thailand, both the Sakaerat Biosphere Reserve and the Suranaree University of Technology campus are located within Nakhon Ratchasima Province. Bottom right shows the overall study location for King Cobra, Burmese Python, and Banded Krait (circular points). The purple areas that the land uses that are included in any of the species hypotheses. Gray lines indicate roads. Bottom right is the same region, but focused on the Banded Krait locations to better show the field margin data used for their assessment of habitat selection. Top right is the study location for the Malayan Krait study on the Suranaree University of Technology campus."}
+knitr::include_graphics(here::here("notebook", "ext_images", "LocationMap.png"))
+```
 
 <!-- enough detail? and double check the match the original papers -->
 
@@ -136,7 +141,8 @@ The main exception is for the first three tracked *Ophiophagus hannah*, who we t
 
 We simplified the conclusions of the original studies into hypotheses targeting their preferred habitat for each species.
 We registered these hypothesis prior to undertaking the multiverse exploration ([https://osf.io/kv8rg/](https://osf.io/kv8rg/)), they remained unchanged and are detailed below.
-```{r hypothesesFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="..."}
+
+```{r hypothesesFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="A summary of the species and hypotheses, alongside sample sizes for each species, and a visualisation describing the two landscape classifications used in the multiverse."}
 knitr::include_graphics(here::here("notebook", "ext_images", "hypothesis_visual.png"))
 ```
 
@@ -145,10 +151,10 @@ knitr::include_graphics(here::here("notebook", "ext_images", "hypothesis_visual.
 @Marshall2018 and @marshall_no_2020 are concerned with King Cobras (*Ophiophagus hannah*).
 King Cobras are a large (tracked individuals between 1.40 and 3.71m snout to vent length), diurnal, active foraging snake species that depredate snakes and monitor lizards [@Jones_supposed_2020].
 While considered a predominately forest dwelling species [@Stuart2012], they are known to make use of more human altered areas [@Whitaker2004; @Rao2013; @jones_how_2022], which can lead to frequent human-snake conflict [@Shankar2013a; @Marshall2018b].
-The extremely low occurrence of King Cobra bites in Thailand means that instances of human-snake conflict are primarily a conservation concern as opposed to human health [@Pochanugool1998; @Viravan1992].
+The extremely low occurrence of King Cobra bites in Thailand means that instances of human-snake conflict are primarily a conservation concern as opposed to a human health concern [@Pochanugool1998; @Viravan1992].
 
-@Marshall2018 does not conclude on an actual selection, instead highlighting the King Cobras' excursions out of the protected forest.
-@marshall_no_2020 looks more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersect the agricultural matrix surrounding the protected forest.
+@Marshall2018 do not conclude on an actual selection, instead highlighting the King Cobras' excursions out of the protected forest.
+@marshall_no_2020 look more specifically at selection, highlighting the importance of semi-natural areas that occupy the banks of irrigation canals and intersect the agricultural matrix surrounding the protected forest.
 Therefore, we will pool both datasets and examine two non-mutually exclusive hypotheses.
 
 H~OPHA1~: King Cobras select for semi-natural habitat.
@@ -158,10 +164,10 @@ H~OPHA2~: King Cobras select for forest habitat.
 ### Burmese Python
 
 @smith_native_2021 describe Burmese Python (*Python bivittatus*) habitat selection and movement.
-Burmese Pythons are large (tracked individuals between  2.21 and 3.09m snout to vent length), ambush predators capable of tacking prey over 100% their own body mass [@bartoszek_natural_2018] and impacting mammal populations [@dorcas_severe_2012].
-The flexibility in regards to prey size means snakes of this size are inevitably drawn into conflict with humans over livestock, a pattern mirrored across the globe for large snakes [@Miranda2016].
+Burmese Pythons are large (tracked individuals between  2.21 and 3.09m snout to vent length), ambush predators capable of tackling prey over 100% their own body mass [@bartoszek_natural_2018], and whose predation pressure can play a role in limiting mammal populations sizes [@dorcas_severe_2012].
+The flexibility in prey size means snakes of this size are inevitably drawn into conflict with humans over livestock, a pattern mirrored across the globe for large snakes [@Miranda2016].
 
-The conclusions of @smith_native_2021 on python habitat selection are not dissimilar to those made on King Cobras, with an active selection for areas near water.
+The conclusions of @smith_native_2021 on python habitat selection are similar to those made on King Cobras, with an active selection for areas near water.
 The land classification used in @smith_native_2021 was slightly different to @marshall_no_2020, grouping semi-natural areas with larger water bodies (e.g., agricultural ponds).
 
 H~PYBI1~: Burmese Pythons select for areas near water.
@@ -207,7 +213,7 @@ We suspect that these escaped detection during the initial publication [@Marshal
 
 ## Multiverse Construction
 
-```{r readInOptions, echo=FALSE}
+```{r readInOptions, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(stringr)
 optionsComplete <- readRDS(here::here("data", "optionsCompleteList.rds"))
@@ -223,7 +229,7 @@ A multiverse is tree of branching paths, where decisions made during analysis sp
 Previous work has reveal the importance of data quantity over analysis decisions in determining habitat selection [@marshall_habitat_2024] (Chapter 3), but we are still left with sizeable variation in final answers –and perhaps more importantly answers that offer contradictory conclusions.
 The variation in results are similarly present in more practical demonstrations, such as many analysts projects [@gould_same_2023].
 
-```{r decisionsFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="..."}
+```{r decisionsFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="A visual of all the decisions contained in the multiverse and colour coded to which approach that decision that applies."}
 knitr::include_graphics(here::here("notebook", "ext_images", "decisions_visual.png"))
 ```
 
@@ -452,10 +458,6 @@ The step-based approaches tended to have more variable *R^2^*, with step-selecti
 *$\tau$^2^* values ranged from very low (`r signif(min(tau2conditional$value), digits = 2)`) for the binary classed RSF models examining *Bungaurs facsiatus*, to `r signif(max(tau2conditional$value), digits = 2)` for the binary classed Poisson models examining the same species.
 Mostly *$\tau$^2^* values below 0.1 `r paste0(sum(tau2conditional$value < 0.1), "/", nrow(tau2conditional))` (overall median of `r round(median(tau2conditional$value), digits = 2)` ±SD `r round(sd(tau2conditional$value), digits = 2)`), largely mirroring results gained from meta-analyses and ecological many analysts projects [@gould_same_2023].
 
-```{r metaR2Plot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Conditional R2 values for all meta-analysis models, with 95% HDCIs."}
-knitr::include_graphics(here::here("figures", "r2Plot.png"))
-```
-
 The intercepts of the meta-analyses models reveal that most hypothesis are overall supported, with the only exceptions existing when the habitat was binary classified (Fig. \@ref(fig:metaInterPlot)).
 *Ophiophagus hannah* H2 and *Python bivittatus* H1 using Compana, *Bungarus candidus* H1 using Two-Step, *Ophiophagus hannah* H2 and *Python bivittatus* H1 using SSF.
 
@@ -472,10 +474,6 @@ Like the model formulation, the impact varied by species and landscape classific
 It reveals that impact of available area method is not necessarily very predictable, and likely interacts with the specific movement characteristics of the study species.
 Available points, either steps or points within an area, tended to be positively related to estimate strength.
 This was reasonably universal, but the larger effects were seen in *Bungarus spp.*, potentially suggesting greater impacts when the habitat's are defined at a finer spatial scale.
-
-```{r metaBetasPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Posterior estimates of the population effects for all meta-analysis models, with 95% HDCIs."}
-knitr::include_graphics(here::here("figures", "metaBeta.png"))
-```
 
 # Discussion
 
@@ -783,6 +781,15 @@ knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_ssf.
 knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_pois.png"))
 ```
 
+## Additional Meta-analysis Plots
+
+```{r metaR2Plot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Conditional R2 values for all meta-analysis models, with 95% HDCIs."}
+knitr::include_graphics(here::here("figures", "r2Plot.png"))
+```
+
+```{r metaBetasPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Posterior estimates of the population effects for all meta-analysis models, with 95% HDCIs."}
+knitr::include_graphics(here::here("figures", "metaBeta.png"))
+```
 
 
 # References

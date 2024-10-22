@@ -4,6 +4,7 @@ data/BUCA/*
 data/BUFA/*
 data/OPHA/*
 data/PYBI/*
+data/SBR SHP/*
 [.]tif$
 *uncom.csv
 /modelOutput/*.rds
