@@ -1,5 +1,5 @@
 ---
-title: "Testing the conclusions of snake habitat selection studies with a multiverse of analyses"
+title: "Snake Habitat Selection Findings are not Undermined by Researcher Analysis Choice"
 author1: "Benjamin Michael Marshall*"
 author2: "Matthew Crane"
 author3: "Cameron Wesley Hodges"
