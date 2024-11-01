@@ -413,7 +413,7 @@ wrsfCompiled <- list(
   tar_target(
     wrsfSpecCurve,
     generate_spec_curves(
-      outputResults = wrsfResults,
+      outputResults = wrsfEstimateOutputs,
       method = "wrsf"
     )
   )

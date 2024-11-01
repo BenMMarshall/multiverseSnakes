@@ -23,14 +23,14 @@ plot_meta_r2 <- function(modelExtracts){
     "<b style='color:#4F0E99'>Step Selection</b>",
     "<b style='color:#E87D13'>Area Based</b>")
   
-  speciesColDF <- paletteList$speciesColourDF %>% 
+  speciesColDF <- paletteList$speciesColourDFCommon %>% 
     mutate(
       speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
       speciesCol = factor(speciesCol, levels = c(
-        "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-        "<span style='color:#6c2b05'>Python bivittatus</span>",
-        "<span style='color:#322b21'>Bungarus candidus</span>",
-        "<span style='color:#b28904'>Bungarus fasciatus</span>")
+        "<span style='color:#bba07e'>King Cobra</span>",
+        "<span style='color:#6c2b05'>Burmese Python</span>",
+        "<span style='color:#322b21'>Malayan Krait</span>",
+        "<span style='color:#b28904'>Banded Krait</span>")
       ))
   speciesColVec <- speciesColDF$colour
   names(speciesColVec) <- speciesColDF$speciesCol
@@ -43,10 +43,10 @@ plot_meta_r2 <- function(modelExtracts){
            hypothesis = str_extract(model, "H1|H2"),
            classLandscape = str_extract(model, "binary|continuous")) %>% 
     mutate(species = case_when(
-      species == "OPHA" ~ "Ophiophagus hannah",
-      species == "PYBI" ~ "Python bivittatus",
-      species == "BUCA" ~ "Bungarus candidus",
-      species == "BUFA" ~ "Bungarus fasciatus"
+      species == "OPHA" ~ "King Cobra",
+      species == "PYBI" ~ "Burmese Python",
+      species == "BUCA" ~ "Malayan Krait",
+      species == "BUFA" ~ "Banded Krait"
     ))
   
   r2conditional <- r2results %>% 
@@ -68,14 +68,15 @@ plot_meta_r2 <- function(modelExtracts){
           "Continuous Habitat Classification"
         ))
     )  %>% 
-    left_join(paletteList$speciesColourDF) %>% 
+    left_join(paletteList$speciesColourDFCommon) %>% 
     mutate(
       speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
       speciesCol = factor(speciesCol, levels = c(
-        "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-        "<span style='color:#6c2b05'>Python bivittatus</span>",
-        "<span style='color:#322b21'>Bungarus candidus</span>",
-        "<span style='color:#b28904'>Bungarus fasciatus</span>")
+        "<span style='color:#b28904'>Banded Krait</span>",
+        "<span style='color:#322b21'>Malayan Krait</span>",
+        "<span style='color:#6c2b05'>Burmese Python</span>",
+        "<span style='color:#bba07e'>King Cobra</span>"
+        )
       )) %>% 
     mutate(method = case_when(
       method == "areaBased" ~ "Compana",
@@ -101,11 +102,11 @@ plot_meta_r2 <- function(modelExtracts){
     geom_hline(yintercept = seq(0.5,20.5,1), linewidth = 0.25, alpha = 0.5,
                colour = paletteList$corePalette["coreGrey"],
                linetype = 2) +
-    geom_pointrange(aes(y = method, x = value, xmin = lower, xmax = upper, 
+    geom_pointrange(aes(y = speciesCol, x = value, xmin = lower, xmax = upper, 
                         colour = speciesCol, shape = hypothesis),
                     fatten = 2,
                     position = position_dodge2(width = 0.75, reverse = TRUE)) +
-    facet_grid(cols = vars(classLandscape),
+    facet_grid(rows = vars(method), cols = vars(classLandscape),
                space = "free", scales = "free", drop = TRUE,
                switch = "y") +
     scale_colour_manual(values = speciesColVec) +
@@ -127,28 +128,51 @@ plot_meta_r2 <- function(modelExtracts){
       strip.text.x = element_markdown(angle = 0, hjust = 0, vjust = 1,
                                       margin = margin(0, 5, 20, 0),
                                       face = 4),
+      axis.text.y = element_markdown(face = 4),
       axis.title.y = element_blank(),
       strip.placement = "outside",
-      axis.title.x = element_text(face = 2, hjust = 0.5, vjust = 1),
-      # legend.position = "none",
+      axis.title.x = element_blank(),
       panel.border = element_blank(),
       panel.spacing = unit(18, "pt"),
       panel.grid = element_blank(),
-      legend.background = element_blank(),
+      # legend.background = element_blank(),
+      legend.box.background = element_rect(fill = "#ffffff", colour = NA),
       legend.direction = "vertical", 
       legend.position = "inside",
-      legend.position.inside = c(1,0.21),
+      legend.position.inside = c(0.98,1),
       legend.justification.inside = c(1,1),
       legend.box = "horizontal",
       legend.title = element_text(face = 2),
       legend.text = element_markdown(face = 3))
   
-  ggsave(filename = here::here("figures", "r2Plot.png"),
-         plot = r2Plot,
-         width = 220, height = 190, units = "mm", dpi = 300)
-  ggsave(filename = here::here("figures", "r2Plot.pdf"),
-         plot = r2Plot,
-         width = 220, height = 190, units = "mm")
+  # Get ggplot grob
+  g <- ggplotGrob(r2Plot)
+  g$layout
+  # gtable::gtable_show_layout(g)
+  # Alternatively, replace the grobs with the nullGrob
+  pos <- grep(pattern = "panel-1-2", g$layout$name)
+  g$grobs[[pos]] <- grid::nullGrob()
+  
+  # If you want, move the axis
+  # g$layout[g$layout$name == "axis-b-2", c("t", "b")] = c(8, 8)
+  
+  # Draw the plot
+  grid::grid.newpage()
+  grid::grid.draw(g)
+  
+  png(here::here("figures", "r2Plot.png"), width = 220, height = 190, units = "mm", res = 300)
+  grid::grid.draw(g) 
+  dev.off()
+  pdf(here::here("figures", "r2Plot.pdf"), width = 220/25.4, height = 190/25.4)
+  grid::grid.draw(g) 
+  dev.off()
+  
+  # ggsave(filename = here::here("figures", "r2Plot.png"),
+  #        # plot = r2Plot,
+  #        width = 220, height = 190, units = "mm", dpi = 300)
+  # ggsave(filename = here::here("figures", "r2Plot.pdf"),
+  #        # plot = r2Plot,
+  #        width = 220, height = 190, units = "mm")
   
   return(r2Plot)
   

@@ -31,18 +31,18 @@ plot_analysis_landscapes <- function(movementDataAll){
     
     if(str_detect(spHy, "OPHA")){
       xyBreaks <- 2000
-      comboTitle <- glue::glue("<span style='color:{speciesColour}'>OPHA</span>: <i>Ophiophagus hannah</i> (King Cobra)")
+      comboTitle <- glue::glue("<span style='color:{speciesColour}'>King Cobra</span> (<i>Ophiophagus hannah</i>)")
     } else if(str_detect(spHy, "PYBI")){
       xyBreaks <- 2000
-      comboTitle <- glue::glue("<span style='color:{speciesColour}'>PYBI</span>: <i>Python bivittatus</i> (Burmese Python)")
+      comboTitle <- glue::glue("<span style='color:{speciesColour}'>Burmese Python</span> (<i>Python bivittatus</i>)")
       
     } else if(str_detect(spHy, "BUCA")){
       xyBreaks <- 1000
-      comboTitle <- glue::glue("<span style='color:{speciesColour}'>BUCA</span>: <i>Bungarus candidus</i> (Malayan Krait)")
+      comboTitle <- glue::glue("<span style='color:{speciesColour}'>Malayan Krait</span> (<i>Bungarus candidus</i>)")
       
     } else if(str_detect(spHy, "BUFA")){
       xyBreaks <- 500
-      comboTitle <- glue::glue("<span style='color:{speciesColour}'>BUFA</span>: <i>Bungarus fasciatus</i> (Banded Krait)")
+      comboTitle <- glue::glue("<span style='color:{speciesColour}'>Banded Krait</span> (<i>Bungarus fasciatus</i>)")
       
     }
     

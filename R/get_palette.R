@@ -21,11 +21,24 @@ get_palette <- function(){
                                  "Bungarus candidus",
                                  "Bungarus fasciatus")
   
+  speciesFullPaletteCommon <- speciesPalette
+  names(speciesFullPaletteCommon) <- c("King Cobra",
+                                       "Burmese Python",
+                                       "Malayan Krait",
+                                       "Banded Krait")
+  
   speciesColour <- data.frame(
     species = c("Ophiophagus hannah",
                 "Python bivittatus",
                 "Bungarus candidus",
                 "Bungarus fasciatus"),
+    colour = c("#bba07e", "#6c2b05", "#322b21", "#b28904")
+  )
+  speciesColourCommon <- data.frame(
+    species = c("King Cobra",
+                "Burmese Python",
+                "Malayan Krait",
+                "Banded Krait"),
     colour = c("#bba07e", "#6c2b05", "#322b21", "#b28904")
   )
   
@@ -37,6 +50,9 @@ get_palette <- function(){
   return(list("corePalette" = palette,
               "speciesPalette" = speciesPalette,
               "speciesFullPalette" = speciesFullPalette,
-              "speciesColourDF" = speciesColour)
+              "speciesColourDF" = speciesColour,
+              "speciesFullPaletteCommon" = speciesFullPaletteCommon,
+              "speciesColourDFCommon" = speciesColourCommon
+              )
   )
 }

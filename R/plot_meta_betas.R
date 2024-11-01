@@ -34,10 +34,10 @@ plot_meta_betas <- function(modelExtracts){
            hypothesis = str_extract(model, "H1|H2"),
            classLandscape = str_extract(model, "binary|continuous")) %>% 
     mutate(species = case_when(
-      species == "OPHA" ~ "Ophiophagus hannah",
-      species == "PYBI" ~ "Python bivittatus",
-      species == "BUCA" ~ "Bungarus candidus",
-      species == "BUFA" ~ "Bungarus fasciatus"
+      species == "OPHA" ~ "King Cobra",
+      species == "PYBI" ~ "Burmese Python",
+      species == "BUCA" ~ "Malayan Krait",
+      species == "BUFA" ~ "Banded Krait"
     )) %>% 
     mutate(
     hypothesis = factor(hypothesis, levels = c(
@@ -111,24 +111,24 @@ plot_meta_betas <- function(modelExtracts){
       method == "twoStep" ~ "Two-step",
       method == "pois" ~ "Poisson")
     ) %>% 
-    left_join(paletteList$speciesColourDF) %>% 
+    left_join(paletteList$speciesColourDFCommon) %>% 
     mutate(
       speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
       speciesCol = factor(speciesCol, levels = c(
-        "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-        "<span style='color:#6c2b05'>Python bivittatus</span>",
-        "<span style='color:#322b21'>Bungarus candidus</span>",
-        "<span style='color:#b28904'>Bungarus fasciatus</span>")
+        "<span style='color:#bba07e'>King Cobra</span>",
+        "<span style='color:#6c2b05'>Burmese Python</span>",
+        "<span style='color:#322b21'>Malayan Krait</span>",
+        "<span style='color:#b28904'>Banded Krait</span>")
       ))
   
-  speciesColDF <- paletteList$speciesColourDF %>% 
+  speciesColDF <- paletteList$speciesColourDFCommon %>% 
     mutate(
       speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
       speciesCol = factor(speciesCol, levels = c(
-        "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-        "<span style='color:#6c2b05'>Python bivittatus</span>",
-        "<span style='color:#322b21'>Bungarus candidus</span>",
-        "<span style='color:#b28904'>Bungarus fasciatus</span>")
+        "<span style='color:#bba07e'>King Cobra</span>",
+        "<span style='color:#6c2b05'>Burmese Python</span>",
+        "<span style='color:#322b21'>Malayan Krait</span>",
+        "<span style='color:#b28904'>Banded Krait</span>")
       ))
   speciesColVec <- speciesColDF$colour
   names(speciesColVec) <- speciesColDF$speciesCol
@@ -265,11 +265,11 @@ plot_meta_betas <- function(modelExtracts){
     mutate(
       speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
       speciesCol = factor(speciesCol, levels = c(
-        "<span style='color:#b28904'>Bungarus fasciatus</span>",
-        "<span style='color:#322b21'>Bungarus candidus</span>",
-        "<span style='color:#6c2b05'>Python bivittatus</span>",
-        "<span style='color:#bba07e'>Ophiophagus hannah</span>"
-      )
+          "<span style='color:#b28904'>Banded Krait</span>",
+          "<span style='color:#322b21'>Malayan Krait</span>",
+          "<span style='color:#6c2b05'>Burmese Python</span>",
+          "<span style='color:#bba07e'>King Cobra</span>"
+          )
       )) %>% 
     filter(.variable == "b_Intercept") %>% 
     ggplot() +
@@ -309,19 +309,49 @@ plot_meta_betas <- function(modelExtracts){
       axis.title.y = element_blank(),
       strip.placement = "outside",
       axis.title.x = element_blank(),
-      legend.position = "none",
       panel.border = element_blank(),
       panel.spacing = unit(18, "pt"),
-      panel.grid = element_blank())
+      panel.grid = element_blank(),
+      # legend.background = element_blank(),
+      legend.box.background = element_rect(fill = "#ffffff", colour = NA),
+      legend.direction = "vertical", 
+      legend.position = "inside",
+      legend.position.inside = c(0.98,1),
+      legend.justification.inside = c(1,1),
+      legend.box = "horizontal",
+      legend.title = element_text(face = 2),
+      legend.text = element_markdown(face = 3))
   
-  ggsave(filename = here("figures",
-                         "metaIntercept.png"),
-         plot = interceptPlot,
-         width = 220, height = 190, units = "mm", dpi = 300)
-  ggsave(filename = here("figures",
-                         "metaIntercept.pdf"),
-         plot = interceptPlot,
-         width = 220, height = 190, units = "mm")
+  # Get ggplot grob
+  g <- ggplotGrob(interceptPlot)
+  g$layout
+  # gtable::gtable_show_layout(g)
+  # Alternatively, replace the grobs with the nullGrob
+  pos <- grep(pattern = "panel-1-2", g$layout$name)
+  g$grobs[[pos]] <- grid::nullGrob()
+  
+  # If you want, move the axis
+  # g$layout[g$layout$name == "axis-b-2", c("t", "b")] = c(8, 8)
+  
+  # Draw the plot
+  grid::grid.newpage()
+  grid::grid.draw(g)
+  
+  png(here::here("figures", "metaIntercept.png"), width = 220, height = 190, units = "mm", res = 300)
+  grid::grid.draw(g) 
+  dev.off()
+  pdf(here::here("figures", "metaIntercept.pdf"), width = 220/25.4, height = 190/25.4)
+  grid::grid.draw(g) 
+  dev.off()
+  
+  # ggsave(filename = here("figures",
+  #                        "metaIntercept.png"),
+  #        plot = interceptPlot,
+  #        width = 220, height = 190, units = "mm", dpi = 300)
+  # ggsave(filename = here("figures",
+  #                        "metaIntercept.pdf"),
+  #        plot = interceptPlot,
+  #        width = 220, height = 190, units = "mm")
   
   return(list(combinedPlot, 
               interceptPlot))

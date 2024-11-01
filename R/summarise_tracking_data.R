@@ -76,24 +76,24 @@ summarise_tracking_data <- function(movementDataAll){
   
   paletteList <- get_palette()
   
-  names(paletteList$speciesPalette) <- c(
-    "Ophiophagus hannah",
-    "Python bivittatus",
-    "Bungarus candidus",
-    "Bungarus fasciatus")
-  
   allMovementData_plotData <- allMovementData_step %>% 
     ungroup() %>% 
     arrange(id) %>% 
-    mutate(id = factor(id, levels = sort(unique(id), decreasing = TRUE))) %>% 
-    left_join(paletteList$speciesColourDF) %>% 
+    mutate(id = factor(id, levels = sort(unique(id), decreasing = TRUE))) %>%
+    mutate(species = case_when(
+      species == "Ophiophagus hannah" ~ "King Cobra",
+      species == "Python bivittatus" ~ "Burmese Python",
+      species == "Bungarus candidus" ~ "Malayan Krait",
+      species == "Bungarus fasciatus" ~ "Banded Krait"
+    )) %>% 
+    left_join(paletteList$speciesColourDFCommon) %>% 
     mutate(
       speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
       speciesCol = factor(speciesCol, levels = c(
-        "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-        "<span style='color:#6c2b05'>Python bivittatus</span>",
-        "<span style='color:#322b21'>Bungarus candidus</span>",
-        "<span style='color:#b28904'>Bungarus fasciatus</span>")
+        "<span style='color:#bba07e'>King Cobra</span>",
+        "<span style='color:#6c2b05'>Burmese Python</span>",
+        "<span style='color:#322b21'>Malayan Krait</span>",
+        "<span style='color:#b28904'>Banded Krait</span>")
       ))
   
   idLabels <- allMovementData_plotData %>%
@@ -124,7 +124,7 @@ summarise_tracking_data <- function(movementDataAll){
                   fontface = 4,
                   size = 5, hjust = 0, vjust = 0,
                   fill = NA, label.color = NA, position = position_nudge(y = 0.05)) +
-    scale_colour_manual(values = paletteList$speciesPalette) +
+    scale_colour_manual(values = paletteList$speciesFullPaletteCommon) +
     facet_grid(rows = vars(speciesCol),
                scales = "free_y", space = "free_y", switch = "y") +
     scale_x_datetime(date_breaks = "years",
@@ -162,15 +162,21 @@ summarise_tracking_data <- function(movementDataAll){
   ggsave(plot = timeLinePlot, file = here("figures", "timeLinePlot.pdf"),
          width = 220, height = 160, units = "mm")
   
-  timeLabels <- timeStepSummaries %>% 
-    left_join(paletteList$speciesColourDF) %>% 
+  timeLabels <- timeStepSummaries %>%
+    mutate(species = case_when(
+      species == "Ophiophagus hannah" ~ "King Cobra",
+      species == "Python bivittatus" ~ "Burmese Python",
+      species == "Bungarus candidus" ~ "Malayan Krait",
+      species == "Bungarus fasciatus" ~ "Banded Krait"
+    )) %>% 
+    left_join(paletteList$speciesColourDFCommon) %>% 
     mutate(
       speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
       speciesCol = factor(speciesCol, levels = c(
-        "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-        "<span style='color:#6c2b05'>Python bivittatus</span>",
-        "<span style='color:#322b21'>Bungarus candidus</span>",
-        "<span style='color:#b28904'>Bungarus fasciatus</span>")
+        "<span style='color:#bba07e'>King Cobra</span>",
+        "<span style='color:#6c2b05'>Burmese Python</span>",
+        "<span style='color:#322b21'>Malayan Krait</span>",
+        "<span style='color:#b28904'>Banded Krait</span>")
       )) %>% 
     mutate(labelText = paste0(
       "Mean lag = ", 
@@ -186,10 +192,10 @@ summarise_tracking_data <- function(movementDataAll){
   
   timeLagPlot <- allMovementData_plotData %>% 
     mutate(speciesCol = factor(speciesCol, levels = c(
-      "<span style='color:#b28904'>Bungarus fasciatus</span>",
-      "<span style='color:#322b21'>Bungarus candidus</span>",
-      "<span style='color:#6c2b05'>Python bivittatus</span>",
-      "<span style='color:#bba07e'>Ophiophagus hannah</span>"
+      "<span style='color:#b28904'>Banded Krait</span>",
+      "<span style='color:#322b21'>Malayan Krait</span>",
+      "<span style='color:#6c2b05'>Burmese Python</span>",
+      "<span style='color:#bba07e'>King Cobra</span>"
     )
     )) %>% 
     filter(!is.na(timeLag)) %>% 
@@ -206,8 +212,8 @@ summarise_tracking_data <- function(movementDataAll){
                   vjust = 1, hjust = 1, fill = NA, label.color = NA, size = 3,
                   fontface = 3) +
     labs(x = "Time lag between tracks (hours)", y = "Density") +
-    scale_fill_manual(values = paletteList$speciesPalette) +
-    scale_colour_manual(values = paletteList$speciesPalette) +
+    scale_fill_manual(values = paletteList$speciesFullPaletteCommon) +
+    scale_colour_manual(values = paletteList$speciesFullPaletteCommon) +
     scale_x_sqrt(breaks = c(2, seq(0,12,6), seq(24, 168, 24),
                             seq(240, 800, 240)),
                  limits = c(0, 168)) +

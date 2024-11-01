@@ -14,7 +14,7 @@ generate_spec_curves <- function(outputResults, method){
   # targets::tar_load("areaBasedResults")
   # targets::tar_load("twoStepResults")
   # targets::tar_load("rsfResults")
-  # targets::tar_load("wrsfResults")
+  # targets::tar_load("wrsfEstimateOutputs")
   # targets::tar_source()
   # 
   # library(here)
@@ -39,17 +39,17 @@ generate_spec_curves <- function(outputResults, method){
   # outputResults <- areaBasedResults
   # outputResults <- twoStepResults
   # outputResults <- rsfResults
-  # outputResults <- wrsfResults
+  # outputResults <- wrsfEstimateOutputs
   
   if(method == "ssf"){
     outputResults <- outputResults %>% 
       mutate("estimate" = modelAvg,
              "se" = modelAvgSE) %>% 
       mutate(hypoSupportSig = case_when(
-        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Ophiophagus hannah" ~ "Significant Support OPHA",
-        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Python bivittatus" ~ "Significant Support PYBI",
-        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Bungarus candidus" ~ "Significant Support BUCA",
-        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Bungarus fasciatus" ~ "Significant Support BUFA",
+        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Ophiophagus hannah" ~ "Significant Support King Cobra",
+        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Python bivittatus" ~ "Significant Support Burmese Python",
+        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Bungarus candidus" ~ "Significant Support Malayan Krait",
+        modelAvgLower > 0 & modelAvgUpper > 0 & species == "Bungarus fasciatus" ~ "Significant Support Banded Krait",
         TRUE ~ "No Support"
       ),
       lower = modelAvgLower,
@@ -62,10 +62,10 @@ generate_spec_curves <- function(outputResults, method){
       mutate("estimate" = companaHabDiff,
              "se" = companaP) %>% 
       mutate(hypoSupportSig = case_when(
-        se < 0.05 & species == "Ophiophagus hannah" ~ "Significant Support OPHA",
-        se < 0.05 & species == "Python bivittatus" ~ "Significant Support PYBI",
-        se < 0.05 & species == "Bungarus candidus" ~ "Significant Support BUCA",
-        se < 0.05 & species == "Bungarus fasciatus" ~ "Significant Support BUFA",
+        se < 0.05 & species == "Ophiophagus hannah" ~ "Significant Support King Cobra",
+        se < 0.05 & species == "Python bivittatus" ~ "Significant Support Burmese Python",
+        se < 0.05 & species == "Bungarus candidus" ~ "Significant Support Malayan Krait",
+        se < 0.05 & species == "Bungarus fasciatus" ~ "Significant Support Banded Krait",
         TRUE ~ "No Support"
       ), lower = estimate - 2*se,
       upper = estimate + 2*se) %>%  
@@ -77,10 +77,10 @@ generate_spec_curves <- function(outputResults, method){
       mutate("estimate" = estimateDiff,
              "se" = sd) %>% 
       mutate(hypoSupportSig = case_when(
-        (estimate - 2*se) > 0 & species == "Ophiophagus hannah" ~ "Significant Support OPHA",
-        (estimate - 2*se) > 0 & species == "Python bivittatus" ~ "Significant Support PYBI",
-        (estimate - 2*se) > 0 & species == "Bungarus candidus" ~ "Significant Support BUCA",
-        (estimate - 2*se) > 0 & species == "Bungarus fasciatus" ~ "Significant Support BUFA",
+        (estimate - 2*se) > 0 & species == "Ophiophagus hannah" ~ "Significant Support King Cobra",
+        (estimate - 2*se) > 0 & species == "Python bivittatus" ~ "Significant Support Burmese Python",
+        (estimate - 2*se) > 0 & species == "Bungarus candidus" ~ "Significant Support Malayan Krait",
+        (estimate - 2*se) > 0 & species == "Bungarus fasciatus" ~ "Significant Support Banded Krait",
         TRUE ~ "No Support"
       ), lower = estimate - 2*se,
       upper = estimate + 2*se) %>%  
@@ -93,10 +93,10 @@ generate_spec_curves <- function(outputResults, method){
       dplyr::mutate("estimate" = twoStepBeta,
                     "se" = twoStepSE) %>% 
       mutate(hypoSupportSig = case_when(
-        (estimate - 1.96*se) > 0 & species == "Ophiophagus hannah" ~ "Significant Support OPHA",
-        (estimate - 1.96*se) > 0 & species == "Python bivittatus" ~ "Significant Support PYBI",
-        (estimate - 1.96*se) > 0 & species == "Bungarus candidus" ~ "Significant Support BUCA",
-        (estimate - 1.96*se) > 0 & species == "Bungarus fasciatus" ~ "Significant Support BUFA",
+        (estimate - 1.96*se) > 0 & species == "Ophiophagus hannah" ~ "Significant Support King Cobra",
+        (estimate - 1.96*se) > 0 & species == "Python bivittatus" ~ "Significant Support Burmese Python",
+        (estimate - 1.96*se) > 0 & species == "Bungarus candidus" ~ "Significant Support Malayan Krait",
+        (estimate - 1.96*se) > 0 & species == "Bungarus fasciatus" ~ "Significant Support Banded Krait",
         TRUE ~ "No Support"
       ), lower = estimate - 1.96*se,
       upper = estimate + 1.96*se) %>%   
@@ -107,39 +107,40 @@ generate_spec_curves <- function(outputResults, method){
       dplyr::mutate("estimate" = Estimate,
                     "se" = SE) %>% 
       mutate(hypoSupportSig = case_when(
-        (estimate - 1.96*se) > 0 & species == "Ophiophagus hannah" ~ "Significant Support OPHA",
-        (estimate - 1.96*se) > 0 & species == "Python bivittatus" ~ "Significant Support PYBI",
-        (estimate - 1.96*se) > 0 & species == "Bungarus candidus" ~ "Significant Support BUCA",
-        (estimate - 1.96*se) > 0 & species == "Bungarus fasciatus" ~ "Significant Support BUFA",
+        (estimate - 1.96*se) > 0 & species == "Ophiophagus hannah" ~ "Significant Support King Cobra",
+        (estimate - 1.96*se) > 0 & species == "Python bivittatus" ~ "Significant Support Burmese Python",
+        (estimate - 1.96*se) > 0 & species == "Bungarus candidus" ~ "Significant Support Malayan Krait",
+        (estimate - 1.96*se) > 0 & species == "Bungarus fasciatus" ~ "Significant Support Banded Krait",
         TRUE ~ "No Support"
       ), lower = estimate - 1.96*se,
       upper = estimate + 1.96*se) %>%   
       dplyr::select(-SE, -zValue, -PrZ, -type)
   } else if(method == "wrsf"){
-    wrsfSummaryList <- lapply(outputResults, summary)
-    wrsfEstimatesList <- lapply(names(wrsfSummaryList), function(x){
-      estDF <- data.frame(
-        "estimate" = wrsfSummaryList[[x]][["CI"]][1,2],
-        "lower" = wrsfSummaryList[[x]][["CI"]][1,1],
-        "upper" = wrsfSummaryList[[x]][["CI"]][1,3],
-        "name" = x
-      )
-    })
-    wrsfEstimates <- do.call(rbind, wrsfEstimatesList)
+    # wrsfSummaryList <- lapply(outputResults, summary)
+    # wrsfEstimatesList <- lapply(names(wrsfSummaryList), function(x){
+    #   estDF <- data.frame(
+    #     "estimate" = wrsfSummaryList[[x]][["CI"]][1,2],
+    #     "lower" = wrsfSummaryList[[x]][["CI"]][1,1],
+    #     "upper" = wrsfSummaryList[[x]][["CI"]][1,3],
+    #     "name" = x
+    #   )
+    # })
+    # wrsfEstimates <- do.call(rbind, wrsfEstimatesList)
+    wrsfEstimates <- outputResults %>% 
+      group_by(species, hypothesis, classLandscape) %>% 
+      slice_head(n = 1)
     wrsfEstimates$analysis <- "wrsf"
-    wrsfEstimates$classLandscape <- ifelse(str_detect(wrsfEstimates$name, "binary"),
+    wrsfEstimates$classLandscape <- ifelse(str_detect(wrsfEstimates$classLandscape, "binary"),
                                            "Binary Habitat Classification",
                                            "Continuous Habitat Classification")
-    wrsfEstimates$species <- str_extract(wrsfEstimates$name, "OPHA|PYBI|BUCA|BUFA")
-    wrsfEstimates$hypothesis <- str_extract(wrsfEstimates$name, "H1|H2")
     outputResults <- wrsfEstimates %>% 
       mutate(species = case_when(
-        species == "OPHA" ~ "Ophiophagus hannah",
-        species == "PYBI" ~ "Python bivittatus",
-        species == "BUCA" ~ "Bungarus candidus",
-        species == "BUFA" ~ "Bungarus fasciatus"
+        species == "OPHA" ~ "King Cobra",
+        species == "PYBI" ~ "Burmese Python",
+        species == "BUCA" ~ "Malayan Krait",
+        species == "BUFA" ~ "Banded Krait"
       )) %>% 
-      dplyr::select(-name)
+      rename("estimate" = est)
   }
   
   if(!method == "wrsf"){
@@ -182,10 +183,10 @@ generate_spec_curves <- function(outputResults, method){
       sort(unique(outputResults$turnDist))))
   }
   
-  hypoSpeciesPalette <- paletteList$speciesPalette
+  hypoSpeciesPalette <- paletteList$speciesFullPaletteCommon
   names(hypoSpeciesPalette) <- paste0("Support ", names(hypoSpeciesPalette))
   hypoSpeciesPalette <- c(hypoSpeciesPalette, "No Support" = "#999999")
-  hypoSpeciesPalette_sig <- paletteList$speciesPalette
+  hypoSpeciesPalette_sig <- paletteList$speciesFullPaletteCommon
   names(hypoSpeciesPalette_sig) <- paste0("Significant Support ", names(hypoSpeciesPalette_sig))
   hypoSpeciesPalette_sig <- c(hypoSpeciesPalette_sig, "No Support" = "#999999")
   
@@ -241,14 +242,20 @@ generate_spec_curves <- function(outputResults, method){
         "Available Area Method",
         "Available Area Contour (%)")
       )) %>% 
-      left_join(paletteList$speciesColourDF) %>% 
+      mutate(species = case_when(
+        species == "Ophiophagus hannah" ~ "King Cobra",
+        species == "Python bivittatus" ~ "Burmese Python",
+        species == "Bungarus candidus" ~ "Malayan Krait",
+        species == "Bungarus fasciatus" ~ "Banded Krait"
+      )) %>% 
+      left_join(paletteList$speciesColourDFCommon) %>% 
       mutate(
         speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
         speciesCol = factor(speciesCol, levels = c(
-          "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-          "<span style='color:#6c2b05'>Python bivittatus</span>",
-          "<span style='color:#322b21'>Bungarus candidus</span>",
-          "<span style='color:#b28904'>Bungarus fasciatus</span>")
+          "<span style='color:#bba07e'>King Cobra</span>",
+          "<span style='color:#6c2b05'>Burmese Python</span>",
+          "<span style='color:#322b21'>Malayan Krait</span>",
+          "<span style='color:#b28904'>Banded Krait</span>")
         )) %>% 
       mutate(value = factor(value, levels = levelOrdering))
     
@@ -266,25 +273,31 @@ generate_spec_curves <- function(outputResults, method){
       group_by(species, hypothesis, classLandscape) %>% 
       dplyr::mutate(index = row_number(),
                     d_medEst = estimate - median(outputResults$estimate, na.rm = TRUE)) %>% 
-      left_join(paletteList$speciesColourDF) %>% 
-      mutate(
-        speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
-        speciesCol = factor(speciesCol, levels = c(
-          "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-          "<span style='color:#6c2b05'>Python bivittatus</span>",
-          "<span style='color:#322b21'>Bungarus candidus</span>",
-          "<span style='color:#b28904'>Bungarus fasciatus</span>")
-        )) %>% 
       mutate(hypoSupport = case_when(
-        estimate > 0 & species == "Ophiophagus hannah" ~ "Support OPHA",
-        estimate > 0 & species == "Python bivittatus" ~ "Support PYBI",
-        estimate > 0 & species == "Bungarus candidus" ~ "Support BUCA",
-        estimate > 0 & species == "Bungarus fasciatus" ~ "Support BUFA",
+        estimate > 0 & species == "Ophiophagus hannah" ~ "Support King Cobra",
+        estimate > 0 & species == "Python bivittatus" ~ "Support Burmese Python",
+        estimate > 0 & species == "Bungarus candidus" ~ "Support Malayan Krait",
+        estimate > 0 & species == "Bungarus fasciatus" ~ "Support Banded Krait",
         TRUE ~ "No Support"
       )) %>% 
       mutate(classLandscape = ifelse(str_detect(classLandscape, "binary"),
                                      "Binary Habitat Classification",
-                                     "Continuous Habitat Classification")) 
+                                     "Continuous Habitat Classification")) %>% 
+      mutate(species = case_when(
+        species == "Ophiophagus hannah" ~ "King Cobra",
+        species == "Python bivittatus" ~ "Burmese Python",
+        species == "Bungarus candidus" ~ "Malayan Krait",
+        species == "Bungarus fasciatus" ~ "Banded Krait"
+      )) %>% 
+      left_join(paletteList$speciesColourDFCommon) %>% 
+      mutate(
+        speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
+        speciesCol = factor(speciesCol, levels = c(
+          "<span style='color:#bba07e'>King Cobra</span>",
+          "<span style='color:#6c2b05'>Burmese Python</span>",
+          "<span style='color:#322b21'>Malayan Krait</span>",
+          "<span style='color:#b28904'>Banded Krait</span>")
+        ))
     
     overallMed <- overallSpecData %>%
       group_by(species, speciesCol, hypothesis, classLandscape) %>% 
@@ -296,19 +309,28 @@ generate_spec_curves <- function(outputResults, method){
       # mutate(lab = glue::glue("<span style='color:{colour}'>{round(medEst, digits = 2)}</span>")) %>% 
       mutate(lab = round(medEst, digits = 2)) %>%
       mutate(hypoSupport = case_when(
-        medEst > 0 & species == "Ophiophagus hannah" ~ "Support OPHA",
-        medEst > 0 & species == "Python bivittatus" ~ "Support PYBI",
-        medEst > 0 & species == "Bungarus candidus" ~ "Support BUCA",
-        medEst > 0 & species == "Bungarus fasciatus" ~ "Support BUFA",
+        medEst > 0 & species == "King Cobra" ~ "Support King Cobra",
+        medEst > 0 & species == "Burmese Python" ~ "Support Burmese Python",
+        medEst > 0 & species == "Malayan Krait" ~ "Support Malayan Krait",
+        medEst > 0 & species == "Banded Krait" ~ "Support Banded Krait",
         TRUE ~ "No Support"
       )) %>% 
       mutate(hypoSupportSig = case_when(
-        hypoSupport == "Support OPHA" ~ "Significant Support OPHA",
-        hypoSupport == "Support PYBI" ~ "Significant Support PYBI",
-        hypoSupport == "Support BUCA" ~ "Significant Support BUCA",
-        hypoSupport == "Support BUFA" ~ "Significant Support BUFA",
+        hypoSupport == "Support King Cobra" ~ "Significant Support King Cobra",
+        hypoSupport == "Support Burmese Python" ~ "Significant Support Burmese Python",
+        hypoSupport == "Support Malayan Krait" ~ "Significant Support Malayan Krait",
+        hypoSupport == "Support Banded Krait" ~ "Significant Support Banded Krait",
         TRUE ~ "No Support"
-      ))
+      )) %>% 
+      left_join(paletteList$speciesColourDFCommon) %>% 
+      mutate(
+        speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
+        speciesCol = factor(speciesCol, levels = c(
+          "<span style='color:#bba07e'>King Cobra</span>",
+          "<span style='color:#6c2b05'>Burmese Python</span>",
+          "<span style='color:#322b21'>Malayan Krait</span>",
+          "<span style='color:#b28904'>Banded Krait</span>")
+        ))
     
     
     countDataLabel <- overallSpecData %>% 
@@ -332,7 +354,7 @@ generate_spec_curves <- function(outputResults, method){
         filter(classLandscape == "Binary Habitat Classification")
     }
     
-    missingCounts <- rbind(expand_grid(species = "Ophiophagus hannah",
+    missingCounts <- rbind(expand_grid(species = "King Cobra",
                                        hypoSupportSig = c("Significant Support", "No Support"),
                                        hypothesis = "H2",
                                        classLandscape = unique(countDataLabel$classLandscape)),
@@ -342,9 +364,7 @@ generate_spec_curves <- function(outputResults, method){
                                        classLandscape = unique(countDataLabel$classLandscape))) %>% 
       rowwise() %>% 
       mutate(hypoSupportSig = ifelse(hypoSupportSig == "Significant Support",
-                                     paste(hypoSupportSig,
-                                           str_to_upper(paste0(substr(unlist(str_split(species, "\\s")), 1, 2),
-                                                               collapse = ""))),
+                                     paste(hypoSupportSig, species),
                                      hypoSupportSig)) %>% 
       mutate(n = NA,
              uniqueKey = paste0(species, hypoSupportSig, hypothesis, classLandscape))
@@ -352,20 +372,20 @@ generate_spec_curves <- function(outputResults, method){
     countDataLabelAll <- countDataLabel %>% 
       full_join(missingCounts, by = "uniqueKey") %>% 
       dplyr::select(species = species.y, hypoSupportSig = hypoSupportSig.y, hypothesis = hypothesis.y,
-             classLandscape = classLandscape.y, n = n.x) %>% 
+                    classLandscape = classLandscape.y, n = n.x) %>% 
       mutate(n = ifelse(is.na(n), 0, n)) %>% 
       group_by(species, hypothesis, classLandscape) %>% 
       mutate(nTotal = sum(n),
              percent = n/nTotal*100,
              lab = paste(n, "/", nTotal)) %>% 
-      left_join(paletteList$speciesColourDF) %>% 
+      left_join(paletteList$speciesColourDFCommon) %>% 
       mutate(
         speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
         speciesCol = factor(speciesCol, levels = c(
-          "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-          "<span style='color:#6c2b05'>Python bivittatus</span>",
-          "<span style='color:#322b21'>Bungarus candidus</span>",
-          "<span style='color:#b28904'>Bungarus fasciatus</span>")
+          "<span style='color:#bba07e'>King Cobra</span>",
+          "<span style='color:#6c2b05'>Burmese Python</span>",
+          "<span style='color:#322b21'>Malayan Krait</span>",
+          "<span style='color:#b28904'>Banded Krait</span>")
         ))
     
     simpleBars <- countDataLabelAll %>% 
@@ -429,7 +449,7 @@ generate_spec_curves <- function(outputResults, method){
           strip.background = element_blank(),
           strip.text = element_text(face = 2, hjust = 1, vjust = 1),
           strip.text.y.left = element_markdown(angle = 0, hjust = 1, vjust = 1,
-                                               margin = margin(0, -30, 20, -10),
+                                               margin = margin(0, -20, 20, -10),
                                                face = 4),
           strip.text.x.top = element_text(face = 4, hjust = 1, vjust = 1),
           strip.placement = "outside",
@@ -461,12 +481,12 @@ generate_spec_curves <- function(outputResults, method){
         geom_hline(yintercept = seq(0.5,10.5,1), linewidth = 0.5, alpha = 0.25, colour = "#403F41",
                    linetype = 2) +
         {if(!method %in% c("area"))facet_grid(rows = vars(variable),
-                   cols = vars(classLandscape), scales = "free_y", space = "free", switch = "y")}+
+                                              cols = vars(classLandscape), scales = "free_y", space = "free", switch = "y")}+
         {if(method %in% c("area"))facet_grid(rows = vars(variable),
                                              scales = "free_y", space = "free", switch = "y")}+
         labs(y = "", x = "Estimate") +
         scale_x_continuous(limits = xlimits) +
-        scale_colour_manual(values = paletteList$speciesFullPalette) +
+        scale_colour_manual(values = paletteList$speciesFullPaletteCommon) +
         scale_shape_manual(values = c(16, 17)) +
         theme_bw() +
         theme(
@@ -519,10 +539,10 @@ generate_spec_curves <- function(outputResults, method){
         filter(species == sp) %>% 
         group_by(hypoSupportSig, hypothesis, classLandscape) %>% 
         count() %>% 
-        ungroup() 
+        ungroup()
       
       rowsNeeded <- c(paste0("Significant Support ",
-                             str_to_upper(paste0(substr(unlist(str_split(sp, "\\s")), 1, 2),
+                             str_to_upper(paste0(sp,
                                                  collapse = ""))),
                       "No Support")
       if(length(unique(countDataLabel$hypoSupportSig)) == 1){
@@ -558,15 +578,19 @@ generate_spec_curves <- function(outputResults, method){
         filter(!hypoSupportSig == "No Support") %>% 
         mutate(label = paste0(n, " | ", total))
       
-      labCol <- hypoSpeciesPalette_sig[str_detect(names(hypoSpeciesPalette_sig),
-                                                  str_to_upper(paste0(substr(unlist(str_split(sp, "\\s")), 1, 2),
-                                                                      collapse = "")))]
+      labCol <- hypoSpeciesPalette_sig[str_detect(names(hypoSpeciesPalette_sig), sp)]
       
       shapesVal <- c(17, 16)
       if(method == "area"){
         names(shapesVal) <- c("TRUE", "FALSE")
       } else {
         names(shapesVal) <- c(names(labCol), "FALSE")
+      }
+      
+      if(sp == "King Cobra"){
+        marginExtra <- 10
+      } else {
+        marginExtra <- 0
       }
       
       (overallSpecCurve_species <- overallSpecData %>%
@@ -628,7 +652,7 @@ generate_spec_curves <- function(outputResults, method){
             strip.background = element_blank(),
             strip.text = element_text(face = 2, hjust = 1, vjust = 1),
             strip.text.y.left = element_markdown(angle = 0, hjust = 1, vjust = 1,
-                                                 margin = margin(0, -30, 20, -10),
+                                                 margin = margin(0, -20+marginExtra, 20, -10),
                                                  face = 4),
             strip.text.x.top = element_text(face = 4, hjust = 1, vjust = 1),
             strip.placement = "outside",
@@ -670,7 +694,7 @@ generate_spec_curves <- function(outputResults, method){
           labs(y = "", x = "Estimate") +
           # scale_x_continuous(limits = xlimits) +
           coord_cartesian(xlim = xlimits) +
-          scale_colour_manual(values = paletteList$speciesFullPalette) +
+          scale_colour_manual(values = paletteList$speciesFullPaletteCommon) +
           scale_shape_manual(values = c(16, 17)) +
           theme_bw() +
           theme(
@@ -711,7 +735,7 @@ generate_spec_curves <- function(outputResults, method){
           labs(y = "", x = "Confidence Interval Width") +
           # scale_x_continuous(limits = xlimits) +
           # coord_cartesian(xlim = xlimits) +
-          scale_colour_manual(values = paletteList$speciesFullPalette) +
+          scale_colour_manual(values = paletteList$speciesFullPaletteCommon) +
           scale_shape_manual(values = c(16, 17)) +
           theme_bw() +
           theme(
@@ -753,41 +777,41 @@ generate_spec_curves <- function(outputResults, method){
   } else {
     # WRSF --------------------------------------------------------------------
     
-    xlimits <- c(NA, 3.5)
+    xlimits <- c(NA, NA)
     
     outputPlotData <- outputResults %>% 
       dplyr::select(-analysis) %>% 
-      dplyr::mutate(across(!matches("estimate|lower|upper"), as.character)) %>% 
-      left_join(paletteList$speciesColourDF) %>% 
+      dplyr::mutate(across(!matches("estimate|low|high"), as.character)) %>% 
+      mutate(hypoSupport = case_when(
+        estimate > 0 & species == "King Cobra" ~ "Support King Cobra",
+        estimate > 0 & species == "Burmese Python" ~ "Support Burmese Python",
+        estimate > 0 & species == "Malayan Krait" ~ "Support Malayan Krait",
+        estimate > 0 & species == "Banded Krait" ~ "Support Banded Krait",
+        TRUE ~ "No Support"
+      )) %>% 
+      left_join(paletteList$speciesColourDFCommon) %>% 
       mutate(
         speciesCol = glue::glue("<span style='color:{colour}'>{species}</span>"),
         speciesCol = factor(speciesCol, levels = c(
-          "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-          "<span style='color:#6c2b05'>Python bivittatus</span>",
-          "<span style='color:#322b21'>Bungarus candidus</span>",
-          "<span style='color:#b28904'>Bungarus fasciatus</span>")
-        )) %>% 
-      mutate(hypoSupport = case_when(
-        estimate > 0 & species == "Ophiophagus hannah" ~ "Support OPHA",
-        estimate > 0 & species == "Python bivittatus" ~ "Support PYBI",
-        estimate > 0 & species == "Bungarus candidus" ~ "Support BUCA",
-        estimate > 0 & species == "Bungarus fasciatus" ~ "Support BUFA",
-        TRUE ~ "No Support"
-      ))
+          "<span style='color:#bba07e'>King Cobra</span>",
+          "<span style='color:#6c2b05'>Burmese Python</span>",
+          "<span style='color:#322b21'>Malayan Krait</span>",
+          "<span style='color:#b28904'>Banded Krait</span>")
+        ))
     
     upperOutliers <- data.frame(
-      speciesCol = factor("<span style='color:#bba07e'>Ophiophagus hannah</span>",
+      speciesCol = factor("<span style='color:#bba07e'>King Cobra</span>",
                           levels = c(
-                            "<span style='color:#bba07e'>Ophiophagus hannah</span>",
-                            "<span style='color:#6c2b05'>Python bivittatus</span>",
-                            "<span style='color:#322b21'>Bungarus candidus</span>",
-                            "<span style='color:#b28904'>Bungarus fasciatus</span>")
+                            "<span style='color:#bba07e'>King Cobra</span>",
+                            "<span style='color:#6c2b05'>Burmese Python</span>",
+                            "<span style='color:#322b21'>Malayan Krait</span>",
+                            "<span style='color:#b28904'>Banded Krait</span>")
       ),
       hypothesis = "H1",
       classLandscape = "Continuous Habitat Classification",
       lab = paste0("<b>", round(outputPlotData$estimate[3], digits = 1), "</b>, 95% <i>",
-                   round(outputPlotData$lower[3], digits = 1), "-",
-                   round(outputPlotData$upper[3], digits = 1),
+                   round(outputPlotData$low[3], digits = 1), "-",
+                   round(outputPlotData$high[3], digits = 1),
                    "<br>outlier not shown</i> \u2B9E")
     )
     
@@ -799,24 +823,24 @@ generate_spec_curves <- function(outputResults, method){
         #            linetype = 2) +
         geom_point(aes(x = estimate, y = hypothesis, colour = hypoSupport), alpha = 1,
                    pch = 19, size = 3)+
-        geom_errorbarh(aes(xmin = lower, xmax = upper, y = hypothesis, colour = hypoSupport),
+        geom_errorbarh(aes(xmin = low, xmax = high, y = hypothesis, colour = hypoSupport),
                        height = 0.1, linewidth = 1.1) +
         geom_text(aes(x = estimate, y = hypothesis, label = round(estimate, digits = 2),
                       colour = hypoSupport), hjust = 0.5, vjust = 0, size = 3, fontface = 2,
                   position = position_nudge(y = 0.15)) +
-        geom_text(aes(x = lower, y = hypothesis, label = round(lower, digits = 2),
+        geom_text(aes(x = low, y = hypothesis, label = round(low, digits = 2),
                       colour = hypoSupport), hjust = 1, vjust = 1, size = 2, fontface = 3,
                   position = position_nudge(y = -0.1)) +
-        geom_text(aes(x = upper, y = hypothesis, label = round(upper, digits = 2),
+        geom_text(aes(x = high, y = hypothesis, label = round(high, digits = 2),
                       colour = hypoSupport), hjust = 0, vjust = 1, size = 2, fontface = 3,
                   position = position_nudge(y = -0.1)) +
-        geom_richtext(data = upperOutliers,
-                      aes(x = xlimits[2], y = hypothesis, label = lab),
-                      colour = hypoSpeciesPalette["Support OPHA"],
-                      vjust = 0.5, hjust = 1, lineheight = 0.95, fontface = 3,
-                      size = 2.5, label.colour = NA)+
+        # geom_richtext(data = upperOutliers,
+        #               aes(x = xlimits[2], y = hypothesis, label = lab),
+        #               colour = hypoSpeciesPalette["Support King Cobra"],
+        #               vjust = 0.5, hjust = 1, lineheight = 0.95, fontface = 3,
+        #               size = 2.5, label.colour = NA)+
         scale_colour_manual(values = hypoSpeciesPalette) +
-        scale_fill_manual(values = hypoSpeciesPalette) +
+        # scale_fill_manual(values = hypoSpeciesPalette) +
         facet_grid(rows = vars(speciesCol, hypothesis),
                    cols = vars(classLandscape), space = "free_y", switch = "y",
                    scale = "free") +
@@ -830,7 +854,7 @@ generate_spec_curves <- function(outputResults, method){
           strip.background = element_blank(),
           strip.text = element_text(face = 2, hjust = 1, vjust = 1),
           strip.text.y.left = element_markdown(angle = 0, hjust = 1, vjust = 1,
-                                               margin = margin(0, -30, 20, -10),
+                                               margin = margin(0, -20, 20, -10),
                                                face = 4),
           strip.text.x.top = element_text(face = 4, hjust = 1, vjust = 1),
           strip.placement = "outside",
