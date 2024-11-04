@@ -432,8 +432,8 @@ knitr::include_graphics(here::here("figures", "specCurve_pois.png"))
 
 Our final analysis approach was using weighted Resource Selection Functions (wRSF).
 All wRSF results provided support for the hypotheses (Fig. \@ref(fig:specCurveWrsf)).
-Although, once again, support for King Cobra H2 when using a continuous classification, is borderline and ultimately rounded to zero.
-The strongest selection was seen in King Cobra H1, where both habitat classification methods unambiguously support the hypothesis.
+Although, once again, support for King Cobra H2 when using a continuous classification is borderline and ultimately rounded to zero.
+The King Cobra H1 saw no support when using the continuous habitat classification but clear support when the landscape was binary classified.
 All other species saw unambiguous support when the habitat was binary classed, but when classed continuously as inverted distance the 95% confidence intervals for Burmese Pythons and Banded Kraits approximated zero.
 
 ```{r specCurveWrsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the weighted Resource Selection Function (wRSF) analysis. Circles and numbers above show the point estimate, and the horizontal bars depict the 95% confidence interval. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right). The results for King Cobra (Ophiophagus hannah) H1 with the continuous habitat classification are hidden to aid with visualising all other estimates."}
@@ -723,7 +723,7 @@ knitr::include_graphics(here::here("figures", "landscape_plot_BUFA_H1.png"))
 
 ## Species-by-species Specification Curves
 
-### King Cobra (*Ophiophagus hannah*)
+### King Cobra
 
 ```{r specCurveAreaOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriated coloured lines. "}
 knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_area.png"))
@@ -745,7 +745,7 @@ knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_ssf.
 knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_pois.png"))
 ```
 
-### Burmese Pythons (*Python bivittatus*)
+### Burmese Pythons
 
 ```{r specCurveAreaPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
 knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_area.png"))
@@ -767,7 +767,7 @@ knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_ssf.p
 knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_pois.png"))
 ```
 
-### Malayan Kraits (*Bungarus candidus*)
+### Malayan Kraits
 
 ```{r specCurveAreaBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
 knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_area.png"))
@@ -789,7 +789,7 @@ knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_ssf.p
 knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_pois.png"))
 ```
 
-### Banded Kraits (*Bungarus fasciatus*)
+### Banded Kraits
 
 ```{r specCurveAreaBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
 knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_area.png"))
