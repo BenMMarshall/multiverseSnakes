@@ -26,6 +26,7 @@ output:
     highlight: monochrome
     fig_caption: true
     dev: pdf
+    extra_dependencies: ["float"]
   bookdown::html_document2:
     theme: yeti
     highlight: monochrome
@@ -37,7 +38,7 @@ csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
-abstract: Possibly the best way to determine a snake’s needs is to follow their movements. Once we have learnt of the snake’s movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human-snake conflict. Extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement studies are providing the correct guidance for snake conservation? We used a multiverse approach to explore several thousand ways of extracting habitat selection estimates from four snake movement datasets, using categoric and continuous classifications of the landscape. The resulting habitat selection estimates showed an overall agreement with regards to direction, indicating general support for the original conclusions on the snakes' selected habitats. However, the strength of the selection appeared more sensitive to choices made during analysis, with several analysis choices appearing only to be impactful with a particular species' data. This leads us to suggest that generalisations on the impact of specific analysis decisions may be difficult to predict a priori for other species and study systems. The broad agreement shown here should bolster confidence in past studies' conclusions. Whereas the variation displayed in the selection strengths highlights how analysis choices could inflate the differences between studies.
+abstract: Possibly the best way to determine a snake’s needs is to follow their movements. Once we have learnt of the snake’s movements we can infer habitat requirements, behaviour, and potential threats. Combined, the movement data and inferences can inform decisions on snake conservation and human-snake conflict. Extracting useful information from snake movement requires many steps, from sampling to analysis. Other studies have shown that a single dataset can result in many different answers in the hands of different researchers, so how can we be confident the results from snake movement studies are providing the correct guidance for snake conservation? We used a multiverse approach to explore several thousand ways of extracting habitat selection estimates from four snake movement datasets, using categorical and continuous classifications of the landscape. The resulting habitat selection estimates showed an overall agreement with regards to direction, indicating general support for the original conclusions on the snakes' selected habitats. However, the strength of the selection appeared more sensitive to choices made during analysis, with several analysis choices appearing only to be impactful with a particular species' data. This leads us to suggest that generalisations on the impact of specific analysis decisions may be difficult to predict a priori for other species and study systems. The broad agreement shown here should bolster confidence in past studies' conclusions. Whereas the variation displayed in the selection strengths highlights how analysis choices could inflate the differences between studies.
 keywords: Movement ecology, simulation, step selection function, poisson, habitat preference, habitat selection, animal movement, multiverse, researcher choice, researcher degrees for freedom, snakes, King Cobra, Burmese Python, Banded Krait, Malayan Krait
 ---
 
@@ -46,8 +47,7 @@ keywords: Movement ecology, simulation, step selection function, poisson, habita
 <!-- reproducibility crisis -->
 <!-- Baker 2016 -->
 
-A key component of science is the continual reassessment of past work and findings [@alberts_self-correction_2015].
-Whether that reassessment takes the form of direct replications aiming to evaluate the reliability of previous work, or a more integrative approach testing the boundaries of previous findings' generalisability by retesting questions in different study systems (e.g., quasi-replications) [@nakagawa_replicating_2015; @peterson_self-correction_2021]. <!-- see peterson paper for definition check . Also add quasi-rep citation --> 
+A key component of science is the continual reassessment of past work and findings [@alberts_self-correction_2015], whether that reassessment takes the form of direct replications aiming to evaluate the reliability of previous work, or a more integrative approach testing the boundaries of previous findings' generalisability by retesting questions in different study systems (e.g., quasi-replications) [@nakagawa_replicating_2015; @peterson_self-correction_2021]. <!-- see peterson paper for definition check . Also add quasi-rep citation --> 
 
 <!-- Direct quote from Peterson 2021 - "When replication in the normal course of integration does not provide clear signals of truth or falsity, researchers instead look for signs of robustness." -->
 
@@ -59,10 +59,10 @@ The assumption of a polygynous mating system coloured and shaped subsequent rese
 The new research highlighted that the initial assumptions of territoriality were overly strong and had misdirected research and obscured an important part of *Anolis* ecology [@Kamath2017; @Kamath2018a].
 Similar perspective changes are seen in studies of bird mating systems, where earlier research focused on mating competition and potentially lost sight of explanations connected to mating cooperation [@griffith_cooperation_2019].
 In this case, over emphasis on mate choice via differential ornamentation could obscure the roles of social compatibility (i.e., pair behavioural compatibility @ihle_fitness_2015; and the imperfect information communicated by ornamentation @wang_no_2017; @wang_male_2017). 
-These examples emphasise the importance of checking and confirming results early, before assumptions are entrenched; we can see this principle recognised in the peer review system.
+These examples emphasise the importance of checking and confirming results early, before assumptions are entrenched and can steer the focus of future studies; we can see this principle recognised in the peer review system.
 
 Checking previous findings through replication is more difficult in systems with high task uncertainty. 
-High task uncertainty systems manifesting high levels of uncontrollable stochasticity, making direct diagnostic replications impractical or impossible, render the evidence from quasi-replications weaker <!-- peterson pano 2021 is the paper for this stuff -->[@peterson_self-correction_2021].
+High task uncertainty systems leading to high levels of uncontrollable stochasticity, make direct diagnostic replications impractical or impossible, while rendering the evidence from quasi-replications weaker <!-- peterson pano 2021 is the paper for this stuff -->[@peterson_self-correction_2021].
 Ecological systems generate high task uncertainty, with many interconnected elements, and when studying wild systems many of those elements are uncontrollable.
 <!-- peterson pano 2021 has a bit about "task uncertainty" where high perfectly describes ecology and the hard to control system -->
 
@@ -75,21 +75,21 @@ Good examples exist in movement ecology, where the re-examination of many animal
 These findings, based on many species, across various regions, are better placed to be the building blocks of future hypotheses.
 
 In some cases older data may have been collected and recorded in ways that enables completely fresh analysis [@kays_movebank_2022].
-As methodologies develop, conceptualisations change, and computational power increases, new avenues for examining the same data may materialise [e.g., @noonan_effects_2020].
+As methodologies develop, conceptualisations of how systems operate change, and computational power increases, new avenues for examining the same data may materialise [e.g., @noonan_effects_2020].
 As these new methods are developed and applied, we may see the conclusions based upon those data change.
-There are a growing number of examples demonstrating that the analysis approach can alter the results [@salis_how_2021; @desbureaux_subjective_2021], and that the researchers themselves can be a key source of variation in analysis and results [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023].
-Recently for ecology and evolution, @gould_same_2023 showed that when ~250 researchers were asked to answer the same question with the same dataset (either bird nestling success, or eucalyptus growth) the analysis approaches and results varied, in some cases indicated opposing effects.
+There are a growing number of examples demonstrating that analysis approach can alter results [@salis_how_2021; @desbureaux_subjective_2021], and that researchers themselves can be a key source of variation in analysis and results [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023].
+Recently for ecology and evolution, @gould_same_2023 showed that when ~250 researchers were asked to answer the same question with the same dataset (either bird nestling success, or eucalyptus growth) the analysis approaches and results varied, and in some cases indicated opposing effects.
 These examples elegantly show the possible extent of technical uncertainty present in some systems (i.e., the uncertainty resulting from differences in methodology)<!-- peterson and pano term again, needs defining -->.
-In practice researchers often do not have the time to explore many possible analysis pathways; therefore, we may be underestimating the uncertainty surrounding published results. 
+In practice researchers often do not have the time to explore many possible analysis pathways; therefore, we may be underestimating the uncertainty surrounding published results.  
 
-Not all disciplines have explored the sources of uncertainty in findings equally.
+Not all disciplines have explored the sources of uncertainty in results equally.
 Prudence would push for examination of uncertainty in all its forms, in particular for fields that already tackle high levels of uncertainty originating from wild study systems.
 Movement ecology is such a field.
 Animals are complex, existing in complex ecosystems with individuality and personality [@stuber_spatial_2022].
 Depending on the research question, controls in movement ecology can be difficult to achieve, and replications difficult to justify given the strict ethical limitations on interventionist study.
 Movement ecology has also seized the opportunities presented by technological developments, enabling higher resolution tracking of animal movements (e.g., GPS tracking) and more sophisticated analysis that can integrate the high dimensional data [e.g., x-y coordinates, time, acceleration, individual, other covariates of interest, @joo_recent_2022].
 
-Personality and the repeatability of behaviours presents a key component of the variation when attempting to generalise [@stuber_spatial_2022]. 
+Personality and the repeatability of behaviours presents a key component of the variation when attempting to generalise in movement ecology [@stuber_spatial_2022]. 
 However, here we focus on the technical uncertainty, the uncertainty originating from the researcher and how they approach the data.
 Many analyst projects highlight the potential for analyst-side variation [@silberzahn_many_2018; @huntingtonklein_influence_2021; @gould_same_2023], and multiverse explorations of movement ecology methods highlight the variation potentially presented within a synthetic movement dataset [@marshall_habitat_2024] (also see Chapter 3).
 Here we take the multiverse approach further by applying it to a number of real case studies to explore whether different analysis approaches alter general conclusions.
@@ -98,7 +98,7 @@ Here we take the multiverse approach further by applying it to a number of real 
 
 <!-- Peterson pano 2021 has a great line that when task uncertainty is higher and more uncontrollable variables exists then integrative replications are more open to interpretation. -->
 
-We selected a quartet of separate but connected movement ecology studies that attempt to disentangle the habitat selection exhibited by snakes in north-eastern Thailand.
+We selected a quartet of separate but connected movement ecology studies that attempt to determine the habitat selection exhibited by snakes in north-eastern Thailand.
 All four cases focus on snakes that come into conflict with humans to varying degrees, either because of the risks posed by their venom: King Cobra [@Marshall2018; @marshall_no_2020], Malayan Krait [@hodges_malayan_2022], Banded Krait [@knierim_spatial_2019], or because of their appetite for domestic livestock: Burmese python [@smith_native_2021].
 In all cases, the habitat selection results could be used to guide snake conservation efforts, as well as interventions into human behaviour to mitigate human-snake conflict by highlighting what the snakes are drawn to.
 With these general goals in mind, we aim to re-examine the movement datasets using a multiverse of habitat selection analysis pathways to reveal whether the same data could lead to different conclusions.
@@ -116,12 +116,12 @@ All four case studies occurred in north-eastern Thailand, within Nakhon Ratchasi
 Three case studies (King Cobra, Burmese Python, Banded Krait) were conducted within the Sakaerat Biosphere Reserve.
 The reserve consists of three zones of management: core, buffer, and transitional.
 The core is largely primary forest; the buffer surrounds the core and is comprised of forest regeneration efforts, whereas the transitional zone allows more development resulting in a mix of agriculture, settlements, and plantation forest.
-Bisecting the transitional zone, and running adjacent to the protected forest areas is a four-lane highway connecting the city of Nakhon Ratchasima to Bangkok.
+Bisecting the transitional zone, and running adjacent to the protected forest areas, is a four-lane highway connecting the city of Nakhon Ratchasima to Bangkok.
 <!-- SUT University campus -->
 The Malayan Krait case study was not in the Sakaerat Biosphere Reserve, instead undertaken nearer to Nakhon Ratchasima proper, on the Suranaree University of Technology campus.
 The university campus is a mix of scrub forest, open lawn, university buildings, and homes.
 Further details on the study sites' characteristics can be found in the original publications [@Marshall2018; @marshall_no_2020; @smith_native_2021; @hodges_malayan_2022; @knierim_spatial_2019].
-For land use classification we relied on data supplied by the Land Development Department of Thailand [@land_development_department_thailand_land-use_2017].
+For land use classification, we relied on data supplied by the Land Development Department of Thailand [@land_development_department_thailand_land-use_2017].
 
 ```{r locationFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The study site locations for all four case studies. Top left shows the location within Thailand, both the Sakaerat Biosphere Reserve and the Suranaree University of Technology campus are located within Nakhon Ratchasima Province. Bottom left shows the overall study location for King Cobra, Burmese Python, and Banded Krait (circular points). The purple areas depict the land uses that are included in any of the species hypotheses. Gray lines indicate roads. Bottom right is the same region, but focused on the Banded Krait locations to better show the field margin data used for their assessment of habitat selection. Top right is the study location for the Malayan Krait on the Suranaree University of Technology campus."}
 knitr::include_graphics(here::here("notebook", "ext_images", "LocationMap.png"))
@@ -129,17 +129,17 @@ knitr::include_graphics(here::here("notebook", "ext_images", "LocationMap.png"))
 
 <!-- enough detail? and double check the match the original papers -->
 
-Snakes can be difficult to detect in wild scenarios [@Durso2015; @boback_use_2020], forcing a wider and more opportunistic suite of methods to gather adequate sample sizes.
+Snakes can be difficult to detect in wild scenarios [@Durso2015; @boback_use_2020], requiring a wider and more opportunistic suite of methods to gather adequate sample sizes.
 In all the chosen case studies snakes were obtained for study using trapping arrays, active surveying, and notifications from locals.
 The local notifications often arose from snakes entering human settlements, and a desire for the snake to be removed.
 <!-- maybe summary table here of capture methods -->
 
-In all cases we implanted snakes with Holohil radio transmitters (either AI-2T, SI-2T, SB-2, or BD-2, Holohil Inc., Ontario, Canada)).
+In all cases, we implanted snakes with Holohil radio transmitters (either AI-2T, SI-2T, SB-2, or BD-2, Holohil Inc., Ontario, Canada)).
 <!-- grab citation from older papers -->
 The implant procedure was conducted by trained team members, or later by independent trained veterinarians, following @Reinert1982.
-We anaesthetised snakes with isoflurane, and implanted transmitters in the coelomic cavity.
-The size of the transmitter varied between species, and was calibrated to body size.
-At no time did we implant transmitters exceeding 5% of the body mass of the animal, in the vast majority of cases the transmitter weighed considerably less than 1% (e.g., King Cobra 0.55 ±SD 0.47%; Banded Krait 0.01 ±SD 0.09%; Burmese Python 0.26%).
+We anaesthetised snakes with isoflurane and implanted transmitters in the coelomic cavity.
+The size of the transmitter varied between species and was calibrated to body size.
+At no time did we implant transmitters exceeding 5% of the body mass of the animal; in the vast majority of cases, the transmitter weighed considerably less than 1% (e.g., King Cobra 0.55 ±SD 0.47%; Banded Krait 0.01 ±SD 0.09%; Burmese Python 0.26%).
 Inspections of longer-term tracked individuals indicated that transmitter presence was not detrimental to their health [@marshall_no_2020].
 Greater details on the implantation procedure, and supplemental snake processing, can be found in the original publications.
 
@@ -151,16 +151,16 @@ The main exception is for the first three tracked King Cobra, who we tracked mor
 
 ## Study Species and Hypotheses
 
-We simplified the conclusions of the original studies into hypotheses targeting their preferred habitat for each species.
+We simplified the conclusions of the original studies into hypotheses targeting the preferred habitat for each species.
 We registered these hypotheses prior to undertaking the multiverse exploration ([https://osf.io/kv8rg/](https://osf.io/kv8rg/)), they remained unchanged and are detailed below.
 
-```{r hypothesesFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="A summary of the species and hypotheses, alongside sample sizes for each species, and a visualisation describing the two landscape classifications used in the multiverse."}
+```{r hypothesesFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="A summary of the species and hypotheses derived from the original studies regarding the habitat selection of each snake species. Alongside are the sample sizes for each species and a visualisation describing the two landscape classifications used in the multiverse."}
 knitr::include_graphics(here::here("notebook", "ext_images", "hypothesis_visual.png"))
 ```
 
 ### King Cobra
 
-@Marshall2018 and @marshall_no_2020 are concerned with King Cobras (*Ophiophagus hannah*).
+@Marshall2018; @marshall_no_2020 are concerned with King Cobras (*Ophiophagus hannah*).
 King Cobras are a large (tracked individuals between 1.40 and 3.71m snout to vent length), diurnal, active foraging snake species that depredate snakes and monitor lizards [@Jones_supposed_2020].
 While considered a predominately forest-dwelling species [@Stuart2012], they are known to make use of more human-altered areas [@Whitaker2004; @Rao2013; @jones_how_2022], which can lead to frequent human-snake conflict [@Shankar2013a; @Marshall2018b].
 Compared to the other species, the habitat selection of King Cobras is relatively more studied.
@@ -217,14 +217,14 @@ Banded Krait Hypothesis 1~: Banded Kraits select for waterways and field edges.
 ## Tracking Data
 
 We downloaded tracking data from Movebank or linked data repositories associated with the original studies.
-The land use data was largely included with the associated data repositories, in cases where it was not we retrieved this from the original authors.
+The land use data were largely included with the associated data repositories; in cases where they were not we retrieved this from the original authors.
 We collated all tracking and land use data, unifying the data formats, naming conventions, and converting files to more accessible formats.
 We were left with two files for every study: a csv containing the movements of all individuals, and geoJSON file containing the polygon data describing land use.
-The movement data contains seven columns: "species" = the binomial species name, "id" = the individual animal ID, "sex" = whether the individual is male (M) or female (F), "x" = the UTM Easting coordinate (m),"y" = the UTM Northing (m), "UTMzone" = the UTM zone either 47N or 48N, "datetime" = the date and time formatted as ISO 8601 "YYYY-MM-DD hh:mm:ss" recorded in "Asia/Bangkok".
-The land use data contains geometry data in UTM projection, and data on the "landuse" category as well as a "habitat" column denoting whether the habitat is part of a hypothesis.
+The movement dataset contains seven columns: "species" = the scientific species name, "id" = the individual animal ID, "sex" = whether the individual is male (M) or female (F), "x" = the UTM Easting coordinate (m),"y" = the UTM Northing (m), "UTMzone" = the UTM zone either 47N or 48N, "datetime" = the date and time formatted as ISO 8601 "YYYY-MM-DD hh:mm:ss" recorded in "Asia/Bangkok".
+The land use data contain geometry data in UTM projection and data on the "landuse" category as well as a "habitat" column denoting whether the habitat is part of a hypothesis.
 
 To reacquaint ourselves with the data, and check for any potential issues that could hinder habitat selection analysis, we used code from @crane_lots_2021 to generate summaries of all the tracking datasets (archived code see reference for @crane_supplementary_2020).
-During this process we identified duplicated data points in the King Cobra data that required removal.
+During this process, we identified duplicated data points in the King Cobra data that required removal.
 We suspect that these escaped detection during the initial publication [@Marshall2018] because the methods used did not use time in estimation of home range.
 
 ## Multiverse Construction
@@ -241,11 +241,11 @@ optionsComplete <- readRDS(here::here("data", "optionsCompleteList.rds"))
 
 ```
 To explore the variation that could arise when testing the above hypotheses, we constructed a multiverse of analytical choices.
-A multiverse is a tree of branching paths, where decisions made during analysis spawn multiple branches, each with alternative answers.
-Previous work has revealed the importance of data quantity over analysis decisions in determining habitat selection [@marshall_habitat_2024] (Chapter 3), but we are still left with sizeable variation in final answers –and perhaps more importantly answers that offer contradictory conclusions.
+A multiverse is a tree of branching paths, where decisions made during analysis spawn multiple branches, each with sudsequent analysis decisions.
+Previous work has revealed the importance of data quantity over analysis decisions in determining habitat selection [@marshall_habitat_2024] (Chapter 3), but we are still left with sizeable variation in final answers –and perhaps more importantly, answers that offer contradictory conclusions.
 The variation in results are similarly present in more practical demonstrations, such as many analysts projects [@gould_same_2023].
 
-```{r decisionsFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="A visual of all the decisions contained in the multiverse and colour coded to which approach that decision applies."}
+```{r decisionsFigure, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="A visual of all the decisions contained in the multiverse and colour coded to which approach that decision applies. Subtitle indicates the name of the decision, and the values or categroies below denote the choices explored in the multiverse. Each decision is combined with all others pertaining to the same analysis method, in unique combinations, and applied to each species to create the full count of habitat selection estimates."}
 knitr::include_graphics(here::here("notebook", "ext_images", "decisions_visual.png"))
 ```
 
@@ -261,43 +261,49 @@ The second approach involved converting the simplified categorical habitat types
 We inverted the distances (and scaled), so that a positive effect in the model meant a positive selection towards a habitat type, resulting in a more intuitive final output (Fig. \@ref(fig:landscapePlotOPHA1); \@ref(fig:landscapePlotOPHA2); \@ref(fig:landscapePlotPYBI1); \@ref(fig:landscapePlotBUCA1); \@ref(fig:landscapePlotBUFA1)).
 All analyses (see below) were run on both classifications, with the exception of the Compositional Analysis that required categoric inputs.
 
-The habitat selection methods we explored consisted of: Resource Selection Functions (RSF) and Composite Analysis (Compana) that we called area-based methods, which used an estimated available area to help define availability for the snakes; Step Selection Functions (SSF), Two-Step (Two-Step), and Poisson models (Poisson) that we refer to as step-based methods, which used randomly generated alternative locations based on the movement and sinuosity of the individual being examined; and a newly described weighted Resource Selection Functions (wRSF), which used a fitted movement model to calibrate the available habitat.
+The habitat selection methods we explored consisted of the following:
+
+1. Resource Selection Functions (RSF) [@gillies_application_2006] and Composite Analysis (Compana) [@manly2007resource] that we called area-based methods, which used an estimated available area to help define availability for the snakes.
+
+2. Step Selection Functions (SSF) [@thurfjell_applications_2014], Two-Step (Two-Step) [@craiu_conditional_2011], and Poisson models (Poisson) [@muff_accounting_2020] that we refer to as step-based methods, which used randomly generated alternative locations based on the movement and sinuosity of the individual being examined.
+
+3. weighted Resource Selection Functions (wRSF) [@alston_mitigating_2023] a newly described method, which used a fitted movement model to calibrate the available habitat.
 
 The area-based category made use of a defined area of availability, for which random available points can be drawn.
 To explore the impact of the definition of available, we created a number of different polygons surrounding the tracking data locations.
-We created available areas using Minimum Convex Polygons (MCP), Kernel Density Estimates (KDE: using the reference smoothing bandwidth [href]), and Autocorrelated Kernel Density Estimates (aKDE).
-We used the adehabitatHR for MCP and KDE creation [@adehabitatHR], and the ctmm package for aKDEs [@ctmm; @Calabrese2016; @Fleming2015; @Fleming2017].
-For the aKDEs we fitted a number of movement models: Ornstein-Uhlenbeck (OU), Ornstein–Uhlenbeck Foraging (OUF), and Independent Identically Distributed (IID); we selected the best performing by AICc.
-We elected to follow guidance from [@silva_autocorrelationinformed_2022], opting for weighted aKDEs and the perturbative hybrid residual maximum likelihood method (pHREML).
+We created available areas using Minimum Convex Polygons (MCP), Kernel Density Estimates (KDE: using the reference smoothing bandwidth [href]), and Autocorrelated Kernel Density Estimates (AKDE).
+We used the adehabitatHR package for MCP and KDE creation [@adehabitatHR], and the ctmm package for AKDEs [@ctmm; @Calabrese2016; @Fleming2015; @Fleming2017].
+For the AKDEs, we fitted a number of movement models: Ornstein-Uhlenbeck (OU), Ornstein–Uhlenbeck Foraging (OUF), and Independent Identically Distributed (IID); we selected the best performing by AICc.
+We elected to follow guidance from [@silva_autocorrelationinformed_2022], opting for weighted AKDEs and the perturbative hybrid residual maximum likelihood method (pHREML).
 The weighted AKDEs are better suited for tracking data with gaps.
 All three methods require an outermost contour to be selected to define the edge of the available habitat; we varied this outer edge including analysis of 90, 95, and 99% contours.
-For the aKDE areas, we selected the point estimate connected to the contour percentage, ignoring the 95% confidence intervals associated with the estimate.
+For the AKDE areas, we selected the point estimate connected to the contour percentage, ignoring the 95% confidence intervals associated with the estimate.
 
 Once an available area was defined, we generated points within the area to extract the available habitat (also referred to as available points).
-We varied the point generation process, either purely random or stratified across the overall area.
+We varied the point generation process, either spatially random or stratified across the overall area.
 In addition to the point generation method, we varied the the number of available points by multiplying the number of known/used data points by `r paste0(range(optionsComplete$area$Method_ap), collapse = " to ")`.
 As each individual had their own available area, we explored Type III habitat selection; this kept this analysis closer to the intent of the original publications.
 
-The step-based models, instead of using an available area, use available steps randomly generated for each time step.
-For these step-based methods a different suite of choices were explored.
-First is the number of random steps generated per known location, we ranged this from `r paste0(range(optionsComplete$ssf$MethodSSF_as), collapse = " to ")`.
-To generate those steps we draw values from distributions, the choice of those distributions make up the next two choices.
-For the random step lengths we looked at impact of using Gamma and Exponential distributions; whereas for the turn angles we looked at Von Mises and Uniform distributions.
-Once the random available locations had been generated, we explore an additional choice regarding the model formula: whether to have the step lengths and turn angles interact with the habitat.
-Termed integrated step-selection, the inclusion of the step lengths and turn angles is meant to aid the acquisition of less biased estimates of habitat selection.
-However, the impacts of the inclusion have differing impacts when using step-selection or a Poisson model (see Chapter 3); we include it here to explore how dramatic that difference can be.
+Instead of using an available area, the step-based models use available steps randomly generated for each time step.
+For these step-based methods a different suite of choices was explored.
+First is the number of random steps generated per known location; we ranged this from `r paste0(range(optionsComplete$ssf$MethodSSF_as), collapse = " to ")`.
+To generate those steps, we draw values from distributions, the choice of those distributions make up the next two choices.
+For the random step lengths we looked at the impact of using Gamma and Exponential distributions; whereas for the turn angles, we looked at Von Mises and Uniform distributions.
+Once the random available locations had been generated, we explore an additional choice regarding the model formula: whether to have the step lengths and turn angles interact with the habitat [@avgar_integrated_2016].
+Termed "integrated step-selection", the inclusion of the step lengths and turn angles is meant to aid the acquisition of less biased estimates of habitat selection.
+However, the impacts of the inclusion differ when using step-selection versus a Poisson model (see Chapter 3); we include it here to explore how dramatic that difference can be.
 While the Poisson models explicitly target population level selection, the SSF models required summation to a single value.
 To generate that value, we conducted a simple mean of the point estimates and calculated corresponding 95% confidence intervals.
 This process likely underestimates the overall uncertainty surrounding the SSF methods, as the uncertainty surrounding the initial estimates is lost.
 
 We also used the newly developed wRSF methods [@alston_mitigating_2023].
 This approach dramatically reduces the choices during analysis; instead of requiring a defined area of availability, the wRSF weights individual animal locations (their impact penalised by repeated information resulting from autocorrelation) and compares them against a range distribution taking the form of a weighted AKDE [@alston_mitigating_2023].
-Once the movement models had been generated, and wRSF models fitted, we used the supplied mean functionality within the ctmm package to generate an overall population selection.
+Once the movement models had been generated, and wRSF models fitted, we used the supplied mean functionality within the ctmm package to generate overall population selection.
 
 We handled the running of all analyses and their associated choices using the targets `r paste0("v.", packageVersion("targets"))` and tarchetypes `r paste0("v.", packageVersion("tarchetypes"))` R packages [@targets; @tarchetypes].
 These packages allowed for efficient parallel processing and tracking of intermediate objects while avoiding errors in one analysis pathway from delays in the completion of others.
 
-During the running of the multiverse there were several instances of model fitting issues.
+During the running of the multiverse, there were several instances of model fitting issues.
 King Cobra 002, 004, and 005 had issues with step lengths fitting to an exponential distribution; we addressed this by excluding the top 25% quantile of observed steps when the exponential fit failed.
 One Banded Krait individual did not have sufficient relocations to generate any area estimates; therefore we excluded them.
 There were infrequent instances where individuals did not enter both habitat types (or available points did not cover both types made more likely with fewer available points); this caused issues with model fitting in Two-Step and SSF approaches.
@@ -306,17 +312,19 @@ If the convergence failure persisted, we excluded those individuals from that ha
 
 ## Bayesian meta-analysis
 
-We ran a series of `r length(list.files(here::here("modelOutput"), pattern = "^meta"))` Bayesian meta-analysis models to determine an overall estimate of habitat selection for each analysis approach and hypothesis.
+We ran a series of `r length(list.files(here::here("modelOutput"), pattern = "^meta"))` Bayesian meta-analysis models to determine an overall estimate of habitat selection for each analysis approach and hypothesis, while accounting for as much as the multiverse structure as possible [@auspurg_toward_2024].
 We used the following model formula: "estimate"|se("estimate confidence") ~ 1 + "choices" + (1|"index of analysis end point").
-The estimate confidence measure varied from method to method: area-based Compana did not have a confidence interval so we excluded that term, for the RSF and Two-Step estimates we used standard error, for the SSF models we used standard errors of the model averaging, and for the Poisson models we used the standard deviation.
+The estimate confidence measure varied from method to method: area-based Compana did not have a confidence interval, so we excluded that term; for the RSF and Two-Step estimates we used standard error; for the SSF models, we used standard errors of the model averaging; and for the Poisson models, we used the standard deviation.
 Choices varied per method, and included a term for every choice made to reach a given analysis end point.
-For the area-based methods (Compana, RSF) the choice terms included area method `r paste0(optionsComplete$area$areaMethod, collapse = ", ")`, contour percentage (`r paste0(optionsComplete$area$areaContour, collapse = ", ")`, scaled), available points generation method (`r paste0(ifelse(optionsComplete$area$Method_sp == "rd", "random", "stratified"), collapse = ", ")`), and the number of available points generated per animal location (`r paste0(range(optionsComplete$area$Method_ap), collapse = " to ")`, scaled).
+For the area-based methods (Compana, RSF), the choice terms included area method `r paste0(optionsComplete$area$areaMethod, collapse = ", ")`, contour percentage (`r paste0(optionsComplete$area$areaContour, collapse = ", ")`, scaled), available points generation method (`r paste0(ifelse(optionsComplete$area$Method_sp == "rd", "random", "stratified"), collapse = ", ")`), and the number of available points generated per animal location (`r paste0(range(optionsComplete$area$Method_ap), collapse = " to ")`, scaled).
 The Compana analysis had the additional choice of test method (`r paste0(optionsComplete$areaMethods$areaBasedTest, collapse = ", ")`).
-For the step-based methods (Two-Step, SSF, Poisson) the choice terms included model formula (integrated, non-integrated), step length distribution (Gamma, Exponential), turn angle distribution (Von Mises, Uniform), and the number of random steps generated per animal location (`r paste0(range(optionsComplete$Method_method$MethodSSF_as), collapse = " to ")`, scaled).
+For the step-based methods (Two-Step, SSF, Poisson), the choice terms included model formula (integrated, non-integrated), step length distribution (Gamma, Exponential), turn angle distribution (Von Mises, Uniform), and the number of random steps generated per animal location (`r paste0(range(optionsComplete$ssf$MethodSSF_as), collapse = " to ")`, scaled).
+The inclusions of "index of analysis end point" allows us to estimate *$\tau$^2^*, a measure of between-study heterogeneity.
 We used weakly informative priors.
-For the intercept prior we used a normal distribution with a mean of 0 and a standard deviation of 2, and for the choices' priors we used Cauchy distributions with a location of -0.1 and scale as 3, except for the number of available points generated per animal location where we used a location of 0.1.
-We ran Bayesian models using the brms package [@brms], running 4 MCMC chains for 1200 iterations each, with a warmup of 400, and a thinning rate of 2.
-For reporting we used 95% median highest density continuous intervals when describing posteriors.
+For the intercept prior, we used a normal distribution with a mean of 0 and a standard deviation of 2, and for the choices' priors we used Cauchy distributions with a location of -0.1 and scale as 3, except for the number of available points generated per animal location where we used a location of 0.1.
+We ran Bayesian models using the brms package [@brms], running 4 MCMC chains for 1200 iterations each with a warmup of 400 and a thinning rate of 2.
+For reporting, we used 95% median highest density continuous intervals when describing posteriors.
+We used *R^2^* and *$\tau$^2^* to explore how much variation is explained by the analysis decisions, and the between-study heterogeneity (in this case analysis end points).
 
 # Results
 
@@ -348,7 +356,7 @@ totalAnalyses <- sum(c(areaBasedCount, poisCount, rsfCount, ssfCount, twoStepCou
 Sample sizes and data density varied between species and individuals.
 We tracked 25 King Cobras, 7 Burmese Pythons, 13 Malayan Kraits, and 3 Banded Kraits, which had adequate data for analysis (Fig. \@ref(fig:timeLinePlot)).
 Tracking duration ranged widely from `r paste(round(range(summaryTable$duration), digits = 0), collapse = " to ")` days (Table. \@ref(tab:trackingSummaryTable)), being cut short by snake deaths, transmitter failure, and studies ending.
-On average we tracked an individual snake for `r round(mean(summaryTable$duration), digits = 2)` ±SD `r round(sd(summaryTable$duration), digits = 2)` days.
+On average, we tracked an individual snake for `r round(mean(summaryTable$duration), digits = 2)` ±SD `r round(sd(summaryTable$duration), digits = 2)` days.
 Despite best efforts to maintain a consistent tracking regime, snakes evade rediscovery, weather prevents tracking, and equipment fails.
 Therefore, all species tend to have mean tracking lag times (i.e., the time between subsequent relocations) a little longer than intended (Fig. \@ref(fig:timeLagPlot); Table. \@ref(tab:trackingSummaryTable)).
 Overall tracking effort resulted in `r format(sum(summaryTable$datapoints), big.mark = ",")` data points, across `r nrow(summaryTable)` snakes, resulting in a mean of `r round(mean(summaryTable$datapoints), digits = 2)` ±SD `r round(sd(summaryTable$datapoints), digits = 2)` per snake.
@@ -365,68 +373,68 @@ In contrast, King Cobra H2 and Burmese Python H1 hypotheses appeared almost enti
 The lack of support does not appear to be connected to any single analysis decision.
 King Cobra H2 and Burmese Python H1 hypotheses appear more likely to be supported when using MCPs to define available area, and least likely when defined via AKDEs, but even using MCPs there is not consistent support in the point estimates.
 High outlying support in Burmese Python H1 estimates are somewhat mitigated when larger numbers of available points are used.
-Also the other species revealed that available area method and contour can have varying impacts.
+Also, the other species revealed that available area method and contour can have varying impacts.
 Only the Compana test method (randomisation or parametric) appears to have a consistent effect, with both Krait hypotheses seeing dramatically higher estimates of selection when parametric testing is used.
-For Malayan Kraits this does not change any conclusions (all estimates are significantly supportive; Fig. \@ref(fig:specCurveAreaBUCA)); however, for Banded Kraits this single decision is responsible for the half of estimates providing support (Fig. \@ref(fig:specCurveAreaBUFA)).
+For Malayan Kraits, this does not change any conclusions (all estimates are significantly supportive; Fig. \@ref(fig:specCurveAreaBUCA)); however, for Banded Kraits this single decision is responsible for the half of estimates providing support (Fig. \@ref(fig:specCurveAreaBUFA)).
 
-```{r specCurveArea, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot show the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines."}
+```{r specCurveArea, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plots show the estimates relative to each analysis choice. Colour depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines."}
 knitr::include_graphics(here::here("figures", "specCurve_area.png"))
 ```
 
 Unlike the Compositional analysis, Resource Selection Functions estimate medians provided support for all hypotheses (Fig. \@ref(fig:specCurveRsf)).
 Although, King Cobra H2's support is marginal.
-The more limited support for King Cobra H2 (for both habitat classification methods) appears driven by those estimates based on MCP available areas, and using wider contours (Fig. \@ref(fig:specCurveRsfOPHA)).
+The more limited support for King Cobra H2 (for both habitat classification methods) appears driven by those estimates based on MCP available areas and using wider contours (Fig. \@ref(fig:specCurveRsfOPHA)).
 All other hypotheses are universally supported, and significantly so (with the exception of only six of 144 Burmese Python estimates).
 The chosen available area method does appear to impact the variability of results, even among the positive selection estimates.
-Those based on MCPs appears to be less variable regardless of other analysis decisions, but this pattern only exists when a continuous habitat classification was used.
-The continuous habitat classification does appear to open the possibility for more dramatic variation in selection strength.
-The number of available points does seem to impact the estimates in both Krait species, but only when not using MCPs, and this impact appears to diminish once over 29.
+Those based on MCPs appear to be less variable regardless of other analysis decisions, but this pattern only exists when a continuous habitat classification was used.
+The continuous habitat classification does appear to open the possibility for more dramatic variation in estimated selection strength.
+The number of available points does seem to impact the estimates in both Krait species, but only when not using MCPs, and this impact appears to diminish above 29.
 
-```{r specCurveRsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot shows the estimates relative to each analysis choice. The colours depict the species, and shape separates hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+```{r specCurveRsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plots show the estimates relative to each analysis choice. Colour depict the species, and shape separates hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
 knitr::include_graphics(here::here("figures", "specCurve_rsf.png"))
 ```
 
-The Two-Step approach was by far the least effective and most problematic when running in within a multiverse, as the models had frequent convergence issues.
-This failure rate is particularly visible in the King Cobra data, when run with low numbers of available points or with attempts to integrate step and turn angle into the equation (Fig. \@ref(fig:specCurveTwoStep)).
+The Two-Step approach was by far the least effective and most problematic when running within a multiverse, as the models had frequent convergence issues.
+This failure rate is particularly visible in the King Cobra data when run with low numbers of available points or with attempts to integrate step and turn angle into the equation (Fig. \@ref(fig:specCurveTwoStep)).
 In addition to the failure rate, we see a more even spread of estimates that contrasts with the ideal "S" shape that would indicate more agreement between the analysis end points.
-The lack of agreement in selection strength appears more prevalent when using the continuous habitat classification, but unlike with RSFs increased variably does not appear connected to any single choice.
+The lack of agreement in selection strength appears more prevalent when using the continuous habitat classification, but unlike with RSFs, increased variably does not appear connected to any single choice.
 The most consistent impact of the choice is whether to integrate step and turn angle into the model formula.
-As mentioned, this led to convergence issues for King Cobras, but for other species the integrated formulations tended to result in more conservative estimates of selection.
-Only for Malayan Kraits with a binary classification did the median estimate swap direction due to this analysis choice, and explains the lower rates of significant selection (32/64; Fig. \@ref(fig:specCurveTwoStepBUCA)).
+As mentioned, this led to convergence issues for King Cobras, but for other species, the integrated formulations tended to result in more conservative estimates of selection.
+Only for Malayan Kraits with a binary classification did the median estimate swap direction due to this analysis choice, and this explains the lower rates of significant selection (32/64; Fig. \@ref(fig:specCurveTwoStepBUCA)).
 
-```{r specCurveTwoStep, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot shows the estimates relative to each analysis choice. The colours depict the species, and shape separates hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+```{r specCurveTwoStep, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plots show the estimates relative to each analysis choice. Colour depict the species, and shape separates hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
 knitr::include_graphics(here::here("figures", "specCurve_twoStep.png"))
 ```
 
 The Step Selection Function approach was impacted by the habitat classification method (Fig. \@ref(fig:specCurveSsf)). 
-When using a binary habitat classification only the Kraits results showed broad support for the hypotheses.
-Whereas when using the the continuous habitat classification, we see more universal support across the species. 
+When using a binary habitat classification, only the Kraits results showed broad support for the hypotheses.
+Whereas when using the the continuous habitat classification, we see more universal support across species. 
 This lack of support when using the binary classification was not clearly connected to any particular analysis decision.
-The only decision that makes consistent change when paired with binary classification was the number of available steps.
+The only decision that makes a consistent change when paired with binary classification was the number of available steps.
 Increased steps tended to lower the overall variability of selection estimates, especially for Malayan Kraits.
 While we did see near universal support for hypotheses in the continuous classification, the estimates for Burmese Pythons were more marginal with only 22 of 64 considered significantly supported (Fig. \@ref(fig:specCurveSsfPYBI)).
-We should be additionally cautious with this support, as the SSF model averaging method may be reducing the uncertainty present in individual SSF models.
+We should be cautious with this support, as the SSF model averaging method may be additionally reducing the uncertainty present in individual SSF models.
 The impact of decisions are most visible in Malayan Kraits, whose estimates' strength is impacted by the step and turn angle distributions, as well as whether the formula was integrated.
 The distribution choices make less of an impact, with the spread of estimates largely overlapping, but using an integrated model formula led to more generous and variable estimates of preference.
 However, despite this impact, all bar one of Malayan Kraits' estimates significantly support the hypothesis regardless of habitat classification method (Fig. \@ref(fig:specCurveSsfBUCA)).
 
-```{r specCurveSsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot shows the estimates relative to each analysis choice. The colours depict the species, and shape separates hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+```{r specCurveSsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plots show the estimates relative to each analysis choice. Colour depict the species, and shape separates hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
 knitr::include_graphics(here::here("figures", "specCurve_ssf.png"))
 ```
 
 The Poisson model approach appears similar to the SSF results, with universal support for the hypotheses when examining the median estimates (Fig. \@ref(fig:specCurvePois)).
-Once again the most marginal support was seen in King Cobra H2, where both classification methods result in low median estimates of preference.
+Once again the most marginal support was seen in King Cobra H2, where both classification methods resulted in low median estimates of preference.
 The marginal medians seem to be largely due to a single decision: whether or not to run an integrated model formulation.
-In this case the integrated models provide far more conservative estimates of selection, and for King Cobra H2 when using binary classification the median falls below zero (Fig. \@ref(fig:specCurvePoisOPHA)).
+In this case, the integrated models provide far more conservative estimates of selection, and for King Cobra H2 when using binary classification the median falls below zero (Fig. \@ref(fig:specCurvePoisOPHA)).
 The impact of model formulation appears for all species, but the most dramatic impacts are seen when paired with binary habitat classification.
-What is missed from the point estimates, and median summaries, is the massive uncertainty surrounding estimates when using the binary classification.
+What is missed from the point estimates, and median summaries, is the large uncertainty surrounding estimates when using the binary classification.
 Zero estimates when using the binary habitat provided significant support.
 This contrasts with the continuous habitat classification, where all species-hypothesis combinations show complete or majority significant support.
 The impacts of other decisions are considerably smaller than model formulation.
 There appear to be advantages to generating more available points, as estimates with few points tend to explain the upper and lower outliers.
 The mitigation of extreme estimates is best seen in Banded Kraits when using a continuous habitat classification (Fig. \@ref(fig:specCurvePoisBUFA)).
 
-```{r specCurvePois, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plot shows the estimates relative to each analysis choice. The colours depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+```{r specCurvePois, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis. Top curves show all estimates, split by species and hypothesis, with coloured points indicating those with point estimates supporting the hypothesis (i.e., > 0). Labelled vertical lines show the median estimate for each species-hypothesis combination. Lower plots show the estimates relative to each analysis choice. Colour depict the species, and shape separate hypothesis 1 and 2 for the King Cobras (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and species-hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
 knitr::include_graphics(here::here("figures", "specCurve_pois.png"))
 ```
 
@@ -434,9 +442,9 @@ Our final analysis approach was using weighted Resource Selection Functions (wRS
 All wRSF results provided support for the hypotheses (Fig. \@ref(fig:specCurveWrsf)).
 Although, once again, support for King Cobra H2 when using a continuous classification is borderline and ultimately rounded to zero.
 The King Cobra H1 saw no support when using the continuous habitat classification but clear support when the landscape was binary classified.
-All other species saw unambiguous support when the habitat was binary classed, but when classed continuously as inverted distance the 95% confidence intervals for Burmese Pythons and Banded Kraits approximated zero.
+All other species saw unambiguous support when the habitat was binary classed, but when classed continuously as inverted distance, the 95% confidence intervals for Burmese Pythons and Banded Kraits approximated zero.
 
-```{r specCurveWrsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the weighted Resource Selection Function (wRSF) analysis. Circles and numbers above show the point estimate, and the horizontal bars depict the 95% confidence interval. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right). The results for King Cobra (Ophiophagus hannah) H1 with the continuous habitat classification are hidden to aid with visualising all other estimates."}
+```{r specCurveWrsf, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the weighted Resource Selection Function (wRSF) analysis. Circles and numbers above show the point estimate, and the horizontal bars depict the 95% confidence interval. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
 knitr::include_graphics(here::here("figures", "specCurve_wrsf.png"))
 ```
 
@@ -472,17 +480,17 @@ The Bayesian meta-analyses tended to perform very well, with the population effe
 The RSF models had the highest *R^2^* values, with the continuous classification estimates being almost entirely described by the predictors (Fig. \@ref(fig:metaR2Plot)).
 The step-based approaches tended to have more variable *R^2^*, with step-selection models having the lowest values.
 
-*$\tau$^2^* values ranged from very low (`r signif(min(tau2conditional$value), digits = 2)`) for the binary classed RSF models examining Banded Kraits, to `r signif(max(tau2conditional$value), digits = 2)` for the binary classed Poisson models examining the same species.
+*$\tau$^2^* values (between analysis end point heterogeneity) ranged from very low (`r signif(min(tau2conditional$value), digits = 2)`) for the binary classed RSF models examining Banded Kraits, to `r signif(max(tau2conditional$value), digits = 2)` for the binary classed Poisson models examining the same species.
 Mostly *$\tau$^2^* values fell below 0.1 `r paste0(sum(tau2conditional$value < 0.1), "/", nrow(tau2conditional))` (overall median of `r round(median(tau2conditional$value), digits = 2)` ±SD `r round(sd(tau2conditional$value), digits = 2)`), largely mirroring results gained from meta-analyses and ecological many analysts projects [@gould_same_2023].
 
-The intercepts of the meta-analysis models reveal that most hypotheses are overall supported, with the only exceptions existing when the habitat was binary classified (Fig. \@ref(fig:metaInterPlot)).
+The intercepts of the meta-analysis models reveal that most hypotheses are supported overall, with the only exceptions existing when the habitat was binary classified (Fig. \@ref(fig:metaInterPlot)).
 King Cobra H2 and Burmese Python H1 using Compana, Malayan Krait H1 using Two-Step, King Cobra H2 and Burmese Python H1 using SSF.
 
-```{r metaInterPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Posterior estimates of the intercept for all meta-analysis models, with 95% HDCIs."}
+```{r metaInterPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Posterior estimates of the intercept for all meta-analysis models, with 95% HDCIs, indicating whether the overall meta-analysed habitat selection estimate supports the original conclusions. Positive values indicate support. Colour denote species, and shape seperates hypotheses for King Cobras. Continous habitat classifcation was incompatible with the Compana method, and so is not shown."}
 knitr::include_graphics(here::here("figures", "metaIntercept.png"))
 ```
 
-Overall the patterns of meta-analysis results mirror the specification curves, and the similarities reappear in the analysis choice impacts.
+Overall the patterns, of meta-analysis results mirror the specification curves, and the similarities reappear in the analysis choice impacts.
 Model formulation appeared to have the most dramatic effect on the meta-analysis estimates, and that effect is seen in all three step-based approaches (Fig. \@ref(fig:metaBetasPlot)).
 The effects themselves were not consistent, with different directions and strengths depending on approach and species.
 Only Banded Kraits were impacted consistently the same way, with the non-integrated estimates tending to have a positive impact on the estimates (Fig. \@ref(fig:metaBetasPlot)). 
@@ -497,9 +505,9 @@ This was reasonably universal, but the larger effects were seen in the Krait spe
 <!-- Muff et al. And third, we reiterated that the logistic regression likelihood to estimate RSFs should always be weighted with a large weight W on the available points, in order to ensure convergence to the IPP likelihood which is guaranteed for urn:x-wiley:00218790:media:jane13087:jane13087-math-0055 (Fithian & Hastie, 2013). -->
 <!-- SHOULD RERUN RSF WITH WEIGHTING ON AVAILABLE, worth it, we didnt see convergence issues I don't think ??? -->
 
-Our re-testing of snake habitat selection studies using a multiverse of over `r totalAnalyses` analysis endpoints, suggests that the original conclusions remain broadly supported.
-More specifically it appears that there is a reasonably low chance that the analysis choices made in the original publications led to strange or outlying results.
-While the multiverse revealed broad support for the direction of the selection, the strength of the effect was more sensitive and we did identify a few analysis choices capable of contradicting the originally published results.
+Our re-testing of snake habitat selection studies using a multiverse of over `r totalAnalyses` analysis endpoints suggests that the original conclusions remain broadly supported.
+More specifically, it appears that there is a reasonably low chance that the analysis choices made in the original publications led to strange or outlying results.
+While the multiverse revealed broad support for the direction of the selection, the strength of the effect was more sensitive, and we did identify a few analysis choices capable of contradicting the originally published results.
 
 Of the four species we examined, Burmese Pythons' preference for water bodies appears the most marginal, but the preference was clear in all bar six RSF analyses and the wRSF analysis.
 All these analysis approaches have different assumptions, and treat the data in different ways.
@@ -520,11 +528,11 @@ While every effort was made during tracking to ensure a correct GPS location was
 Even small errors may lead to mismatches between the true location (and habitat) of an animal and the land-use data we had access to.
 This mismatch may be more pronounced when habitats are rarer or when animals tend to remain near its edges.
 Banded Kraits' focus on very thin field margins may have made it particularly susceptible, and similarly Burmese Pythons' selection for the banks of water bodies.
-The rarity of these habitats may have also played a role, as we see a clear decrease in the confidence intervals surrounding the estimates as we increased the number of available points sampled.
+The rarity of these habitats may have also played a role, as we see a clear narrowing of the confidence intervals surrounding the estimates as we increased the number of available points sampled.
 We suspect that location error resulting in binary habitat mis-classification may explain the large confidence intervals of the Poisson models and the limited support in *Python bivitattus* SSF analyses, as this uncertainty and lack of support is not visible in the continuous habitat models.
 
 A second decision that could alter estimate strength dramatically was whether we used an integrated model formulation (i.e., include step and turn angle in the model formula).
-The work of [@muff_accounting_2020] and [@forester_accounting_2009], as well as chapter 3 showed that integrated formulas have contrasting impacts on estimates in step-selection approaches and poisson models.
+The work of @muff_accounting_2020 and @forester_accounting_2009, as well as chapter 3 showed that integrated formulas have contrasting impacts on estimates in step-selection approaches and poisson models.
 The step-selection models tend to produce less biased estimates when using an integrated formula, whereas the poisson models produced the opposite.
 With those findings in mind, we should weight the findings using the non-integrated poisson models more heavily.
 The non-integrated Poisson models show clearer support for the hypotheses in all cases with either classification, bar King Cobra H1 and Burmese Python H1 whose estimates seem negligibly impacted when using the continuous classification.
@@ -562,11 +570,11 @@ The previously published conclusions that they make heavy use of semi-natural ar
 Why King Cobras use these habitats is not immediately clear, but it could be driven by prey availability (e.g., other snake species @Barnes2017; @Strine2018a), the avoidance of threats, and density of shelter sites.
 Other reptiles are known to make use of linear habitats [@doherty_animal_2019; @Kay2016], including other snakes at this study site (i.e., King Cobra's prey; @Jones_supposed_2020).
 Both prey species and King Cobras could be using these linear connected semi-natural areas a means of avoiding the more exposed and dangerous fields and anthropogenic areas.
-Human activity in fields, such as ploughing will kill snakes [@Knierim2017a], and we have documented many fatalities of King Cobras as a direct result of human actions (e.g., persecution, road collision; @marshall_no_2020).
+Human activity in fields, such as ploughing, will kill snakes [@Knierim2017a], and we have documented many fatalities of King Cobras as a direct result of human actions (e.g., persecution, road collision; @marshall_no_2020).
 We can be confident that suggestions regarding the importance of edge or scrub habitats amongst a human-modified landscape are robust in the face of a multitude of analysis choices.
 
-The second hypothesis regarding their selection for forest was not nearly as widely supported, and only appears to be supported in certain analysis approaches.
-The original paper highlighted the propensity for King Cobras to leave the forest [@Marshall2018], and the heightened movement particularly during breeding season, potentially mate searching behaviour.
+The second hypothesis regarding their selection for forest was not nearly as widely supported and only appears to be supported in certain analysis approaches.
+The original paper highlighted the propensity for King Cobras to leave the forest and the heightened movement particularly during breeding season [@Marshall2018], potentially mate searching behaviour.
 Mate searching has been indicated as a potential seasonal driver of heightened movements in other snake species [@Bauder2016a; @Duvall1997].
 The King Cobra dataset used in the first paper [@Marshall2018] was skewed towards King Cobras found in/near protected forest, hence the focus on forest use.
 The data used here pooled old and new data that presents a more complete picture of King Cobra selection, likely weakened that association with protected forest.
@@ -580,7 +588,7 @@ Other studies have revealed King Cobra potentially favour less disturbed areas f
 The conclusions regarding Burmese Pythons' habitat selection appear susceptible to differing analysis approaches, but overall we can be fairly confident in the assertion that Burmese Pythons ideally remain closer to water bodies.
 The patterns of selection in Burmese Pythons appear more clearly with broader landscape level approaches compared to those using steps.
 It is likely that Burmese Pythons are prioritising being close to water bodies for food and shelter.
-The use of water bodies and aquatic landscapes is well documented in Burmese Python's invasive range in Florida, USA [@mutascio_modeling_2018]; and in Thailand evidence of Burmese Pythons capitalising on both shelter and prey provided by the water bodies is apparent.
+The use of water bodies and aquatic landscapes is well documented in Burmese Python's invasive range in Florida, USA [@mutascio_modeling_2018], and in Thailand evidence of Burmese Pythons capitalising on both shelter and prey provided by the water bodies is apparent.
 As mentioned for the King Cobras, edge areas in agricultural land in this area of Thailand are considerably less trafficked and modified compared to the agricultural matrix of crops.
 Less disturbance likely boosts shelter site options, as well as ambush sites and associated prey (e.g., aquatic birds).
 Shelter sites along edge habitats, such as field margins and banks, appear to be suitable for nesting (also evidenced by Banded Krait nest site choice; @smith_risk_2024; @knierim_spatial_2019).
@@ -603,19 +611,21 @@ Studies elsewhere in Thailand have suggested that other medically significant sn
 
 ### Banded Krait
 
-Banded Kraits' conclusions fall mostly in the middle, they are very well supported by the overall meta-analysis intercepts but did clearly reveal some scenarios where researcher choice could have obscured what appears to be a selection for field margins.
-As mentioned for other species, field margins and other edge habitats, appear key to snakes' lives in agricultural areas in northeastern Thailand, providing shelter and movement corridors.
-Banded Kraits supports this.
+Banded Kraits' conclusions fall mostly in the middle; they are very well supported by the overall meta-analysis intercepts but did clearly reveal some scenarios where researcher choice could have obscured what appears to be a selection for field margins.
+As mentioned for other species, field margins and other edge habitats appear key to snakes' lives in agricultural areas in northeastern Thailand [@Knierim2018], providing shelter and movement corridors.
+Banded Kraits support this.
 Their use of edge habitats is not limited to sheltering, as like Burmese Pythons, the edges offer suitable (possibly communal) nest sites [@knierim_spatial_2019].
 When paired with other studies indicating the importance of field margins for mammals and amphibians [@brown_habitat_2001; @groffen_preference_2018], particularly rice paddy edges, it is clear that Banded Kraits likely find all the resources required in these edge habitats.
 The concentration to the field margins may indicate a human-snake interaction hotspot, the identification of which could aid refinement of agent-based snakebite risk maps (e.g., @goldstein_integrating_2021).
+
+### Overall conclusions
 
 <!-- Future - while things look ok here for direction. move towards modern methods, or methods that are scale independent if you want to extrapolate strength, e.g. bring in more mechanisms, mirror point made in review paper -->
 Looking forward, we feel confident in the broad conclusions drawn by the original studies and that the analyses choices of the original publications did not result in peculiar conclusions.
 The support originating from more modern methods is additionally reassuring.
 The wRSFs should be best placed to provide us with a broad estimate of habitat selection, while simultaneously tackling the issues arising from inconsistent tracking [@alston_mitigating_2023].
 However, the use of exact selection strengths should be examined in more detail if they are to be adapted to future purposes such as human-snake conflict prediction (as supported by simulation habitat multiverses; @marshall_habitat_2024; Chapter 3).
-In those cases reassessment of the selection using newer methods more acutely tailored to prediction may be required, either by greater integration of mechanistic drivers of snake movement, or via methods that are scale independent enabling better beyond-sample extrapolation (e.g., @michelot_langevin_2019).
+In those cases, reassessment of the selection using newer methods more acutely tailored to prediction may be required, either by greater integration of mechanistic drivers of snake movement, or via methods that are scale independent enabling better beyond-sample extrapolation (e.g., @michelot_langevin_2019).
 
 Summarised together, this study reveals the robustness of snake habitat selection studies to researcher analysis choice, while also reaffirming the conclusions regarding the important role habitat patches (edges, banks, canals, etc.) play for snakes in an otherwise human dominated unsuitable landscape.
 
@@ -625,7 +635,7 @@ BMM was funded by the Natural Environment Research Council (NERC) via the IAPETU
 
 # Software availablity
 
-All code used in the creation of this manuscript is available at [https://github.com/BenMMarshall/multiverseSnakes](https://github.com/BenMMarshall/multiverseSnakes); and archived at [ZENDO DOI HERE WHEN READY].
+All code used in the creation of this manuscript is available at [https://github.com/BenMMarshall/multiverseSnakes](https://github.com/BenMMarshall/multiverseSnakes); and archived at [https://doi.org/10.5281/zenodo.14034844](https://doi.org/10.5281/zenodo.14034844).
 
 In addition to packages mentioned in the methods, a complete list of software used follows.
 
@@ -688,36 +698,36 @@ knitr::kable(
   col.names = c("Species", "Individual ID", "Number of Datapoints", "Total Tracking Duration (days)",
                 "Mean Time Lag ± Standard Error (hours)", "Number of Moves", 
                 "Mean Step Length ± Standard Error (metres)"), escape = FALSE) %>%
-  kableExtra::kable_styling(font_size = 8, latex_options = "scale_down")
+  kableExtra::kable_styling(font_size = 8, latex_options = c("scale_down", "hold_position"))
 ```
 
-```{r timeLagPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The distribution between subsequent data points for each species. Circles below the distributions show the media time lag. Reported alongside is the mean, standard error (±), and range of time lags. Large time lags are usually the result of prolonged missing periods or transmitter failures. N.b., the x axis is square-rooted to aid with visualisation."}
+```{r timeLagPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="The distribution between subsequent data points for each species. Circles below the distributions show the media time lag. Reported alongside is the mean, standard error (±), and range of time lags. Large time lags are usually the result of prolonged missing periods or transmitter failures. N.b., the x axis is square-rooted to aid with visualisation."}
 knitr::include_graphics(here::here("figures", "timeLagPlot.png"))
 ```
 
-```{r timeLinePlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The timeline of all tracked individuals, split by species. Each recorded data point is depcited by a |."}
+```{r timeLinePlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="The timeline of all tracked individuals, split by species. Each recorded data point is depcited by a |."}
 knitr::include_graphics(here::here("figures", "timeLinePlot.png"))
 ```
 
 ## Species-by-hypothesis Habitat Classification
 
-```{r landscapePlotOPHA1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The landscape covariates used in the King Cobra models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
+```{r landscapePlotOPHA1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="The landscape covariates used in the King Cobra models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
 knitr::include_graphics(here::here("figures", "landscape_plot_OPHA_H1.png"))
 ```
 
-```{r landscapePlotOPHA2, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The landscape covariates used in the King Cobra models for hypothesis 2, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
+```{r landscapePlotOPHA2, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="The landscape covariates used in the King Cobra models for hypothesis 2, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
 knitr::include_graphics(here::here("figures", "landscape_plot_OPHA_H2.png"))
 ```
 
-```{r landscapePlotPYBI1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The landscape covariates used in the Burmese Python models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
+```{r landscapePlotPYBI1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="The landscape covariates used in the Burmese Python models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
 knitr::include_graphics(here::here("figures", "landscape_plot_PYBI_H1.png"))
 ```
 
-```{r landscapePlotBUCA1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The landscape covariates used in the Malayan Krait models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
+```{r landscapePlotBUCA1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="The landscape covariates used in the Malayan Krait models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
 knitr::include_graphics(here::here("figures", "landscape_plot_BUCA_H1.png"))
 ```
 
-```{r landscapePlotBUFA1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="The landscape covariates used in the Banded Krait models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
+```{r landscapePlotBUFA1, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="The landscape covariates used in the Banded Krait models for hypothesis 1, overlayed with the recorded locations of the animals. Left hand: the binary classification where hypothesised habitats are classed as 1, whereas all other areas are classed as 0. Right hand: the inverted continuous landscape classification where higher values indicated proximity to a given land use or habitat."}
 knitr::include_graphics(here::here("figures", "landscape_plot_BUFA_H1.png"))
 ```
 
@@ -725,90 +735,90 @@ knitr::include_graphics(here::here("figures", "landscape_plot_BUFA_H1.png"))
 
 ### King Cobra
 
-```{r specCurveAreaOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriated coloured lines. "}
-knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_area.png"))
+```{r specCurveAreaOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriated coloured lines. "}
+knitr::include_graphics(here::here("figures", "specCurve_King Cobra_area.png"))
 ```
 
-```{r specCurveRsfOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_rsf.png"))
+```{r specCurveRsfOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_King Cobra_rsf.png"))
 ```
 
-```{r specCurveTwoStepOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates, split by hypothesis, with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate for each hypothesis. Lower plot shows the estimates relative to each analysis choice. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_twoStep.png"))
+```{r specCurveTwoStepOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates, split by hypothesis, with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate for each hypothesis. Lower plots show the estimates relative to each analysis choice. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_King Cobra_twoStep.png"))
 ```
 
-```{r specCurveSsfOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates, split by hypothesis, with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate for each hypothesis. Lower plot shows the estimates relative to each analysis choice. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_ssf.png"))
+```{r specCurveSsfOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates, split by hypothesis, with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate for each hypothesis. Lower plots show the estimates relative to each analysis choice. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_King Cobra_ssf.png"))
 ```
 
-```{r specCurvePoisOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates, split by hypothesis, with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate for each hypothesis. Lower plot shows the estimates relative to each analysis choice. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Ophiophagus hannah_pois.png"))
+```{r specCurvePoisOPHA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for King Cobras (Ophiophagus hannah). Top curves show all estimates, split by hypothesis, with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate for each hypothesis. Lower plots show the estimates relative to each analysis choice. Shape separates hypothesis 1 and 2 (circles = hypothesis 1, triangle = hypothesis 2). Median estimates are shown with hollow diamonds, and hypothesis medians are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_King Cobra_pois.png"))
 ```
 
 ### Burmese Pythons
 
-```{r specCurveAreaPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
-knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_area.png"))
+```{r specCurveAreaPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
+knitr::include_graphics(here::here("figures", "specCurve_Burmese Python_area.png"))
 ```
 
-```{r specCurveRsfPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_rsf.png"))
+```{r specCurveRsfPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Burmese Python_rsf.png"))
 ```
 
-```{r specCurveTwoStepPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_twoStep.png"))
+```{r specCurveTwoStepPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Burmese Python_twoStep.png"))
 ```
 
-```{r specCurveSsfPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_ssf.png"))
+```{r specCurveSsfPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Burmese Python_ssf.png"))
 ```
 
-```{r specCurvePoisPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Python bivittatus_pois.png"))
+```{r specCurvePoisPYBI, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.pos = "h", fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for Burmese Pythons (Python bivittatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Burmese Python_pois.png"))
 ```
 
 ### Malayan Kraits
 
-```{r specCurveAreaBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_area.png"))
+```{r specCurveAreaBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
+knitr::include_graphics(here::here("figures", "specCurve_Malayan Krait_area.png"))
 ```
 
-```{r specCurveRsfBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_rsf.png"))
+```{r specCurveRsfBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Malayan Krait_rsf.png"))
 ```
 
-```{r specCurveTwoStepBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_twoStep.png"))
+```{r specCurveTwoStepBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Malayan Krait_twoStep.png"))
 ```
 
-```{r specCurveSsfBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_ssf.png"))
+```{r specCurveSsfBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Malayan Krait_ssf.png"))
 ```
 
-```{r specCurvePoisBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus candidus_pois.png"))
+```{r specCurvePoisBUCA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for Malayan Kraits (Bungarus candidus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Malayan Krait_pois.png"))
 ```
 
 ### Banded Kraits
 
-```{r specCurveAreaBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_area.png"))
+```{r specCurveAreaBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Compositional (Compana) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines."}
+knitr::include_graphics(here::here("figures", "specCurve_Banded Krait_area.png"))
 ```
 
-```{r specCurveRsfBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_rsf.png"))
+```{r specCurveRsfBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the areas-based Resource Selection Function (RSF) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Banded Krait_rsf.png"))
 ```
 
-```{r specCurveTwoStepBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_twoStep.png"))
+```{r specCurveTwoStepBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Two-Step analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Banded Krait_twoStep.png"))
 ```
 
-```{r specCurveSsfBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_ssf.png"))
+```{r specCurveSsfBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Step Selection Function (SSF) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Banded Krait_ssf.png"))
 ```
 
-```{r specCurvePoisBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plot shows the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
-knitr::include_graphics(here::here("figures", "specCurve_Bungarus fasciatus_pois.png"))
+```{r specCurvePoisBUFA, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="All estimates of habitat selection derived from the step-based Poisson model (Poisson) analysis for Banded Kraits (Bungarus fasciatus). Top curves show all estimates with coloured points and corresponding confidence intervals indicating whether those estimates significantly support the hypothesis. Bottom right labels provide a count of estimates that significantly support the hypothesis out of the total estimates. Labelled vertical lines show the median point estimate. Lower plots show the estimates relative to each analysis choice. Median estimates are shown with hollow diamonds, and are connected with appropriately coloured lines. The plot is split left and right for the analysis using a binary classification (left), and continuous inverted distance (right)."}
+knitr::include_graphics(here::here("figures", "specCurve_Banded Krait_pois.png"))
 ```
 
 ## Additional Meta-analysis Plots
@@ -821,5 +831,6 @@ knitr::include_graphics(here::here("figures", "r2Plot.png"))
 knitr::include_graphics(here::here("figures", "metaBeta.png"))
 ```
 
+\clearpage
 
 # References
