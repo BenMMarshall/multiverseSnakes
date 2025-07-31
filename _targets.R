@@ -99,7 +99,7 @@ optionsList_area <- list(
   areaMethod = c("MCP", "AKDE", "KDEhref"),
   # areaMethod = c("MCP", "KDEhref"),
   areaContour = c(90, 95, 99),
-  Method_ap = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
+  Method_ap = as.integer(round(exp(seq(log(1), log(200), length.out = 8)), digits = 0)),
   Method_sp = c("rd", "st")
 )
 
@@ -114,7 +114,7 @@ optionsList_areaMethods <- list(
 optionsList_sff <- list(
   Method_method = c("ssf"),
   # MethodSSF_as = c(2, 10),
-  MethodSSF_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
+  MethodSSF_as = as.integer(round(exp(seq(log(1), log(200), length.out = 8)), digits = 0)),
   MethodSSF_mf = c("mf.is", "mf.ss"),
   MethodSSF_sd = c("gamma", "exp"),
   MethodSSF_td = c("vonmises", "unif")
@@ -123,7 +123,7 @@ optionsList_sff <- list(
 optionsList_pois <- list(
   Method_method = c("pois"),
   # MethodPois_as = c(2, 10),
-  MethodPois_as = as.integer(round(exp(seq(log(1), log(50), length.out = 8)), digits = 0)),
+  MethodPois_as = as.integer(round(exp(seq(log(1), log(200), length.out = 8)), digits = 0)),
   MethodPois_mf = c("mf.is", "mf.ss"),
   MethodPois_sd = c("gamma", "exp"),
   MethodPois_td = c("vonmises", "unif")

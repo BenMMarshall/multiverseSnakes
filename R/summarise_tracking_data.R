@@ -228,7 +228,7 @@ summarise_tracking_data <- function(movementDataAll){
       panel.border = element_blank(),
       axis.line.x = element_line(),
       axis.ticks.y = element_blank(),
-      axis.title = element_blank(),
+      # axis.title = element_blank(),
       axis.title.y.left = element_blank(),
       axis.text.y.left = element_markdown(face = 4, vjust = 0),
       strip.background = element_blank(),

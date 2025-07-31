@@ -47,11 +47,26 @@ method_wrsf <- function(allIndividualData){
   
   akdeList <- vector("list", length = length(names(teleObj)))
   names(akdeList) <- names(teleObj)
+  akdeESSList <- vector("list", length = length(names(teleObj)))
+  names(akdeESSList) <- names(teleObj)
   for(n in names(teleObj)){
-    akdeList[[n]] <- ctmm::akde(teleObj[[n]], fitsList[[n]],
+     akdeOUT <- ctmm::akde(teleObj[[n]], fitsList[[n]],
                                 weights = TRUE)
+    
+    kdeSum <- summary(akdeOUT, level.UD = 0.95)
+    kdeSummary <- as.data.frame(kdeSum$CI)
+    kdeSummary$level <- 0.95
+    kdeSummary$unit <- rownames(kdeSummary)
+    kdeSummary$areaDOF <- kdeSum$DOF["area"]
+    kdeSummary$species <- movementDataLL$species[1]
+    kdeSummary$id <- n
+    akdeESSList[[n]] <- kdeSummary
+    akdeList[[n]] <- akdeOUT
   }
   print("--- akde")
+  akdeESS <- do.call(rbind, akdeESSList)
+  write.csv(akdeESS, file = here::here("modelOutput", paste0(
+    "ESS_", movementDataLL$species[1], ".csv")))
   
   if(land == "binary"){
     landscapeRaster[] <- as.factor(landscapeRaster[])

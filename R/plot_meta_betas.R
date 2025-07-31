@@ -158,7 +158,7 @@ plot_meta_betas <- function(modelExtracts){
                    linetype = 2) +
         geom_pointrange(aes(y = .variable, x = .value, xmin = .lower, xmax = .upper, 
                             colour = speciesCol, shape = hypothesis),
-                        fatten = 2,
+                        fatten = 2, size = 1.15, linewidth = 0.95,
                         position = position_dodge2(width = 0.75, reverse = TRUE)) +
         # geom_errorbar(aes(y = .variable, xmin = .lower, xmax = .upper, 
         #                   colour = species), width = 0) +
@@ -231,7 +231,8 @@ plot_meta_betas <- function(modelExtracts){
             axis.title.y.left = element_blank(),
             strip.text.x.top = element_blank()),
     plotList[[3]] +
-      theme(strip.text.x.top = element_blank()),
+      theme(strip.text.x.top = element_blank(),
+            axis.title.x = element_text()),
     guide_area()
   ) +
     plot_layout(guides = "collect",
@@ -281,7 +282,7 @@ plot_meta_betas <- function(modelExtracts){
                linetype = 2) +
     geom_pointrange(aes(y = speciesCol, x = .value, xmin = .lower, xmax = .upper, 
                         colour = speciesCol, shape = hypothesis),
-                    fatten = 2,
+                    fatten = 2, size = 1.15, linewidth = 0.95,
                     position = position_dodge2(width = 0.75, reverse = TRUE)) +
     scale_colour_manual(values = speciesColVec) +
     facet_grid(rows = vars(method), cols = vars(classLandscape),
@@ -308,7 +309,7 @@ plot_meta_betas <- function(modelExtracts){
       axis.text.y = element_markdown(face = 4),
       axis.title.y = element_blank(),
       strip.placement = "outside",
-      axis.title.x = element_blank(),
+      # axis.title.x = element_blank(),
       panel.border = element_blank(),
       panel.spacing = unit(18, "pt"),
       panel.grid = element_blank(),

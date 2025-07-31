@@ -9,6 +9,7 @@ data/SBR SHP/*
 *uncom.csv
 /modelOutput/*.rds
 /notebook/feedback
+*.zip
 
 # files with log in details for movebank
 movebank_login_abstraction.R

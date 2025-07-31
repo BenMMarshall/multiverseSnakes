@@ -29,17 +29,18 @@ generate_spec_curves <- function(outputResults, method){
   paletteList <- get_palette()
   
   # method <- "ssf"
-  # method <- "pois"
-  # method <- "area"
-  # method <- "twoStep"
-  # method <- "rsf"
-  # method <- "wrsf"
   # outputResults <- ssfResults
-  # outputResults <- poisResults
+  # method <- "area"
   # outputResults <- areaBasedResults
-  # outputResults <- twoStepResults
+  # method <- "rsf"
   # outputResults <- rsfResults
+  # method <- "pois"
+  # outputResults <- poisResults
+  # method <- "twoStep"
+  # outputResults <- twoStepResults
+  # method <- "wrsf"
   # outputResults <- wrsfEstimateOutputs
+  # outputResults <- read.csv(here::here("data", "areaBasedEstimateOutputs_uncom.csv"))
   
   if(method == "ssf"){
     outputResults <- outputResults %>% 
@@ -475,9 +476,9 @@ generate_spec_curves <- function(outputResults, method){
                                       group = group, colour = species),
                   alpha = 0.5, linewidth = 0.5) +
         geom_point(data = medData, aes(x = modelMedEst, y = value), colour = "#FFFFFF", 
-                   alpha = 1, size = 1.5, position = position_nudge(y = 0), shape = 23) +
+                   alpha = 1, size = 2.5, position = position_nudge(y = 0), shape = 23) +
         geom_point(data = medData, aes(x = modelMedEst, y = value, colour = species),
-                   alpha = 1, size = 1, position = position_nudge(y = 0), shape = 23) +
+                   alpha = 1, size = 2, position = position_nudge(y = 0), shape = 23) +
         geom_hline(yintercept = seq(0.5,10.5,1), linewidth = 0.5, alpha = 0.25, colour = "#403F41",
                    linetype = 2) +
         {if(!method %in% c("area"))facet_grid(rows = vars(variable),
@@ -642,7 +643,7 @@ generate_spec_curves <- function(outputResults, method){
           scale_shape_manual(values = shapesVal) +
           facet_grid(rows = vars(speciesCol, hypothesis),
                      cols = vars(classLandscape), space = "free", switch = "y") +
-          labs(y = "", x = "Estimate") +
+          labs(y = "", x = "Selection Estimate for Hypothised Habitat") +
           # scale_x_continuous(limits = xlimits) +
           coord_cartesian(xlim = xlimits) +
           theme_bw() +
@@ -691,7 +692,7 @@ generate_spec_curves <- function(outputResults, method){
                                                 cols = vars(classLandscape), scales = "free_y", space = "free", switch = "y")}+
           {if(method %in% c("area"))facet_grid(rows = vars(variable),
                                                scales = "free_y", space = "free", switch = "y")}+
-          labs(y = "", x = "Estimate") +
+          labs(y = "", x = "Selection Estimate for Hypothised Habitat") +
           # scale_x_continuous(limits = xlimits) +
           coord_cartesian(xlim = xlimits) +
           scale_colour_manual(values = paletteList$speciesFullPaletteCommon) +
@@ -844,7 +845,7 @@ generate_spec_curves <- function(outputResults, method){
         facet_grid(rows = vars(speciesCol, hypothesis),
                    cols = vars(classLandscape), space = "free_y", switch = "y",
                    scale = "free") +
-        labs(y = "", x = "Estimate") +
+        labs(y = "", x = "Selection Estimate for Hypothised Habitat") +
         coord_cartesian(clip = "off", xlim = xlimits) +
         # scale_x_continuous(limits = xlimits) +
         theme_bw() +
@@ -860,7 +861,6 @@ generate_spec_curves <- function(outputResults, method){
           strip.placement = "outside",
           axis.text.y.left = element_blank(),
           axis.ticks.y.left = element_blank(),
-          axis.title.x = element_blank(),
           axis.line.x = element_line(),
           strip.clip = "off",
           legend.position = "none",
